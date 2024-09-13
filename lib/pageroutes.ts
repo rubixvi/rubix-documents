@@ -31,8 +31,10 @@ function getRecurrsiveAllLinks(node: Paths) {
 
   if (isRoute(node) && node.items) {
     node.items.forEach((subNode) => {
-      const temp = { ...subNode, href: `${node.href}${subNode.href}` };
-      ans.push(...getRecurrsiveAllLinks(temp));
+      if (isRoute(subNode)) {
+        const temp = { ...subNode, href: `${node.href}${subNode.href}` };
+        ans.push(...getRecurrsiveAllLinks(temp));
+      }
     });
   }
 
