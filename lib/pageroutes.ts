@@ -1,13 +1,16 @@
 import { Documents } from '@/settings/documents';
 
-export type Paths = {
-  title: string;
-  href: string;
-  noLink?: true;
-  heading?: string;
-  items?: Paths[];
-  spacer?: boolean;
-};
+export type Paths = 
+  | {
+      title: string;
+      href: string;
+      noLink?: true;
+      heading?: string;
+      items?: Paths[];
+    }
+  | {
+      spacer: true;
+    };
 
 export const Routes: Paths[] = [
   ...Documents,
