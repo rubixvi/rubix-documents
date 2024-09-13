@@ -20,24 +20,21 @@ function isRoute(item: Paths): item is Extract<Paths, { title: string; href: str
   return "title" in item && "href" in item;
 }
 
-export default function SubLink({
-  title,
-  href,
-  items,
-  noLink,
-  level,
-  isSheet,
-}: Paths & { level: number; isSheet: boolean }) {
+export default function SubLink(props: Paths & { level: number; isSheet: boolean }) {
   const path = usePathname();
-  const [isOpen, setIsOpen] = useState(level == 0);
+  const [isOpen, setIsOpen] = useState(props.level === 0);
 
   useEffect(() => {
-    if (href && path != href && path.includes(href)) setIsOpen(true);
-  }, [href, path]);
+    if (isRoute(props) && props.href && path !== props.href && path.includes(props.href)) {
+      setIsOpen(true);
+    }
+  }, [path, props]);
 
-  if (!isRoute({ title, href, items })) {
+  if (!isRoute(props)) {
     return null;
   }
+
+  const { title, href, items, noLink, level, isSheet } = props;
 
   const Comp = (
     <Anchor activeClassName="text-primary text-sm font-medium" href={href}>
