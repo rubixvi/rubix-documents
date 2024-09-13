@@ -18,15 +18,24 @@ export const Routes: Paths[] = [
 
 type Page = { title: string; href: string };
 
+function isRoute(node: Paths): node is Extract<Paths, { title: string; href: string }> {
+  return "title" in node && "href" in node;
+}
+
 function getRecurrsiveAllLinks(node: Paths) {
   const ans: Page[] = [];
-  if (!node.noLink) {
+
+  if (isRoute(node) && !node.noLink) {
     ans.push({ title: node.title, href: node.href });
   }
+
   node.items?.forEach((subNode) => {
-    const temp = { ...subNode, href: `${node.href}${subNode.href}` };
-    ans.push(...getRecurrsiveAllLinks(temp));
+    if (isRoute(node)) {
+      const temp = { ...subNode, href: `${node.href}${subNode.href}` };
+      ans.push(...getRecurrsiveAllLinks(temp));
+    }
   });
+
   return ans;
 }
 
