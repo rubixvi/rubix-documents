@@ -66,6 +66,7 @@ Product documentation, business website and guides.
 - Code copy
 - Tables
 - Mathematical expression
+- AI knowledgebase **(Development)**
 
 ## Contributing
 
