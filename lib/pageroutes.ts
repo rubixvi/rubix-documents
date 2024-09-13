@@ -9,7 +9,7 @@ export type Paths =
       items?: Paths[];
     }
   | {
-      spacer?: boolean;
+      spacer: true;
     };
 
 export const Routes: Paths[] = [
