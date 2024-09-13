@@ -22,7 +22,7 @@ function isRoute(node: Paths): node is Extract<Paths, { title: string; href: str
   return "title" in node && "href" in node;
 }
 
-function getRecurrsiveAllLinks(node: Paths): Page[] {
+function getAllLinks(node: Paths): Page[] {
   const ans: Page[] = [];
 
   if (isRoute(node) && !node.noLink) {
@@ -33,7 +33,7 @@ function getRecurrsiveAllLinks(node: Paths): Page[] {
     node.items.forEach((subNode) => {
       if (isRoute(subNode)) {
         const temp = { ...subNode, href: `${node.href}${subNode.href}` };
-        ans.push(...getRecurrsiveAllLinks(temp));
+        ans.push(...getAllLinks(temp));
       }
     });
   }
@@ -41,4 +41,4 @@ function getRecurrsiveAllLinks(node: Paths): Page[] {
   return ans;
 }
 
-export const PageRoutes = Routes.map((it) => getRecurrsiveAllLinks(it)).flat();
+export const PageRoutes = Routes.map((it) => getAllLinks(it)).flat();
