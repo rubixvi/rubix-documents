@@ -80,12 +80,17 @@ export default function SubLink(props: Paths & { level: number; isSheet: boolean
             )}
           >
             {items?.map((innerLink) => {
+              if (!isRoute(innerLink)) {
+                return null;
+              }
+
               const modifiedItems = {
                 ...innerLink,
-                href: `${href + innerLink.href}`,
+                href: `${href}${innerLink.href}`,
                 level: level + 1,
                 isSheet,
               };
+
               return <SubLink key={modifiedItems.href} {...modifiedItems} />;
             })}
           </div>
