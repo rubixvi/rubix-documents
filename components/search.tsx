@@ -84,9 +84,9 @@ export default function Search() {
           <ScrollArea className="max-h-[350px]">
             <div className="flex flex-col items-start overflow-y-auto px-1 pb-4 sm:px-3">
               {filteredResults.map((item) => {
-                const level = (item.href.split("/").slice(1).length -
-                  1) as keyof typeof paddingMap;
-                const paddingClass = paddingMap[level];
+                if ("href" in item) {
+                  const level = (item.href.split("/").slice(1).length - 1) as keyof typeof paddingMap;
+                  const paddingClass = paddingMap[level];
 
                 return (
                   <DialogClose key={item.href} asChild>
@@ -108,7 +108,10 @@ export default function Search() {
                       </div>
                     </Anchor>
                   </DialogClose>
-                );
+                  );
+                }
+
+                return null;
               })}
             </div>
           </ScrollArea>
