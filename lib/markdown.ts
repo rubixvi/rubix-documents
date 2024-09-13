@@ -51,16 +51,16 @@ export async function getDocument(slug: string) {
   }
 }
 
+function getDocumentPath(slug: string) {
+  return path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
+}
+
 export function getPreviousNext(path: string) {
   const index = PageRoutes.findIndex(({ href }) => href == `/${path}`);
   return {
     prev: PageRoutes[index - 1],
     next: PageRoutes[index + 1],
   };
-}
-
-function getDocumentPath(slug: string) {
-  return path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
 }
 
 const preCopy = () => (tree: any) => {
