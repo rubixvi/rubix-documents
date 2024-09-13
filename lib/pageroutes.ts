@@ -22,7 +22,7 @@ function isRoute(node: Paths): node is Extract<Paths, { title: string; href: str
   return "title" in node && "href" in node;
 }
 
-function getRecurrsiveAllLinks(node: Paths) {
+function getRecurrsiveAllLinks(node: Paths): Page[] {
   const ans: Page[] = [];
 
   if (isRoute(node) && !node.noLink) {

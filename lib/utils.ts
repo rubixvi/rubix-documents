@@ -7,6 +7,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+function isRoute(node: Paths): node is Extract<Paths, { href: string; title: string }> {
+  return "href" in node && "title" in node;
+}
+
 export function helperSearch(
   query: string,
   node: Paths,
@@ -17,30 +21,34 @@ export function helperSearch(
   const res: Paths[] = [];
   let parentHas = false;
 
-  const nextLink = `${prefix}${node.href}`;
+  if (isRoute(node)) {
+    const nextLink = `${prefix}${node.href}`;
   
-  if (!node.noLink && node.title && node.title.toLowerCase().includes(query.toLowerCase())) {
-    res.push({ ...node, items: undefined, href: nextLink });
-    parentHas = true;
+    if (!node.noLink && node.title && node.title.toLowerCase().includes(query.toLowerCase())) {
+      res.push({ ...node, items: undefined, href: nextLink });
+      parentHas = true;
+    }
+  
+    const goNext = maxLevel ? currentLevel < maxLevel : true;
+  
+    if (goNext && node.items) {
+      node.items.forEach((item) => {
+        const innerRes = helperSearch(
+          query,
+          item,
+          nextLink,
+          currentLevel + 1,
+          maxLevel
+        );
+        if (innerRes.length && !parentHas && !node.noLink) {
+          res.push({ ...node, items: undefined, href: nextLink });
+          parentHas = true;
+        }
+        res.push(...innerRes);
+      });
+    }
   }
-  
-  const goNext = maxLevel ? currentLevel < maxLevel : true;
-  
-  if (goNext)
-    node.items?.forEach((item) => {
-      const innerRes = helperSearch(
-        query,
-        item,
-        nextLink,
-        currentLevel + 1,
-        maxLevel
-      );
-      if (!!innerRes.length && !parentHas && !node.noLink) {
-        res.push({ ...node, items: undefined, href: nextLink });
-        parentHas = true;
-      }
-      res.push(...innerRes);
-    });
+
   return res;
 }
 
