@@ -84,7 +84,7 @@
 .prose th,
 .prose td {
   @apply border border-border;
-  padding: 8px;
+  padding: 10px 15px;
 }
 
 pre {
