@@ -72,6 +72,21 @@
   padding-inline-start: 0;
 }
 
+.prose :where(table):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  width: auto;
+}
+
+.prose table {
+  @apply border border-border border-collapse;
+}
+
+/* Add borders around table cells (th and td) */
+.prose th,
+.prose td {
+  @apply border border-border;
+  padding: 8px;
+}
+
 pre {
   padding: 0 !important;
   width: inherit !important;
@@ -156,6 +171,14 @@ pre>code {
 .dark .attr-name {
   color: #cacaca;
 
+}
+
+span.katex-display {
+  display: flex;
+}
+
+span.katex-html {
+  display: none;
 }
 
 .rehype-code-title {
