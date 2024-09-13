@@ -6,6 +6,7 @@ export type Paths = {
   noLink?: true;
   heading?: string;
   items?: Paths[];
+  spacer?: true;
 };
 
 export const Routes: Paths[] = [
