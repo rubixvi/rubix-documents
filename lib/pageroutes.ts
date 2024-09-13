@@ -29,12 +29,12 @@ function getRecurrsiveAllLinks(node: Paths) {
     ans.push({ title: node.title, href: node.href });
   }
 
-  node.items?.forEach((subNode) => {
-    if (isRoute(node)) {
+  if (isRoute(node) && node.items) {
+    node.items.forEach((subNode) => {
       const temp = { ...subNode, href: `${node.href}${subNode.href}` };
       ans.push(...getRecurrsiveAllLinks(temp));
-    }
-  });
+    });
+  }
 
   return ans;
 }
