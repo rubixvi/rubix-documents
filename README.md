@@ -2,6 +2,8 @@
 
 This **Document Starter Kit** is developed with **Next.js**, **Tailwind CSS** and **TypeScript**. It serves as a flexible and scalable foundation for building documentation websites or content-driven projects. With modern web technologies at its core, this kit simplifies the process of creating, managing and presenting rich documentation with ease and efficiency.
 
+**Demo**: [https://rubix-documents.vercel.app/](https://rubix-documents.vercel.app/)
+
 ## Table of Contents
 
 - Installation
