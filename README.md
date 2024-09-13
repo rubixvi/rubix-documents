@@ -43,12 +43,12 @@ This **Document Starter Kit** is developed with **Next.js**, **Tailwind CSS** an
 ## Usage
 
 Product documentation, business website and guides.
-![Main Screen](./screens/screen-1.png)
-![Document Screen](./screens/screen-2.png)
-![Document Footer](./screens/screen-3.png)
-![Document Search](./screens/screen-4.png)
-![Main Dark Screen](./screens/screen-5.png)
-![Document Dark Screen](./screens/screen-6.png)
+![Main Screen](./public/screens/screen-1.png)
+![Document Screen](./public/screens/screen-2.png)
+![Document Footer](./public/screens/screen-3.png)
+![Document Search](./public/screens/screen-4.png)
+![Main Dark Screen](./public/screens/screen-5.png)
+![Document Dark Screen](./public/screens/screen-6.png)
 
 
 ## Features
