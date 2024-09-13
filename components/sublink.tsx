@@ -16,6 +16,10 @@ import { SheetClose } from "@/components/ui/sheet";
 import Anchor from "./anchor";
 import { Button } from "./ui/button";
 
+function isRoute(item: Paths): item is Extract<Paths, { title: string; href: string }> {
+  return "title" in item && "href" in item;
+}
+
 export default function SubLink({
   title,
   href,
@@ -28,10 +32,10 @@ export default function SubLink({
   const [isOpen, setIsOpen] = useState(level == 0);
 
   useEffect(() => {
-    if (path != href && path.includes(href)) setIsOpen(true);
+    if (href && path != href && path.includes(href)) setIsOpen(true);
   }, [href, path]);
 
-  if (!title || !href) {
+  if (!isRoute({ title, href, items })) {
     return null;
   }
 
@@ -42,11 +46,7 @@ export default function SubLink({
   );
 
   const titleOrLink = !noLink ? (
-    isSheet ? (
-      <SheetClose asChild>{Comp}</SheetClose>
-    ) : (
-      Comp
-    )
+    isSheet ? <SheetClose asChild>{Comp}</SheetClose> : Comp
   ) : (
     <h2 className="font-medium text-primary sm:text-sm">{title}</h2>
   );
