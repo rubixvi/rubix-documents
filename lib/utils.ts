@@ -58,30 +58,27 @@ export function advanceSearch(query: string) {
   ).flat();
 }
 
-export function formatDate(dateStr: string): string {
+function formatDateHelper(dateStr: string, options: Intl.DateTimeFormatOptions): string {
   const [day, month, year] = dateStr.split("-").map(Number);
   const date = new Date(year, month - 1, day);
+  return date.toLocaleDateString("en-US", options);
+}
 
-  const options: Intl.DateTimeFormatOptions = {
+export function formatDate(dateStr: string): string {
+  return formatDateHelper(dateStr, {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
-  };
-
-  return date.toLocaleDateString("en-US", options);
+  });
 }
 
 export function formatDate2(dateStr: string): string {
-  const [day, month, year] = dateStr.split("-").map(Number);
-  const date = new Date(year, month - 1, day);
-
-  const options: Intl.DateTimeFormatOptions = {
+  return formatDateHelper(dateStr, {
     month: "short",
     day: "numeric",
     year: "numeric",
-  };
-  return date.toLocaleDateString("en-US", options);
+  });
 }
 
 export function stringToDate(date: string) {
