@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Settings } from "@/lib/settings";
+import { Settings } from "@/settings/config";
 import { LuArrowUpRight, LuGithub } from "react-icons/lu";
 
 import { ModeToggle } from "@/components/theme-toggle";
@@ -8,7 +8,7 @@ import { SheetLeft } from "./sidebar";
 import { buttonVariants } from "./ui/button";
 import Search from "./search";
 import Anchor from "./anchor";
-import { Navigations, GitHubLink } from "@/lib/navigation";
+import { Navigations, GitHubLink } from "@/settings/navigation";
 import { SheetClose } from "@/components/ui/sheet";
 
 export function Navbar() {

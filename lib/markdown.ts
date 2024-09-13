@@ -19,12 +19,12 @@ async function parseMdx<Frontmatter>(rawMdx: string) {
       parseFrontmatter: true,
       mdxOptions: {
         rehypePlugins: [
-          preProcess,
+          preCopy,
           rehypeCodeTitles,
           rehypePrism,
           rehypeSlug,
           rehypeAutolinkHeadings,
-          postProcess,
+          postCopy,
         ],
         remarkPlugins: [remarkGfm],
       },
@@ -52,8 +52,8 @@ export async function getDocument(slug: string) {
 export function getPreviousNext(path: string) {
   const index = PageRoutes.findIndex(({ href }) => href == `/${path}`);
   return {
-    prev: index > 0 ? PageRoutes[index - 1] : null,
-    next: index < PageRoutes.length - 1 ? PageRoutes[index + 1] : null,
+    prev: PageRoutes[index - 1],
+    next: PageRoutes[index + 1],
   };
 }
 
@@ -61,7 +61,7 @@ function getDocumentPath(slug: string) {
   return path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
 }
 
-const preProcess = () => (tree: any) => {
+const preCopy = () => (tree: any) => {
   visit(tree, (node) => {
     if (node?.type === "element" && node?.tagName === "pre") {
       const [codeEl] = node.children;
@@ -71,7 +71,7 @@ const preProcess = () => (tree: any) => {
   });
 };
 
-const postProcess = () => (tree: any) => {
+const postCopy = () => (tree: any) => {
   visit(tree, "element", (node) => {
     if (node?.type === "element" && node?.tagName === "pre") {
       node.properties["raw"] = node.raw;
