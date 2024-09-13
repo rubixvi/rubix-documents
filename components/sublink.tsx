@@ -31,6 +31,10 @@ export default function SubLink({
     if (path != href && path.includes(href)) setIsOpen(true);
   }, [href, path]);
 
+  if (!title || !href) {
+    return null;
+  }
+
   const Comp = (
     <Anchor activeClassName="text-primary text-sm font-medium" href={href}>
       {title}
