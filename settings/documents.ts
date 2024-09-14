@@ -42,4 +42,21 @@ export const Documents: Paths[] = [
     title: "Random",
     href: "/random",
   },
+  {
+    title: "Deep",
+    href: "/deep",
+    heading: "Deep Links",
+    items: [
+      {
+        title: "Deeper",
+        href: "/deeper",
+        items : [
+          {
+            title: "Even Deeper",
+            href: "/even-deeper",
+          },
+        ]
+      },
+    ],
+  },
 ];

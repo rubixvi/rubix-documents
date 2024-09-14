@@ -1,37 +1,54 @@
 import { OpenGraph, TwitterCard } from "@/lib/metadata";
 
 const url = "https://www.rubixstudios.com.au";
+const sitename = "Documents";
+const description = "This comprehensive documentation template, crafted with Next.js and available as open-source, delivers a sleek and responsive design, tailored to meet all your project documentation requirements.";
+const keywords = ["Next.js", "documentation", "Rubix Studios", "open source", "SEO"];
+const siteicon = "/icon.png";
+const urlimage = "/images/og-image.png";
+const imagealt = "Rubix Studios Documentation";
+const twitterhandle = "@RubixStudios";
+
+const companyname = "Rubix Studios";
+const companylink = "https://www.rubixstudios.com.au";
+
+const branding = true;
+
+export const Company = {
+  name: companyname,
+  link: companylink,
+  branding: branding,
+};
 
 export const Settings = {
-  title: "Documents",
+  title: sitename,
   metadataBase: url,
-  description:
-    "This comprehensive documentation template, crafted with Next.js and available as open-source, delivers a sleek and responsive design, tailored to meet all your project documentation requirements.",
-  siteicon: "/icon.png",
-  keywords: ["Next.js", "documentation", "Rubix Studios", "open source", "SEO"],
+  description: description,
+  siteicon: siteicon,
+  keywords: keywords,
   openGraph: {
     type: "website",
-    title: "Documents",
-    description: "This comprehensive documentation template delivers a sleek and responsive design.",
-    siteName: "Rubix Studios",
+    title: sitename,
+    description: description,
+    siteName: sitename,
     images: [
       {
-        url: "/images/og-image.png",
+        url: urlimage,
         width: 1200,
         height: 630,
-        alt: "Rubix Studios Documentation",
+        alt: imagealt,
       },
     ],
   } as OpenGraph,
   twitter: {
     card: "summary_large_image",
-    title: "Documents",
-    description: "This comprehensive documentation template delivers a sleek and responsive design.",
-    site: "@RubixStudios",
+    title: sitename,
+    description: description,
+    site: twitterhandle,
     images: [
       {
-        url: "/images/og-image.png",
-        alt: "Rubix Studios Documentation",
+        url: urlimage,
+        alt: imagealt,
       },
     ],
   } as TwitterCard,
