@@ -1,42 +1,80 @@
 import path from "path";
 import { promises as fs } from "fs";
+
 import { compile } from "@mdx-js/mdx";
+import grayMatter from "gray-matter";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkStringify from "remark-stringify";
+
 import remarkGfm from "remark-gfm";
+import remarkRehype from "remark-rehype";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeKatex from "rehype-katex";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkStringify from "remark-stringify";
+
+import { Documents } from '@/settings/documents';
+import { Paths } from "@/lib/pageroutes";
 
 const docsDir = path.join(process.cwd(), "contents/docs");
 const outputDir = path.join(process.cwd(), "public", "search-data");
+
+function isRoute(node: Paths): node is Extract<Paths, { href: string; title: string }> {
+  return "href" in node && "title" in node;
+}
 
 function createSlug(filePath: string): string {
   const relativePath = path.relative(docsDir, filePath);
   const parsed = path.parse(relativePath);
 
   const slugPath = parsed.dir ? `${parsed.dir}/${parsed.name}` : parsed.name;
+  const normalizedSlug = slugPath.replace(/\\/g, '/');
 
   if (parsed.name === "index") {
-    return `/${parsed.dir}` || "/";
+    return `/${parsed.dir.replace(/\\/g, '/')}` || "/";
   } else {
-    return `/${slugPath.replace(/\\/g, '/')}`;
+    return `/${normalizedSlug}`;
+  }
+}
+
+function findDocumentBySlug(slug: string): Paths | null {
+  function searchDocs(docs: Paths[], currentPath = ""): Paths | null {
+    for (const doc of docs) {
+      if (isRoute(doc)) {
+        const fullPath = currentPath + doc.href;
+        if (fullPath === slug) return doc;
+        if (doc.items) {
+          const found: Paths | null = searchDocs(doc.items, fullPath);
+          if (found) return found;
+        }
+      }
+    }
+    return null;
+  }
+  return searchDocs(Documents);
+}
+
+async function ensureDirectoryExists(dir: string) {
+  try {
+    await fs.access(dir);
+  } catch (err) {
+    await fs.mkdir(dir, { recursive: true });
   }
 }
 
 async function processMdxFile(filePath: string) {
   const rawMdx = await fs.readFile(filePath, "utf-8");
 
+  const { content, data: frontmatter } = grayMatter(rawMdx);
+
   const plainContent = await unified()
     .use(remarkParse)
     .use(remarkStringify)
-    .process(rawMdx);
+    .process(content);
 
-  const compiledMdx = await compile(rawMdx, {
+  const compiledMdx = await compile(content, {
     remarkPlugins: [remarkGfm, remarkRehype],
     rehypePlugins: [
       rehypeSlug,
@@ -48,12 +86,13 @@ async function processMdxFile(filePath: string) {
     format: "mdx",
   });
 
-  const frontmatter = compiledMdx.data?.frontmatter || {};
   const slug = createSlug(filePath);
+  const matchedDoc = findDocumentBySlug(slug);
 
   return {
     slug,
-    frontmatter,
+    title: frontmatter.title || (matchedDoc && isRoute(matchedDoc) ? matchedDoc.title : "Untitled"),
+    description: frontmatter.description || "",
     content: String(plainContent.value),
   };
 }
@@ -77,6 +116,8 @@ async function getMdxFiles(dir: string): Promise<string[]> {
 
 async function convertMdxToJson() {
   try {
+    await ensureDirectoryExists(outputDir);
+
     const mdxFiles = await getMdxFiles(docsDir);
     const combinedData = [];
 

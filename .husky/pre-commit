@@ -1,12 +1,4 @@
 #!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
-# Compile TypeScript files
-npx tsc --project tsconfig.scripts.json
-
-# Rename .js files to .mjs in the dist/scripts directory
-for file in dist/scripts/*.js; do
-  mv "$file" "${file%.js}.mjs"
-done
-
-# Run the renamed .mjs file
-node dist/scripts/content.mjs
+sh ./scripts/post-process.sh

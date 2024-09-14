@@ -3,7 +3,8 @@ import { twMerge } from "tailwind-merge";
 
 import { Paths, Routes } from "./pageroutes";
 
-import searchData from "@/search-data/documents.json"
+import { Documents } from '@/settings/documents';
+import searchData from "@/public/search-data/documents.json"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -14,10 +15,10 @@ function isRoute(node: Paths): node is Extract<Paths, { href: string; title: str
 }
 
 export function helperSearch(
-  query: string,
-  node: Paths,
-  prefix: string,
-  currentLevel: number,
+  query: string, 
+  node: Paths, 
+  prefix: string, 
+  currentLevel: number, 
   maxLevel?: number
 ) {
   const res: Paths[] = [];
@@ -26,7 +27,7 @@ export function helperSearch(
   if (isRoute(node)) {
     const nextLink = `${prefix}${node.href}`;
   
-    if (!node.noLink && node.title && node.title.toLowerCase().includes(query.toLowerCase())) {
+    if (!query || node.title.toLowerCase().includes(query.toLowerCase())) {
       res.push({ ...node, items: undefined, href: nextLink });
       parentHas = true;
     }
@@ -35,13 +36,7 @@ export function helperSearch(
   
     if (goNext && node.items) {
       node.items.forEach((item) => {
-        const innerRes = helperSearch(
-          query,
-          item,
-          nextLink,
-          currentLevel + 1,
-          maxLevel
-        );
+        const innerRes = helperSearch(query, item, nextLink, currentLevel + 1, maxLevel);
         if (innerRes.length && !parentHas && !node.noLink) {
           res.push({ ...node, items: undefined, href: nextLink });
           parentHas = true;
@@ -54,21 +49,80 @@ export function helperSearch(
   return res;
 }
 
+function calculateRelevance(query: string, title: string, content: string) {
+  let score = 0;
+  const lowerQuery = query.toLowerCase();
+  
+  if (title.toLowerCase().includes(lowerQuery)) {
+    score += 10;
+  }
+  if (content.toLowerCase().includes(lowerQuery)) {
+    score += 5;
+  }
+  return score;
+}
+
+export function cleanMdxContent(content: string): string {
+  let strippedContent = content
+    .replace(/<[^>]+>/g, '')
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`]*`/g, '')
+    .replace(/\|[^|]+\|/g, '')
+    .replace(/[:\-]+/g, '')
+    .replace(/[*-]\s|\[x\]|\[ \]/g, '')
+    .replace(/[#>]/g, '')
+    .replace(/[*_~`]+/g, '')
+    .replace(/\\/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  return strippedContent;
+}
+
 export function advanceSearch(query: string) {
-  return SearchData
-    .filter((doc) => {
-      const titleMatch = doc.frontmatter.title
-        .toLowerCase()
-        .includes(query.toLowerCase());
-      const contentMatch = doc.content
-        .toLowerCase()
-        .includes(query.toLowerCase());
-      return titleMatch || contentMatch;
+  const lowerQuery = query.toLowerCase();
+
+  if (!query) {
+    return helperSearch("", { items: Documents }, "", 1);
+  }
+
+  return searchData
+    .map((doc) => {
+      const title = doc.title || "";
+      const content = doc.content || "";
+      
+      const cleanedContent = cleanMdxContent(content);
+
+      const relevanceScore = calculateRelevance(query, title, content);
+
+      const contentIndex = cleanedContent.toLowerCase().indexOf(lowerQuery);
+      let snippet = "";
+
+      if (contentIndex !== -1) {
+        const snippetLength = 100;
+        const start = Math.max(0, contentIndex - snippetLength / 2);
+        const end = Math.min(cleanedContent.length, contentIndex + snippetLength / 2);
+        snippet = cleanedContent.slice(start, end).replace(/\n/g, " ").trim();
+
+        if (start > 0) {
+          snippet = `...${snippet}`;
+        }
+
+        if (end < cleanedContent.length) {
+          snippet += "...";
+        }
+      }
+
+      return {
+        title: doc.title || "Untitled",
+        href: `${doc.slug}`,
+        snippet: snippet || cleanedContent.slice(0, 100),
+        description: doc.description || "",
+        relevance: relevanceScore,
+      };
     })
-    .map((doc) => ({
-      title: doc.frontmatter.title,
-      href: `/docs${doc.slug}`,
-    }));
+    .filter((doc) => doc.relevance > 0)
+    .sort((a, b) => b.relevance - a.relevance);
 }
 
 function formatDateHelper(dateStr: string, options: Intl.DateTimeFormatOptions): string {
