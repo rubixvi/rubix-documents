@@ -42,7 +42,7 @@ export default function Search() {
     [searchedInput]
   );
 
-  function renderDocuments(documents: any[], parentHref: string = "/docs") {
+  function renderDocuments(documents: any[], parentHref: string = "/docs"): React.ReactNode[] {
     if (!documents || !Array.isArray(documents)) {
       return [];
     }
