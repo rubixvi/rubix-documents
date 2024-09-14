@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",  // Use ESNext module system
+    "moduleResolution": "node", // Use Node module resolution
+    "outDir": "dist/scripts",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["scripts/**/*.ts"],
+  "exclude": ["node_modules"]
+}
