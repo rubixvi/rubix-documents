@@ -59,6 +59,16 @@
   }
 }
 
+.highlight {
+  font-weight: bold;
+  color: black;
+}
+
+.dark .highlight {
+  font-weight: bold;
+  color: white;
+}
+
 .prose {
   margin: 0 !important;
 }
@@ -113,7 +123,6 @@ pre>code {
   content: attr(line);
   text-align: right;
 }
-
 
 .highlight-line {
   @apply dark:bg-neutral-800/90;

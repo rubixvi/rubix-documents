@@ -17,6 +17,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import Anchor from "./anchor";
 import { advanceSearch, cn } from "@/lib/utils";
 import { Documents } from '@/settings/documents';
+import { highlight } from "@/components/highlight";
 
 export default function Search() {
   const [searchedInput, setSearchedInput] = useState("");
@@ -118,7 +119,7 @@ export default function Search() {
             <div className="flex flex-col items-start overflow-y-auto px-1 pb-4 sm:px-3">
             {searchedInput
               ? filteredResults.map((item) => {
-                  if ('href' in item) {
+                  if ("href" in item) {
                     return (
                       <DialogClose key={item.href} asChild>
                         <Anchor
@@ -130,16 +131,19 @@ export default function Search() {
                           <div className="flex items-center h-full w-fit gap-x-2">
                             <LuFileText className="h-[1.1rem] w-[1.1rem]" /> {item.title}
                           </div>
-                          {'snippet' in item && item.snippet && (
-                            <p className="w-full truncate text-xs text-neutral-500 dark:text-neutral-400">
-                              {item.snippet}...
-                            </p>
+                          {"snippet" in item && item.snippet && (
+                            <p
+                              className="w-full truncate text-xs text-neutral-500 dark:text-neutral-400"
+                              dangerouslySetInnerHTML={{
+                                __html: highlight(item.snippet, searchedInput),
+                              }}
+                            />
                           )}
                         </Anchor>
                       </DialogClose>
                     );
                   }
-                  return null; 
+                  return null;
                 })
               : renderDocuments(Documents)}
             </div>
