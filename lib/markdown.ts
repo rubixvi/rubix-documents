@@ -43,13 +43,19 @@ type BaseMdxFrontmatter = {
 export async function getDocument(slug: string) {
   try {
     const contentPath = getDocumentPath(slug);
-    const rawMdx = await fs.readFile(contentPath, "utf-8");
-    return await parseMdx<BaseMdxFrontmatter>(rawMdx);
+    const rawMdx = await fs.readFile(contentPath, 'utf-8');
+    const parsedMdx = await parseMdx<BaseMdxFrontmatter>(rawMdx);
+
+    return {
+      frontmatter: parsedMdx.frontmatter,
+      content: rawMdx,
+    };
   } catch (err) {
     console.log(err);
     return null;
   }
 }
+
 
 function getDocumentPath(slug: string) {
   return path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
