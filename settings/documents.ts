@@ -38,4 +38,8 @@ export const Documents: Paths[] = [
       },
     ],
   },
+  {
+    title: "Random",
+    href: "/random",
+  },
 ];

@@ -22,7 +22,6 @@ import { highlight } from "@/components/highlight";
 export default function Search() {
   const [searchedInput, setSearchedInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  console.log("Documents:", Documents);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

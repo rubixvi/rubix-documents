@@ -49,7 +49,7 @@ export default function SubLink(props: Paths & { level: number; isSheet: boolean
   );
 
   if (!items) {
-    return <div className="flex flex-col">{titleOrLink}</div>;
+    return <div className="flex flex-col text-sm">{titleOrLink}</div>;
   }
 
   return (
