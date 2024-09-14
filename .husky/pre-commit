@@ -1,4 +1,3 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
 
-sh ./scripts/post-process.sh
+./.husky/post-process.sh || exit 1
