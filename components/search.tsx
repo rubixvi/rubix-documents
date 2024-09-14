@@ -130,7 +130,7 @@ export default function Search() {
                           <div className="flex items-center h-full w-fit gap-x-2">
                             <LuFileText className="h-[1.1rem] w-[1.1rem]" /> {item.title}
                           </div>
-                          {item.snippet && (
+                          {'snippet' in item && item.snippet && (
                             <p className="w-full truncate text-xs text-neutral-500 dark:text-neutral-400">
                               {item.snippet}...
                             </p>
