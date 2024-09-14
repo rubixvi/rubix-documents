@@ -36,4 +36,8 @@ export const Documents = [
             },
         ],
     },
+    {
+        title: "Random",
+        href: "/random",
+    },
 ];
