@@ -84,7 +84,8 @@ async function convertMdxToJson() {
 
     for (const file of mdxFiles) {
       const jsonData = await processMdxFile(file);
-      const outputFilePath = path.join(outputDir, `${jsonData.slug}.json`);
+      const relativePath = path.relative(docsDir, file);
+      const outputFilePath = path.join(outputDir, path.dirname(relativePath), `${path.basename(file, '.mdx')}.json`);
 
       await ensureDirectoryExists(outputFilePath);
       await fs.writeFile(outputFilePath, JSON.stringify(jsonData, null, 2));
