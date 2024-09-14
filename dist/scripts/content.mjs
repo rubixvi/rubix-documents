@@ -16,11 +16,12 @@ const outputDir = path.join(process.cwd(), "public", "search-data");
 function createSlug(filePath) {
     const relativePath = path.relative(docsDir, filePath);
     const parsed = path.parse(relativePath);
+    const slugPath = parsed.dir ? `${parsed.dir}/${parsed.name}` : parsed.name;
     if (parsed.name === "index") {
-        return parsed.dir || '/';
+        return `/${parsed.dir}` || "/";
     }
     else {
-        return path.join(parsed.dir, parsed.name);
+        return `/${slugPath.replace(/\\/g, '/')}`;
     }
 }
 async function processMdxFile(filePath) {
@@ -63,21 +64,16 @@ async function getMdxFiles(dir) {
     }
     return files;
 }
-async function ensureDirectoryExists(filePath) {
-    const dir = path.dirname(filePath);
-    await fs.mkdir(dir, { recursive: true });
-}
 async function convertMdxToJson() {
     try {
         const mdxFiles = await getMdxFiles(docsDir);
+        const combinedData = [];
         for (const file of mdxFiles) {
             const jsonData = await processMdxFile(file);
-            const relativePath = path.relative(docsDir, file);
-            const outputFilePath = path.join(outputDir, path.dirname(relativePath), `${path.basename(file, '.mdx')}.json`);
-            await ensureDirectoryExists(outputFilePath);
-            await fs.writeFile(outputFilePath, JSON.stringify(jsonData, null, 2));
+            combinedData.push(jsonData);
         }
-        console.log("All MDX files have been converted to JSON.");
+        const combinedOutputPath = path.join(outputDir, "documents.json");
+        await fs.writeFile(combinedOutputPath, JSON.stringify(combinedData, null, 2));
     }
     catch (err) {
         console.error("Error processing MDX files:", err);
