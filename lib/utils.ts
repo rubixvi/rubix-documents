@@ -3,6 +3,8 @@ import { twMerge } from "tailwind-merge";
 
 import { Paths, Routes } from "./pageroutes";
 
+import searchData from "@/search-data/documents.json"
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -53,9 +55,20 @@ export function helperSearch(
 }
 
 export function advanceSearch(query: string) {
-  return Routes.map((node) =>
-    helperSearch(query, node, "", 1, query.length == 0 ? 2 : undefined)
-  ).flat();
+  return SearchData
+    .filter((doc) => {
+      const titleMatch = doc.frontmatter.title
+        .toLowerCase()
+        .includes(query.toLowerCase());
+      const contentMatch = doc.content
+        .toLowerCase()
+        .includes(query.toLowerCase());
+      return titleMatch || contentMatch;
+    })
+    .map((doc) => ({
+      title: doc.frontmatter.title,
+      href: `/docs${doc.slug}`,
+    }));
 }
 
 function formatDateHelper(dateStr: string, options: Intl.DateTimeFormatOptions): string {

@@ -17,6 +17,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import Anchor from "./anchor";
 
 import { advanceSearch, cn } from "@/lib/utils";
+import searchData from "@/search-data/documents.json"
 
 export default function Search() {
   const [searchedInput, setSearchedInput] = useState("");
@@ -37,7 +38,7 @@ export default function Search() {
   }, []);
 
   const filteredResults = useMemo(
-    () => advanceSearch(searchedInput.trim()),
+    () => advanceSearch(searchedInput.trim(), searchData),
     [searchedInput]
   );
 
