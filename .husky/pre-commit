@@ -1,4 +1,12 @@
 #!/bin/sh
 
+# Compile TypeScript files
 npx tsc --project tsconfig.scripts.json
-node dist/scripts/content.js
+
+# Rename .js files to .mjs in the dist/scripts directory
+for file in dist/scripts/*.js; do
+  mv "$file" "${file%.js}.mjs"
+done
+
+# Run the renamed .mjs file
+node dist/scripts/content.mjs
