@@ -83,7 +83,13 @@ export function advanceSearch(query: string) {
   const lowerQuery = query.toLowerCase();
 
   if (!query) {
-    return helperSearch("", { items: Documents }, "", 1);
+    const rootNode: Paths = {
+      title: "Root",
+      href: "/",
+      items: Documents,
+    };
+
+    return helperSearch("", rootNode, "", 1);
   }
 
   return searchData
