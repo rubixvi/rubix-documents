@@ -52,14 +52,13 @@ Product documentation, business website and guides.
 ![Main Dark Screen](./public/screens/screen-5.png)
 ![Document Dark Screen](./public/screens/screen-6.png)
 
-
 ## Features
 
 - MDX documentation
 - Nested pages
 - Syntax highlighting
 - Pagination
-- Search **(Development)**
+- Search
 - Code line highlight
 - Code title
 - Custom components
@@ -69,6 +68,7 @@ Product documentation, business website and guides.
 - Tables
 - Mathematical expression
 - AI knowledgebase **(Development)**
+- AI documentation support **(Development)**
 
 ## Contributing
 
