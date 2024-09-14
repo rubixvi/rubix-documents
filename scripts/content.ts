@@ -12,33 +12,28 @@ import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
 
-// Directory paths
 const docsDir = path.join(process.cwd(), "contents/docs");
 const outputDir = path.join(process.cwd(), "public", "search-data");
 
-// Helper to create a slug from a file path
 function createSlug(filePath: string): string {
   const relativePath = path.relative(docsDir, filePath);
   const parsed = path.parse(relativePath);
 
   if (parsed.name === "index") {
-    return parsed.dir || '/'; // Default to root for top-level index.mdx
+    return parsed.dir || '/';
   } else {
     return path.join(parsed.dir, parsed.name);
   }
 }
 
-// Function to process MDX file content and extract plain text and frontmatter
 async function processMdxFile(filePath: string) {
   const rawMdx = await fs.readFile(filePath, "utf-8");
 
-  // Extract plain content from the MDX without compiling JSX
   const plainContent = await unified()
-    .use(remarkParse)  // Parse Markdown to AST
-    .use(remarkStringify)  // Convert AST back to plain Markdown text
+    .use(remarkParse)
+    .use(remarkStringify)
     .process(rawMdx);
 
-  // Compile MDX to extract frontmatter but avoid JSX compilation
   const compiledMdx = await compile(rawMdx, {
     remarkPlugins: [remarkGfm, remarkRehype],
     rehypePlugins: [
@@ -46,7 +41,7 @@ async function processMdxFile(filePath: string) {
       rehypeAutolinkHeadings,
       rehypeCodeTitles,
       rehypeKatex,
-      [rehypePrism, { ignoreMissing: true }], // Prevents unknown language errors
+      [rehypePrism, { ignoreMissing: true }],
     ],
     format: "mdx",
   });
@@ -57,11 +52,10 @@ async function processMdxFile(filePath: string) {
   return {
     slug,
     frontmatter,
-    content: String(plainContent.value), // Use plain Markdown text content
+    content: String(plainContent.value),
   };
 }
 
-// Function to get all MDX files in the folder recursively
 async function getMdxFiles(dir: string): Promise<string[]> {
   let files: string[] = [];
   const items = await fs.readdir(dir, { withFileTypes: true });
@@ -79,13 +73,11 @@ async function getMdxFiles(dir: string): Promise<string[]> {
   return files;
 }
 
-// Ensure directory exists (create recursively if needed)
 async function ensureDirectoryExists(filePath: string) {
   const dir = path.dirname(filePath);
   await fs.mkdir(dir, { recursive: true });
 }
 
-// Main function to convert all MDX files to JSON
 async function convertMdxToJson() {
   try {
     const mdxFiles = await getMdxFiles(docsDir);
@@ -96,7 +88,6 @@ async function convertMdxToJson() {
 
       await ensureDirectoryExists(outputFilePath);
       await fs.writeFile(outputFilePath, JSON.stringify(jsonData, null, 2));
-      console.log(`Generated JSON for: ${jsonData.slug}`);
     }
 
     console.log("All MDX files have been converted to JSON.");
@@ -105,5 +96,4 @@ async function convertMdxToJson() {
   }
 }
 
-// Run the script
 convertMdxToJson();
