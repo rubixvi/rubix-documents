@@ -56,9 +56,11 @@ Product documentation, business website and guides.
 
 - MDX documentation
 - Nested pages
-- Syntax highlighting
 - Pagination
 - Search
+- Fuzzy search
+- Search highlights
+- Syntax highlighting
 - Code line highlight
 - Code title
 - Custom components
