@@ -139,7 +139,7 @@ export default function Search() {
                       </DialogClose>
                     );
                   }
-                  return null; // Return null for items without an href
+                  return null; 
                 })
               : renderDocuments(Documents)}
             </div>
