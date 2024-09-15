@@ -8,7 +8,7 @@ export default async function Toc({ path }: { path: string }) {
   const tocs = await getTable(path);
 
   return (
-    <div className="lg:flex hidden sticky top-16 flex-[0] min-w-[230px] h-[94.5vh] py-8 toc">
+    <div className="xl:flex hidden sticky top-16 flex-[0] min-w-[230px] h-[94.5vh] py-8 toc">
       <div className="flex flex-col gap-3 w-full pl-2">
         <h3 className="text-sm font-semibold">On this page</h3>
         <ScrollArea className="pt-0.5 pb-4">

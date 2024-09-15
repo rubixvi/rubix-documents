@@ -59,16 +59,6 @@
   }
 }
 
-.highlight {
-  font-weight: bold;
-  color: black;
-}
-
-.dark .highlight {
-  font-weight: bold;
-  color: white;
-}
-
 .prose {
   margin: 0 !important;
 }
@@ -90,7 +80,6 @@
   @apply border border-border border-collapse;
 }
 
-/* Add borders around table cells (th and td) */
 .prose th,
 .prose td {
   @apply border border-border;
@@ -201,6 +190,16 @@ span.katex-html {
   @apply tracking-wider;
   @apply font-medium;
   font-family: var(--font-code) !important;
+}
+
+.highlight {
+  font-weight: bold;
+  color: black;
+}
+
+.dark .highlight {
+  font-weight: bold;
+  color: white;
 }
 
 .highlight-comp>code {
