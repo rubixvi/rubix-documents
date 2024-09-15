@@ -281,9 +281,9 @@ export function debounce(func: (...args: any[]) => void, wait: number, immediate
     clearTimeout(timeout!);
     timeout = setTimeout(() => {
       timeout = null;
-      if (!immediate) func.apply(this, args);
+      if (!immediate) func(...args);
     }, wait);
-    if (callNow) func.apply(this, args);
+    if (callNow) func(...args);
   };
 }
 
