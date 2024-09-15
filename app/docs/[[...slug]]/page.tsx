@@ -5,6 +5,7 @@ import { Settings } from "@/settings/config";
 
 import PageBreadcrumb from "@/components/pagebreadcrumb";
 import Pagination from "@/components/pagination";
+import Toc from "@/components/toc";
 import { Typography } from "@/components/typography";
 
 type PageProps = {
@@ -30,6 +31,7 @@ export default async function Pages({ params: { slug = [] } }: PageProps) {
           <Pagination pathname={pathName} />
         </Typography>
       </div>
+      {Settings.toc && <Toc path={pathName} />}
     </div>
   );
 }

@@ -70,6 +70,7 @@ This kit can be used to create product documentation, business websites, and gui
 
 - MDX documentation
 - Nested pages
+- Table of content
 - Pagination
 - Search with fuzzy search and highlights
 - Syntax highlighting
