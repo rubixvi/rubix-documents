@@ -75,6 +75,7 @@ This kit can be used to create product documentation, business websites, and gui
 - Search with fuzzy search and highlights
 - Syntax highlighting
 - Code line highlight and title
+- Mermaid charts
 - Custom components
 - Light and dark mode
 - Code switcher and copy functionality
