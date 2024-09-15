@@ -15,25 +15,29 @@ function isRoute(node: Paths): node is Extract<Paths, { href: string; title: str
 }
 
 export function helperSearch(
-  query: string, 
-  node: Paths, 
-  prefix: string, 
-  currentLevel: number, 
+  query: string,
+  node: Paths,
+  prefix: string,
+  currentLevel: number,
   maxLevel?: number
 ) {
   const res: Paths[] = [];
   let parentHas = false;
+  const lowerQuery = query.toLowerCase();
 
   if (isRoute(node)) {
     const nextLink = `${prefix}${node.href}`;
-  
-    if (!query || node.title.toLowerCase().includes(query.toLowerCase())) {
+
+    const titleMatch = node.title.toLowerCase().includes(lowerQuery);
+    const titleDistance = searchMatch(lowerQuery, node.title.toLowerCase());
+
+    if (titleMatch || titleDistance <= 2) {
       res.push({ ...node, items: undefined, href: nextLink });
       parentHas = true;
     }
-  
+
     const goNext = maxLevel ? currentLevel < maxLevel : true;
-  
+
     if (goNext && node.items) {
       node.items.forEach((item) => {
         const innerRes = helperSearch(query, item, nextLink, currentLevel + 1, maxLevel);
@@ -50,52 +54,112 @@ export function helperSearch(
 }
 
 function searchMatch(a: string, b: string): number {
-  const matrix = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
+  const aLen = a.length;
+  const bLen = b.length;
 
-  for (let i = 0; i <= a.length; i++) {
-    matrix[i][0] = i;
-  }
-  for (let j = 0; j <= b.length; j++) {
-    matrix[0][j] = j;
-  }
+  if (aLen === 0) return bLen;
+  if (bLen === 0) return aLen;
 
-  for (let i = 1; i <= a.length; i++) {
-    for (let j = 1; j <= b.length; j++) {
+  if (aLen > bLen) [a, b] = [b, a];
+
+  let prevRow = Array(aLen + 1).fill(0);
+  let currRow = Array(aLen + 1).fill(0);
+
+  for (let i = 0; i <= aLen; i++) prevRow[i] = i;
+
+  for (let j = 1; j <= bLen; j++) {
+    currRow[0] = j;
+    for (let i = 1; i <= aLen; i++) {
       const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-      matrix[i][j] = Math.min(
-        matrix[i - 1][j] + 1,
-        matrix[i][j - 1] + 1,
-        matrix[i - 1][j - 1] + cost
-      );
+      currRow[i] = Math.min(prevRow[i] + 1, currRow[i - 1] + 1, prevRow[i - 1] + cost);
     }
+    [prevRow, currRow] = [currRow, prevRow];
   }
 
-  return matrix[a.length][b.length];
+  return prevRow[aLen];
 }
 
-function calculateRelevance(query: string, title: string, content: string) {
+function calculateRelevance(query: string, title: string, content: string): number {
   let score = 0;
-  const lowerQuery = query.toLowerCase();
+  const lowerQuery = query.toLowerCase().trim();
+  const lowerTitle = title.toLowerCase();
+  const lowerContent = content.toLowerCase();
   
-  if (title.toLowerCase().includes(lowerQuery)) {
-    score += 10;
+  const queryWords = lowerQuery.split(/\s+/);
+
+  if (lowerTitle.includes(lowerQuery)) {
+    score += 30;
+  } else {
+    queryWords.forEach((word) => {
+      if (lowerTitle.includes(word)) {
+        score += 10;
+      }
+    });
   }
-  if (content.toLowerCase().includes(lowerQuery)) {
-    score += 5;
-  }
+
+  queryWords.forEach((word) => {
+    const titleDistance = searchMatch(word, lowerTitle);
+    if (titleDistance <= 2) {
+      score += 5;
+    }
+  });
+
+  queryWords.forEach((word) => {
+    const exactPhraseMatch = new RegExp(`\\b${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'g');
+    const exactMatches = lowerContent.match(exactPhraseMatch);
+    if (exactMatches) {
+      score += exactMatches.length * 10;
+    }
+  });
+
+  queryWords.forEach((word) => {
+    if (lowerContent.includes(word)) {
+      score += 5;
+    }
+  });
+
+  const proximityScore = calculateProximityScore(lowerQuery, lowerContent);
+  score += proximityScore * 3;
+
+  const lengthNormalizationFactor = Math.log(content.length + 1);
+  score = score / lengthNormalizationFactor;
+
   return score;
 }
 
-export function cleanMdxContent(content: string): string {
+function calculateProximityScore(query: string, content: string): number {
+  const words = content.split(/\s+/);
+  const queryWords = query.split(/\s+/);
+  let proximityScore = 0;
+
+  for (let i = 0; i < words.length; i++) {
+    for (let j = 0; j < queryWords.length; j++) {
+      if (words[i] === queryWords[j]) {
+        for (let k = j + 1; k < queryWords.length; k++) {
+          const nextWordIndex = words.indexOf(queryWords[k], i + 1);
+          if (nextWordIndex !== -1 && nextWordIndex - i <= 3) {
+            proximityScore += 20;
+          }
+        }
+      }
+    }
+  }
+
+  return proximityScore;
+}
+
+function cleanMdxContent(content: string): string {
   let strippedContent = content
     .replace(/<[^>]+>/g, '')
     .replace(/```[\s\S]*?```/g, '')
     .replace(/`[^`]*`/g, '')
-    .replace(/\|[^|]+\|/g, '')
-    .replace(/[:\-]+/g, '')
-    .replace(/[*-]\s|\[x\]|\[ \]/g, '')
-    .replace(/[#>]/g, '')
+    .replace(/\|.*?\|/g, '')
+    .replace(/[*+-]\s|\d+\.\s|\[x\]|\[ \]/g, '')
+    .replace(/^(#{1,6}\s|>\s|-{3,}|\*{3,})/gm, '')
     .replace(/[*_~`]+/g, '')
+    .replace(/!\[.*?\]\(.*?\)|\[.*?\]\(.*?\)/g, '')
+    .replace(/\$\$[\s\S]*?\$\$/g, '')
+    .replace(/\$[^$]*\$/g, '')
     .replace(/\\/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
@@ -103,67 +167,68 @@ export function cleanMdxContent(content: string): string {
   return strippedContent;
 }
 
+export function extractSnippet(content: string, query: string): string {
+  const lowerContent = content.toLowerCase();
+  const queryWords = query.toLowerCase().split(/\s+/);
+
+  let indices = [];
+  queryWords.forEach((word) => {
+    const index = lowerContent.indexOf(word);
+    if (index !== -1) {
+      indices.push(index);
+    }
+  });
+
+  if (indices.length === 0) {
+    return content.slice(0, 100);
+  }
+
+  const avgIndex = Math.floor(indices.reduce((a, b) => a + b) / indices.length);
+
+  const snippetLength = 100;
+  const contextLength = Math.floor(snippetLength / 2);
+
+  const start = Math.max(0, avgIndex - contextLength);
+  const end = Math.min(avgIndex + contextLength, content.length);
+
+  let snippet = content.slice(start, end).replace(/\n/g, " ").trim();
+
+  if (start > 0) {
+    snippet = `...${snippet}`;
+  }
+  if (end < content.length) {
+    snippet += "...";
+  }
+
+  return snippet;
+}
+
 export function advanceSearch(query: string) {
-  const lowerQuery = query.toLowerCase();
-
-  if (!query) {
-    const rootNode: Paths = {
-      title: "Root",
-      href: "/",
-      items: Documents,
-    };
-
-    return helperSearch("", rootNode, "", 1);
+  const lowerQuery = query.toLowerCase().trim();
+  
+  if (lowerQuery.length <= 2) {
+    return [];
   }
 
   return searchData
     .map((doc) => {
       const title = doc.title || "";
       const content = doc.content || "";
-
       const cleanedContent = cleanMdxContent(content);
 
-      let relevanceScore = 0;
+      let relevanceScore = calculateRelevance(lowerQuery, title, cleanedContent);
 
-      if (title.toLowerCase().includes(lowerQuery)) {
-        relevanceScore += 20;
-      }
+      const proximityScore = calculateProximityScore(lowerQuery, cleanedContent);
+      relevanceScore += proximityScore;
 
-      const titleDistance = searchMatch(lowerQuery, title.toLowerCase());
-      if (titleDistance <= 2) {
-        relevanceScore += 10;
-      }
+      let snippet = extractSnippet(cleanedContent, lowerQuery);
 
-      const contentIndex = cleanedContent.toLowerCase().indexOf(lowerQuery);
-      if (contentIndex !== -1) {
-        relevanceScore += 10;
-      }
-
-      const contentDistance = searchMatch(lowerQuery, cleanedContent.toLowerCase());
-      if (contentDistance <= 5) {
-        relevanceScore += 5;
-      }
-
-      let snippet = "";
-      if (contentIndex !== -1) {
-        const snippetLength = 100;
-        const start = Math.max(0, contentIndex - snippetLength / 2);
-        const end = Math.min(cleanedContent.length, contentIndex + snippetLength / 2);
-        snippet = cleanedContent.slice(start, end).replace(/\n/g, " ").trim();
-
-        if (start > 0) {
-          snippet = `...${snippet}`;
-        }
-
-        if (end < cleanedContent.length) {
-          snippet += "...";
-        }
-      }
+      const highlightedSnippet = highlight(snippet, query);
 
       return {
         title: doc.title || "Untitled",
         href: `${doc.slug}`,
-        snippet: snippet || cleanedContent.slice(0, 100),
+        snippet: highlightedSnippet,
         description: doc.description || "",
         relevance: relevanceScore,
       };
@@ -171,7 +236,7 @@ export function advanceSearch(query: string) {
     .filter((doc) => doc.relevance > 0)
     .sort((a, b) => b.relevance - a.relevance);
 }
-
+  
 function formatDateHelper(dateStr: string, options: Intl.DateTimeFormatOptions): string {
   const [day, month, year] = dateStr.split("-").map(Number);
   const date = new Date(year, month - 1, day);
@@ -198,4 +263,35 @@ export function formatDate2(dateStr: string): string {
 export function stringToDate(date: string) {
   const [day, month, year] = date.split("-").map(Number);
   return new Date(year, month - 1, day);
+}
+
+export function debounce(func: (...args: any[]) => void, wait: number, immediate = false) {
+  let timeout: NodeJS.Timeout;
+  return function (...args: any[]) {
+    const callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      timeout = null;
+      if (!immediate) func.apply(this, args);
+    }, wait);
+    if (callNow) func.apply(this, args);
+  };
+}
+
+export function highlight(snippet: string, searchTerms: string): string {
+  const terms = searchTerms
+    .split(/\s+/)
+    .filter(term => term.trim().length > 0)
+    .map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+
+  if (terms.length === 0) return snippet;
+
+  const regex = new RegExp(`(${terms.join('|')})`, 'gi');
+
+  return snippet.replace(/(<[^>]+>)|([^<]+)/g, (match, htmlTag, textContent) => {
+    if (htmlTag) {
+      return htmlTag;
+    }
+    return textContent.replace(regex, "<span class='highlight'>$1</span>");
+  });
 }
