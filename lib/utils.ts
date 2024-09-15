@@ -14,6 +14,30 @@ export type search = {
   relevance?: number;
 };
 
+function memoize<T extends (...args: any[]) => any>(fn: T) {
+  const cache = new Map<string, ReturnType<T>>();
+
+  return (...args: Parameters<T>): ReturnType<T> => {
+    const key = JSON.stringify(args);
+
+    if (cache.has(key)) {
+      const cachedResult = cache.get(key);
+      if (cachedResult !== undefined) return cachedResult;
+    }
+
+    const result = fn(...args);
+
+    if (result !== '' && result != null) {
+      cache.set(key, result);
+    }
+
+    return result;
+  };
+}
+
+const memoizedSearchMatch = memoize(searchMatch);
+const memoizedCleanMdxContent = memoize(cleanMdxContent);
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -37,7 +61,7 @@ export function helperSearch(
     const nextLink = `${prefix}${node.href}`;
 
     const titleMatch = node.title.toLowerCase().includes(lowerQuery);
-    const titleDistance = searchMatch(lowerQuery, node.title.toLowerCase());
+    const titleDistance = memoizedSearchMatch(lowerQuery, node.title.toLowerCase());
 
     if (titleMatch || titleDistance <= 2) {
       res.push({ ...node, items: undefined, href: nextLink });
@@ -88,12 +112,12 @@ function searchMatch(a: string, b: string): number {
 }
 
 function calculateRelevance(query: string, title: string, content: string): number {
-  let score = 0;
   const lowerQuery = query.toLowerCase().trim();
   const lowerTitle = title.toLowerCase();
-  const lowerContent = content.toLowerCase();
-  
+  const lowerContent = memoizedCleanMdxContent(content);
   const queryWords = lowerQuery.split(/\s+/);
+
+  let score = 0;
 
   if (lowerTitle.includes(lowerQuery)) {
     score += 30;
@@ -105,20 +129,18 @@ function calculateRelevance(query: string, title: string, content: string): numb
     });
   }
 
-  queryWords.forEach((word) => {
-    const titleDistance = searchMatch(word, lowerTitle);
-    if (titleDistance <= 2) {
+  const titleDistances = queryWords.map(word => memoizedSearchMatch(word, lowerTitle));
+  for (const distance of titleDistances) {
+    if (distance <= 2) {
       score += 5;
     }
-  });
+  }
 
-  queryWords.forEach((word) => {
-    const exactPhraseMatch = new RegExp(`\\b${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'g');
-    const exactMatches = lowerContent.match(exactPhraseMatch);
-    if (exactMatches) {
-      score += exactMatches.length * 10;
-    }
-  });
+  const exactPhraseRegex = new RegExp(`\\b(${queryWords.join('|')})\\b`, 'g');
+  const exactMatches = lowerContent.match(exactPhraseRegex);
+  if (exactMatches) {
+    score += exactMatches.length * 10;
+  }
 
   queryWords.forEach((word) => {
     if (lowerContent.includes(word)) {
@@ -130,34 +152,29 @@ function calculateRelevance(query: string, title: string, content: string): numb
   score += proximityScore * 3;
 
   const lengthNormalizationFactor = Math.log(content.length + 1);
-  score = score / lengthNormalizationFactor;
-
-  return score;
+  return score / lengthNormalizationFactor;
 }
 
 function calculateProximityScore(query: string, content: string): number {
   const words = content.split(/\s+/);
   const queryWords = query.split(/\s+/);
-  let proximityScore = 0;
+  return queryWords.reduce((score, queryWord) => {
+    const firstIndex = words.indexOf(queryWord);
+    if (firstIndex === -1) return score;
 
-  for (let i = 0; i < words.length; i++) {
-    for (let j = 0; j < queryWords.length; j++) {
-      if (words[i] === queryWords[j]) {
-        for (let k = j + 1; k < queryWords.length; k++) {
-          const nextWordIndex = words.indexOf(queryWords[k], i + 1);
-          if (nextWordIndex !== -1 && nextWordIndex - i <= 3) {
-            proximityScore += 20;
-          }
-        }
+    for (let i = firstIndex + 1; i < words.length; i++) {
+      const nextQueryWordIndex = queryWords.indexOf(words[i], i);
+      if (nextQueryWordIndex !== -1 && i - firstIndex <= 3) {
+        score += 20;
       }
     }
-  }
 
-  return proximityScore;
+    return score;
+  }, 0);
 }
 
 function cleanMdxContent(content: string): string {
-  let strippedContent = content
+  return content
     .replace(/<[^>]+>/g, '')
     .replace(/```[\s\S]*?```/g, '')
     .replace(/`[^`]*`/g, '')
@@ -171,11 +188,9 @@ function cleanMdxContent(content: string): string {
     .replace(/\\/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
-
-  return strippedContent;
 }
 
-export function extractSnippet(content: string, query: string): string {
+function extractSnippet(content: string, query: string): string {
   const lowerContent = content.toLowerCase();
   const queryWords = query.toLowerCase().split(/\s+/);
 
@@ -192,45 +207,34 @@ export function extractSnippet(content: string, query: string): string {
   }
 
   const avgIndex = Math.floor(indices.reduce((a, b) => a + b) / indices.length);
-
   const snippetLength = 100;
   const contextLength = Math.floor(snippetLength / 2);
-
   const start = Math.max(0, avgIndex - contextLength);
   const end = Math.min(avgIndex + contextLength, content.length);
 
   let snippet = content.slice(start, end).replace(/\n/g, " ").trim();
-
-  if (start > 0) {
-    snippet = `...${snippet}`;
-  }
-  if (end < content.length) {
-    snippet += "...";
-  }
+  if (start > 0) snippet = `...${snippet}`;
+  if (end < content.length) snippet += "...";
 
   return snippet;
 }
 
 export function advanceSearch(query: string) {
   const lowerQuery = query.toLowerCase().trim();
-  
-  if (lowerQuery.length <= 2) {
-    return [];
-  }
+  if (lowerQuery.length <= 2) return [];
 
-  return searchData
-    .map((doc) => {
+  const chunks = chunkArray(searchData, 100);
+
+  const results = chunks.flatMap((chunk) =>
+    chunk.map((doc) => {
       const title = doc.title || "";
       const content = doc.content || "";
-      const cleanedContent = cleanMdxContent(content);
-
+      const cleanedContent = memoizedCleanMdxContent(content);
       let relevanceScore = calculateRelevance(lowerQuery, title, cleanedContent);
-
       const proximityScore = calculateProximityScore(lowerQuery, cleanedContent);
       relevanceScore += proximityScore;
 
-      let snippet = extractSnippet(cleanedContent, lowerQuery);
-
+      const snippet = extractSnippet(cleanedContent, lowerQuery);
       const highlightedSnippet = highlight(snippet, query);
 
       return {
@@ -242,9 +246,20 @@ export function advanceSearch(query: string) {
       };
     })
     .filter((doc) => doc.relevance > 0)
-    .sort((a, b) => b.relevance - a.relevance);
+    .sort((a, b) => b.relevance - a.relevance)
+  );
+
+  return results;
 }
-  
+
+function chunkArray<T>(array: T[], chunkSize: number): T[][] {
+  const chunks: T[][] = [];
+  for (let i = 0; i < array.length; i += chunkSize) {
+    chunks.push(array.slice(i, i + chunkSize));
+  }
+  return chunks;
+}
+
 function formatDateHelper(dateStr: string, options: Intl.DateTimeFormatOptions): string {
   const [day, month, year] = dateStr.split("-").map(Number);
   const date = new Date(year, month - 1, day);
@@ -273,21 +288,51 @@ export function stringToDate(date: string) {
   return new Date(year, month - 1, day);
 }
 
-export function debounce(func: (...args: any[]) => void, wait: number, immediate = false) {
+export function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  wait: number,
+  immediate = false
+): (...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout> | null = null;
+  let lastArgs: Parameters<T> | null = null;
+  let rafId: number | null = null;
+  let lastCallTime: number | null = null;
 
-  return function (...args: any[]) {
+  const later = (time: number) => {
+    const remaining = wait - (time - (lastCallTime || 0));
+    if (remaining <= 0) {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      func(...(lastArgs as Parameters<T>));
+      lastArgs = null;
+      lastCallTime = null;
+    } else {
+      rafId = requestAnimationFrame(later);
+    }
+  };
+
+  return (...args: Parameters<T>) => {
+    lastArgs = args;
+    lastCallTime = performance.now();
     const callNow = immediate && !timeout;
-    clearTimeout(timeout!);
+    if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => {
-      timeout = null;
-      if (!immediate) func(...args);
+      rafId = requestAnimationFrame(later);
     }, wait);
     if (callNow) func(...args);
   };
 }
 
+
 export function highlight(snippet: string, searchTerms: string): string {
+  if (!snippet || !searchTerms) return snippet;
+  
   const terms = searchTerms
     .split(/\s+/)
     .filter(term => term.trim().length > 0)
@@ -296,11 +341,8 @@ export function highlight(snippet: string, searchTerms: string): string {
   if (terms.length === 0) return snippet;
 
   const regex = new RegExp(`(${terms.join('|')})`, 'gi');
-
   return snippet.replace(/(<[^>]+>)|([^<]+)/g, (match, htmlTag, textContent) => {
-    if (htmlTag) {
-      return htmlTag;
-    }
+    if (htmlTag) return htmlTag;
     return textContent.replace(regex, "<span class='highlight'>$1</span>");
   });
 }
