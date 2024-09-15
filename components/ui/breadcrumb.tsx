@@ -1,8 +1,11 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+"use client";
+
+import * as React from "react";
+import { useRouter } from "next/navigation";
+import { Slot } from "@radix-ui/react-slot";
 import { LuChevronRight, LuMoreHorizontal } from "react-icons/lu";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const Breadcrumb = React.forwardRef<
   HTMLElement,
@@ -43,13 +46,25 @@ const BreadcrumbLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentPropsWithoutRef<"a"> & {
     asChild?: boolean
+    href?: string
   }
->(({ asChild, className, ...props }, ref) => {
-  const Comp = asChild ? Slot : "a"
+>(({ asChild, className, href, ...props }, ref) => {
+  const router = useRouter();
+
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (href && href.startsWith("/")) {
+      event.preventDefault()
+      router.push(href)
+    }
+  };
+
+  const Comp = asChild ? Slot : "a";
 
   return (
     <Comp
       ref={ref}
+      href={href}
+      onClick={handleClick}
       className={cn("transition-colors hover:text-foreground", className)}
       {...props}
     />
@@ -102,7 +117,7 @@ const BreadcrumbEllipsis = ({
     <span className="sr-only">More</span>
   </span>
 )
-BreadcrumbEllipsis.displayName = "BreadcrumbElipssis"
+BreadcrumbEllipsis.displayName = "BreadcrumbEllipsis"
 
 export {
   Breadcrumb,
