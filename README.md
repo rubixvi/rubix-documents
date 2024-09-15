@@ -27,7 +27,7 @@
 
     ```bash
     git clone https://github.com/rubixvi/rubix-documents.git
-    cd yourproject
+    cd rubix-documents
     ```
 
 2. Install dependencies:
