@@ -179,7 +179,7 @@ export function extractSnippet(content: string, query: string): string {
   const lowerContent = content.toLowerCase();
   const queryWords = query.toLowerCase().split(/\s+/);
 
-  let indices = [];
+  let indices: number[] = [];
   queryWords.forEach((word) => {
     const index = lowerContent.indexOf(word);
     if (index !== -1) {
