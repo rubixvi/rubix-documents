@@ -40,9 +40,21 @@ type BaseMdxFrontmatter = {
   description: string;
 };
 
+const getDocumentPathMemoized = (() => {
+  const cache = new Map<string, string>();
+  return (slug: string) => {
+    const cachedPath = cache.get(slug);
+    if (cachedPath) return cachedPath;
+
+    const contentPath = path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
+    cache.set(slug, contentPath);
+    return contentPath;
+  };
+})();
+
 export async function getDocument(slug: string) {
   try {
-    const contentPath = getDocumentPath(slug);
+    const contentPath = getDocumentPathMemoized(slug);
     const rawMdx = await fs.readFile(contentPath, "utf-8");
     return await parseMdx<BaseMdxFrontmatter>(rawMdx);
   } catch (err) {
@@ -51,31 +63,34 @@ export async function getDocument(slug: string) {
   }
 }
 
+function getDocumentPath(slug: string) {
+  return path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
+}
+
+const pathIndexMap = new Map(PageRoutes.map((route, index) => [route.href, index]));
+
 export function getPreviousNext(path: string) {
-  const index = PageRoutes.findIndex(({ href }) => href == `/${path}`);
+  const index = pathIndexMap.get(`/${path}`) || -1;
   return {
     prev: PageRoutes[index - 1],
     next: PageRoutes[index + 1],
   };
 }
 
-function getDocumentPath(slug: string) {
-  return path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
-}
-
 const preCopy = () => (tree: any) => {
-  visit(tree, (node) => {
-    if (node?.type === "element" && node?.tagName === "pre") {
+  visit(tree, "element", (node) => {
+    if (node.tagName === "pre") {
       const [codeEl] = node.children;
-      if (codeEl.tagName !== "code") return;
-      node.raw = codeEl.children?.[0].value;
+      if (codeEl?.tagName === "code") {
+        node.raw = codeEl.children?.[0]?.value || "";
+      }
     }
   });
 };
 
 const postCopy = () => (tree: any) => {
   visit(tree, "element", (node) => {
-    if (node?.type === "element" && node?.tagName === "pre") {
+    if (node.tagName === "pre" && node.raw) {
       node.properties["raw"] = node.raw;
     }
   });
