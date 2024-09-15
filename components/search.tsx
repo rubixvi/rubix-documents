@@ -15,13 +15,13 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import Anchor from "./anchor";
-import { advanceSearch, cn, debounce, highlight } from "@/lib/utils";
+import { advanceSearch, cn, debounce, highlight, search } from "@/lib/utils";
 import { Documents } from '@/settings/documents';
 
 export default function Search() {
   const [searchedInput, setSearchedInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [filteredResults, setFilteredResults] = useState([]);
+  const [filteredResults, setFilteredResults] = useState<search[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const debouncedSearch = useMemo(

@@ -6,6 +6,14 @@ import { Paths, Routes } from "./pageroutes";
 import { Documents } from '@/settings/documents';
 import searchData from "@/public/search-data/documents.json"
 
+export type search = {
+  title: string;
+  href: string;
+  snippet?: string;
+  description?: string;
+  relevance?: number;
+};
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
