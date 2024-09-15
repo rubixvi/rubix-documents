@@ -4,7 +4,7 @@ export const Documents: Paths[] = [
   {
     title: "Introduction",
     href: "/introduction",
-    heading: "Getting Started",
+    heading: "Getting started",
     items: [
       {
         title: "Installation",
@@ -45,14 +45,14 @@ export const Documents: Paths[] = [
   {
     title: "Deep",
     href: "/deep",
-    heading: "Deep Links",
+    heading: "Deep links",
     items: [
       {
         title: "Deeper",
         href: "/deeper",
         items : [
           {
-            title: "Even Deeper",
+            title: "Even deeper",
             href: "/even-deeper",
           },
         ]

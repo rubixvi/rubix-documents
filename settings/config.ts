@@ -13,6 +13,7 @@ const companyname = "Rubix Studios";
 const companylink = "https://www.rubixstudios.com.au";
 
 const branding = true;
+const tableofcontents = true;
 
 export const Company = {
   name: companyname,
@@ -26,6 +27,7 @@ export const Settings = {
   description: description,
   siteicon: siteicon,
   keywords: keywords,
+  toc: tableofcontents,
   openGraph: {
     type: "website",
     title: sitename,

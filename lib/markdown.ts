@@ -1,5 +1,5 @@
 import path from "path";
-import { promises as fs } from "fs";
+import { promises as fs, createReadStream } from "fs";
 
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
@@ -61,6 +61,33 @@ export async function getDocument(slug: string) {
     console.log(err);
     return null;
   }
+}
+
+const headingsRegex = /^(#{2,4})\s(.+)$/gm;
+
+export async function getTable(slug: string) {
+  const contentPath = await getDocumentPath(slug);
+  const extractedHeadings = [];
+
+  const stream = createReadStream(contentPath, { encoding: 'utf-8' });
+  for await (const chunk of stream) {
+    const matches = [...chunk.matchAll(headingsRegex)];
+    extractedHeadings.push(...matches.map((match) => {
+      const level = match[1].length;
+      const text = match[2].trim();
+      return {
+        level: level,
+        text: text,
+        href: `#${innerslug(text)}`,
+      };
+    }));
+  }
+
+  return extractedHeadings;
+}
+
+function innerslug(text: string) {
+  return text.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
 }
 
 function getDocumentPath(slug: string) {
