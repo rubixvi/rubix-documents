@@ -1,5 +1,5 @@
 import path from "path";
-import { promises as fs, createReadStream } from "fs";
+import { createReadStream, promises as fs } from "fs";
 
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
@@ -97,11 +97,16 @@ function getDocumentPath(slug: string) {
 const pathIndexMap = new Map(PageRoutes.map((route, index) => [route.href, index]));
 
 export function getPreviousNext(path: string) {
-  const index = pathIndexMap.get(`/${path}`) || -1;
-  return {
-    prev: PageRoutes[index - 1],
-    next: PageRoutes[index + 1],
-  };
+  const index = pathIndexMap.get(`/${path}`);
+
+  if (index === undefined || index === -1) {
+    return { prev: null, next: null };
+  }
+
+  const prev = index > 0 ? PageRoutes[index - 1] : null;
+  const next = index < PageRoutes.length - 1 ? PageRoutes[index + 1] : null;
+
+  return { prev, next };
 }
 
 const preCopy = () => (tree: any) => {
