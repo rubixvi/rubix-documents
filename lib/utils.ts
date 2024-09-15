@@ -274,12 +274,12 @@ export function stringToDate(date: string) {
 }
 
 export function debounce(func: (...args: any[]) => void, wait: number, immediate = false) {
-  let timeout: NodeJS.Timeout;
+  let timeout: ReturnType<typeof setTimeout>;
   return function (...args: any[]) {
     const callNow = immediate && !timeout;
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      timeout = null;
+      timeout = undefined;
       if (!immediate) func.apply(this, args);
     }, wait);
     if (callNow) func.apply(this, args);
