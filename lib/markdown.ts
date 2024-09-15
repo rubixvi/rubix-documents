@@ -1,5 +1,5 @@
 import path from "path";
-import { promises as fs, createReadStream } from "fs";
+import { createReadStream, promises as fs } from "fs";
 
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
