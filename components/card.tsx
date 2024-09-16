@@ -32,7 +32,7 @@ export default function Card({
     >
         <div
         className={clsx(
-            "relative p-6 border rounded-lg h-full flex flex-col justify-between bg-white hover:dark:shadow-[#711069] dark:bg-neutral-900 dark:border-neutral-800 shadow-md transition-shadow duration-300 ease-in-out hover:shadow-lg hover:dark:shadow-md",
+            "relative p-6 border rounded-lg h-full flex flex-col justify-between bg-white dark:bg-neutral-900 dark:border-neutral-800 shadow-md transition-shadow duration-300 ease-in-out hover:shadow-lg hover:dark:shadow-md",
             className
         )}
         >
