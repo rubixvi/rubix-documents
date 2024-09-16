@@ -58,9 +58,18 @@ async function ensureDirectoryExists(dir) {
     }
 }
 function removeCustomComponents() {
+    const customComponentNames = [
+        "Tabs",
+        "TabsList",
+        "TabsTrigger",
+        "pre",
+        "Mermaid",
+    ];
     return (tree) => {
         visit(tree, "mdxJsxFlowElement", (node, index, parent) => {
-            parent.children.splice(index, 1);
+            if (customComponentNames.includes(node.name)) {
+                parent.children.splice(index, 1);
+            }
         });
     };
 }
