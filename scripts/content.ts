@@ -15,6 +15,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeKatex from "rehype-katex";
 
+import { visit } from "unist-util-visit";
 import { Documents } from '@/settings/documents';
 import { Paths } from "@/lib/pageroutes";
 
