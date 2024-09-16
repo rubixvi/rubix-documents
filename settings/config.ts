@@ -12,7 +12,7 @@ const imagealt = "Rubix Studios Documentation";
 const twitterhandle = "@RubixStudios";
 
 const companyname = "Rubix Studios";
-const companylink = "https://rubix-documents.vercel.app";
+const companylink = "https://www.rubixstudios.com.au";
 
 const branding = true;
 const rightsidebar = true;
