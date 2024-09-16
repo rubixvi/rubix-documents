@@ -3,6 +3,7 @@ import { getDocument } from "@/lib/markdown";
 import { PageRoutes } from "@/lib/pageroutes";
 import { Settings } from "@/settings/config";
 
+import GitHub from "@/components/GitHub";
 import PageBreadcrumb from "@/components/pagebreadcrumb";
 import Pagination from "@/components/pagination";
 import Toc from "@/components/toc";
@@ -11,6 +12,8 @@ import { Typography } from "@/components/typography";
 type PageProps = {
   params: { slug: string[] };
 };
+
+export const revalidate = 60; 
 
 export default async function Pages({ params: { slug = [] } }: PageProps) {
   const pathName = slug.join("/");
@@ -31,7 +34,10 @@ export default async function Pages({ params: { slug = [] } }: PageProps) {
           <Pagination pathname={pathName} />
         </Typography>
       </div>
-      {Settings.toc && <Toc path={pathName} />}
+      <div className="xl:flex xl:flex-col hidden sticky gap-5 top-16 flex-[0] min-w-[230px] h-[94.5vh] py-8 toc">
+        {Settings.toc && <Toc path={pathName} />}
+        <GitHub slug={pathName} title={res.frontmatter.title} />
+      </div>
     </div>
   );
 }
@@ -57,3 +63,4 @@ export function generateStaticParams() {
       slug: item.href.split("/").slice(1),
     }));
 }
+
