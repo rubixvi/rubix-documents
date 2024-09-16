@@ -1,5 +1,7 @@
 import { OpenGraph, TwitterCard } from "@/lib/metadata";
 
+const gtm = "GTM-XXXXXXX";
+
 const url = "https://www.rubixstudios.com.au";
 const sitename = "Documents";
 const description = "This comprehensive documentation template, crafted with Next.js and available as open-source, delivers a sleek and responsive design, tailored to meet all your project documentation requirements.";
@@ -23,6 +25,7 @@ export const Company = {
 };
 
 export const Settings = {
+  gtm: gtm,
   title: sitename,
   metadataBase: url,
   description: description,

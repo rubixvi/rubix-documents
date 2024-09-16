@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleTagManager } from '@next/third-parties/google'
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { GeistSans } from "geist/font/sans";
@@ -47,6 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <GoogleTagManager gtmId={Settings.gtm} />
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} font-regular`}
         suppressHydrationWarning

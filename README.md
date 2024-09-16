@@ -44,6 +44,24 @@
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the project.
 
+5. **For Production:**
+
+   - Build the app:
+
+     ```bash
+     npm run build
+     ```
+
+   - Start the production server:
+
+     ```bash
+     npm run start
+     ```
+
+   - Open [http://localhost:3000](http://localhost:3000) to view the production build.
+
+   - **If deploying to Vercel,** the build step is automatically handled during deployment.
+
 ## Usage
 
 This kit can be used to create product documentation, business websites, and guides.
@@ -68,20 +86,22 @@ This kit can be used to create product documentation, business websites, and gui
 
 ## Features
 
-- MDX documentation
-- Nested pages
-- Table of content
-- Pagination
-- Search with fuzzy search and highlights
-- Syntax highlighting
-- Code line highlight and title
-- Mermaid charts
-- Custom components
-- Light and dark mode
-- Code switcher and copy functionality
-- Tables and mathematical expressions
-- AI knowledgebase **(Development)**
-- AI documentation support **(Development)**
+- **Seamless MDX Integration**: Write documentation with Markdown and enhanced JSX components.
+- **Multi-level Page Navigation**: Organize content with nested pages for a clear hierarchical structure.
+- **Dynamic Table of Contents**: Automatically generate a table of contents for easy navigation.
+- **Content Pagination**: Smooth transitions between pages for a seamless reading experience.
+- **Advanced Search**: Fuzzy search with term highlighting for quick and accurate results.
+- **Code Syntax Highlighting**: Beautiful, theme-aware syntax highlighting for code snippets.
+- **Enhanced Code Blocks**: Support for line highlighting and code titles to improve readability.
+- **Mermaid.js Diagrams**: Create complex flowcharts, graphs, and diagrams directly in your documentation.
+- **Custom Components**: Easily integrate reusable, custom React components in your documentation.
+- **Light and Dark Modes**: Full support for both light and dark themes with automatic switching.
+- **Interactive Code Switcher**: Switch between code snippets and copy them with a single click.
+- **Mathematical and Tabular Expressions**: Seamlessly include tables and math formulas with built-in LaTeX support.
+- **AI Knowledgebase (In Development)**: Integrating AI-powered documentation assistance.
+- **AI-powered Documentation Support (In Development)**: Future-ready AI tools for creating and managing content.
+- **SEO Optimization**: Comprehensive metadata and SEO integration to help your documentation rank better on search engines. Automatically generated metadata ensures proper indexing and improves discoverability.
+- **Meta Tags Management**: Easily manage meta tags such as title, description, canonical URLs, and social sharing images (Open Graph and Twitter cards), ensuring your content looks great when shared.
 
 ## Contributing
 

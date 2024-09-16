@@ -1,7 +1,7 @@
 {
-  "name": "aria-docs",
+  "name": "rubix-documents",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,6 +10,7 @@
     "generate-content-json": "ts-node scripts/content.ts"
   },
   "dependencies": {
+    "@next/third-parties": "^14.2.11",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-collapsible": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -23,7 +24,7 @@
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.441.0",
     "mermaid": "^11.2.0",
-    "next": "^14.2.6",
+    "next": "^14.2.11",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
@@ -44,11 +45,12 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.14",
-    "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/next": "^9.0.0",
+    "@types/node": "^22.5.5",
+    "@types/react": "^18.3.6",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8",
+    "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.6",
     "husky": "^9.1.6",
     "postcss": "^8",
