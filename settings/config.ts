@@ -2,7 +2,7 @@ import { OpenGraph, TwitterCard } from "@/lib/metadata";
 
 const gtm = "GTM-XXXXXXX";
 
-const url = "https://www.rubixstudios.com.au";
+const url = "https://rubix-documents.vercel.app";
 const sitename = "Documents";
 const description = "This comprehensive documentation template, crafted with Next.js and available as open-source, delivers a sleek and responsive design, tailored to meet all your project documentation requirements.";
 const keywords = ["Next.js", "documentation", "Rubix Studios", "open source", "SEO"];
