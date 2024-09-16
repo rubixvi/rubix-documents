@@ -86,6 +86,8 @@ export function helperSearch(
 }
 
 function searchMatch(a: string, b: string): number {
+  if (typeof a !== 'string' || typeof b !== 'string') return 0;
+
   const aLen = a.length;
   const bLen = b.length;
 
@@ -93,6 +95,8 @@ function searchMatch(a: string, b: string): number {
   if (bLen === 0) return aLen;
 
   if (aLen > bLen) [a, b] = [b, a];
+
+  const maxDistance = Math.min(Math.max(Math.floor(aLen / 2), 2), 5);
 
   let prevRow = Array(aLen + 1).fill(0);
   let currRow = Array(aLen + 1).fill(0);
@@ -104,12 +108,17 @@ function searchMatch(a: string, b: string): number {
     for (let i = 1; i <= aLen; i++) {
       const cost = a[i - 1] === b[j - 1] ? 0 : 1;
       currRow[i] = Math.min(prevRow[i] + 1, currRow[i - 1] + 1, prevRow[i - 1] + cost);
+      
+      if (currRow[i] > maxDistance) {
+        return maxDistance;
+      }
     }
     [prevRow, currRow] = [currRow, prevRow];
   }
 
-  return prevRow[aLen];
+  return Math.min(prevRow[aLen], maxDistance);
 }
+
 
 function calculateRelevance(query: string, title: string, content: string): number {
   const lowerQuery = query.toLowerCase().trim();
@@ -119,17 +128,19 @@ function calculateRelevance(query: string, title: string, content: string): numb
 
   let score = 0;
 
-  if (lowerTitle.includes(lowerQuery)) {
-    score += 30;
+  if (lowerTitle.includes(queryWords[0])) {
+    score += 40; // Higher priority to the first query term.
+  } else if (lowerTitle.includes(lowerQuery)) {
+    score += 30; // Prioritize exact match for the entire query.
   } else {
-    queryWords.forEach((word) => {
+    queryWords.forEach((word, idx) => {
       if (lowerTitle.includes(word)) {
-        score += 10;
+        score += 10 + (5 * (queryWords.length - idx));
       }
     });
   }
 
-  const titleDistances = queryWords.map(word => memoizedSearchMatch(word, lowerTitle));
+  const titleDistances = queryWords.map((word) => memoizedSearchMatch(word, lowerTitle));
   for (const distance of titleDistances) {
     if (distance <= 2) {
       score += 5;
@@ -156,21 +167,31 @@ function calculateRelevance(query: string, title: string, content: string): numb
 }
 
 function calculateProximityScore(query: string, content: string): number {
+  if (typeof query !== 'string' || typeof content !== 'string') return 0;
+
   const words = content.split(/\s+/);
   const queryWords = query.split(/\s+/);
-  return queryWords.reduce((score, queryWord) => {
-    const firstIndex = words.indexOf(queryWord);
-    if (firstIndex === -1) return score;
+  
+  let proximityScore = 0;
+  let firstIndex = -1;
 
-    for (let i = firstIndex + 1; i < words.length; i++) {
-      const nextQueryWordIndex = queryWords.indexOf(words[i], i);
-      if (nextQueryWordIndex !== -1 && i - firstIndex <= 3) {
-        score += 20;
+  queryWords.forEach((queryWord, queryIndex) => {
+    const wordIndex = words.indexOf(queryWord, firstIndex + 1);
+    
+    if (wordIndex !== -1) {
+      if (queryIndex === 0) {
+        proximityScore += 30;
+      } else if (wordIndex - firstIndex <= 3) {
+        proximityScore += 20 - (wordIndex - firstIndex);
       }
-    }
 
-    return score;
-  }, 0);
+      firstIndex = wordIndex;
+    } else {
+      firstIndex = -1;
+    }
+  });
+
+  return proximityScore;
 }
 
 function cleanMdxContent(content: string): string {
@@ -221,7 +242,10 @@ function extractSnippet(content: string, query: string): string {
 
 export function advanceSearch(query: string) {
   const lowerQuery = query.toLowerCase().trim();
-  if (lowerQuery.length <= 2) return [];
+
+  const queryWords = lowerQuery.split(/\s+/).filter(word => word.length >= 3);
+
+  if (queryWords.length === 0) return [];
 
   const chunks = chunkArray(searchData, 100);
 
@@ -230,12 +254,13 @@ export function advanceSearch(query: string) {
       const title = doc.title || "";
       const content = doc.content || "";
       const cleanedContent = memoizedCleanMdxContent(content);
-      let relevanceScore = calculateRelevance(lowerQuery, title, cleanedContent);
-      const proximityScore = calculateProximityScore(lowerQuery, cleanedContent);
+
+      let relevanceScore = calculateRelevance(queryWords.join(' '), title, cleanedContent);
+      const proximityScore = calculateProximityScore(queryWords.join(' '), cleanedContent);
       relevanceScore += proximityScore;
 
       const snippet = extractSnippet(cleanedContent, lowerQuery);
-      const highlightedSnippet = highlight(snippet, query);
+      const highlightedSnippet = highlight(snippet, queryWords.join(' '));
 
       return {
         title: doc.title || "Untitled",
@@ -330,9 +355,10 @@ export function debounce<T extends (...args: any[]) => any>(
 }
 
 
+
 export function highlight(snippet: string, searchTerms: string): string {
   if (!snippet || !searchTerms) return snippet;
-  
+
   const terms = searchTerms
     .split(/\s+/)
     .filter(term => term.trim().length > 0)
@@ -340,7 +366,8 @@ export function highlight(snippet: string, searchTerms: string): string {
 
   if (terms.length === 0) return snippet;
 
-  const regex = new RegExp(`(${terms.join('|')})`, 'gi');
+  const regex = new RegExp(`(${terms.join('|')})(?![^<>]*>)`, 'gi');
+  
   return snippet.replace(/(<[^>]+>)|([^<]+)/g, (match, htmlTag, textContent) => {
     if (htmlTag) return htmlTag;
     return textContent.replace(regex, "<span class='highlight'>$1</span>");
