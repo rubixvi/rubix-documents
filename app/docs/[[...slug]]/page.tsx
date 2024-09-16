@@ -3,7 +3,7 @@ import { getDocument } from "@/lib/markdown";
 import { PageRoutes } from "@/lib/pageroutes";
 import { Settings } from "@/settings/config";
 
-import GitHub from "@/components/GitHub";
+import GitHub from "@/components/github";
 import PageBreadcrumb from "@/components/pagebreadcrumb";
 import Pagination from "@/components/pagination";
 import Toc from "@/components/toc";
