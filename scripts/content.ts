@@ -65,12 +65,23 @@ async function ensureDirectoryExists(dir: string) {
 }
 
 function removeCustomComponents() {
+  const customComponentNames = [
+    "Tabs",
+    "TabsList",
+    "TabsTrigger",
+    "pre",
+    "Mermaid",
+  ];
+
   return (tree: any) => {
     visit(tree, "mdxJsxFlowElement", (node, index, parent) => {
-      parent.children.splice(index, 1);
+      if (customComponentNames.includes(node.name)) {
+        parent.children.splice(index, 1);
+      }
     });
   };
 }
+
 
 async function processMdxFile(filePath: string) {
   const rawMdx = await fs.readFile(filePath, "utf-8");
