@@ -3,6 +3,7 @@ import { getDocument } from "@/lib/markdown";
 import { PageRoutes } from "@/lib/pageroutes";
 import { Settings } from "@/settings/config";
 
+import GitHub from "@/components/github";
 import PageBreadcrumb from "@/components/pagebreadcrumb";
 import Pagination from "@/components/pagination";
 import Toc from "@/components/toc";
@@ -31,7 +32,12 @@ export default async function Pages({ params: { slug = [] } }: PageProps) {
           <Pagination pathname={pathName} />
         </Typography>
       </div>
-      {Settings.toc && <Toc path={pathName} />}
+      {Settings.rightbar && (
+        <div className="hidden xl:flex xl:flex-col sticky top-16 gap-5 py-8 min-w-[230px] h-[94.5vh] toc">
+          <Toc path={pathName} />
+          {Settings.fbedit && <GitHub slug={pathName} title={res.frontmatter.title} />}
+        </div>
+      )}
     </div>
   );
 }
@@ -57,3 +63,4 @@ export function generateStaticParams() {
       slug: item.href.split("/").slice(1),
     }));
 }
+

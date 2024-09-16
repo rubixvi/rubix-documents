@@ -5,6 +5,7 @@ import grayMatter from "gray-matter";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
+import remarkMdx from "remark-mdx";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypePrism from "rehype-prism-plus";
@@ -12,6 +13,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeKatex from "rehype-katex";
+import { visit } from "unist-util-visit";
 import { Documents } from '../settings/documents.mjs';
 const docsDir = path.join(process.cwd(), "contents/docs");
 const outputDir = path.join(process.cwd(), "public", "search-data");
@@ -56,11 +58,29 @@ async function ensureDirectoryExists(dir) {
         await fs.mkdir(dir, { recursive: true });
     }
 }
+function removeCustomComponents() {
+    const customComponentNames = [
+        "Tabs",
+        "TabsList",
+        "TabsTrigger",
+        "pre",
+        "Mermaid",
+    ];
+    return (tree) => {
+        visit(tree, "mdxJsxFlowElement", (node, index, parent) => {
+            if (customComponentNames.includes(node.name)) {
+                parent.children.splice(index, 1);
+            }
+        });
+    };
+}
 async function processMdxFile(filePath) {
     const rawMdx = await fs.readFile(filePath, "utf-8");
     const { content, data: frontmatter } = grayMatter(rawMdx);
     const plainContent = await unified()
         .use(remarkParse)
+        .use(remarkMdx)
+        .use(removeCustomComponents)
         .use(remarkStringify)
         .process(content);
     const compiledMdx = await compile(content, {
