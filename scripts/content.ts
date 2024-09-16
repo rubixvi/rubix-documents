@@ -6,7 +6,7 @@ import grayMatter from "gray-matter";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
-
+import remarkMdx from "remark-mdx";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypePrism from "rehype-prism-plus";
@@ -64,6 +64,14 @@ async function ensureDirectoryExists(dir: string) {
   }
 }
 
+function removeCustomComponents() {
+  return (tree: any) => {
+    visit(tree, "mdxJsxFlowElement", (node, index, parent) => {
+      parent.children.splice(index, 1);
+    });
+  };
+}
+
 async function processMdxFile(filePath: string) {
   const rawMdx = await fs.readFile(filePath, "utf-8");
 
@@ -71,6 +79,8 @@ async function processMdxFile(filePath: string) {
 
   const plainContent = await unified()
     .use(remarkParse)
+    .use(remarkMdx)
+    .use(removeCustomComponents)
     .use(remarkStringify)
     .process(content);
 
