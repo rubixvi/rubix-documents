@@ -13,6 +13,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeKatex from "rehype-katex";
+import { visit } from "unist-util-visit";
 import { Documents } from '../settings/documents.mjs';
 const docsDir = path.join(process.cwd(), "contents/docs");
 const outputDir = path.join(process.cwd(), "public", "search-data");
