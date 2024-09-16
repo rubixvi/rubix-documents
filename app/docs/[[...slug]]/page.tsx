@@ -13,8 +13,6 @@ type PageProps = {
   params: { slug: string[] };
 };
 
-export const revalidate = 60; 
-
 export default async function Pages({ params: { slug = [] } }: PageProps) {
   const pathName = slug.join("/");
   const res = await getDocument(pathName);
