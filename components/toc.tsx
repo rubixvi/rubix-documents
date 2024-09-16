@@ -7,6 +7,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 export default async function Toc({ path }: { path: string }) {
   const tocs = await getTable(path);
 
+  if (!tocs.length) {
+    return null;
+  }
+  
   return (
     <div className="flex flex-col gap-3 w-full pl-2">
       <h3 className="text-sm font-semibold">On this page</h3>

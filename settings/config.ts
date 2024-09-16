@@ -14,6 +14,7 @@ const companylink = "https://www.rubixstudios.com.au";
 
 const branding = true;
 const rightsidebar = true;
+const feedbackedit = true;
 
 export const Company = {
   name: companyname,
@@ -28,6 +29,7 @@ export const Settings = {
   siteicon: siteicon,
   keywords: keywords,
   rightbar: rightsidebar,
+  fbedit: feedbackedit,
   openGraph: {
     type: "website",
     title: sitename,

@@ -37,7 +37,7 @@ export default async function Pages({ params: { slug = [] } }: PageProps) {
       {Settings.rightbar && (
         <div className="hidden xl:flex xl:flex-col sticky top-16 gap-5 py-8 min-w-[230px] h-[94.5vh] toc">
           <Toc path={pathName} />
-          <GitHub slug={pathName} title={res.frontmatter.title} />
+          {Settings.fbedit && <GitHub slug={pathName} title={res.frontmatter.title} />}
         </div>
       )}
     </div>
