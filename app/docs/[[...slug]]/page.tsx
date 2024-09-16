@@ -34,10 +34,12 @@ export default async function Pages({ params: { slug = [] } }: PageProps) {
           <Pagination pathname={pathName} />
         </Typography>
       </div>
-      <div className="xl:flex xl:flex-col hidden sticky gap-5 top-16 flex-[0] min-w-[230px] h-[94.5vh] py-8 toc">
-        {Settings.toc && <Toc path={pathName} />}
-        <GitHub slug={pathName} title={res.frontmatter.title} />
-      </div>
+      {Settings.rightbar && (
+        <div className="hidden xl:flex xl:flex-col sticky top-16 gap-5 py-8 min-w-[230px] h-[94.5vh] toc">
+          <Toc path={pathName} />
+          <GitHub slug={pathName} title={res.frontmatter.title} />
+        </div>
+      )}
     </div>
   );
 }
