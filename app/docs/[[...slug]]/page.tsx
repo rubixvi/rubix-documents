@@ -52,11 +52,14 @@ export async function generateMetadata({ params: { slug = [] } }: PageProps) {
   
   if (!res) return null;
 
-  const { frontmatter } = res;
+  const { frontmatter, lastUpdated } = res;
 
   return {
     title: `${frontmatter.title} - ${Settings.title}`,
     description: frontmatter.description,
+    ...(lastUpdated && {
+      lastModified: new Date(lastUpdated).toISOString(),
+    }),
   };
 }
 

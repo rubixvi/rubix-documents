@@ -1,18 +1,10 @@
 import path from "path";
 import { promises as fs } from "fs";
-import { compile } from "@mdx-js/mdx";
 import grayMatter from "gray-matter";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
 import remarkMdx from "remark-mdx";
-import remarkGfm from "remark-gfm";
-import remarkRehype from "remark-rehype";
-import rehypePrism from "rehype-prism-plus";
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeCodeTitles from "rehype-code-titles";
-import rehypeKatex from "rehype-katex";
 import { visit } from "unist-util-visit";
 import { Documents } from '../settings/documents.mjs';
 const docsDir = path.join(process.cwd(), "contents/docs");
@@ -83,17 +75,6 @@ async function processMdxFile(filePath) {
         .use(removeCustomComponents)
         .use(remarkStringify)
         .process(content);
-    const compiledMdx = await compile(content, {
-        remarkPlugins: [remarkGfm, remarkRehype],
-        rehypePlugins: [
-            rehypeSlug,
-            rehypeAutolinkHeadings,
-            rehypeCodeTitles,
-            rehypeKatex,
-            [rehypePrism, { ignoreMissing: true }],
-        ],
-        format: "mdx",
-    });
     const slug = createSlug(filePath);
     const matchedDoc = findDocumentBySlug(slug);
     return {
