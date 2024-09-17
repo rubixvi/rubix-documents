@@ -80,6 +80,10 @@
   @apply border border-border border-collapse;
 }
 
+.prose th {
+  @apply dark:bg-neutral-900;
+}
+
 .prose th,
 .prose td {
   @apply border border-border;
