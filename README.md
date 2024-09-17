@@ -105,7 +105,7 @@ This kit can be used to create product documentation, business websites, and gui
 - **Syntax Highlighting**: Theme-aware highlighting.
 - **Enhanced Code Blocks**: Line highlighting & code titles.
 
-**Theming & User Experience**
+**Theming & UX**
 
 - **Light/Dark Modes**: Automatic theme switching.
 - **SEO Optimization**: Auto-generated metadata for better ranking.
