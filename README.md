@@ -84,34 +84,34 @@ This kit can be used to create product documentation, business websites, and gui
 ![Document Dark Screen](./public/screens/screen-6.png)
 *Document Dark Mode Screen*
 
-## Key Features
+## Features
 
-**Content Creation**
+### Content Creation
 
 - **MDX Integration**: Write docs with Markdown & JSX components.
 - **Custom Components**: Reuse React components in your docs.
 - **Mermaid.js Diagrams**: Create flowcharts & diagrams.
 - **Math & Tables**: Include tables & LaTeX math formulas.
 
-**Navigation & Readability**
+### Navigation & Readability
 
 - **Multi-level Navigation**: Nested pages for hierarchy.
 - **Content Pagination**: Smooth transitions between pages.
 - **Dynamic TOC**: Auto-generated table of contents.
 - **Code Switcher**: Toggle & copy code snippets easily.
 
-**Code Features**
+### Code Features
 
 - **Syntax Highlighting**: Theme-aware highlighting.
 - **Enhanced Code Blocks**: Line highlighting & code titles.
 
-**Theming & UX**
+### Theming & UX
 
 - **Light/Dark Modes**: Automatic theme switching.
 - **SEO Optimization**: Auto-generated metadata for better ranking.
   - Manage meta tags (title, description, URLs, social sharing).
 
-**Search & Future Enhancements**
+### Search & Future Enhancements
 
 - **Advanced Search**: Fuzzy search with term highlighting.
 - **AI Knowledgebase**: Future AI-powered doc tools.
