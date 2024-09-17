@@ -58,7 +58,7 @@ export function Logo() {
     <Link href="/" className="flex items-center gap-2.5">
       <Image 
         src={Settings.siteicon}
-        alt={Settings.title}
+        alt={`${Settings.title} main logo`}
         width={34}
         height={34}
         loading="lazy"
