@@ -1,16 +1,27 @@
+"use client";
+
 import Link from "next/link";
 import clsx from "clsx";
-
-import { getTable } from "@/lib/markdown";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-export default async function Toc({ path }: { path: string }) {
-  const tocs = await getTable(path);
+type TocProps = {
+  tocs: { href: string; level: number; text: string }[];
+};
+
+export default function Toc({ tocs }: TocProps) {
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetElement = document.querySelector(href);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, '', href);
+    }
+  };
 
   if (!tocs.length) {
     return null;
   }
-  
+
   return (
     <div className="flex flex-col gap-3 w-full pl-2">
       <h3 className="text-sm font-semibold">On this page</h3>
@@ -20,10 +31,12 @@ export default async function Toc({ path }: { path: string }) {
             <Link
               key={href}
               href={href}
+              scroll={false}
+              onClick={(e) => handleSmoothScroll(e, href)}
               className={clsx({
                 "pl-0": level == 2,
                 "pl-4": level == 3,
-                "pl-8 ": level == 4,
+                "pl-8": level == 4,
               })}
             >
               {text}

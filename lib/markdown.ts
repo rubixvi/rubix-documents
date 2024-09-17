@@ -56,7 +56,15 @@ export async function getDocument(slug: string) {
   try {
     const contentPath = getDocumentPathMemoized(slug);
     const rawMdx = await fs.readFile(contentPath, "utf-8");
-    return await parseMdx<BaseMdxFrontmatter>(rawMdx);
+    const parsedMdx = await parseMdx<BaseMdxFrontmatter>(rawMdx);
+
+    const tocs = await getTable(slug);
+
+    return {
+      frontmatter: parsedMdx.frontmatter,
+      content: parsedMdx.content,
+      tocs,
+    };
   } catch (err) {
     console.log(err);
     return null;

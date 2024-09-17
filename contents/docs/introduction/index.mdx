@@ -1,80 +1,68 @@
 ---
 title: Introduction
-description: This section provides an overview of Introduction.
+description: This section provides an overview of how to get started with the Documents, Next.js Document Starter Kit.
 ---
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime, molestiae, facilis aperiam et, error illum vel ullam? Quis architecto dolore ullam
+Welcome to **Documents**, a powerful and flexible Next.js document tool starter kit designed to simplify the process of creating high-quality, comprehensive product documentation, technical manuals, and business guides. Built with **React**, **Tailwind CSS**, and **TypeScript**, this starter kit provides the foundation for scaling your documentation efforts, whether you're working on a small internal project or a large public knowledge base.
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
+Documents was crafted to streamline the creation, management and showcasing of documentation, allowing developers and teams to focus on the content rather than building the underlying structure. This documentation aims to help you get up and running with the kit, exploring the various features and providing insights into how to structure and present your content effectively.
 
-| Syntax        | Description |   Test Text |
-| :------------ | :---------: | ----------: |
-| Header        |    Title    | Here's this |
-| Paragraph     |    Text     |    And more |
-| Strikethrough |             |    ~~Text~~ |
+<CardGrid>
+  <Card
+    subtitle="Instruction"
+    title="Quick Start"
+    description="Get started with Documents using our quick start installation guide to get your project started."
+    href="/docs/introduction/quick-start"
+  />
+  <Card
+    subtitle="Support"
+    title="Rubix Studios"
+    description="Australia's leading branding, marketing and web development company."
+    href="https://www.rubixstudios.com.au/"
+    external={true}
+  />
+</CardGrid>
 
-## Getting Started
+## Why Documents?
 
-To begin using the Documentation Template, follow these simple steps:
+Documents was created as an open-source project to help the community streamline their documentation process, enabling developers to focus on more critical 
+tasks. Built with scalability in mind, it adapts to projects of all sizes, from single-page guides to comprehensive knowledge bases. The integration of MDX, 
+custom components and Tailwind CSS ensures an intuitive experience, simplifying both content creation and management. 
 
-- Start by cloning the repository to your local machine.
+- **Product Guides**: Comprehensive manuals for product usage, setup and troubleshooting.
+- **Business Documentation**: Clear and structured documentation for internal processes, policies and systems.
+- **Technical Manuals**: Detailed guides for APIs, software development kits (SDKs) and technical processes.
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quae iure nulla deserunt dolore quam pariatur minus sapiente accusantium. Optio, necessitatibus sequi. Veritatis, aspernatur? Possimus quis repellat eum vitae eveniet.
+Documents offers extensive customization options, allowing you to easily align the design and functionality with your branding or specific documentation 
+requirements.
 
-## Blockquotes
+## Key Features
 
-Blockquotes are useful for emphasizing key points or quoting external sources:
+Here are some of the features that make **Documents** an ideal for building your documentation:
 
-> "Documentation is a love letter that you write to your future self." - Damian Conway
+| Feature                              | Description                                                                                                      |
+|--------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| **Content Creation**                 | Write documentation using Markdown with JSX, custom components and Mermaid.js for diagrams.                      |
+| **Navigation & Structure**           | Organize content with multi-level navigation, automatically generated tables of contents and smooth pagination.  |
+| **Code Features**                    | Syntax highlighting, enhanced code blocks and a code switcher with copy functionality.                           |
+| **Advanced Search**                  | Fuzzy search with term highlighting for quick and accurate results.                                              |
+| **Theming & Layout**                 | Supports light/dark modes with automatic switching and responsive design.                                        |
+| **Math & Tables**                    | Seamless integration of LaTeX for math and structured tables.                                                    |
+| **SEO & Meta Tags**                  | Built-in SEO, metadata generation and control over meta tags for better search rankings and social sharing.      |
+| **AI-powered Docs (In Development)** | Future feature for AI-driven content creation and management.                                                    |
 
-Feel free to use blockquotes to highlight important information or quotes relevant to your documentation.
+## How to Use These Documents
 
-## Code Examples with switch
+On the left side of the screen, you'll find the documentation's navigation bar. The pages are organized in a logical sequence, progressing from foundational 
+topics to more advanced concepts, allowing you to follow along step-by-step as you build your documentations. However, feel free to explore the content in 
+any order, selecting the sections most relevant to your use case.
 
-Here a custom tab component from shadcn ui is used.
+On the right side of the screen, a table of contents provides easy navigation between sections of each page. For quick access to specific content, you can 
+use the search bar at the top or the search shortcut (`Ctrl+K` or `Cmd+K`).
 
-<Tabs defaultValue="js" className="pt-5 pb-1">
-  <TabsList className="">
-    <TabsTrigger value="js">layout.jsx</TabsTrigger>
-    <TabsTrigger value="ts">layout.tsx</TabsTrigger>
-  </TabsList>
-  <TabsContent value="js">
-  ```jsx {7} showLineNumbers
-import ThemeProvider from './theme-provider'
- 
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <body className="container">
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
-  )}
-````
-  </TabsContent>
-  <TabsContent value="ts">
-```tsx {11} showLineNumbers
-import ThemeProvider from './theme-provider'
- 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <html>
-      <body className="container">
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
-  )
-}
-```
-  </TabsContent>
-</Tabs>
+To begin, head over to the [Installation Guide](/docs/introduction/quick-start).
 
-## Conclusion
+## Join our Community
 
-Thank you for choosing the Documentation Template for your project. Whether you're documenting software, APIs, or processes, we're here to support you in creating clear and effective documentation. Happy documenting!
+If you have questions about anything related to Documents, you're always welcome to ask our community on GitHub Discussions, Discord, X (Twitter), Facebook 
+and Reddit.
