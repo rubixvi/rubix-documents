@@ -115,8 +115,6 @@ This kit can be used to create product documentation, business websites, and gui
 
 - **Advanced Search**: Fuzzy search with term highlighting for quick and accurate results.
 - **AI Knowledgebase (In Development)**: Future-ready AI-powered documentation tools to assist in content creation and management.
-  
----
 
 > **Note:** AI-powered documentation support is currently under development.
 
