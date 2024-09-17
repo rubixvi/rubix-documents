@@ -32,6 +32,7 @@ export default function Toc({ tocs }: TocProps) {
               key={href}
               href={href}
               scroll={false}
+              aria-label={`Go to ${text} section`}
               onClick={(e) => handleSmoothScroll(e, href)}
               className={clsx({
                 "pl-0": level == 2,
