@@ -187,9 +187,3 @@ export default function Search() {
     </div>
   );
 }
-
-const paddingMap = {
-  1: "pl-6",
-  2: "pl-8",
-  3: "pl-10",
-} as const;

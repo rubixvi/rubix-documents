@@ -38,6 +38,7 @@ export function Navbar() {
                   className={buttonVariants({ variant: "ghost", size: "icon" })}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="View the repository on GitHub"
                 >
                   <LuGithub className="w-[1.1rem] h-[1.1rem]" />
                 </Link>
@@ -60,6 +61,8 @@ export function Logo() {
         alt={Settings.title}
         width={34}
         height={34}
+        loading="lazy"
+        decoding="async"
       />
       <h1 className="text-md font-semibold">{Settings.title}</h1>
     </Link>
