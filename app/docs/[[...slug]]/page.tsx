@@ -31,11 +31,6 @@ export default async function Pages({ params: { slug = [] } }: PageProps) {
           <p className="-mt-4 text-base text-muted-foreground text-[16.5px]">
             {frontmatter.description}
           </p>
-          {res.lastUpdated && (
-            <p className="text-xs text-muted-foreground">
-              Last updated: {new Date(res.lastUpdated).toLocaleDateString()}
-            </p>
-          )}
           <div>{content}</div>
           <Pagination pathname={pathName} />
         </Typography>

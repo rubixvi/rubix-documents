@@ -60,7 +60,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="px-8 h-auto">
+          <main className="px-5 sm:px-8 h-auto">
             {children}
           </main>
           <Footer />
