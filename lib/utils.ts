@@ -1,9 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-import { Paths, Routes } from "./pageroutes";
+import { Paths } from "./pageroutes";
 
-import { Documents } from '@/settings/documents';
 import searchData from "@/public/search-data/documents.json"
 
 export type search = {
@@ -129,9 +128,9 @@ function calculateRelevance(query: string, title: string, content: string): numb
   let score = 0;
 
   if (lowerTitle.includes(queryWords[0])) {
-    score += 40; // Higher priority to the first query term.
+    score += 40;
   } else if (lowerTitle.includes(lowerQuery)) {
-    score += 30; // Prioritize exact match for the entire query.
+    score += 30;
   } else {
     queryWords.forEach((word, idx) => {
       if (lowerTitle.includes(word)) {
