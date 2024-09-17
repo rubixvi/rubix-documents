@@ -31,6 +31,11 @@ export default async function Pages({ params: { slug = [] } }: PageProps) {
           <p className="-mt-4 text-base text-muted-foreground text-[16.5px]">
             {frontmatter.description}
           </p>
+          {res.lastUpdated && (
+            <p className="text-xs text-muted-foreground">
+              Last updated: {new Date(res.lastUpdated).toLocaleDateString()}
+            </p>
+          )}
           <div>{content}</div>
           <Pagination pathname={pathName} />
         </Typography>
@@ -52,11 +57,14 @@ export async function generateMetadata({ params: { slug = [] } }: PageProps) {
   
   if (!res) return null;
 
-  const { frontmatter } = res;
+  const { frontmatter, lastUpdated } = res;
 
   return {
     title: `${frontmatter.title} - ${Settings.title}`,
     description: frontmatter.description,
+    ...(lastUpdated && {
+      lastModified: new Date(lastUpdated).toISOString(),
+    }),
   };
 }
 

@@ -42,18 +42,19 @@ type BaseMdxFrontmatter = {
   description: string;
 };
 
+const computeDocumentPath = (slug: string) => {
+  return Settings.gitload
+    ? `${GitHubLink.href}/raw/main/contents/docs/${slug}/index.mdx`
+    : path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
+};
+
 const getDocumentPathMemoized = (() => {
   const cache = new Map<string, string>();
   return (slug: string) => {
-    const cachedPath = cache.get(slug);
-    if (cachedPath) return cachedPath;
-
-    const contentPath = Settings.gitload
-      ? `${GitHubLink.href}/raw/main/contents/docs/${slug}/index.mdx`
-      : path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
-
-    cache.set(slug, contentPath);
-    return contentPath;
+    if (!cache.has(slug)) {
+      cache.set(slug, computeDocumentPath(slug));
+    }
+    return cache.get(slug)!;
   };
 })();
 
@@ -61,6 +62,7 @@ export async function getDocument(slug: string) {
   try {
     const contentPath = getDocumentPathMemoized(slug);
     let rawMdx = "";
+    let lastUpdated: string | null = null;
 
     if (Settings.gitload) {
       const response = await fetch(contentPath);
@@ -68,8 +70,11 @@ export async function getDocument(slug: string) {
         throw new Error(`Failed to fetch content from GitHub: ${response.statusText}`);
       }
       rawMdx = await response.text();
+      lastUpdated = response.headers.get('Last-Modified') ?? null;
     } else {
       rawMdx = await fs.readFile(contentPath, "utf-8");
+      const stats = await fs.stat(contentPath);
+      lastUpdated = stats.mtime.toISOString();
     }
 
     const parsedMdx = await parseMdx<BaseMdxFrontmatter>(rawMdx);
@@ -79,6 +84,7 @@ export async function getDocument(slug: string) {
       frontmatter: parsedMdx.frontmatter,
       content: parsedMdx.content,
       tocs,
+      lastUpdated,
     };
   } catch (err) {
     console.error(err);
@@ -88,8 +94,8 @@ export async function getDocument(slug: string) {
 
 const headingsRegex = /^(#{2,4})\s(.+)$/gm;
 
-export async function getTable(slug: string) {
-  const extractedHeadings = [];
+export async function getTable(slug: string): Promise<Array<{ level: number; text: string; href: string }>> {
+  const extractedHeadings: Array<{ level: number; text: string; href: string }> = [];
   let rawMdx = "";
 
   if (Settings.gitload) {
