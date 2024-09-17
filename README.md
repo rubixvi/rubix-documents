@@ -84,24 +84,41 @@ This kit can be used to create product documentation, business websites, and gui
 ![Document Dark Screen](./public/screens/screen-6.png)
 *Document Dark Mode Screen*
 
-## Features
+## Key Features
 
-- **Seamless MDX Integration**: Write documentation with Markdown and enhanced JSX components.
-- **Multi-level Page Navigation**: Organize content with nested pages for a clear hierarchical structure.
-- **Dynamic Table of Contents**: Automatically generate a table of contents for easy navigation.
+### Content Creation
+
+- **Seamless MDX Integration**: Write documentation using Markdown with enhanced JSX components.
+- **Custom Components**: Easily integrate reusable React components in your documentation.
+- **Mermaid.js Diagrams**: Create flowcharts, graphs, and diagrams directly in your docs.
+- **Math & Tables Support**: Seamlessly include tables and mathematical formulas with LaTeX support.
+
+### Navigation & Readability
+
+- **Multi-level Navigation**: Organize content with nested pages for a clear hierarchy.
 - **Content Pagination**: Smooth transitions between pages for a seamless reading experience.
-- **Advanced Search**: Fuzzy search with term highlighting for quick and accurate results.
+- **Dynamic Table of Contents**: Automatically generated TOC for easier navigation.
+- **Interactive Code Switcher**: Toggle between different code snippets and copy with a single click.
+
+### Code Features
+
 - **Code Syntax Highlighting**: Beautiful, theme-aware syntax highlighting for code snippets.
-- **Enhanced Code Blocks**: Support for line highlighting and code titles to improve readability.
-- **Mermaid.js Diagrams**: Create complex flowcharts, graphs, and diagrams directly in your documentation.
-- **Custom Components**: Easily integrate reusable, custom React components in your documentation.
-- **Light and Dark Modes**: Full support for both light and dark themes with automatic switching.
-- **Interactive Code Switcher**: Switch between code snippets and copy them with a single click.
-- **Mathematical and Tabular Expressions**: Seamlessly include tables and math formulas with built-in LaTeX support.
-- **AI Knowledgebase (In Development)**: Integrating AI-powered documentation assistance.
-- **AI-powered Documentation Support (In Development)**: Future-ready AI tools for creating and managing content.
-- **SEO Optimization**: Comprehensive metadata and SEO integration to help your documentation rank better on search engines. Automatically generated metadata ensures proper indexing and improves discoverability.
-- **Meta Tags Management**: Easily manage meta tags such as title, description, canonical URLs, and social sharing images (Open Graph and Twitter cards), ensuring your content looks great when shared.
+- **Enhanced Code Blocks**: Support for line highlighting and code titles for improved readability.
+
+### Theming & User Experience
+
+- **Light & Dark Modes**: Full support for light and dark themes with automatic switching.
+- **SEO Optimization**: Automatically generated metadata for better search rankings.
+  - Manage meta tags like title, description, canonical URLs, and social sharing images (Open Graph & Twitter cards).
+
+### Search & Future Enhancements
+
+- **Advanced Search**: Fuzzy search with term highlighting for quick and accurate results.
+- **AI Knowledgebase (In Development)**: Future-ready AI-powered documentation tools to assist in content creation and management.
+  
+---
+
+> **Note:** AI-powered documentation support is currently under development.
 
 ## Contributing
 
