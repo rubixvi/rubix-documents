@@ -8,7 +8,7 @@ import { Step, StepItem } from "@/components/ui/step";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const components = {
-    a: RoutedLink,
+    a: RoutedLink as React.ComponentType<React.AnchorHTMLAttributes<HTMLAnchorElement>>,
     Card,
     CardGrid,
     Mermaid,
