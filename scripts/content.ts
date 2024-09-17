@@ -96,18 +96,6 @@ async function processMdxFile(filePath: string) {
     .use(remarkStringify)
     .process(content);
 
-  const compiledMdx = await compile(content, {
-    remarkPlugins: [remarkGfm, remarkRehype],
-    rehypePlugins: [
-      rehypeSlug,
-      rehypeAutolinkHeadings,
-      rehypeCodeTitles,
-      rehypeKatex,
-      [rehypePrism, { ignoreMissing: true }],
-    ],
-    format: "mdx",
-  });
-
   const slug = createSlug(filePath);
   const matchedDoc = findDocumentBySlug(slug);
 

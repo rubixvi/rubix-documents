@@ -21,6 +21,8 @@ const feedbackedit = true;
 const tableofcontent = true;
 const totopscroll = true;
 
+const loadfromgithub = false;
+
 export const Company = {
   name: companyname,
   link: companylink,
@@ -38,6 +40,7 @@ export const Settings = {
   toc: tableofcontent,
   feedback: feedbackedit,
   totop: totopscroll,
+  gitload: loadfromgithub,
   openGraph: {
     type: "website",
     title: sitename,

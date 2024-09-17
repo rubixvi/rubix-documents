@@ -12,6 +12,8 @@ import { visit } from "unist-util-visit";
 
 import { PageRoutes } from "./pageroutes";
 import { components } from './components'; 
+import { Settings } from "../settings/config";
+import { GitHubLink } from "../settings/navigation";
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({
@@ -46,7 +48,10 @@ const getDocumentPathMemoized = (() => {
     const cachedPath = cache.get(slug);
     if (cachedPath) return cachedPath;
 
-    const contentPath = path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
+    const contentPath = Settings.gitload
+      ? `${GitHubLink.href}/raw/main/contents/docs/${slug}/index.mdx`
+      : path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
+
     cache.set(slug, contentPath);
     return contentPath;
   };
@@ -55,9 +60,19 @@ const getDocumentPathMemoized = (() => {
 export async function getDocument(slug: string) {
   try {
     const contentPath = getDocumentPathMemoized(slug);
-    const rawMdx = await fs.readFile(contentPath, "utf-8");
-    const parsedMdx = await parseMdx<BaseMdxFrontmatter>(rawMdx);
+    let rawMdx = "";
 
+    if (Settings.gitload) {
+      const response = await fetch(contentPath);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch content from GitHub: ${response.statusText}`);
+      }
+      rawMdx = await response.text();
+    } else {
+      rawMdx = await fs.readFile(contentPath, "utf-8");
+    }
+
+    const parsedMdx = await parseMdx<BaseMdxFrontmatter>(rawMdx);
     const tocs = await getTable(slug);
 
     return {
@@ -66,7 +81,7 @@ export async function getDocument(slug: string) {
       tocs,
     };
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return null;
   }
 }
@@ -74,21 +89,43 @@ export async function getDocument(slug: string) {
 const headingsRegex = /^(#{2,4})\s(.+)$/gm;
 
 export async function getTable(slug: string) {
-  const contentPath = await getDocumentPath(slug);
   const extractedHeadings = [];
+  let rawMdx = "";
 
-  const stream = createReadStream(contentPath, { encoding: 'utf-8' });
-  for await (const chunk of stream) {
-    const matches = [...chunk.matchAll(headingsRegex)];
-    extractedHeadings.push(...matches.map((match) => {
-      const level = match[1].length;
-      const text = match[2].trim();
-      return {
-        level: level,
-        text: text,
-        href: `#${innerslug(text)}`,
-      };
-    }));
+  if (Settings.gitload) {
+    const contentPath = `${GitHubLink.href}/raw/main/contents/docs/${slug}/index.mdx`;
+    try {
+      const response = await fetch(contentPath);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch content from GitHub: ${response.statusText}`);
+      }
+      rawMdx = await response.text();
+    } catch (error) {
+      console.error("Error fetching content from GitHub:", error);
+      return [];
+    }
+  } else {
+    const contentPath = path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
+    try {
+      const stream = createReadStream(contentPath, { encoding: 'utf-8' });
+      for await (const chunk of stream) {
+        rawMdx += chunk;
+      }
+    } catch (error) {
+      console.error("Error reading local file:", error);
+      return [];
+    }
+  }
+
+  let match;
+  while ((match = headingsRegex.exec(rawMdx)) !== null) {
+    const level = match[1].length;
+    const text = match[2].trim();
+    extractedHeadings.push({
+      level: level,
+      text: text,
+      href: `#${innerslug(text)}`,
+    });
   }
 
   return extractedHeadings;
@@ -96,10 +133,6 @@ export async function getTable(slug: string) {
 
 function innerslug(text: string) {
   return text.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
-}
-
-function getDocumentPath(slug: string) {
-  return path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`);
 }
 
 const pathIndexMap = new Map(PageRoutes.map((route, index) => [route.href, index]));
