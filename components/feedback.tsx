@@ -4,12 +4,12 @@ import { LuArrowUpRight } from "react-icons/lu";
 import { GitHubLink } from "@/settings/navigation";
 import { cn } from "@/lib/utils";
 
-type GitHubEdit = {
+type SideBarEdit = {
   title: string;
   slug: string;
 };
 
-export default function GitHub({ slug, title }: GitHubEdit) {
+export default function RightSideBar({ slug, title }: SideBarEdit) {
   const feedbackUrl = `${GitHubLink.href}/issues/new?title=Feedback for "${title}"&labels=feedback`;
   const editUrl = `${GitHubLink.href}/edit/main/contents/docs/${slug}/index.mdx`;
 
@@ -35,7 +35,7 @@ export default function GitHub({ slug, title }: GitHubEdit) {
             "text-sm text-neutral-800 dark:text-neutral-300/85 no-underline flex items-center"
           )}
         >
-          <LuArrowUpRight className="mr-1 w-4 h-4 inline-block" /> Edit this page
+          <LuArrowUpRight className="mr-1 w-4 h-4 inline-block" /> Edit page
         </Link>
       </div>
     </div>

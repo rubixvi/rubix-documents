@@ -3,10 +3,11 @@ import { getDocument } from "@/lib/markdown";
 import { PageRoutes } from "@/lib/pageroutes";
 import { Settings } from "@/settings/config";
 
-import GitHub from "@/components/github";
 import PageBreadcrumb from "@/components/pagebreadcrumb";
 import Pagination from "@/components/pagination";
 import Toc from "@/components/toc";
+import Feedback from "@/components/feedback";
+import { BackToTop } from "@/components/backtotop";
 import { Typography } from "@/components/typography";
 
 type PageProps = {
@@ -18,24 +19,27 @@ export default async function Pages({ params: { slug = [] } }: PageProps) {
   const res = await getDocument(pathName);
 
   if (!res) notFound();
-  
+
+  const { frontmatter, content, tocs } = res;
+
   return (
     <div className="flex items-start gap-14">
       <div className="flex-[3] pt-10">
         <PageBreadcrumb paths={slug} />
         <Typography>
-          <h1 className="text-3xl -mt-2">{res.frontmatter.title}</h1>
+          <h1 className="text-3xl -mt-2">{frontmatter.title}</h1>
           <p className="-mt-4 text-base text-muted-foreground text-[16.5px]">
-            {res.frontmatter.description}
+            {frontmatter.description}
           </p>
-          <div>{res.content}</div>
+          <div>{content}</div>
           <Pagination pathname={pathName} />
         </Typography>
       </div>
       {Settings.rightbar && (
-        <div className="hidden xl:flex xl:flex-col sticky top-16 gap-5 py-8 min-w-[230px] h-[94.5vh] toc">
-          <Toc path={pathName} />
-          {Settings.fbedit && <GitHub slug={pathName} title={res.frontmatter.title} />}
+        <div className="hidden xl:flex xl:flex-col sticky top-16 gap-3 py-8 min-w-[230px] h-[94.5vh] toc">
+          {Settings.toc && <Toc tocs={tocs} />}
+          {Settings.feedback && <Feedback slug={pathName} title={frontmatter.title} />}
+          {Settings.totop && <BackToTop className="mt-6 self-start text-sm text-neutral-800 dark:text-neutral-300/85" />}
         </div>
       )}
     </div>
@@ -63,4 +67,3 @@ export function generateStaticParams() {
       slug: item.href.split("/").slice(1),
     }));
 }
-

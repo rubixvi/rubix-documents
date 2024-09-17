@@ -15,8 +15,11 @@ const companyname = "Rubix Studios";
 const companylink = "https://www.rubixstudios.com.au";
 
 const branding = true;
+
 const rightsidebar = true;
 const feedbackedit = true;
+const tableofcontent = true;
+const totopscroll = true;
 
 export const Company = {
   name: companyname,
@@ -32,7 +35,9 @@ export const Settings = {
   siteicon: siteicon,
   keywords: keywords,
   rightbar: rightsidebar,
-  fbedit: feedbackedit,
+  toc: tableofcontent,
+  feedback: feedbackedit,
+  totop: totopscroll,
   openGraph: {
     type: "website",
     title: sitename,
