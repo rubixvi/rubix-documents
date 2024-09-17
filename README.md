@@ -84,39 +84,39 @@ This kit can be used to create product documentation, business websites, and gui
 ![Document Dark Screen](./public/screens/screen-6.png)
 *Document Dark Mode Screen*
 
-## Key Features
+## Features
 
 ### Content Creation
 
-- **Seamless MDX Integration**: Write documentation using Markdown with enhanced JSX components.
-- **Custom Components**: Easily integrate reusable React components in your documentation.
-- **Mermaid.js Diagrams**: Create flowcharts, graphs, and diagrams directly in your docs.
-- **Math & Tables Support**: Seamlessly include tables and mathematical formulas with LaTeX support.
+- **MDX Integration**: Write docs with Markdown & JSX components.
+- **Custom Components**: Reuse React components in your docs.
+- **Mermaid.js Diagrams**: Create flowcharts & diagrams.
+- **Math & Tables**: Include tables & LaTeX math formulas.
 
 ### Navigation & Readability
 
-- **Multi-level Navigation**: Organize content with nested pages for a clear hierarchy.
-- **Content Pagination**: Smooth transitions between pages for a seamless reading experience.
-- **Dynamic Table of Contents**: Automatically generated TOC for easier navigation.
-- **Interactive Code Switcher**: Toggle between different code snippets and copy with a single click.
+- **Multi-level Navigation**: Nested pages for hierarchy.
+- **Content Pagination**: Smooth transitions between pages.
+- **Dynamic TOC**: Auto-generated table of contents.
+- **Code Switcher**: Toggle & copy code snippets easily.
 
 ### Code Features
 
-- **Code Syntax Highlighting**: Beautiful, theme-aware syntax highlighting for code snippets.
-- **Enhanced Code Blocks**: Support for line highlighting and code titles for improved readability.
+- **Syntax Highlighting**: Theme-aware highlighting.
+- **Enhanced Code Blocks**: Line highlighting & code titles.
 
-### Theming & User Experience
+### Theming & UX
 
-- **Light & Dark Modes**: Full support for light and dark themes with automatic switching.
-- **SEO Optimization**: Automatically generated metadata for better search rankings.
-  - Manage meta tags like title, description, canonical URLs, and social sharing images (Open Graph & Twitter cards).
+- **Light/Dark Modes**: Automatic theme switching.
+- **SEO Optimization**: Auto-generated metadata for better ranking.
+  - Manage meta tags (title, description, URLs, social sharing).
 
 ### Search & Future Enhancements
 
-- **Advanced Search**: Fuzzy search with term highlighting for quick and accurate results.
-- **AI Knowledgebase (In Development)**: Future-ready AI-powered documentation tools to assist in content creation and management.
+- **Advanced Search**: Fuzzy search with term highlighting.
+- **AI Knowledgebase**: Future AI-powered doc tools.
 
-> **Note:** AI-powered documentation support is currently under development.
+> **Note:** AI documentation support is in development.
 
 ## Contributing
 
