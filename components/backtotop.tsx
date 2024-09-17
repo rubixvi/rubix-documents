@@ -32,7 +32,6 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
   return (
     <button
       ref={ref}
-      aria-hidden="true"
       onClick={ScrollUp}
       className={cn(
         'flex items-center ml-2 transition opacity-0',
