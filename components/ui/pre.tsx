@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import Copy from "./copy";
+import Copy from "../copy";
 
 export default function Pre({
   children,

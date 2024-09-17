@@ -1,21 +1,21 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Pre from "@/components/pre";
-import Note from "@/components/note";
+import Card from "@/components/ui/card";
+import CardGrid from "@/components/ui/cardgrid";
+import Mermaid from "@/components/ui/mermaid";
+import Note from "@/components/ui/note";
+import Pre from "@/components/ui/pre";
 import { Step, StepItem } from "@/components/ui/step";
-import Mermaid from "@/components/mermaid";
-import Card from "@/components/card";
-import CardGrid from "@/components/cardgrid";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const components = {
+    Card,
+    CardGrid,
+    Mermaid,
+    Note,
+    pre: Pre,
+    Step,
+    StepItem,
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
-    pre: Pre,
-    Note,
-    Step,
-    StepItem,
-    Mermaid,
-    Card,
-    CardGrid,
 };
