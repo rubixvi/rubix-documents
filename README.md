@@ -1,6 +1,6 @@
 # Documents
 
-**Documents**, a powerful and flexible Next.js document tool starter kit designed to simplify the process of creating high-quality, comprehensive product documentation, technical manuals, and business guides. Built with **React**, **Tailwind CSS**, and **TypeScript**, this starter kit provides the foundation for scaling your documentation efforts, whether you're working on a small internal project or a large public knowledge base.
+**Documents**, a powerful and flexible Next.js documentation starter kit designed to simplify the process of creating high-quality, comprehensive product documentation, technical manuals, and business guides. Built with **React**, **Tailwind CSS**, and **TypeScript**, this starter kit provides the foundation to build your project documentation, whether you're working on a small internal project or a large public knowledge base.
 
 **Demo**: [https://rubix-documents.vercel.app/](https://rubix-documents.vercel.app/)
 
