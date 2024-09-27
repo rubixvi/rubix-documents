@@ -1,14 +1,15 @@
 import { notFound } from "next/navigation";
-import { getDocument } from "@/lib/markdown";
-import { PageRoutes } from "@/lib/pageroutes";
-import { Settings } from "@/settings/config";
 
+import { BackToTop } from "@/components/backtotop";
+import Feedback from "@/components/feedback";
 import PageBreadcrumb from "@/components/pagebreadcrumb";
 import Pagination from "@/components/pagination";
 import Toc from "@/components/toc";
-import Feedback from "@/components/feedback";
-import { BackToTop } from "@/components/backtotop";
 import { Typography } from "@/components/typography";
+
+import { getDocument } from "@/lib/markdown";
+import { PageRoutes } from "@/lib/pageroutes";
+import { Settings } from "@/settings/config";
 
 type PageProps = {
   params: { slug: string[] };
