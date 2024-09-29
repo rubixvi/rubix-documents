@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./.husky/post-process.sh || exit 1
