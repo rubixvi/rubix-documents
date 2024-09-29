@@ -65,6 +65,16 @@
 
 .contains-task-list {
   list-style-type: none;
+  padding-inline-start: 0;
+}
+
+.task-list-item {
+  display: flex;
+  align-items: center;
+}
+
+.task-list-item input {
+  margin-right: 0.5rem;
 }
 
 .prose ul > li::marker {
