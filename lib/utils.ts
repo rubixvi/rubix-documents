@@ -353,8 +353,6 @@ export function debounce<T extends (...args: any[]) => any>(
   };
 }
 
-
-
 export function highlight(snippet: string, searchTerms: string): string {
   if (!snippet || !searchTerms) return snippet;
 
