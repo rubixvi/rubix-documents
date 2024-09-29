@@ -1,79 +1,165 @@
 ---
 title: Installation
-description: Installation guide for our application.
+description: This guide covers the installation of Documents and how to edit your new project.
 ---
 
-To get started with our application, follow these simple steps:
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime, molestiae, facilis aperiam et, error illum vel ullam? Quis architecto dolore ullam
+To install and edit the Documents, you need to have several prerequisites in place. Here's a list of all the essential pre-requisites 
+for setting up and working on this project.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Frubixvi%2Frubix-documents&project-name=my-documents&repository-name=my-documents&demo-title=Documents&demo-description=This%20Document%20Starter%20Kit%20is%20developed%20with%20Next.js%2C%20Tailwind%20CSS%20and%20TypeScript.%20It%20serves%20as%20a%20flexible%20and%20scalable%20foundation%20for%20building%20documentation%20websites%20or%20content-driven%20projects.&demo-url=https%3A%2F%2Frubix-documents.vercel.app%2F&demo-image=https%3A%2F%2Fgithub.com%2Frubixvi%2Frubix-documents%2Fblob%2Fmain%2Fpublic%2Fscreens%2Fscreen-1.png)
 
 ## Prerequisites
 
-Before installing our application, make sure you have the following:
+<Step>
+<StepItem title="System Requirements">
 
-- Node.js installed on your machine
+- **Node.js:** Make sure you have Node.js installed. The project uses `npm`, which comes with Node.js. Install Node.js from here.
+- **NPM or Yarn:** Since the project uses `npm` commands, ensure that npm is installed with Node.js. Alternatively, you can use Yarn if preferred.
 
-<Note title="Remember" type="danger">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit Numquam iste dolorum
-  tempore consectetur explicabo.
-</Note>
+To verify installation, run:
 
-## Installation Steps
+  ```bash
+  node -v
+  npm -v
+  ```
+
+</StepItem>
+<StepItem title="Git">
+You need to have Git installed to clone the repository. Download Git from [here](https://git-scm.com/).
+
+  ```bash
+  git --version
+  ```
+
+</StepItem>
+<StepItem title="Code Editor">
+You’ll need a code editor to work on the project. Common options include:
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [WebStorm](https://www.jetbrains.com/webstorm/)
+- Any other text editor you prefer.
+
+</StepItem>
+<StepItem title="Required Knowledge">
+- **Next.js:** Since this is a Next.js project, you should be familiar with Next.js basics.
+- **React:** The project uses React, so understanding React's component structure and hooks will help.
+- **TypeScript:** The project is written in TypeScript, so you should have a basic understanding of it.
+- **Tailwind CSS:** The project uses Tailwind CSS for styling.
+- **MDX:** Markdown + JSX (MDX) is used for writing documentation.
+
+</StepItem>
+</Step>
+
+## Installation
 
 <Step>
 <StepItem title="Clone the Repository">
-Start by creating a new React project using vite:
+First, clone the repository to your local machine using Git:
 
-```bash
-git clone https://github.com/your-repo/your-project.git
-```
+  ```bash
+  git clone https://github.com/rubixvi/rubix-documents.git
+  ```
 
-</StepItem>
-<StepItem title="Navigate to the Project Directory">
-Install `tailwindcss` and its peer dependencies, then add your `tailwind.config.js` and postcss.config.js files:
+Change the directory to the project folder:
 
-```tsx
-import "@/styles/globals.css";
-import { Inter as FontSans } from "next/font/google";
-
-import { cn } from "@/lib/utils";
-
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-export default function RootLayout({ children }: RootLayoutProps) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <head />
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}
-      >
-        ...
-      </body>
-    </html>
-  );
-}
-```
+  ```bash
+  cd rubix-documents
+  ```
 
 </StepItem>
-
 <StepItem title="Install Dependencies">
- Install the necessary dependencies using npm or yarn.
+Use npm to install all the required dependencies:
+
+  ```bash
+  npm install
+  ```
+
+This will install all the dependencies listed in the package.json file, including:
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- MDX components
+- Other dependencies like ESLint, PostCSS, Husky, etc.
+
+</StepItem>
+
+<StepItem title="Running the Development Server">
+Start the development server by running:
 
 ```bash
-npm install
-# or
-yarn install
+npm run dev
+```
+
+This will start the local server, and you can open your browser at:
+
+```arduino
+http://localhost:3000
 ```
 
 </StepItem>
 
+<StepItem title="Editing the Project">
+- **MDX Files:** Documentation content is stored in `contents/docs`.
+- **Components:** You can edit React components in the `components/` directory.
+- **Tailwind:** Tailwind styling are managed in `tailwind.config.ts` and `app/globals.css`.
+
+To make any changes to the project, open the files in your editor and modify them as needed.
+
+
+<Note title="Required" type="danger">
+  The project's search functionality relies on the Husky's automation to build `search-data/documents.json` ensure git commit is performed to generate this file.
+</Note>
+
+
+</StepItem>
+<StepItem title="Building for Production">
+Once you’ve made your changes and want to build the project for production:
+
+```bash
+npm run build
+```
+
+This will generate a production-ready build of the app.
+
+</StepItem>
+<StepItem title="Running Production Server">
+To run the production server:
+
+```bash
+npm run start
+```
+
+The production app will be available at:
+
+```bash
+http://localhost:3000
+```
+
+</StepItem>
 </Step>
 
-## Additional Information
+## Optional
+<Step>
+<StepItem title="Deploying to Vercel">
+This project is optimized for Vercel deployment. To deploy to Vercel:
 
-For more detailed instructions and troubleshooting tips, refer to our [documentation](#).
+- Go to [vercel.com](https://vercel.com/) and sign up.
+- Link your GitHub repository and deploy the project.
+- Vercel will handle the build process for you automatically.
+
+The production app will be available at:
+
+```bash
+http://localhost:3000
+```
+
+</StepItem>
+<StepItem title="Linting and Pre-commit Hooks">
+The project uses ESLint for linting and Husky for Git hooks. These tools are configured automatically, but you can customize them in `.eslintrc.json` and `.husky` directories.
+</StepItem>
+</Step>
+## Important Information
+
+The project's search functionality relies on the Husky's automation to build `search-data/documents.json` ensure git commit is performed to generate this file.
