@@ -63,9 +63,21 @@
   margin: 0 !important;
 }
 
-.prose :where(ul):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+.contains-task-list {
   list-style-type: none;
-  padding-left: 0;
+}
+
+.prose ul > li::marker {
+  color: hsl(0, 0%, 29%);
+}
+
+.dark .prose ul > li::marker {
+  color: hsl(0, 0%, 79%);
+}
+
+.prose :where([class~="not-prose"] ul > li)::marker,
+.prose :where([class~="not-prose"] ul > li)::marker * {
+  color: inherit;
 }
 
 .prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
@@ -172,7 +184,6 @@ pre>code {
 
 .dark .attr-name {
   color: #cacaca;
-
 }
 
 span.katex-display {
@@ -216,6 +227,7 @@ span.katex-html {
 .CollapsibleContent[data-state='open'] {
   animation: slideDown 300ms ease-out;
 }
+
 .CollapsibleContent[data-state='closed'] {
   animation: slideUp 300ms ease-out;
 }
