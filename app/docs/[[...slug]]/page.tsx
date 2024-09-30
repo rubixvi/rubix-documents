@@ -3,11 +3,11 @@ import { getDocument } from "@/lib/markdown";
 import { PageRoutes } from "@/lib/pageroutes";
 import { Settings } from "@/settings/config";
 
-import PageBreadcrumb from "@/components/pagebreadcrumb";
-import Pagination from "@/components/pagination";
-import Toc from "@/components/toc";
-import Feedback from "@/components/feedback";
-import { BackToTop } from "@/components/backtotop";
+import PageBreadcrumb from "@/components/navigation/pagebreadcrumb";
+import Pagination from "@/components/navigation/pagination";
+import Toc from "@/components/navigation/toc";
+import Feedback from "@/components/navigation/feedback";
+import { BackToTop } from "@/components/navigation/backtotop";
 import { Typography } from "@/components/typography";
 
 type PageProps = {

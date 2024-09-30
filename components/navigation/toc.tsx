@@ -35,8 +35,8 @@ export default function Toc({ tocs }: TocProps) {
               onClick={(e) => handleSmoothScroll(e, href)}
               className={clsx({
                 "pl-0": level == 2,
-                "pl-4": level == 3,
-                "pl-8": level == 4,
+                "pl-3": level == 3,
+                "pl-6": level == 4,
               })}
             >
               {text}

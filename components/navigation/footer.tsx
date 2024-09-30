@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Company, Settings } from "@/settings/config";
+import { Company } from "@/settings/config";
 
 export function Footer() {
   return (
