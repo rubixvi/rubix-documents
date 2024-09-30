@@ -13,8 +13,8 @@ import {
 } from "@/components/ui/collapsible";
 import { SheetClose } from "@/components/ui/sheet";
 
-import Anchor from "./anchor";
-import { Button } from "./ui/button";
+import Anchor from "@/components/navigation/anchor";
+import { Button } from "@/components/ui/button";
 
 function isRoute(item: Paths): item is Extract<Paths, { title: string; href: string }> {
   return "title" in item && "href" in item;
@@ -22,7 +22,7 @@ function isRoute(item: Paths): item is Extract<Paths, { title: string; href: str
 
 export default function SubLink(props: Paths & { level: number; isSheet: boolean }) {
   const path = usePathname();
-  const [isOpen, setIsOpen] = useState(props.level === 0);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     if (isRoute(props) && props.href && path !== props.href && path.includes(props.href)) {

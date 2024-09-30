@@ -1,4 +1,4 @@
-import { Sidebar } from "@/components/sidebar";
+import { Sidebar } from "@/components/navigation/sidebar";
 
 export default function Documents({
   children,
