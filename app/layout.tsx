@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { GoogleTagManager } from '@next/third-parties/google'
 import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components/navigation/navbar";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Footer } from "@/components/footer";
+import { Footer } from "@/components/navigation/footer";
 import { Settings } from "@/settings/config";
 import "./globals.css";
 
