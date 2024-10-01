@@ -59,22 +59,14 @@
   }
 }
 
+.typography {
+  @apply prose prose-zinc prose-headings:scroll-m-20 prose-code:leading-6 prose-code:font-code prose-code:p-1 prose-code:rounded-md prose-pre:bg-neutral-100 prose-pre:border prose-code:before:content-none prose-code:after:content-none prose-img:rounded-md prose-img:border;
+  @apply text-sm prose-code:text-xs w-[85vw] !min-w-full sm:w-full sm:mx-auto pt-2;
+  @apply dark:prose-invert dark:prose-code:bg-neutral-900 prose-code:text-neutral-800 dark:prose-code:text-white dark:prose-pre:bg-neutral-900;
+}
+
 .prose {
   margin: 0 !important;
-}
-
-.contains-task-list {
-  list-style-type: none;
-  padding-inline-start: 0;
-}
-
-.task-list-item {
-  display: flex;
-  align-items: center;
-}
-
-.task-list-item input {
-  margin-right: 0.5rem;
 }
 
 .prose ul > li::marker {
@@ -112,21 +104,33 @@
   padding: 8px 10px;
 }
 
+.code-line {
+  padding: 0.75px 12.5px;
+}
+
 pre {
-  padding: 0 !important;
+  padding: 0px !important;
   width: inherit !important;
   overflow-x: auto;
 }
-
 pre>code {
   display: grid;
   max-width: inherit !important;
   padding: 14px 0 !important;
 }
 
-.code-line {
-  padding: 0.75px 12.5px;
+.contains-task-list {
+  list-style-type: none;
+  padding-inline-start: 0;
+}
 
+.task-list-item {
+  display: flex;
+  align-items: center;
+}
+
+.task-list-item input {
+  margin-right: 0.5rem;
 }
 
 .line-number::before {
@@ -139,53 +143,23 @@ pre>code {
   text-align: right;
 }
 
+.highlight {
+  font-weight: bold;
+  color: black;
+}
+
+.dark .highlight {
+  font-weight: bold;
+  color: white;
+}
+
 .highlight-line {
   @apply dark:bg-neutral-800/90;
   @apply bg-neutral-200/90;
 }
 
-.punctuation {
-  color: gray;
-}
-
-.comment {
-  color: gray;
-}
-
-.keyword {
-  color: rgb(255, 50, 115)
-}
-
-.function {
-  color: hsla(210, 100%, 66%, 1)
-}
-
-.string,
-.constant,
-.annotation,
-.boolean,
-.number {
-  color: hsl(0, 0%, 29%)
-}
-
-.dark .string,
-.dark .constant,
-.dark .annotation,
-.dark .boolean,
-.dark.number {
-  color: hsl(0, 0%, 71%)
-}
-
-.dark .keyword {
-  color: hsla(341, 90%, 67%, 1)
-}
-
-.attr-value {
-  color: hsla(131, 43%, 57%, 1)
-}
-
-.tag {
-  color: hsla(341, 90%, 67%, 1)
+.highlight-comp>code {
+  background-color: transparent !important;
 }
 
 .attr-name {
@@ -194,6 +168,53 @@ pre>code {
 
 .dark .attr-name {
   color: #cacaca;
+}
+
+.punctuation,
+.comment {
+  color: gray;
+}
+
+.number,
+.tag,
+.property-access,
+.keyword {
+  color: hsla(335, 73%, 53%, 1)
+}
+
+.dark .tag,
+.dark .keyword,
+.dark .property-access,
+.dark .number {
+  color: hsla(335, 76%, 59%, 1)
+}
+
+.at.operator,
+.builtin,
+.function {
+  color: hsla(210, 100%, 66%, 1)
+}
+
+.attr-name,
+.dark .attr-name {
+  color: hsla(37, 90%, 48%, 1)
+}
+
+.attr-value,
+.string {
+  color: hsla(131, 43%, 57%, 1)
+}
+
+.constant,
+.annotation,
+.boolean {
+  color: hsl(0, 0%, 29%)
+}
+
+.dark .constant,
+.dark .annotation,
+.dark .boolean {
+  color: hsl(0, 0%, 71%)
 }
 
 span.katex-display {
@@ -215,20 +236,6 @@ span.katex-html {
   @apply tracking-wider;
   @apply font-medium;
   font-family: var(--font-code) !important;
-}
-
-.highlight {
-  font-weight: bold;
-  color: black;
-}
-
-.dark .highlight {
-  font-weight: bold;
-  color: white;
-}
-
-.highlight-comp>code {
-  background-color: transparent !important;
 }
 
 .CollapsibleContent {

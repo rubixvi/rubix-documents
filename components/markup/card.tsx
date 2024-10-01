@@ -52,7 +52,7 @@ export default function Card({
       {IconComponent && <IconComponent className="text-gray-500 dark:text-gray-300" />}
       <div>
       {subtitle && variant === "normal" && (
-        <p className="text-xs font-semibold mb-1 text-gray-500 dark:text-gray-400">{subtitle}</p>
+        <p className="text-xs font-semibold !mb-1 text-gray-500 dark:text-gray-400">{subtitle}</p>
       )}
       {image && variant === "image" && (
         <Image 
@@ -60,7 +60,7 @@ export default function Card({
           alt={title} 
           width={400}
           height={400} 
-          className="w-full h-[180px] object-cover object-center m-0 border-0 rounded-none"
+          className="w-full h-[180px] object-cover object-center !m-0 border-0 rounded-none"
         />
       )}
       <div
@@ -68,7 +68,7 @@ export default function Card({
           variant === "small" 
           ? "text-sm transition-all group-hover:font-bold"
           : variant === "image"
-          ? "text-sm p-4 py-2 transition-all group-hover:font-bold"
+          ? "text-sm !p-4 !py-2 transition-all group-hover:font-bold"
           : "text-lg font-semibold transition-all group-hover:font-bold",
           className
         )}
@@ -76,7 +76,7 @@ export default function Card({
         {title}
       </div>
         {description && variant === "normal" && (
-          <p className="text-sm font-normal text-gray-600 dark:text-gray-400 mt-2 mb-2">{description}</p>
+          <p className="text-sm font-normal text-gray-600 dark:text-gray-400 !my-2">{description}</p>
         )}
       </div>
       {children}
@@ -89,7 +89,7 @@ export default function Card({
       passHref
       target={external ? "_blank" : "_self"}
       rel={external ? "noopener noreferrer" : undefined}
-      className="no-underline"
+      className="!no-underline"
     >
       {content}
     </Link>

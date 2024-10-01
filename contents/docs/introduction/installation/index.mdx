@@ -14,8 +14,8 @@ for setting up and working on this project.
 <Step>
 <StepItem title="System Requirements">
 
-- **Node.js:** Make sure you have Node.js installed. The project uses `npm`, which comes with Node.js. Install Node.js from here.
-- **NPM or Yarn:** Since the project uses `npm` commands, ensure that npm is installed with Node.js. Alternatively, you can use Yarn if preferred.
+  - **Node.js:** Make sure you have Node.js installed. The project uses `npm`, which comes with Node.js. Install Node.js from here.
+  - **NPM or Yarn:** Since the project uses `npm` commands, ensure that npm is installed with Node.js. Alternatively, you can use Yarn if preferred.
 
 To verify installation, run:
 
@@ -36,16 +36,16 @@ You need to have Git installed to clone the repository. Download Git from [here]
 <StepItem title="Code Editor">
 You’ll need a code editor to work on the project. Common options include:
 
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [WebStorm](https://www.jetbrains.com/webstorm/)
-- Any other text editor you prefer.
+  - [Visual Studio Code](https://code.visualstudio.com/)
+  - [WebStorm](https://www.jetbrains.com/webstorm/)
+  - Any other text editor you prefer.
 
 </StepItem>
 <StepItem title="Required Knowledge">
 - **Next.js:** Since this is a Next.js project, you should be familiar with Next.js basics.
 - **React:** The project uses React, so understanding React's component structure and hooks will help.
 - **TypeScript:** The project is written in TypeScript, so you should have a basic understanding of it.
-- **Tailwind CSS:** The project uses Tailwind CSS for styling.
+- **Tailwind:** The project uses Tailwind CSS for styling.
 - **MDX:** Markdown + JSX (MDX) is used for writing documentation.
 
 </StepItem>
@@ -77,34 +77,34 @@ Use npm to install all the required dependencies:
 
 This will install all the dependencies listed in the package.json file, including:
 
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- MDX components
-- Other dependencies like ESLint, PostCSS, Husky, etc.
+  - Next.js
+  - React
+  - TypeScript
+  - Tailwind CSS
+  - MDX components
+  - Other dependencies like ESLint, PostCSS, Husky, etc.
 
 </StepItem>
 
 <StepItem title="Running the Development Server">
 Start the development server by running:
 
-```bash
-npm run dev
-```
+  ```bash
+  npm run dev
+  ```
 
 This will start the local server, and you can open your browser at:
 
-```arduino
-http://localhost:3000
-```
+  ```arduino
+  http://localhost:3000
+  ```
 
 </StepItem>
 
 <StepItem title="Editing the Project">
-- **MDX Files:** Documentation content is stored in `contents/docs`.
-- **Components:** You can edit React components in the `components/` directory.
-- **Tailwind:** Tailwind styling are managed in `tailwind.config.ts` and `app/globals.css`.
+  - **MDX Files:** Documentation content is stored in `contents/docs`.
+  - **Components:** You can edit React components in the `components/` directory.
+  - **Tailwind:** Tailwind styling are managed in `tailwind.config.ts` and `app/globals.css`.
 
 To make any changes to the project, open the files in your editor and modify them as needed.
 
@@ -118,9 +118,9 @@ To make any changes to the project, open the files in your editor and modify the
 <StepItem title="Building for Production">
 Once you’ve made your changes and want to build the project for production:
 
-```bash
-npm run build
-```
+  ```bash
+  npm run build
+  ```
 
 This will generate a production-ready build of the app.
 
@@ -128,15 +128,15 @@ This will generate a production-ready build of the app.
 <StepItem title="Running Production Server">
 To run the production server:
 
-```bash
-npm run start
-```
+  ```bash
+  npm run start
+  ```
 
 The production app will be available at:
 
-```bash
-http://localhost:3000
-```
+  ```arduino
+  http://localhost:3000
+  ```
 
 </StepItem>
 </Step>
@@ -146,21 +146,22 @@ http://localhost:3000
 <StepItem title="Deploying to Vercel">
 This project is optimized for Vercel deployment. To deploy to Vercel:
 
-- Go to [vercel.com](https://vercel.com/) and sign up.
-- Link your GitHub repository and deploy the project.
-- Vercel will handle the build process for you automatically.
+  - Go to [vercel.com](https://vercel.com/) and sign up.
+  - Link your GitHub repository and deploy the project.
+  - Vercel will handle the build process for you automatically.
 
 The production app will be available at:
 
-```bash
-http://localhost:3000
-```
+  ```bash
+  http://localhost:3000
+  ```
 
 </StepItem>
 <StepItem title="Linting and Pre-commit Hooks">
 The project uses ESLint for linting and Husky for Git hooks. These tools are configured automatically, but you can customize them in `.eslintrc.json` and `.husky` directories.
 </StepItem>
 </Step>
+
 ## Important Information
 
 The project's search functionality relies on the Husky's automation to build `search-data/documents.json` ensure git commit is performed to generate this file.

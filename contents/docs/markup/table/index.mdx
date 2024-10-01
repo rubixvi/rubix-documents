@@ -71,6 +71,24 @@ export default function RootLayout({
     </html>
   )
 }
+
+/* ====================
+   Typography Styles
+==================== */
+.typography {
+  @apply prose prose-zinc `prose-headings`:scroll-m-20 prose-code:leading-6 prose-code:font-code prose-code:p-1 prose-code:rounded-md prose-pre:bg-neutral-100 prose-pre:border prose-code:before:content-none prose-code:after:content-none prose-img:rounded-md prose-img:border;
+  @apply text-sm prose-code:text-xs w-[85vw] !min-w-full sm:w-full sm:mx-auto pt-2;
+  @apply dark:prose-invert dark:prose-code:bg-neutral-900 prose-code:text-neutral-800 dark:prose-code:text-white dark:prose-pre:bg-neutral-900;
+}
+
+.prose {
+  margin: 0 !important;
+}
+
+/* List styles */
+.prose ul > li::marker {
+  color: hsl(0, 0%, 29%);
+}
 ```
   </TabsContent>
 </Tabs>
