@@ -10,61 +10,61 @@ Setting up your new documentation project is straightforward. Most of the essent
 
 This section provides the core settings for your documentation site, such as defining the site's URL, site icon and title.
 
-```tsx showLineNumbers
-export const url = ""; // The URL for your documentation site
-export const siteicon = ""; // Icon displayed next to the site name in the header
-export const sitename = ""; // Title of your documentation site
-```
+  ```tsx showLineNumbers
+  export const url = ""; // The URL for your documentation site
+  export const siteicon = ""; // Icon displayed next to the site name in the header
+  export const sitename = ""; // Title of your documentation site
+  ```
 
 ## Google Tags
 
 This section allows you to integrate Google Tag Manager into your documentation project. You can add your GTM code and configure whether it's connected.
 
-```tsx showLineNumbers
-export const gtm = ""; // Add your Google Tag Manager code here
-export const gtmconnected = true; // Set to true if GTM is connected, otherwise set to false
-```
+  ```tsx showLineNumbers
+  export const gtm = ""; // Add your Google Tag Manager code here
+  export const gtmconnected = true; // Set to true if GTM is connected, otherwise set to false
+  ```
 
 ## Search Engine
 
 Configure essential SEO settings to ensure your documentation site is optimized for search engines. This includes meta descriptions, keywords and social media sharing details like images and alt text.
 
-```tsx showLineNumbers
-export const description = ""; // Description of your documentation site for SEO
-export const keywords = ["", ""]; // List of SEO keywords for your documentation site
-export const urlimage = ""; // The URL of the image used when sharing on social media)
-export const imagealt = ""; // Alt text for shared images, helpful for screen readers
-export const twitterhandle = ""; // Your company’s Twitter handle for social sharing
-```
+  ```tsx showLineNumbers
+  export const description = ""; // Description of your documentation site for SEO
+  export const keywords = ["", ""]; // List of SEO keywords for your documentation site
+  export const urlimage = ""; // The URL of the image used when sharing on social media)
+  export const imagealt = ""; // Alt text for shared images, helpful for screen readers
+  export const twitterhandle = ""; // Your company’s Twitter handle for social sharing
+  ```
 
 ## Footer Branding
 
 The footer settings allow you to customize the company information displayed at the bottom of the site. You can add the company name and the URL that the name will link to.
 
-```tsx showLineNumbers
-export const companyname = ""; // The company name displayed in the copyright section
-export const companylink = ""; // The URL your company name should link to
-```
+  ```tsx showLineNumbers
+  export const companyname = ""; // The company name displayed in the copyright section
+  export const companylink = ""; // The URL your company name should link to
+  ```
 
 ## General Layout
 
 The layout settings control the appearance and functionality of various elements of the documentation site, such as branding, the right sidebar, feedback options, table of contents, and scroll-to-top functionality.
 
-```tsx showLineNumbers
-export const branding = true; // Set to true to display our branding elements
-export const rightsidebar = true; // Set to true to enable the right sidebar with feedback, table of contents and scroll-to-top
-export const feedbackedit = true; // Control to enable/disable feedback on GitHub
-export const tableofcontent = true; // Control to enable/disable the generated table of contents
-export const totopscroll = true; // Control to enable/disable scroll-to-top button
-```
+  ```tsx showLineNumbers
+  export const branding = true; // Set to true to display our branding elements
+  export const rightsidebar = true; // Set to true to enable the right sidebar with feedback, table of contents and scroll-to-top
+  export const feedbackedit = true; // Control to enable/disable feedback on GitHub
+  export const tableofcontent = true; // Control to enable/disable the generated table of contents
+  export const totopscroll = true; // Control to enable/disable scroll-to-top button
+  ```
 
 ## Github Control
 
 If your MDX files are hosted on GitHub, you can configure the project to load documents directly from there. This option can be useful for syncing documentation updates directly with your repository.
 
-```tsx showLineNumbers
-export const loadfromgithub = false; // Set to true to load your MDX documents directly from GitHub
-```
+  ```tsx showLineNumbers
+  export const loadfromgithub = false; // Set to true to load your MDX documents directly from GitHub
+  ```
 
 ## Project Structure
 <CardGrid>
