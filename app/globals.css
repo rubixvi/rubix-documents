@@ -109,7 +109,7 @@
 }
 
 pre {
-  padding: 0px !important;
+  padding: 0 !important;
   width: inherit !important;
   overflow-x: auto;
 }
