@@ -3,8 +3,9 @@
 npx tsc --project tsconfig.scripts.json
 
 find dist/scripts -name "*.js" | while read file; do
-  mv "$file" "${file%.js}.mjs"
+  mv -f "$file" "${file%.js}.mjs"
 done
+
 
 for file in dist/scripts/scripts/content.mjs dist/scripts/lib/pageroutes.mjs; do
   if [ -f "$file" ]; then
