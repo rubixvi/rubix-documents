@@ -52,7 +52,7 @@ export default function Card({
       {IconComponent && <IconComponent className="text-gray-500 dark:text-gray-300" />}
       <div>
       {subtitle && variant === "normal" && (
-        <p className="text-xs font-semibold !mb-1 text-gray-500 dark:text-gray-400">{subtitle}</p>
+        <p className="text-xs font-semibold !my-1 text-gray-500 dark:text-gray-400">{subtitle}</p>
       )}
       {image && variant === "image" && (
         <Image 

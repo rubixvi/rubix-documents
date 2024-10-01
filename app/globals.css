@@ -175,6 +175,7 @@ pre>code {
   color: gray;
 }
 
+.attr-name,
 .number,
 .tag,
 .property-access,
@@ -182,6 +183,7 @@ pre>code {
   color: hsla(335, 73%, 53%, 1)
 }
 
+.dark .attr-name,
 .dark .tag,
 .dark .keyword,
 .dark .property-access,
@@ -193,11 +195,6 @@ pre>code {
 .builtin,
 .function {
   color: hsla(210, 100%, 66%, 1)
-}
-
-.attr-name,
-.dark .attr-name {
-  color: hsla(37, 90%, 48%, 1)
 }
 
 .attr-value,
