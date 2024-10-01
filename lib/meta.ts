@@ -1,4 +1,4 @@
-import { OpenGraph, TwitterCard } from "@/lib/metadata";
+import { OpenGraph, TwitterCard } from "./metadata";
 import { 
   gtm, gtmconnected, url, sitename, description, keywords, siteicon, urlimage, imagealt, 
   twitterhandle, companyname, companylink, branding, rightsidebar, feedbackedit, 
@@ -19,7 +19,7 @@ export const Settings = {
   feedback: feedbackedit,
   totop: totopscroll,
   gitload: loadfromgithub,
-  
+
   title: sitename,
   metadataBase: url,
   description: description,
