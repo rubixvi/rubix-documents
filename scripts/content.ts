@@ -8,8 +8,8 @@ import remarkStringify from "remark-stringify";
 import remarkMdx from "remark-mdx";
 import { visit } from "unist-util-visit";
 
-import { Documents } from '../settings/documents';
-import { Paths } from "../lib/pageroutes";
+import { Documents } from '@/settings/documents';
+import { Paths } from "@/lib/pageroutes";
 
 const docsDir = path.join(process.cwd(), "contents/docs");
 const outputDir = path.join(process.cwd(), "public", "search-data");
@@ -52,9 +52,7 @@ function findDocumentBySlug(slug: string): Paths | null {
 async function ensureDirectoryExists(dir: string) {
   try {
     await fs.access(dir);
-    console.log(`Directory ${dir} already exists.`);
   } catch (err) {
-    console.log(`Creating directory: ${dir}`);
     await fs.mkdir(dir, { recursive: true });
   }
 }

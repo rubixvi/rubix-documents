@@ -1,6 +1,10 @@
 #!/bin/sh
 
-find dist/scripts -name "*.js" -exec sh -c 'mv "$1" "${1%.js}.mjs"' _ {} \;
+npx tsc --project tsconfig.scripts.json
+
+for file in dist/scripts/**/*.js; do
+  mv "$file" "${file%.js}.mjs"
+done
 
 for file in dist/scripts/scripts/content.mjs dist/scripts/lib/pageroutes.mjs; do
   if [ -f "$file" ]; then
