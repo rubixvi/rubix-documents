@@ -1,10 +1,10 @@
-import Card from "@/components/ui/card";
-import CardGrid from "@/components/ui/cardgrid";
-import RoutedLink from '@/components/ui/link';
-import Mermaid from "@/components/ui/mermaid";
-import Note from "@/components/ui/note";
+import Card from "@/components/markup/card";
+import CardGrid from "@/components/markup/cardgrid";
+import RoutedLink from '@/components/markup/link';
+import Mermaid from "@/components/markup/mermaid";
+import Note from "@/components/markup/note";
 import Pre from "@/components/ui/pre";
-import { Step, StepItem } from "@/components/ui/step";
+import { Step, StepItem } from "@/components/markup/step";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const components = {

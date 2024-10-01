@@ -23,22 +23,22 @@ function isRoute(node: Paths): node is Extract<Paths, { title: string; href: str
 }
 
 function getAllLinks(node: Paths): Page[] {
-  const ans: Page[] = [];
+  const pages: Page[] = [];
 
   if (isRoute(node) && !node.noLink) {
-    ans.push({ title: node.title, href: node.href });
+    pages.push({ title: node.title, href: node.href });
   }
 
   if (isRoute(node) && node.items) {
     node.items.forEach((subNode) => {
       if (isRoute(subNode)) {
         const temp = { ...subNode, href: `${node.href}${subNode.href}` };
-        ans.push(...getAllLinks(temp));
+        pages.push(...getAllLinks(temp));
       }
     });
   }
 
-  return ans;
+  return pages;
 }
 
 export const PageRoutes = Routes.map((it) => getAllLinks(it)).flat();

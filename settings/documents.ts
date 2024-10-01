@@ -24,32 +24,9 @@ export const Documents: Paths[] = [
     spacer: true,
   },
   {
-    title: "Components",
-    href: "/components",
-    heading: "Components",
-    items: [
-      {
-        title: "Alert",
-        href: "/alert",
-      },
-      {
-        title: "Table",
-        href: "/table",
-      },
-      {
-        title: "Tabs",
-        href: "/tabs",
-      },
-    ],
-  },
-  {
-    title: "Random",
-    href: "/random",
-  },
-  {
-    title: "Deep",
-    href: "/deep",
-    heading: "Deep links",
+    title: "Structure",
+    href: "/structure",
+    heading: "Navigation",
     items: [
       {
         title: "Deeper",
@@ -60,6 +37,48 @@ export const Documents: Paths[] = [
             href: "/even-deeper",
           },
         ]
+      },
+    ],
+  },
+  {
+    spacer: true,
+  },
+  {
+    title: "Markup",
+    href: "/markup",
+    heading: "Components",
+    items: [
+      {
+        title: "Alert",
+        href: "/alert",
+      },
+      {
+        title: "Cards",
+        href: "/cards",
+      },
+      {
+        title: "Diagrams",
+        href: "/diagrams",
+      },
+      {
+        title: "Lists",
+        href: "/lists",
+      },
+      {
+        title: "Maths",
+        href: "/maths",
+      },
+      {
+        title: "Steps",
+        href: "/steps",
+      },
+      {
+        title: "Table",
+        href: "/table",
+      },
+      {
+        title: "Tabs",
+        href: "/tabs",
       },
     ],
   },
