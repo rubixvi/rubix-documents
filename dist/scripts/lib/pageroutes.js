@@ -1,4 +1,4 @@
-import { Documents } from '../settings/documents.mjs';
+import { Documents } from '../settings/documents';
 export const Routes = [
     ...Documents,
 ];
