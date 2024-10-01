@@ -2,7 +2,7 @@
 
 npx tsc --project tsconfig.scripts.json
 
-for file in dist/scripts/**/*.js; do
+find dist/scripts -name "*.js" | while read file; do
   mv "$file" "${file%.js}.mjs"
 done
 
