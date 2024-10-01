@@ -52,7 +52,9 @@ function findDocumentBySlug(slug: string): Paths | null {
 async function ensureDirectoryExists(dir: string) {
   try {
     await fs.access(dir);
+    console.log(`Directory ${dir} already exists.`);
   } catch (err) {
+    console.log(`Creating directory: ${dir}`);
     await fs.mkdir(dir, { recursive: true });
   }
 }
