@@ -57,7 +57,6 @@ export async function generateMetadata({ params: { slug = [] } }: PageProps) {
   return {
     title: `${frontmatter.title} - ${Settings.title}`,
     description: frontmatter.description,
-    keywords: frontmatter.keywords,
     ...(lastUpdated && {
       lastModified: new Date(lastUpdated).toISOString(),
     }),
