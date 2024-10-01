@@ -9,6 +9,10 @@ export const Documents = [
                 href: "/installation",
             },
             {
+                title: "Setup",
+                href: "/setup",
+            },
+            {
                 title: "Changelog",
                 href: "/changelog",
             },
@@ -18,32 +22,13 @@ export const Documents = [
         spacer: true,
     },
     {
-        title: "Components",
-        href: "/components",
-        heading: "Components",
-        items: [
-            {
-                title: "Alert",
-                href: "/alert",
-            },
-            {
-                title: "Table",
-                href: "/table",
-            },
-            {
-                title: "Tabs",
-                href: "/tabs",
-            },
-        ],
+        title: "Navigation",
+        href: "/navigation",
+        heading: "Documents",
     },
     {
-        title: "Random",
-        href: "/random",
-    },
-    {
-        title: "Deep",
-        href: "/deep",
-        heading: "Deep links",
+        title: "Structure",
+        href: "/structure",
         items: [
             {
                 title: "Deeper",
@@ -54,6 +39,48 @@ export const Documents = [
                         href: "/even-deeper",
                     },
                 ]
+            },
+        ],
+    },
+    {
+        spacer: true,
+    },
+    {
+        title: "Markup",
+        href: "/markup",
+        heading: "Components",
+        items: [
+            {
+                title: "Alert",
+                href: "/alert",
+            },
+            {
+                title: "Cards",
+                href: "/cards",
+            },
+            {
+                title: "Diagrams",
+                href: "/diagrams",
+            },
+            {
+                title: "Lists",
+                href: "/lists",
+            },
+            {
+                title: "Maths",
+                href: "/maths",
+            },
+            {
+                title: "Steps",
+                href: "/steps",
+            },
+            {
+                title: "Table",
+                href: "/table",
+            },
+            {
+                title: "Tabs",
+                href: "/tabs",
             },
         ],
     },

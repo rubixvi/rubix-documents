@@ -6,18 +6,18 @@ function isRoute(node) {
     return "title" in node && "href" in node;
 }
 function getAllLinks(node) {
-    const ans = [];
+    const pages = [];
     if (isRoute(node) && !node.noLink) {
-        ans.push({ title: node.title, href: node.href });
+        pages.push({ title: node.title, href: node.href });
     }
     if (isRoute(node) && node.items) {
         node.items.forEach((subNode) => {
             if (isRoute(subNode)) {
                 const temp = { ...subNode, href: `${node.href}${subNode.href}` };
-                ans.push(...getAllLinks(temp));
+                pages.push(...getAllLinks(temp));
             }
         });
     }
-    return ans;
+    return pages;
 }
 export const PageRoutes = Routes.map((it) => getAllLinks(it)).flat();

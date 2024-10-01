@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
 import { RxMoon, RxSun } from "react-icons/rx";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function ModeToggle() {

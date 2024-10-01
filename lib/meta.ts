@@ -19,7 +19,7 @@ export const Settings = {
   feedback: feedbackedit,
   totop: totopscroll,
   gitload: loadfromgithub,
-  
+
   title: sitename,
   metadataBase: url,
   description: description,
