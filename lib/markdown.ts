@@ -10,10 +10,10 @@ import rehypeCodeTitles from "rehype-code-titles";
 import rehypeKatex from 'rehype-katex'
 import { visit } from "unist-util-visit";
 
-import { PageRoutes } from "./pageroutes";
-import { components } from './components'; 
-import { Settings } from "./meta";
-import { GitHubLink } from "../settings/navigation";
+import { PageRoutes } from "@/lib/pageroutes";
+import { components } from '@/lib/components'; 
+import { Settings } from "@/lib/meta";
+import { GitHubLink } from "@/settings/navigation";
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({

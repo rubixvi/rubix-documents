@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-import { Paths } from "./pageroutes";
+import { Paths } from "@/lib/pageroutes";
 
 import searchData from "@/public/search-data/documents.json"
 

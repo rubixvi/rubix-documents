@@ -1,4 +1,4 @@
-import { OpenGraph, TwitterCard } from "./metadata";
+import { OpenGraph, TwitterCard } from "@/lib/metadata";
 import { 
   gtm, gtmconnected, url, sitename, description, keywords, siteicon, urlimage, imagealt, 
   twitterhandle, companyname, companylink, branding, rightsidebar, feedbackedit, 
