@@ -40,6 +40,7 @@ async function parseMdx<Frontmatter>(rawMdx: string) {
 type BaseMdxFrontmatter = {
   title: string;
   description: string;
+  keywords: string;
 };
 
 const computeDocumentPath = (slug: string) => {
