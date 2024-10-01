@@ -4,8 +4,11 @@ npx tsc --project tsconfig.scripts.json
 
 find dist/scripts -name "*.js" | while read file; do
   mv -f "$file" "${file%.js}.mjs"
+  if [ $? -ne 0 ]; then
+    echo "Error renaming $file"
+    exit 1
+  fi
 done
-
 
 for file in dist/scripts/scripts/content.mjs dist/scripts/lib/pageroutes.mjs; do
   if [ -f "$file" ]; then
