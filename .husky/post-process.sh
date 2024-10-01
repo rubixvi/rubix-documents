@@ -2,7 +2,7 @@
 
 npx tsc --project tsconfig.scripts.json
 
-for file in dist/scripts/scripts/content.mjs dist/scripts/lib/content.mjs dist/scripts/lib/pageroutes.mjs; do
+for file in dist/scripts/**/*.js; do
   mv "$file" "${file%.js}.mjs"
 done
 
