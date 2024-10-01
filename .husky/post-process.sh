@@ -1,17 +1,9 @@
 #!/bin/sh
 
-echo "Starting TypeScript compilation..."
 npx tsc --project tsconfig.scripts.json
-echo "TypeScript compilation complete."
 
-echo "Renaming .js files to .mjs..."
-find dist/scripts -name "*.js" | while read file; do
-  mv -f "$file" "${file%.js}.mjs"
-  if [ $? -ne 0 ]; then
-    echo "Error renaming $file"
-    exit 1
-  fi
-  echo "Renamed $file to ${file%.js}.mjs"
+for file in dist/scripts/**/*.js; do
+  mv "$file" "${file%.js}.mjs"
 done
 
 for file in dist/scripts/scripts/content.mjs dist/scripts/lib/pageroutes.mjs; do
