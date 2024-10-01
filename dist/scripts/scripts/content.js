@@ -7,8 +7,10 @@ import remarkStringify from "remark-stringify";
 import remarkMdx from "remark-mdx";
 import { visit } from "unist-util-visit";
 import { Documents } from '@/settings/documents';
+
 const docsDir = path.join(process.cwd(), "contents/docs");
 const outputDir = path.join(process.cwd(), "public", "search-data");
+
 function isRoute(node) {
     return "href" in node && "title" in node;
 }
