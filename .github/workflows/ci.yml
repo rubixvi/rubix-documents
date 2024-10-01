@@ -1,0 +1,53 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Compile TypeScript
+      run: npx tsc --project tsconfig.scripts.json
+
+    - name: Rename .js files to .mjs
+      run: |
+        for file in dist/scripts/**/*.js; do
+          mv "$file" "${file%.js}.mjs"
+        done
+
+    - name: Post-process scripts
+      run: |
+        for file in dist/scripts/scripts/content.mjs dist/scripts/lib/pageroutes.mjs; do
+          if [ -f "$file" ]; then
+            echo "Processing $file..."
+            sed -i 's|import { Documents } from '\''@/settings/documents'\''|import { Documents } from '\''../settings/documents.mjs'\''|g' "$file"
+            if [ $? -ne 0 ]; then
+              echo "Error: Failed to update $file"
+              exit 1
+            fi
+            echo "$file updated successfully."
+          else
+            echo "$file not found!"
+          fi
+        done
+
+    - name: Run content script
+      run: node dist/scripts/scripts/content.mjs

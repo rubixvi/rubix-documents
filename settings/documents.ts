@@ -11,6 +11,10 @@ export const Documents: Paths[] = [
         href: "/installation",
       },
       {
+        title: "Setup",
+        href: "/setup",
+      },
+      {
         title: "Changelog",
         href: "/changelog",
       },
