@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getDocument } from "@/lib/markdown";
 import { PageRoutes } from "@/lib/pageroutes";
-import { Settings } from "@/settings/config";
+import { Settings } from "@/lib/meta";
 
 import PageBreadcrumb from "@/components/navigation/pagebreadcrumb";
 import Pagination from "@/components/navigation/pagination";

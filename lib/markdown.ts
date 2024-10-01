@@ -12,7 +12,7 @@ import { visit } from "unist-util-visit";
 
 import { PageRoutes } from "./pageroutes";
 import { components } from './components'; 
-import { Settings } from "../settings/config";
+import { Settings } from "./meta";
 import { GitHubLink } from "../settings/navigation";
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
