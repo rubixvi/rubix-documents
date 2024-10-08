@@ -3,78 +3,42 @@ title: Steps
 description: This section provides an overview of Introduction.
 ---
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime, molestiae, facilis aperiam et, error illum vel ullam? Quis architecto dolore ullam
+The `<Step>` and `<StepItem>` components allow you to create structured step-by-step guides in your documentation. These components are particularly useful when you want to break down a process or tutorial into easy-to-follow stages.
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
+## Steps
 
-| Syntax        | Description |   Test Text |
-| :------------ | :---------: | ----------: |
-| Header        |    Title    | Here's this |
-| Paragraph     |    Text     |    And more |
-| Strikethrough |             |    ~~Text~~ |
+To create a step-by-step guide in your MDX, you can use the following structure:
 
-## Getting Started
+<Step>
+  <StepItem title="Install Node.js">
+    Make sure you have Node.js installed on your machine. You can download it from [here](https://nodejs.org).
+    
+    To verify the installation, run the following command:
 
-To begin using the Documentation Template, follow these simple steps:
+    ```bash
+    node -v
+    ```
+  </StepItem>
 
-- Start by cloning the repository to your local machine.
+  <StepItem title="Install Dependencies">
+    After cloning the repository, navigate to the project directory and install the necessary dependencies:
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quae iure nulla deserunt dolore quam pariatur minus sapiente accusantium. Optio, necessitatibus sequi. Veritatis, aspernatur? Possimus quis repellat eum vitae eveniet.
+    ```bash
+    npm install
+    ```
+  </StepItem>
 
-## Blockquotes
+  <StepItem title="Run the Project">
+    Start the development server:
 
-Blockquotes are useful for emphasizing key points or quoting external sources:
+    ```bash
+    npm run dev
+    ```
 
-> "Documentation is a love letter that you write to your future self." - Damian Conway
+    You can access the application at:
 
-Feel free to use blockquotes to highlight important information or quotes relevant to your documentation.
-
-## Code Examples with switch
-
-Here a custom tab component from shadcn ui is used.
-
-<Tabs defaultValue="js" className="pt-5 pb-1">
-  <TabsList className="">
-    <TabsTrigger value="js">layout.jsx</TabsTrigger>
-    <TabsTrigger value="ts">layout.tsx</TabsTrigger>
-  </TabsList>
-  <TabsContent value="js">
-  ```jsx {7} showLineNumbers
-import ThemeProvider from './theme-provider'
- 
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <body className="container">
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
-  )}
-````
-  </TabsContent>
-  <TabsContent value="ts">
-```tsx {11} showLineNumbers
-import ThemeProvider from './theme-provider'
- 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <html>
-      <body className="container">
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
-  )
-}
-```
-  </TabsContent>
-</Tabs>
-
-## Conclusion
-
-Thank you for choosing the Documentation Template for your project. Whether you're documenting software, APIs, or processes, we're here to support you in creating clear and effective documentation. Happy documenting!
+    ```bash
+    http://localhost:3000
+    ```
+  </StepItem>
+</Step>
