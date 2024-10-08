@@ -5,76 +5,75 @@ description: This section provides an overview of Introduction.
 
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime, molestiae, facilis aperiam et, error illum vel ullam? Quis architecto dolore ullam
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
+## Small Card
 
-| Syntax        | Description |   Test Text |
-| :------------ | :---------: | ----------: |
-| Header        |    Title    | Here's this |
-| Paragraph     |    Text     |    And more |
-| Strikethrough |             |    ~~Text~~ |
+<CardGrid>
+  <Card
+    title="Page Structure"
+    href="/docs/deep/deeper"
+    icon="alignJustify"
+    variant="small"
+    description="test description"
+  />
+  <Card
+    title="Page Structure"
+    href="/docs/deep/deeper"
+    icon="alignJustify"
+    variant="small"
+  />
+  <Card
+    title="Rubix Studios"
+    href="https://www.rubixstudios.com.au"
+    icon="alignJustify"
+    external={true}
+    variant="small"
+  />
+</CardGrid>
 
-## Getting Started
+## Large Card
 
-To begin using the Documentation Template, follow these simple steps:
+<CardGrid>
+  <Card
+    subtitle="Instructions"
+    title="Installation"
+    description="Get started with Documents using our quick start installation guide to get your project started."
+    href="/docs/introduction/installation"
+  />
+  <Card
+    subtitle="Setup"
+    title="Site Settings"
+    description="Setting up your Documents projects layout, links and search engine optimisation."
+    href="/docs/introduction/setup"
+  />
+  <Card
+    subtitle="Support"
+    title="Rubix Studios"
+    description="Australia's leading branding, marketing and web development company."
+    href="https://www.rubixstudios.com.au/"
+    external={true}
+  />
+</CardGrid>
 
-- Start by cloning the repository to your local machine.
+## Image Card
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quae iure nulla deserunt dolore quam pariatur minus sapiente accusantium. Optio, necessitatibus sequi. Veritatis, aspernatur? Possimus quis repellat eum vitae eveniet.
-
-## Blockquotes
-
-Blockquotes are useful for emphasizing key points or quoting external sources:
-
-> "Documentation is a love letter that you write to your future self." - Damian Conway
-
-Feel free to use blockquotes to highlight important information or quotes relevant to your documentation.
-
-## Code Examples with switch
-
-Here a custom tab component from shadcn ui is used.
-
-<Tabs defaultValue="js" className="pt-5 pb-1">
-  <TabsList className="">
-    <TabsTrigger value="js">layout.jsx</TabsTrigger>
-    <TabsTrigger value="ts">layout.tsx</TabsTrigger>
-  </TabsList>
-  <TabsContent value="js">
-  ```jsx {7} showLineNumbers
-import ThemeProvider from './theme-provider'
- 
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <body className="container">
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
-  )}
-````
-  </TabsContent>
-  <TabsContent value="ts">
-```tsx {11} showLineNumbers
-import ThemeProvider from './theme-provider'
- 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <html>
-      <body className="container">
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
-  )
-}
-```
-  </TabsContent>
-</Tabs>
-
-## Conclusion
-
-Thank you for choosing the Documentation Template for your project. Whether you're documenting software, APIs, or processes, we're here to support you in creating clear and effective documentation. Happy documenting!
+<CardGrid>
+  <Card
+    title="Rubix Studios"
+    href="https://www.rubixstudios.com.au"
+    image="/images/og-image.png"
+    external={true}
+    variant="image"
+  />
+  <Card
+    title="Rubix Studios"
+    href="https://www.rubixstudios.com.au"
+    image="/images/og-image.png"
+    variant="image"
+  />
+  <Card
+    title="Rubix Studios"
+    href="https://www.rubixstudios.com.au"
+    image="/images/og-image.png"
+    variant="image"
+  />
+</CardGrid>

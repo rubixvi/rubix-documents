@@ -53,10 +53,6 @@ export const Documents: Paths[] = [
     heading: "Components",
     items: [
       {
-        title: "Alert",
-        href: "/alert",
-      },
-      {
         title: "Cards",
         href: "/cards",
       },
@@ -65,12 +61,20 @@ export const Documents: Paths[] = [
         href: "/diagrams",
       },
       {
+        title: "Filetree",
+        href: "/filetree",
+      },
+      {
         title: "Lists",
         href: "/lists",
       },
       {
         title: "Maths",
         href: "/maths",
+      },
+      {
+        title: "Notes",
+        href: "/notes",
       },
       {
         title: "Steps",

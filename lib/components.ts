@@ -7,10 +7,21 @@ import Pre from "@/components/ui/pre";
 import { Step, StepItem } from "@/components/markup/step";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import dynamic from 'next/dynamic';
+
+const FileTree = dynamic(() => import('@/components/markup/filetree'), {
+    ssr: false,
+});
+
+import { Folder, File } from '@/components/markup/filetree';
+
 export const components = {
     a: RoutedLink as React.ComponentType<React.AnchorHTMLAttributes<HTMLAnchorElement>>,
     Card,
     CardGrid,
+    FileTree,
+    Folder,
+    File,
     Mermaid,
     Note,
     pre: Pre,

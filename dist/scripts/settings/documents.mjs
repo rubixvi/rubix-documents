@@ -51,10 +51,6 @@ export const Documents = [
         heading: "Components",
         items: [
             {
-                title: "Alert",
-                href: "/alert",
-            },
-            {
                 title: "Cards",
                 href: "/cards",
             },
@@ -63,12 +59,20 @@ export const Documents = [
                 href: "/diagrams",
             },
             {
+                title: "Filetree",
+                href: "/filetree",
+            },
+            {
                 title: "Lists",
                 href: "/lists",
             },
             {
                 title: "Maths",
                 href: "/maths",
+            },
+            {
+                title: "Notes",
+                href: "/notes",
             },
             {
                 title: "Steps",
