@@ -13,7 +13,7 @@ export default function PageMenu({ isSheet = false }) {
       {Routes.map((item, index) => {
         if ('spacer' in item) {
           return (
-            <div key={`spacer-${index}`} className="my-2">
+            <div key={`spacer-${index}`} className="my-2 mr-3">
               <hr className="border-t border-gray-300" />
             </div>
           );

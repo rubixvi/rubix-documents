@@ -55,7 +55,7 @@ export default function SubLink(props: Paths & { level: number; isSheet: boolean
   return (
     <div className="flex flex-col w-full gap-1">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-2 text-sm mr-3">
           {titleOrLink}
           <CollapsibleTrigger asChild>
             <Button
