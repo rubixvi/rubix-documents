@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { Slot } from "@radix-ui/react-slot";
-import { LuChevronRight, LuMoreHorizontal } from "react-icons/lu";
+import { LuChevronRight, LuMoveHorizontal } from "react-icons/lu";
 
 import { cn } from "@/lib/utils";
 
@@ -113,7 +113,7 @@ const BreadcrumbEllipsis = ({
     className={cn("flex h-9 w-9 items-center justify-center", className)}
     {...props}
   >
-    <LuMoreHorizontal className="h-4 w-4" />
+    <LuMoveHorizontal className="h-4 w-4" />
     <span className="sr-only">More</span>
   </span>
 )
