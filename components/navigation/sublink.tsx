@@ -1,55 +1,65 @@
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
+import { LuChevronDown, LuChevronRight } from "react-icons/lu"
 
-import { LuChevronDown, LuChevronRight } from "react-icons/lu";
-
-import { Paths } from "@/lib/pageroutes";
-import { cn } from "@/lib/utils";
-
+import { Paths } from "@/lib/pageroutes"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 import {
   Collapsible,
   CollapsibleContent,
-  CollapsibleTrigger
-} from "@/components/ui/collapsible";
-import { SheetClose } from "@/components/ui/sheet";
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { SheetClose } from "@/components/ui/sheet"
+import Anchor from "@/components/navigation/anchor"
 
-import Anchor from "@/components/navigation/anchor";
-import { Button } from "@/components/ui/button";
-
-function isRoute(item: Paths): item is Extract<Paths, { title: string; href: string }> {
-  return "title" in item && "href" in item;
+function isRoute(
+  item: Paths
+): item is Extract<Paths, { title: string; href: string }> {
+  return "title" in item && "href" in item
 }
 
-export default function SubLink(props: Paths & { level: number; isSheet: boolean }) {
-  const path = usePathname();
-  const [isOpen, setIsOpen] = useState(true);
+export default function SubLink(
+  props: Paths & { level: number; isSheet: boolean }
+) {
+  const path = usePathname()
+  const [isOpen, setIsOpen] = useState(true)
 
   useEffect(() => {
-    if (isRoute(props) && props.href && path !== props.href && path.includes(props.href)) {
-      setIsOpen(true);
+    if (
+      isRoute(props) &&
+      props.href &&
+      path !== props.href &&
+      path.includes(props.href)
+    ) {
+      setIsOpen(true)
     }
-  }, [path, props]);
+  }, [path, props])
 
   if (!isRoute(props)) {
-    return null;
+    return null
   }
 
-  const { title, href, items, noLink, level, isSheet } = props;
+  const { title, href, items, noLink, level, isSheet } = props
 
   const Comp = (
     <Anchor activeClassName="text-primary text-sm font-medium" href={href}>
       {title}
     </Anchor>
-  );
+  )
 
   const titleOrLink = !noLink ? (
-    isSheet ? <SheetClose asChild>{Comp}</SheetClose> : Comp
+    isSheet ? (
+      <SheetClose asChild>{Comp}</SheetClose>
+    ) : (
+      Comp
+    )
   ) : (
     <h2 className="font-medium text-primary sm:text-sm">{title}</h2>
-  );
+  )
 
   if (!items) {
-    return <div className="flex flex-col text-sm">{titleOrLink}</div>;
+    return <div className="flex flex-col text-sm">{titleOrLink}</div>
   }
 
   return (
@@ -58,11 +68,7 @@ export default function SubLink(props: Paths & { level: number; isSheet: boolean
         <div className="flex items-center gap-2 text-sm mr-3">
           {titleOrLink}
           <CollapsibleTrigger asChild>
-            <Button
-              className="ml-auto h-6 w-6"
-              variant="link"
-              size="icon"
-            >
+            <Button className="ml-auto h-6 w-6" variant="link" size="icon">
               {!isOpen ? (
                 <LuChevronRight className="h-[0.9rem] w-[0.9rem]" />
               ) : (
@@ -81,7 +87,7 @@ export default function SubLink(props: Paths & { level: number; isSheet: boolean
           >
             {items?.map((innerLink) => {
               if (!isRoute(innerLink)) {
-                return null;
+                return null
               }
 
               const modifiedItems = {
@@ -89,13 +95,13 @@ export default function SubLink(props: Paths & { level: number; isSheet: boolean
                 href: `${href}${innerLink.href}`,
                 level: level + 1,
                 isSheet,
-              };
+              }
 
-              return <SubLink key={modifiedItems.href} {...modifiedItems} />;
+              return <SubLink key={modifiedItems.href} {...modifiedItems} />
             })}
           </div>
         </CollapsibleContent>
       </Collapsible>
     </div>
-  );
+  )
 }

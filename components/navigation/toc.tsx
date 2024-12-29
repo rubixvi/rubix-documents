@@ -1,25 +1,29 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import clsx from "clsx";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import Link from "next/link"
+import clsx from "clsx"
+
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 type TocProps = {
-  tocs: { href: string; level: number; text: string }[];
-};
+  tocs: { href: string; level: number; text: string }[]
+}
 
 export default function Toc({ tocs }: TocProps) {
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const targetElement = document.querySelector(href);
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault()
+    const targetElement = document.querySelector(href)
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
-      window.history.pushState(null, '', href);
+      targetElement.scrollIntoView({ behavior: "smooth" })
+      window.history.pushState(null, "", href)
     }
-  };
+  }
 
   if (!tocs.length) {
-    return null;
+    return null
   }
 
   return (
@@ -45,5 +49,5 @@ export default function Toc({ tocs }: TocProps) {
         </div>
       </ScrollArea>
     </div>
-  );
+  )
 }

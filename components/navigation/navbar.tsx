@@ -1,14 +1,14 @@
-import Link from "next/link";
-import { Logo } from "@/components/navigation/logo";
-import { LuArrowUpRight, LuGithub } from "react-icons/lu";
+import Link from "next/link"
+import { GitHubLink, Navigations } from "@/settings/navigation"
+import { LuArrowUpRight, LuGithub } from "react-icons/lu"
 
-import { ModeToggle } from "@/components/navigation/theme-toggle";
-import { SheetLeft } from "@/components/navigation/sidebar";
-import Search from "@/components/navigation/search";
-import Anchor from "@/components/navigation/anchor";
-import { Navigations, GitHubLink } from "@/settings/navigation";
-import { buttonVariants } from "@/components/ui/button";
-import { SheetClose } from "@/components/ui/sheet";
+import { buttonVariants } from "@/components/ui/button"
+import { SheetClose } from "@/components/ui/sheet"
+import Anchor from "@/components/navigation/anchor"
+import { Logo } from "@/components/navigation/logo"
+import Search from "@/components/navigation/search"
+import { SheetLeft } from "@/components/navigation/sidebar"
+import { ModeToggle } from "@/components/navigation/theme-toggle"
 
 export function Navbar() {
   return (
@@ -45,7 +45,7 @@ export function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
 export function NavMenu({ isSheet = false }) {
@@ -64,21 +64,18 @@ export function NavMenu({ isSheet = false }) {
           >
             {item.title}{" "}
             {item.external && (
-              <LuArrowUpRight
-                className="w-3 h-3 align-super"
-                strokeWidth={3}
-              />
+              <LuArrowUpRight className="w-3 h-3 align-super" strokeWidth={3} />
             )}
           </Anchor>
-        );
+        )
         return isSheet ? (
           <SheetClose key={item.title + item.href} asChild>
             {Comp}
           </SheetClose>
         ) : (
           Comp
-        );
+        )
       })}
     </>
-  );
+  )
 }

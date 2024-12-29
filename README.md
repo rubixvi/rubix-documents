@@ -25,22 +25,22 @@
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/rubixvi/rubix-documents.git
-    cd rubix-documents
-    ```
+   ```bash
+   git clone https://github.com/rubixvi/rubix-documents.git
+   cd rubix-documents
+   ```
 
 2. Install dependencies:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 3. Run the development server:
 
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the project.
 
@@ -67,22 +67,22 @@
 This kit can be used to create product documentation, business websites and guides.
 
 ![Main Screen](./public/screens/screen-1.png)
-*Main Screen*
+_Main Screen_
 
 ![Document Screen](./public/screens/screen-2.png)
-*Document Screen*
+_Document Screen_
 
 ![Document Footer](./public/screens/screen-3.png)
-*Document Footer*
+_Document Footer_
 
 ![Document Search](./public/screens/screen-4.png)
-*Document Search*
+_Document Search_
 
 ![Main Dark Screen](./public/screens/screen-5.png)
-*Main Dark Mode Screen*
+_Main Dark Mode Screen_
 
 ![Document Dark Screen](./public/screens/screen-6.png)
-*Document Dark Mode Screen*
+_Document Dark Mode Screen_
 
 ## Features
 

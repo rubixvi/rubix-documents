@@ -60,9 +60,9 @@
 }
 
 .typography {
-  @apply prose prose-zinc prose-headings:scroll-m-20 prose-code:leading-6 prose-code:font-code prose-code:p-1 prose-code:rounded-md prose-pre:bg-neutral-100 prose-pre:border prose-code:before:content-none prose-code:after:content-none prose-img:rounded-md prose-img:border;
-  @apply text-sm prose-code:text-xs w-[85vw] !min-w-full sm:w-full sm:mx-auto pt-2;
-  @apply dark:prose-invert dark:prose-code:bg-neutral-900 prose-code:text-neutral-800 dark:prose-code:text-white dark:prose-pre:bg-neutral-900;
+  @apply prose prose-zinc prose-headings:scroll-m-20 prose-code:rounded-md prose-code:p-1 prose-code:font-code prose-code:leading-6 prose-code:before:content-none prose-code:after:content-none prose-pre:border prose-pre:bg-neutral-100 prose-img:rounded-md prose-img:border;
+  @apply w-[85vw] !min-w-full pt-2 text-sm prose-code:text-xs sm:mx-auto sm:w-full;
+  @apply dark:prose-invert prose-code:text-neutral-800 dark:prose-code:bg-neutral-900 dark:prose-code:text-white dark:prose-pre:bg-neutral-900;
 }
 
 .prose {
@@ -82,16 +82,17 @@
   color: inherit;
 }
 
-.prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+.prose
+  :where(ul > li):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   padding-inline-start: 0;
 }
 
-.prose :where(table):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+.prose :where(table):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   width: auto;
 }
 
 .prose table {
-  @apply border border-border border-collapse;
+  @apply border-collapse border border-border;
 }
 
 .prose th {
@@ -113,7 +114,7 @@ pre {
   width: inherit !important;
   overflow-x: auto;
 }
-pre>code {
+pre > code {
   display: grid;
   max-width: inherit !important;
   padding: 14px 0 !important;
@@ -158,7 +159,7 @@ pre>code {
   @apply bg-neutral-200/90;
 }
 
-.highlight-comp>code {
+.highlight-comp > code {
   background-color: transparent !important;
 }
 
@@ -180,7 +181,7 @@ pre>code {
 .tag,
 .property-access,
 .keyword {
-  color: hsla(335, 73%, 53%, 1)
+  color: hsla(335, 73%, 53%, 1);
 }
 
 .dark .attr-name,
@@ -188,30 +189,30 @@ pre>code {
 .dark .keyword,
 .dark .property-access,
 .dark .number {
-  color: hsla(335, 76%, 59%, 1)
+  color: hsla(335, 76%, 59%, 1);
 }
 
 .at.operator,
 .builtin,
 .function {
-  color: hsla(210, 100%, 66%, 1)
+  color: hsla(210, 100%, 66%, 1);
 }
 
 .attr-value,
 .string {
-  color: hsla(131, 43%, 57%, 1)
+  color: hsla(131, 43%, 57%, 1);
 }
 
 .constant,
 .annotation,
 .boolean {
-  color: hsl(0, 0%, 29%)
+  color: hsl(0, 0%, 29%);
 }
 
 .dark .constant,
 .dark .annotation,
 .dark .boolean {
-  color: hsl(0, 0%, 71%)
+  color: hsl(0, 0%, 71%);
 }
 
 span.katex-display {
@@ -238,11 +239,11 @@ span.katex-html {
 .CollapsibleContent {
   overflow: hidden;
 }
-.CollapsibleContent[data-state='open'] {
+.CollapsibleContent[data-state="open"] {
   animation: slideDown 300ms ease-out;
 }
 
-.CollapsibleContent[data-state='closed'] {
+.CollapsibleContent[data-state="closed"] {
   animation: slideUp 300ms ease-out;
 }
 

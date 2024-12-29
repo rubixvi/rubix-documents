@@ -1,4 +1,4 @@
-import { Paths } from "@/lib/pageroutes";
+import { Paths } from "@/lib/pageroutes"
 
 export const Documents: Paths[] = [
   {
@@ -35,12 +35,12 @@ export const Documents: Paths[] = [
       {
         title: "Deeper",
         href: "/deeper",
-        items : [
+        items: [
           {
             title: "Even deeper",
             href: "/even-deeper",
           },
-        ]
+        ],
       },
     ],
   },
@@ -90,4 +90,4 @@ export const Documents: Paths[] = [
       },
     ],
   },
-];
+]

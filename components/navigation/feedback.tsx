@@ -1,17 +1,17 @@
-import Link from "next/link";
-import { LuArrowUpRight } from "react-icons/lu";
+import Link from "next/link"
+import { GitHubLink } from "@/settings/navigation"
+import { LuArrowUpRight } from "react-icons/lu"
 
-import { GitHubLink } from "@/settings/navigation";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 type SideBarEdit = {
-  title: string;
-  slug: string;
-};
+  title: string
+  slug: string
+}
 
 export default function RightSideBar({ slug, title }: SideBarEdit) {
-  const feedbackUrl = `${GitHubLink.href}/issues/new?title=Feedback for "${title}"&labels=feedback`;
-  const editUrl = `${GitHubLink.href}/edit/main/contents/docs/${slug}/index.mdx`;
+  const feedbackUrl = `${GitHubLink.href}/issues/new?title=Feedback for "${title}"&labels=feedback`
+  const editUrl = `${GitHubLink.href}/edit/main/contents/docs/${slug}/index.mdx`
 
   return (
     <div className="flex flex-col gap-3 pl-2">
@@ -39,5 +39,5 @@ export default function RightSideBar({ slug, title }: SideBarEdit) {
         </Link>
       </div>
     </div>
-  );
+  )
 }
