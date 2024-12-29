@@ -18,6 +18,13 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 
 import Anchor from "./anchor"
 
+interface Document {
+  title?: string;
+  href?: string;
+  spacer?: boolean;
+  items?: Document[];
+}
+
 export default function Search() {
   const [searchedInput, setSearchedInput] = useState("")
   const [isOpen, setIsOpen] = useState(false)
@@ -67,7 +74,7 @@ export default function Search() {
   }, [searchedInput, debouncedSearch])
 
   function renderDocuments(
-    documents: any[],
+    documents: Document[],
     parentHref: string = "/docs"
   ): React.ReactNode[] {
     if (!documents || !Array.isArray(documents)) {
@@ -156,7 +163,7 @@ export default function Search() {
           <ScrollArea className="max-h-[350px]">
             <div className="flex flex-col items-start overflow-y-auto px-1 pt-1 pb-4 sm:px-3">
               {searchedInput
-                ? filteredResults.map((item, index) => {
+                ? filteredResults.map((item) => {
                     if ("href" in item) {
                       return (
                         <DialogClose key={item.href} asChild>

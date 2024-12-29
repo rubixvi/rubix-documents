@@ -12,25 +12,28 @@ export type search = {
   relevance?: number
 }
 
-function memoize<T extends (...args: any[]) => any>(fn: T) {
-  const cache = new Map<string, ReturnType<T>>()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function memoize<T extends (...args: any[]) => any>(fn: T): T {
+  const cache = new Map<string, ReturnType<T>>();
 
-  return (...args: Parameters<T>): ReturnType<T> => {
-    const key = JSON.stringify(args)
+  return ((...args: Parameters<T>): ReturnType<T> => {
+    const key = JSON.stringify(args);
 
     if (cache.has(key)) {
-      const cachedResult = cache.get(key)
-      if (cachedResult !== undefined) return cachedResult
+      const cachedResult = cache.get(key);
+      if (cachedResult !== undefined) {
+        return cachedResult;
+      }
     }
 
-    const result = fn(...args)
+    const result = fn(...args);
 
     if (result !== "" && result != null) {
-      cache.set(key, result)
+      cache.set(key, result);
     }
 
-    return result
-  }
+    return result;
+  }) as T;
 }
 
 const memoizedSearchMatch = memoize(searchMatch)
@@ -342,6 +345,7 @@ export function stringToDate(date: string) {
   return new Date(year, month - 1, day)
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number,

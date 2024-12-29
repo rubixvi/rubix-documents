@@ -8,11 +8,19 @@ import rehypeKatex from "rehype-katex"
 import rehypePrism from "rehype-prism-plus"
 import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
-import { visit } from "unist-util-visit"
+import { visit } from "unist-util-visit";
+import { Node } from "unist";
+import { Element, Text } from "hast";
 
 import { components } from "@/lib/components"
 import { Settings } from "@/lib/meta"
 import { PageRoutes } from "@/lib/pageroutes"
+
+declare module "hast" {
+  interface Element {
+    raw?: string;
+  }
+}
 
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({
@@ -175,21 +183,23 @@ export function getPreviousNext(path: string) {
   return { prev, next }
 }
 
-const preCopy = () => (tree: any) => {
-  visit(tree, "element", (node) => {
+const preCopy = () => (tree: Node) => {
+  visit(tree, "element", (node: Element) => {
     if (node.tagName === "pre") {
-      const [codeEl] = node.children
+      const [codeEl] = node.children as Element[];
       if (codeEl?.tagName === "code") {
-        node.raw = codeEl.children?.[0]?.value || ""
+        const textNode = codeEl.children?.[0] as Text;
+        node.raw = textNode?.value || "";
       }
     }
-  })
-}
+  });
+};
 
-const postCopy = () => (tree: any) => {
-  visit(tree, "element", (node) => {
+const postCopy = () => (tree: Node) => {
+  visit(tree, "element", (node: Element) => {
     if (node.tagName === "pre" && node.raw) {
-      node.properties["raw"] = node.raw
+      node.properties = node.properties || {};
+      node.properties["raw"] = node.raw;
     }
-  })
-}
+  });
+};

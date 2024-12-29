@@ -1,13 +1,13 @@
 import Pre from "@/components/ui/pre"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Card from "@/components/markup/card"
-import CardGrid from "@/components/markup/cardgrid"
-import { FileTree } from "@/components/markup/dynamic-filetree"
-import { File, Folder } from "@/components/markup/filetree"
-import RoutedLink from "@/components/markup/link"
-import Mermaid from "@/components/markup/mermaid"
-import Note from "@/components/markup/note"
-import { Step, StepItem } from "@/components/markup/step"
+import Card from "@/components/markdown/card"
+import CardGrid from "@/components/markdown/cardgrid"
+import { FileTree } from "@/components/markdown/dynamic-filetree"
+import { File, Folder } from "@/components/markdown/filetree"
+import RoutedLink from "@/components/markdown/link"
+import Mermaid from "@/components/markdown/mermaid"
+import Note from "@/components/markdown/note"
+import { Step, StepItem } from "@/components/markdown/step"
 
 export const components = {
   a: RoutedLink as React.ComponentType<
