@@ -19,10 +19,10 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import Anchor from "./anchor"
 
 interface Document {
-  title?: string;
-  href?: string;
-  spacer?: boolean;
-  items?: Document[];
+  title?: string
+  href?: string
+  spacer?: boolean
+  items?: Document[]
 }
 
 export default function Search() {

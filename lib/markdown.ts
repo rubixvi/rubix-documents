@@ -1,6 +1,7 @@
 import { createReadStream, promises as fs } from "fs"
 import path from "path"
 import { GitHubLink } from "@/settings/navigation"
+import { Element, Text } from "hast"
 import { compileMDX } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeCodeTitles from "rehype-code-titles"
@@ -8,9 +9,8 @@ import rehypeKatex from "rehype-katex"
 import rehypePrism from "rehype-prism-plus"
 import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
-import { visit } from "unist-util-visit";
-import { Node } from "unist";
-import { Element, Text } from "hast";
+import { Node } from "unist"
+import { visit } from "unist-util-visit"
 
 import { components } from "@/lib/components"
 import { Settings } from "@/lib/meta"
@@ -18,7 +18,7 @@ import { PageRoutes } from "@/lib/pageroutes"
 
 declare module "hast" {
   interface Element {
-    raw?: string;
+    raw?: string
   }
 }
 
@@ -186,20 +186,20 @@ export function getPreviousNext(path: string) {
 const preCopy = () => (tree: Node) => {
   visit(tree, "element", (node: Element) => {
     if (node.tagName === "pre") {
-      const [codeEl] = node.children as Element[];
+      const [codeEl] = node.children as Element[]
       if (codeEl?.tagName === "code") {
-        const textNode = codeEl.children?.[0] as Text;
-        node.raw = textNode?.value || "";
+        const textNode = codeEl.children?.[0] as Text
+        node.raw = textNode?.value || ""
       }
     }
-  });
-};
+  })
+}
 
 const postCopy = () => (tree: Node) => {
   visit(tree, "element", (node: Element) => {
     if (node.tagName === "pre" && node.raw) {
-      node.properties = node.properties || {};
-      node.properties["raw"] = node.raw;
+      node.properties = node.properties || {}
+      node.properties["raw"] = node.raw
     }
-  });
-};
+  })
+}

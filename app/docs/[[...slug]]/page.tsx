@@ -11,11 +11,11 @@ import Pagination from "@/components/navigation/pagination"
 import Toc from "@/components/navigation/toc"
 
 type PageProps = {
-  params: Promise<{ slug: string[] }>;
-};
+  params: Promise<{ slug: string[] }>
+}
 
 export default async function Pages({ params }: PageProps) {
-  const { slug = [] } = await params;
+  const { slug = [] } = await params
   const pathName = slug.join("/")
   const res = await getDocument(pathName)
 
@@ -52,7 +52,7 @@ export default async function Pages({ params }: PageProps) {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { slug = [] } = await params;
+  const { slug = [] } = await params
   const pathName = slug.join("/")
   const res = await getDocument(pathName)
 

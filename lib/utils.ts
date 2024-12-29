@@ -14,26 +14,26 @@ export type search = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function memoize<T extends (...args: any[]) => any>(fn: T): T {
-  const cache = new Map<string, ReturnType<T>>();
+  const cache = new Map<string, ReturnType<T>>()
 
   return ((...args: Parameters<T>): ReturnType<T> => {
-    const key = JSON.stringify(args);
+    const key = JSON.stringify(args)
 
     if (cache.has(key)) {
-      const cachedResult = cache.get(key);
+      const cachedResult = cache.get(key)
       if (cachedResult !== undefined) {
-        return cachedResult;
+        return cachedResult
       }
     }
 
-    const result = fn(...args);
+    const result = fn(...args)
 
     if (result !== "" && result != null) {
-      cache.set(key, result);
+      cache.set(key, result)
     }
 
-    return result;
-  }) as T;
+    return result
+  }) as T
 }
 
 const memoizedSearchMatch = memoize(searchMatch)
@@ -147,14 +147,14 @@ function calculateRelevance(
 
   let score = 0
 
-  if (lowerTitle.includes(queryWords[0])) {
-    score += 40
+  if (lowerTitle === lowerQuery) {
+    score += 150
   } else if (lowerTitle.includes(lowerQuery)) {
-    score += 30
+    score += 100
   } else {
-    queryWords.forEach((word, idx) => {
+    queryWords.forEach((word) => {
       if (lowerTitle.includes(word)) {
-        score += 10 + 5 * (queryWords.length - idx)
+        score += 50
       }
     })
   }
@@ -164,7 +164,7 @@ function calculateRelevance(
   )
   for (const distance of titleDistances) {
     if (distance <= 2) {
-      score += 5
+      score += 20
     }
   }
 
@@ -181,7 +181,7 @@ function calculateRelevance(
   })
 
   const proximityScore = calculateProximityScore(lowerQuery, lowerContent)
-  score += proximityScore * 3
+  score += proximityScore * 2
 
   const lengthNormalizationFactor = Math.log(content.length + 1)
   return score / lengthNormalizationFactor
@@ -299,7 +299,20 @@ export function advanceSearch(query: string) {
           relevance: relevanceScore,
         }
       })
-      .filter((doc) => doc.relevance > 0)
+      .filter((doc) => {
+        const queryWords = lowerQuery.split(/\s+/)
+
+        return (
+          doc.relevance > 0 &&
+          queryWords.some(
+            (word) =>
+              doc.title.toLowerCase().includes(word) ||
+              (doc.description &&
+                doc.description.toLowerCase().includes(word)) ||
+              (doc.snippet && doc.snippet.toLowerCase().includes(word))
+          )
+        )
+      })
       .sort((a, b) => b.relevance - a.relevance)
   )
 

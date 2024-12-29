@@ -6,8 +6,8 @@ import remarkMdx from "remark-mdx"
 import remarkParse from "remark-parse"
 import remarkStringify from "remark-stringify"
 import { unified } from "unified"
-import { visit } from "unist-util-visit"
 import { Node, Parent } from "unist"
+import { visit } from "unist-util-visit"
 
 import { Paths } from "@/lib/pageroutes"
 
