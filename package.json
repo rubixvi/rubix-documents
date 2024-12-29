@@ -42,6 +42,7 @@
     "remark-gfm": "^4.0.0",
     "remark-mdx": "^3.0.1",
     "remark-rehype": "^11.1.0",
+    "sanitize-html": "^2.14.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "unist-util-visit": "^5.0.0"
@@ -53,6 +54,7 @@
     "@types/node": "^22.5.5",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
+    "@types/sanitize-html": "^2.13.0",
     "@types/tailwindcss": "^3.1.0",
     "@typescript-eslint/parser": "^8.18.2",
     "autoprefixer": "^10.4.20",

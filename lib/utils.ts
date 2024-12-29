@@ -1,5 +1,6 @@
 import searchData from "@/public/search-data/documents.json"
 import { clsx, type ClassValue } from "clsx"
+import sanitizeHtml from "sanitize-html"
 import { twMerge } from "tailwind-merge"
 
 import { Paths } from "@/lib/pageroutes"
@@ -148,7 +149,7 @@ function calculateRelevance(
   let score = 0
 
   if (lowerTitle === lowerQuery) {
-    score += 150
+    score += 200
   } else if (lowerTitle.includes(lowerQuery)) {
     score += 100
   } else {
@@ -168,10 +169,11 @@ function calculateRelevance(
     }
   }
 
-  const exactPhraseRegex = new RegExp(`\\b(${queryWords.join("|")})\\b`, "g")
-  const exactMatches = lowerContent.match(exactPhraseRegex)
+  const exactMatches = lowerContent.match(
+    new RegExp(`\\b${lowerQuery}\\b`, "gi")
+  )
   if (exactMatches) {
-    score += exactMatches.length * 10
+    score += exactMatches.length * 20
   }
 
   queryWords.forEach((word) => {
@@ -216,23 +218,40 @@ function calculateProximityScore(query: string, content: string): number {
 }
 
 function cleanMdxContent(content: string): string {
-  return content
-    .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, "")
-    .replace(/<style[\s\S]*?>[\s\S]*?<\/style>/gi, "")
-    .replace(/<iframe[\s\S]*?>[\s\S]*?<\/iframe>/gi, "")
-    .replace(/<[^>]+>/g, "")
-    .replace(/```[\s\S]*?```/g, "")
-    .replace(/`[^`]*`/g, "")
-    .replace(/\|.*?\|/g, "")
-    .replace(/[*+-]\s|\d+\.\s|\[x\]|\[ \]/g, "")
-    .replace(/^(#{1,6}\s|>\s|-{3,}|\*{3,})/gm, "")
-    .replace(/[*_~`]+/g, "")
-    .replace(/!\[.*?\]\(.*?\)|\[.*?\]\(.*?\)/g, "")
-    .replace(/\$\$[\s\S]*?\$\$/g, "")
-    .replace(/\$[^$]*\$/g, "")
-    .replace(/\\/g, " ")
-    .replace(/\s+/g, " ")
-    .trim()
+  let sanitizedContent = sanitizeHtml(content, {
+    allowedTags: [],
+    allowedAttributes: {},
+    textFilter: (text) => text.replace(/\s+/g, " ").trim(),
+  })
+
+  sanitizedContent = sanitizedContent.replace(
+    /&(#(?:\d+)|(?:[a-z]+));/gi,
+    (_, entity) => {
+      if (entity.startsWith("#")) {
+        const code = parseInt(entity.substring(1), 10)
+        return String.fromCharCode(code)
+      }
+      const entities: { [key: string]: string } = {
+        amp: "&",
+        lt: "<",
+        gt: ">",
+        nbsp: " ",
+        quot: '"',
+        apos: "'",
+      }
+      return entities[entity.toLowerCase()] || ""
+    }
+  )
+
+  return sanitizedContent
+}
+
+function safeURI(str: string): string {
+  try {
+    return decodeURIComponent(str)
+  } catch {
+    return str
+  }
 }
 
 function extractSnippet(content: string, query: string): string {
@@ -252,12 +271,13 @@ function extractSnippet(content: string, query: string): string {
   }
 
   const avgIndex = Math.floor(indices.reduce((a, b) => a + b) / indices.length)
-  const snippetLength = 100
+  const snippetLength = 150
   const contextLength = Math.floor(snippetLength / 2)
   const start = Math.max(0, avgIndex - contextLength)
   const end = Math.min(avgIndex + contextLength, content.length)
 
   let snippet = content.slice(start, end).replace(/\n/g, " ").trim()
+  snippet = safeURI(snippet)
   if (start > 0) snippet = `...${snippet}`
   if (end < content.length) snippet += "..."
 

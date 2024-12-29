@@ -160,8 +160,8 @@ export default function Search() {
               </p>
             )
           )}
-          <ScrollArea className="max-h-[350px]">
-            <div className="flex flex-col items-start overflow-y-auto px-1 pt-1 pb-4 sm:px-3">
+          <ScrollArea className="max-h-[350px] w-full">
+            <div className="flex flex-col items-start overflow-y-auto px-1 pt-1 pb-4 sm:px-3 w-full">
               {searchedInput
                 ? filteredResults.map((item) => {
                     if ("href" in item) {
@@ -169,17 +169,17 @@ export default function Search() {
                         <DialogClose key={item.href} asChild>
                           <Anchor
                             className={cn(
-                              "w-full p-3 flex flex-col gap-0.5 text-[15px] rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-900"
+                              "p-3 flex flex-col max-w-[620px] gap-0.5 text-[15px] rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-900"
                             )}
                             href={`/docs${item.href}`}
                           >
-                            <div className="flex items-center h-full w-fit gap-x-2">
-                              <LuFileText className="h-[1.1rem] w-[1.1rem]" />{" "}
-                              {item.title}
+                            <div className="flex items-center h-full gap-x-2">
+                              <LuFileText className="h-[1.1rem] w-[1.1rem]" />
+                              <span className="truncate">{item.title}</span>
                             </div>
                             {"snippet" in item && item.snippet && (
                               <p
-                                className="w-full truncate text-xs text-neutral-500 dark:text-neutral-400"
+                                className="truncate text-xs text-neutral-500 dark:text-neutral-400"
                                 dangerouslySetInnerHTML={{
                                   __html: highlight(
                                     item.snippet,
