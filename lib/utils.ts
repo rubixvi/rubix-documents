@@ -217,6 +217,9 @@ function calculateProximityScore(query: string, content: string): number {
 
 function cleanMdxContent(content: string): string {
   return content
+    .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?>[\s\S]*?<\/style>/gi, "")
+    .replace(/<iframe[\s\S]*?>[\s\S]*?<\/iframe>/gi, "")
     .replace(/<[^>]+>/g, "")
     .replace(/```[\s\S]*?```/g, "")
     .replace(/`[^`]*`/g, "")
