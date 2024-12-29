@@ -1,14 +1,17 @@
-import path from "path";
 import { promises as fs } from "fs";
+import path from "path";
+import { Documents } from "../settings/documents.mjs";
 import grayMatter from "gray-matter";
-import { unified } from "unified";
+import remarkMdx from "remark-mdx";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
-import remarkMdx from "remark-mdx";
+import { unified } from "unified";
 import { visit } from "unist-util-visit";
-import { Documents } from '../settings/documents.mjs';
 const docsDir = path.join(process.cwd(), "contents/docs");
 const outputDir = path.join(process.cwd(), "public", "search-data");
+function isMdxJsxFlowElement(node) {
+    return node.type === "mdxJsxFlowElement" && "name" in node;
+}
 function isRoute(node) {
     return "href" in node && "title" in node;
 }
@@ -16,9 +19,9 @@ function createSlug(filePath) {
     const relativePath = path.relative(docsDir, filePath);
     const parsed = path.parse(relativePath);
     const slugPath = parsed.dir ? `${parsed.dir}/${parsed.name}` : parsed.name;
-    const normalizedSlug = slugPath.replace(/\\/g, '/');
+    const normalizedSlug = slugPath.replace(/\\/g, "/");
     if (parsed.name === "index") {
-        return `/${parsed.dir.replace(/\\/g, '/')}` || "/";
+        return `/${parsed.dir.replace(/\\/g, "/")}` || "/";
     }
     else {
         return `/${normalizedSlug}`;
@@ -46,7 +49,7 @@ async function ensureDirectoryExists(dir) {
     try {
         await fs.access(dir);
     }
-    catch (err) {
+    catch {
         await fs.mkdir(dir, { recursive: true });
     }
 }
@@ -60,7 +63,10 @@ function removeCustomComponents() {
     ];
     return (tree) => {
         visit(tree, "mdxJsxFlowElement", (node, index, parent) => {
-            if (customComponentNames.includes(node.name)) {
+            if (isMdxJsxFlowElement(node) &&
+                parent &&
+                Array.isArray(parent.children) &&
+                customComponentNames.includes(node.name)) {
                 parent.children.splice(index, 1);
             }
         });
@@ -79,7 +85,8 @@ async function processMdxFile(filePath) {
     const matchedDoc = findDocumentBySlug(slug);
     return {
         slug,
-        title: frontmatter.title || (matchedDoc && isRoute(matchedDoc) ? matchedDoc.title : "Untitled"),
+        title: frontmatter.title ||
+            (matchedDoc && isRoute(matchedDoc) ? matchedDoc.title : "Untitled"),
         description: frontmatter.description || "",
         content: String(plainContent.value),
     };

@@ -1,34 +1,30 @@
-import Card from "@/components/markup/card";
-import CardGrid from "@/components/markup/cardgrid";
-import RoutedLink from '@/components/markup/link';
-import Mermaid from "@/components/markup/mermaid";
-import Note from "@/components/markup/note";
-import Pre from "@/components/ui/pre";
-import { Step, StepItem } from "@/components/markup/step";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-import dynamic from 'next/dynamic';
-
-const FileTree = dynamic(() => import('@/components/markup/filetree'), {
-    ssr: false,
-});
-
-import { Folder, File } from '@/components/markup/filetree';
+import Pre from "@/components/ui/pre"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Card from "@/components/markdown/card"
+import CardGrid from "@/components/markdown/cardgrid"
+import { FileTree } from "@/components/markdown/dynamic-filetree"
+import { File, Folder } from "@/components/markdown/filetree"
+import RoutedLink from "@/components/markdown/link"
+import Mermaid from "@/components/markdown/mermaid"
+import Note from "@/components/markdown/note"
+import { Step, StepItem } from "@/components/markdown/step"
 
 export const components = {
-    a: RoutedLink as React.ComponentType<React.AnchorHTMLAttributes<HTMLAnchorElement>>,
-    Card,
-    CardGrid,
-    FileTree,
-    Folder,
-    File,
-    Mermaid,
-    Note,
-    pre: Pre,
-    Step,
-    StepItem,
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-};
+  a: RoutedLink as React.ComponentType<
+    React.AnchorHTMLAttributes<HTMLAnchorElement>
+  >,
+  Card,
+  CardGrid,
+  FileTree,
+  Folder,
+  File,
+  Mermaid,
+  Note,
+  pre: Pre,
+  Step,
+  StepItem,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+}

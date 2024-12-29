@@ -1,82 +1,92 @@
-"use client";
+"use client"
 
-import { useEffect, useMemo, useState } from "react";
-import { LuCommand, LuFileText, LuSearch } from "react-icons/lu";
+import { useEffect, useMemo, useState } from "react"
+import { Documents } from "@/settings/documents"
+import { LuCommand, LuFileText, LuSearch } from "react-icons/lu"
 
-import { Input } from "@/components/ui/input";
+import { advanceSearch, cn, debounce, highlight, search } from "@/lib/utils"
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
-  DialogTrigger,
-  DialogClose,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
-import Anchor from "./anchor";
-import { advanceSearch, cn, debounce, highlight, search } from "@/lib/utils";
-import { Documents } from '@/settings/documents';
+import Anchor from "./anchor"
+
+interface Document {
+  title?: string
+  href?: string
+  spacer?: boolean
+  items?: Document[]
+}
 
 export default function Search() {
-  const [searchedInput, setSearchedInput] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [filteredResults, setFilteredResults] = useState<search[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [searchedInput, setSearchedInput] = useState("")
+  const [isOpen, setIsOpen] = useState(false)
+  const [filteredResults, setFilteredResults] = useState<search[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const debouncedSearch = useMemo(
     () =>
       debounce((input) => {
-        setIsLoading(true);
-        const results = advanceSearch(input.trim());
-        setFilteredResults(results);
-        setIsLoading(false);
+        setIsLoading(true)
+        const results = advanceSearch(input.trim())
+        setFilteredResults(results)
+        setIsLoading(false)
       }, 200),
     []
-  );
+  )
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.ctrlKey && event.key === "k") {
-        event.preventDefault();
-        setIsOpen(true);
+        event.preventDefault()
+        setIsOpen(true)
       }
 
       if (isOpen && event.key === "Enter" && filteredResults.length > 2) {
-        const selected = filteredResults[0];
+        const selected = filteredResults[0]
         if ("href" in selected) {
-          window.location.href = `/docs${selected.href}`;
-          setIsOpen(false);
+          window.location.href = `/docs${selected.href}`
+          setIsOpen(false)
         }
       }
-    };
+    }
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown)
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, filteredResults]);
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [isOpen, filteredResults])
 
   useEffect(() => {
     if (searchedInput.length >= 3) {
-      debouncedSearch(searchedInput);
+      debouncedSearch(searchedInput)
     } else {
-      setFilteredResults([]);
+      setFilteredResults([])
     }
-  }, [searchedInput, debouncedSearch]);
+  }, [searchedInput, debouncedSearch])
 
-  function renderDocuments(documents: any[], parentHref: string = "/docs"): React.ReactNode[] {
+  function renderDocuments(
+    documents: Document[],
+    parentHref: string = "/docs"
+  ): React.ReactNode[] {
     if (!documents || !Array.isArray(documents)) {
-      return [];
+      return []
     }
 
     return documents.flatMap((doc) => {
-      if ('spacer' in doc && doc.spacer) {
-        return [];
+      if ("spacer" in doc && doc.spacer) {
+        return []
       }
 
-      const href = `${parentHref}${doc.href}`;
+      const href = `${parentHref}${doc.href}`
 
       return [
         <DialogClose key={href} asChild>
@@ -91,9 +101,9 @@ export default function Search() {
             </div>
           </Anchor>
         </DialogClose>,
-        ...renderDocuments(doc.items || [], `${href}`)
-      ];
-    });
+        ...renderDocuments(doc.items || [], `${href}`),
+      ]
+    })
   }
 
   return (
@@ -101,9 +111,9 @@ export default function Search() {
       <Dialog
         open={isOpen}
         onOpenChange={(open) => {
-          setIsOpen(open);
+          setIsOpen(open)
           if (!open) {
-            setTimeout(() => setSearchedInput(""), 200);
+            setTimeout(() => setSearchedInput(""), 200)
           }
         }}
       >
@@ -142,48 +152,53 @@ export default function Search() {
               Searching...
             </p>
           ) : (
-            filteredResults.length === 0 && searchedInput.length >= 3 && (
+            filteredResults.length === 0 &&
+            searchedInput.length >= 3 && (
               <p className="mx-auto mt-2 text-sm text-muted-foreground">
                 No results found for{" "}
                 <span className="text-primary">{`"${searchedInput}"`}</span>
               </p>
             )
           )}
-          <ScrollArea className="max-h-[350px]">
-            <div className="flex flex-col items-start overflow-y-auto px-1 pt-1 pb-4 sm:px-3">
-            {searchedInput
-                ? filteredResults.map((item, index) => {
-                  if ("href" in item) {
-                    return (
-                      <DialogClose key={item.href} asChild>
-                        <Anchor
-                          className={cn(
-                            "w-full p-3 flex flex-col gap-0.5 text-[15px] rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-900"
-                          )}
-                          href={`/docs${item.href}`}
-                        >
-                          <div className="flex items-center h-full w-fit gap-x-2">
-                            <LuFileText className="h-[1.1rem] w-[1.1rem]" /> {item.title}
-                          </div>
-                          {"snippet" in item && item.snippet && (
-                            <p
-                              className="w-full truncate text-xs text-neutral-500 dark:text-neutral-400"
-                              dangerouslySetInnerHTML={{
-                                __html: highlight(item.snippet, searchedInput),
-                              }}
-                            />
-                          )}
-                        </Anchor>
-                      </DialogClose>
-                    );
-                  }
-                  return null;
-                })
-              : renderDocuments(Documents)}
+          <ScrollArea className="max-h-[350px] w-full">
+            <div className="flex flex-col items-start overflow-y-auto px-1 pt-1 pb-4 sm:px-3 w-full">
+              {searchedInput
+                ? filteredResults.map((item) => {
+                    if ("href" in item) {
+                      return (
+                        <DialogClose key={item.href} asChild>
+                          <Anchor
+                            className={cn(
+                              "p-3 flex flex-col max-w-[620px] gap-0.5 text-[15px] rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-900"
+                            )}
+                            href={`/docs${item.href}`}
+                          >
+                            <div className="flex items-center h-full gap-x-2">
+                              <LuFileText className="h-[1.1rem] w-[1.1rem]" />
+                              <span className="truncate">{item.title}</span>
+                            </div>
+                            {"snippet" in item && item.snippet && (
+                              <p
+                                className="truncate text-xs text-neutral-500 dark:text-neutral-400"
+                                dangerouslySetInnerHTML={{
+                                  __html: highlight(
+                                    item.snippet,
+                                    searchedInput
+                                  ),
+                                }}
+                              />
+                            )}
+                          </Anchor>
+                        </DialogClose>
+                      )
+                    }
+                    return null
+                  })
+                : renderDocuments(Documents)}
             </div>
           </ScrollArea>
         </DialogContent>
       </Dialog>
     </div>
-  );
+  )
 }

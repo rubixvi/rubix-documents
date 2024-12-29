@@ -1,13 +1,14 @@
-import { Children, PropsWithChildren, ReactNode } from "react";
-import clsx from "clsx";
-import { cn } from "@/lib/utils";
+import { Children, PropsWithChildren, ReactNode } from "react"
+import clsx from "clsx"
+
+import { cn } from "@/lib/utils"
 
 interface StepProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export function Step({ children }: PropsWithChildren<StepProps>) {
-  const length = Children.count(children);
+  const length = Children.count(children)
 
   return (
     <div className="flex flex-col">
@@ -25,12 +26,12 @@ export function Step({ children }: PropsWithChildren<StepProps>) {
         </div>
       ))}
     </div>
-  );
+  )
 }
 
 interface StepItemProps {
-  title?: string;
-  children: ReactNode;
+  title?: string
+  children: ReactNode
 }
 
 export function StepItem({ children, title }: StepItemProps) {
@@ -39,5 +40,5 @@ export function StepItem({ children, title }: StepItemProps) {
       {title && <h3 className="!mt-0">{title}</h3>}
       <div>{children}</div>
     </div>
-  );
+  )
 }

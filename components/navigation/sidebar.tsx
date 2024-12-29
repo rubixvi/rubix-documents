@@ -1,18 +1,18 @@
-import { AlignLeftIcon } from "lucide-react";
+import { LuAlignLeft } from "react-icons/lu"
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
-import { DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button"
+import { DialogTitle } from "@/components/ui/dialog"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Sheet,
   SheetClose,
   SheetContent,
   SheetHeader,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { NavMenu } from "@/components/navigation/navbar";
-import { Logo } from "@/components/navigation/logo";
-import PageMenu from "@/components/navigation/pagemenu";
+} from "@/components/ui/sheet"
+import { Logo } from "@/components/navigation/logo"
+import { NavMenu } from "@/components/navigation/navbar"
+import PageMenu from "@/components/navigation/pagemenu"
 
 export function Sidebar() {
   return (
@@ -21,7 +21,7 @@ export function Sidebar() {
         <PageMenu />
       </ScrollArea>
     </aside>
-  );
+  )
 }
 
 export function SheetLeft() {
@@ -29,7 +29,7 @@ export function SheetLeft() {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="md:hidden flex">
-          <AlignLeftIcon />
+          <LuAlignLeft className="!size-6" />
         </Button>
       </SheetTrigger>
       <SheetContent className="flex flex-col gap-4 px-0" side="left">
@@ -49,5 +49,5 @@ export function SheetLeft() {
         </ScrollArea>
       </SheetContent>
     </Sheet>
-  );
+  )
 }

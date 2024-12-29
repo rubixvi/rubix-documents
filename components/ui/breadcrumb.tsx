@@ -1,11 +1,12 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { useRouter } from "next/navigation";
-import { Slot } from "@radix-ui/react-slot";
-import { LuChevronRight, LuMoreHorizontal } from "react-icons/lu";
+import * as React from "react"
+import { useRouter } from "next/navigation"
+import { Slot } from "@radix-ui/react-slot"
+import { BsThreeDots } from "react-icons/bs"
+import { LuChevronRight } from "react-icons/lu"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 const Breadcrumb = React.forwardRef<
   HTMLElement,
@@ -49,16 +50,16 @@ const BreadcrumbLink = React.forwardRef<
     href?: string
   }
 >(({ asChild, className, href, ...props }, ref) => {
-  const router = useRouter();
+  const router = useRouter()
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (href && href.startsWith("/")) {
       event.preventDefault()
       router.push(href)
     }
-  };
+  }
 
-  const Comp = asChild ? Slot : "a";
+  const Comp = asChild ? Slot : "a"
 
   return (
     <Comp
@@ -113,7 +114,7 @@ const BreadcrumbEllipsis = ({
     className={cn("flex h-9 w-9 items-center justify-center", className)}
     {...props}
   >
-    <LuMoreHorizontal className="h-4 w-4" />
+    <BsThreeDots className="h-4 w-4" />
     <span className="sr-only">More</span>
   </span>
 )

@@ -1,15 +1,31 @@
-import { OpenGraph, TwitterCard } from "@/lib/metadata";
-import { 
-  gtm, gtmconnected, url, sitename, description, keywords, siteicon, urlimage, imagealt, 
-  twitterhandle, companyname, companylink, branding, rightsidebar, feedbackedit, 
-  tableofcontent, totopscroll, loadfromgithub 
-} from "@/settings/settings";
+import {
+  branding,
+  companylink,
+  companyname,
+  description,
+  feedbackedit,
+  gtm,
+  gtmconnected,
+  imagealt,
+  keywords,
+  loadfromgithub,
+  rightsidebar,
+  siteicon,
+  sitename,
+  tableofcontent,
+  totopscroll,
+  twitterhandle,
+  url,
+  urlimage,
+} from "@/settings/settings"
+
+import { OpenGraph, TwitterCard } from "@/lib/metadata"
 
 export const Company = {
   name: companyname,
   link: companylink,
   branding: branding,
-};
+}
 
 export const Settings = {
   gtm: gtm,
@@ -52,4 +68,4 @@ export const Settings = {
     ],
   } as TwitterCard,
   canonical: url,
-};
+}

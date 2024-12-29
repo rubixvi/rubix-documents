@@ -7,23 +7,28 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste dolorum te
 
 ## Flowchart
 
-<Mermaid chart={`graph TD;
+<Mermaid
+  chart={`graph TD;
     Start --> Task1;
     Task1 --> Task2;
-    Task2 --> End;`} />
+    Task2 --> End;`}
+/>
 
-##  Decision Tree
+## Decision Tree
 
-<Mermaid chart={`graph TD;
+<Mermaid
+  chart={`graph TD;
     A[Start] --> B{Is it raining?};
     B -->|Yes| C[Take an umbrella];
     B -->|No| D[Enjoy the weather];
     C --> E[Go outside];
-    D --> E;`} />
+    D --> E;`}
+/>
 
 ## Entity-Relationship Diagram
 
-<Mermaid chart={`erDiagram
+<Mermaid
+  chart={`erDiagram
     CUSTOMER ||--o{ ORDER : places
     ORDER ||--|{ LINE-ITEM : contains
     PRODUCT ||--o{ LINE-ITEM : "included in"
@@ -43,4 +48,5 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste dolorum te
         int productId
         string name
         float price
-    }`} />
+    }`}
+/>

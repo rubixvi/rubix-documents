@@ -4,7 +4,7 @@ description: This guide covers the installation of Documents and how to edit you
 keywords: ["installation", "github", "node", "guide", "nextjs", "documents"]
 ---
 
-To install and edit the Documents, you need to have several prerequisites in place. Here's a list of all the essential pre-requisites 
+To install and edit the Documents, you need to have several prerequisites in place. Here's a list of all the essential pre-requisites
 for setting up and working on this project.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Frubixvi%2Frubix-documents&project-name=my-documents&repository-name=my-documents&demo-title=Documents&demo-description=This%20Document%20Starter%20Kit%20is%20developed%20with%20Next.js%2C%20Tailwind%20CSS%20and%20TypeScript.%20It%20serves%20as%20a%20flexible%20and%20scalable%20foundation%20for%20building%20documentation%20websites%20or%20content-driven%20projects.&demo-url=https%3A%2F%2Frubix-documents.vercel.app%2F&demo-image=https%3A%2F%2Fgithub.com%2Frubixvi%2Frubix-documents%2Fblob%2Fmain%2Fpublic%2Fscreens%2Fscreen-1.png)
@@ -14,31 +14,31 @@ for setting up and working on this project.
 <Step>
 <StepItem title="System Requirements">
 
-  - **Node.js:** Make sure you have Node.js installed. The project uses `npm`, which comes with Node.js. Install Node.js from here.
-  - **NPM or Yarn:** Since the project uses `npm` commands, ensure that npm is installed with Node.js. Alternatively, you can use Yarn if preferred.
+- **Node.js:** Make sure you have Node.js installed. The project uses `npm`, which comes with Node.js. Install Node.js from here.
+- **NPM or Yarn:** Since the project uses `npm` commands, ensure that npm is installed with Node.js. Alternatively, you can use Yarn if preferred.
 
 To verify installation, run:
 
-  ```bash
-  node -v
-  npm -v
-  ```
+```bash
+node -v
+npm -v
+```
 
 </StepItem>
 <StepItem title="Git">
 You need to have Git installed to clone the repository. Download Git from [here](https://git-scm.com/).
 
-  ```bash
-  git --version
-  ```
+```bash
+git --version
+```
 
 </StepItem>
 <StepItem title="Code Editor">
 You’ll need a code editor to work on the project. Common options include:
 
-  - [Visual Studio Code](https://code.visualstudio.com/)
-  - [WebStorm](https://www.jetbrains.com/webstorm/)
-  - Any other text editor you prefer.
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [WebStorm](https://www.jetbrains.com/webstorm/)
+- Any other text editor you prefer.
 
 </StepItem>
 <StepItem title="Required Knowledge">
@@ -57,47 +57,47 @@ You’ll need a code editor to work on the project. Common options include:
 <StepItem title="Clone the Repository">
 First, clone the repository to your local machine using Git:
 
-  ```bash
-  git clone https://github.com/rubixvi/rubix-documents.git
-  ```
+```bash
+git clone https://github.com/rubixvi/rubix-documents.git
+```
 
 Change the directory to the project folder:
 
-  ```bash
-  cd rubix-documents
-  ```
+```bash
+cd rubix-documents
+```
 
 </StepItem>
 <StepItem title="Install Dependencies">
 Use npm to install all the required dependencies:
 
-  ```bash
-  npm install
-  ```
+```bash
+npm install
+```
 
 This will install all the dependencies listed in the package.json file, including:
 
-  - Next.js
-  - React
-  - TypeScript
-  - Tailwind CSS
-  - MDX components
-  - Other dependencies like ESLint, PostCSS, Husky, etc.
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- MDX components
+- Other dependencies like ESLint, PostCSS, Husky, etc.
 
 </StepItem>
 
 <StepItem title="Running the Development Server">
 Start the development server by running:
 
-  ```bash
-  npm run dev
-  ```
+```bash
+npm run dev
+```
 
 This will start the local server, and you can open your browser at:
 
-  ```arduino
-  http://localhost:3000
-  ```
+```arduino
+http://localhost:3000
+```
 
 </StepItem>
 
@@ -108,19 +108,19 @@ This will start the local server, and you can open your browser at:
 
 To make any changes to the project, open the files in your editor and modify them as needed.
 
-
 <Note title="Required" type="danger">
-  The project's search functionality relies on the Husky's automation to build `search-data/documents.json` ensure git commit is performed to generate this file.
+  The project's search functionality relies on the Husky's automation to build
+  `search-data/documents.json` ensure git commit is performed to generate this
+  file.
 </Note>
-
 
 </StepItem>
 <StepItem title="Building for Production">
 Once you’ve made your changes and want to build the project for production:
 
-  ```bash
-  npm run build
-  ```
+```bash
+npm run build
+```
 
 This will generate a production-ready build of the app.
 
@@ -128,33 +128,34 @@ This will generate a production-ready build of the app.
 <StepItem title="Running Production Server">
 To run the production server:
 
-  ```bash
-  npm run start
-  ```
+```bash
+npm run start
+```
 
 The production app will be available at:
 
-  ```arduino
-  http://localhost:3000
-  ```
+```arduino
+http://localhost:3000
+```
 
 </StepItem>
 </Step>
 
 ## Optional
+
 <Step>
 <StepItem title="Deploying to Vercel">
 This project is optimized for Vercel deployment. To deploy to Vercel:
 
-  - Go to [vercel.com](https://vercel.com/) and sign up.
-  - Link your GitHub repository and deploy the project.
-  - Vercel will handle the build process for you automatically.
+- Go to [vercel.com](https://vercel.com/) and sign up.
+- Link your GitHub repository and deploy the project.
+- Vercel will handle the build process for you automatically.
 
 The production app will be available at:
 
-  ```bash
-  http://localhost:3000
-  ```
+```bash
+http://localhost:3000
+```
 
 </StepItem>
 <StepItem title="Linting and Pre-commit Hooks">

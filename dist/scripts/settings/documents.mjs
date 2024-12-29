@@ -38,7 +38,7 @@ export const Documents = [
                         title: "Even deeper",
                         href: "/even-deeper",
                     },
-                ]
+                ],
             },
         ],
     },

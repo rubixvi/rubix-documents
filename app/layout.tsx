@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
-import { GoogleTagManager } from '@next/third-parties/google'
-import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/navigation/navbar";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import { Footer } from "@/components/navigation/footer";
-import { Settings } from "@/lib/meta";
-import "./globals.css";
+import type { Metadata } from "next"
+import { GoogleTagManager } from "@next/third-parties/google"
+import { GeistMono } from "geist/font/mono"
+import { GeistSans } from "geist/font/sans"
 
-const baseUrl = Settings.metadataBase;
+import { Settings } from "@/lib/meta"
+import { Footer } from "@/components/navigation/footer"
+import { Navbar } from "@/components/navigation/navbar"
+import { ThemeProvider } from "@/components/theme-provider"
+
+import "./globals.css"
+
+const baseUrl = Settings.metadataBase
 
 export const metadata: Metadata = {
   title: Settings.title,
@@ -39,18 +41,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: baseUrl,
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      { Settings.gtmconnected && (
-        <GoogleTagManager gtmId={Settings.gtm} />
-      )}
+      {Settings.gtmconnected && <GoogleTagManager gtmId={Settings.gtm} />}
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} font-regular`}
         suppressHydrationWarning
@@ -62,12 +62,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="px-5 sm:px-8 h-auto">
-            {children}
-          </main>
+          <main className="px-5 sm:px-8 h-auto">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

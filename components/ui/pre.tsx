@@ -1,5 +1,6 @@
-import { ComponentProps } from "react";
-import Copy from "@/components/markup/copy";
+import { ComponentProps } from "react"
+
+import Copy from "@/components/markdown/copy"
 
 export default function Pre({
   children,
@@ -15,5 +16,5 @@ export default function Pre({
         <pre {...rest}>{children}</pre>
       </div>
     </div>
-  );
+  )
 }
