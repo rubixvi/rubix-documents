@@ -7,11 +7,21 @@ import remarkParse from "remark-parse"
 import remarkStringify from "remark-stringify"
 import { unified } from "unified"
 import { visit } from "unist-util-visit"
+import { Node, Parent } from "unist"
 
 import { Paths } from "@/lib/pageroutes"
 
 const docsDir = path.join(process.cwd(), "contents/docs")
 const outputDir = path.join(process.cwd(), "public", "search-data")
+
+interface MdxJsxFlowElement extends Node {
+  name: string
+  children?: Node[]
+}
+
+function isMdxJsxFlowElement(node: Node): node is MdxJsxFlowElement {
+  return node.type === "mdxJsxFlowElement" && "name" in node
+}
 
 function isRoute(
   node: Paths
@@ -53,7 +63,7 @@ function findDocumentBySlug(slug: string): Paths | null {
 async function ensureDirectoryExists(dir: string) {
   try {
     await fs.access(dir)
-  } catch (err) {
+  } catch {
     await fs.mkdir(dir, { recursive: true })
   }
 }
@@ -67,12 +77,21 @@ function removeCustomComponents() {
     "Mermaid",
   ]
 
-  return (tree: any) => {
-    visit(tree, "mdxJsxFlowElement", (node, index, parent) => {
-      if (customComponentNames.includes(node.name)) {
-        parent.children.splice(index, 1)
+  return (tree: Node) => {
+    visit(
+      tree,
+      "mdxJsxFlowElement",
+      (node: Node, index: number | null, parent: Parent | null) => {
+        if (
+          isMdxJsxFlowElement(node) &&
+          parent &&
+          Array.isArray(parent.children) &&
+          customComponentNames.includes(node.name)
+        ) {
+          parent.children.splice(index!, 1)
+        }
       }
-    })
+    )
   }
 }
 
