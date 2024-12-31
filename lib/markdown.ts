@@ -22,6 +22,12 @@ declare module "hast" {
   }
 }
 
+type BaseMdxFrontmatter = {
+  title: string
+  description: string
+  keywords: string
+}
+
 async function parseMdx<Frontmatter>(rawMdx: string) {
   return await compileMDX<Frontmatter>({
     source: rawMdx,
@@ -44,19 +50,13 @@ async function parseMdx<Frontmatter>(rawMdx: string) {
   })
 }
 
-type BaseMdxFrontmatter = {
-  title: string
-  description: string
-  keywords: string
-}
-
 const computeDocumentPath = (slug: string) => {
   return Settings.gitload
     ? `${GitHubLink.href}/raw/main/contents/docs/${slug}/index.mdx`
     : path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`)
 }
 
-const getDocumentPathMemoized = (() => {
+const getDocumentPath = (() => {
   const cache = new Map<string, string>()
   return (slug: string) => {
     if (!cache.has(slug)) {
@@ -68,7 +68,7 @@ const getDocumentPathMemoized = (() => {
 
 export async function getDocument(slug: string) {
   try {
-    const contentPath = getDocumentPathMemoized(slug)
+    const contentPath = getDocumentPath(slug)
     let rawMdx = ""
     let lastUpdated: string | null = null
 

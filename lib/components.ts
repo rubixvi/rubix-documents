@@ -10,9 +10,7 @@ import Note from "@/components/markdown/note"
 import { Step, StepItem } from "@/components/markdown/step"
 
 export const components = {
-  a: RoutedLink as React.ComponentType<
-    React.AnchorHTMLAttributes<HTMLAnchorElement>
-  >,
+  a: RoutedLink,
   Card,
   CardGrid,
   FileTree,
