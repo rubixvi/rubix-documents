@@ -1,0 +1,152 @@
+---
+title: Cards
+description: Explore and implement various card styles, including small, large and image cards.
+---
+
+This section introduces the different card styles available in the system, from compact small cards to visually rich image cards. Each example is paired with JSX code snippets, providing you with a practical guide to incorporate these components seamlessly into your project.
+
+## Small Card
+
+<CardGrid>
+  <Card
+    title="Instructions"
+    href="/docs/introduction/installation"
+    icon="alignJustify"
+    variant="small"
+    description="test description"
+  />
+  <Card
+    title="Setup"
+    href="/docs/introduction/setup"
+    icon="alignJustify"
+    variant="small"
+  />
+  <Card
+    title="Rubix Studios"
+    href="https://www.rubixstudios.com.au"
+    icon="alignJustify"
+    external={true}
+    variant="small"
+  />
+</CardGrid>
+
+```jsx
+<CardGrid>
+  <Card
+    title="Instructions"
+    href="/docs/introduction/installation"
+    icon="alignJustify"
+    variant="small"
+    description="test description"
+  />
+  <Card
+    title="Setup"
+    href="/docs/introduction/setup"
+    icon="alignJustify"
+    variant="small"
+  />
+  <Card
+    title="Rubix Studios"
+    href="https://www.rubixstudios.com.au"
+    icon="alignJustify"
+    external={true}
+    variant="small"
+  />
+</CardGrid>
+```
+
+## Large Card
+
+<CardGrid>
+  <Card
+    subtitle="Instructions"
+    title="Installation"
+    description="Get started with Documents using our quick start installation guide to get your project started."
+    href="/docs/introduction/installation"
+  />
+  <Card
+    subtitle="Setup"
+    title="Site Settings"
+    description="Setting up your Documents projects layout, links and search engine optimisation."
+    href="/docs/introduction/setup"
+  />
+  <Card
+    subtitle="Support"
+    title="Rubix Studios"
+    description="Australia's leading branding, marketing and web development company."
+    href="https://www.rubixstudios.com.au/"
+    external={true}
+  />
+</CardGrid>
+
+```jsx
+<CardGrid>
+  <Card
+    subtitle="Instructions"
+    title="Installation"
+    description="Get started with Documents using our quick start installation guide to get your project started."
+    href="/docs/introduction/installation"
+  />
+  <Card
+    subtitle="Setup"
+    title="Site Settings"
+    description="Setting up your Documents projects layout, links and search engine optimisation."
+    href="/docs/introduction/setup"
+  />
+  <Card
+    subtitle="Support"
+    title="Rubix Studios"
+    description="Australia's leading branding, marketing and web development company."
+    href="https://www.rubixstudios.com.au/"
+    external={true}
+  />
+</CardGrid>
+```
+
+## Image Card
+
+<CardGrid>
+  <Card
+    title="Instructions"
+    href="/docs/introduction/installation"
+    image="/images/og-image.png"
+    variant="image"
+  />
+  <Card
+    title="Setup"
+    href="/docs/introduction/setup"
+    image="/images/og-image.png"
+    variant="image"
+  />
+  <Card
+    title="Rubix Studios"
+    href="https://www.rubixstudios.com.au"
+    image="/images/og-image.png"
+    external={true}
+    variant="image"
+  />
+</CardGrid>
+
+```jsx
+<CardGrid>
+  <Card
+    title="Instructions"
+    href="/docs/introduction/installation"
+    image="/images/og-image.png"
+    variant="image"
+  />
+  <Card
+    title="Setup"
+    href="/docs/introduction/setup"
+    image="/images/og-image.png"
+    variant="image"
+  />
+  <Card
+    title="Rubix Studios"
+    href="https://www.rubixstudios.com.au"
+    image="/images/og-image.png"
+    external={true}
+    variant="image"
+  />
+</CardGrid>
+```

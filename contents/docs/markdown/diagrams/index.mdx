@@ -1,0 +1,112 @@
+---
+title: Diagrams
+description: Add various diagram types, including flowcharts, decision trees and entity-relationship diagrams.
+---
+
+Diagrams are powerful tools for visualizing processes, relationships, and decisions. This section showcases different types of diagrams created using **Mermaid**, complete with examples and reusable code snippets to integrate into your projects.
+
+## Flowchart
+
+A flowchart represents a sequence of steps or processes in a visual format. Use this diagram to map workflows, decision-making processes, or operational flows.
+
+<Mermaid
+  chart={`graph TD;
+    Start --> Task1;
+    Task1 --> Task2;
+    Task2 --> End;`}
+/>
+
+```jsx
+<Mermaid
+  chart={\`
+    graph TD;
+    Start --> Task1;
+    Task1 --> Task2;
+    Task2 --> End;
+  \`}
+/>
+```
+
+## Decision Tree
+
+Decision trees illustrate choices and possible outcomes, making them ideal for decision-making workflows or processes involving multiple paths.
+
+<Mermaid
+  chart={`graph TD;
+    A[Start] --> B{Is it raining?};
+    B -->|Yes| C[Take an umbrella];
+    B -->|No| D[Enjoy the weather];
+    C --> E[Go outside];
+    D --> E;`}
+/>
+
+```jsx
+<Mermaid
+  chart={\`
+    graph TD;
+    A[Start] --> B{Is it raining?};
+    B -->|Yes| C[Take an umbrella];
+    B -->|No| D[Enjoy the weather];
+    C --> E[Go outside];
+    D --> E;
+  \`}
+/>
+```
+
+## Entity-Relationship Diagram
+
+Entity-relationship diagrams (ERDs) are used to model relationships between entities in a system. They are widely used in database design and system architecture planning.
+
+<Mermaid
+  chart={`erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE-ITEM : contains
+    PRODUCT ||--o{ LINE-ITEM : "included in"
+    CUSTOMER {
+        string name
+        string email
+    }
+    ORDER {
+        int orderNumber
+        date orderDate
+    }
+    LINE-ITEM {
+        int quantity
+        float price
+    }
+    PRODUCT {
+        int productId
+        string name
+        float price
+    }`}
+/>
+
+```jsx
+<Mermaid
+  chart={\`
+    erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE-ITEM : contains
+    PRODUCT ||--o{ LINE-ITEM : "included in"
+    CUSTOMER {
+        string name
+        string email
+    }
+    ORDER {
+        int orderNumber
+        date orderDate
+    }
+    LINE-ITEM {
+        int quantity
+        float price
+    }
+    PRODUCT {
+        int productId
+        string name
+        float price
+    }
+  \`}
+/>
+```
+
+Each of these diagrams serves a specific purpose and Mermaid makes it easy to generate them dynamically. Feel free to experiment with the provided code snippets and adapt them to your needs.

@@ -33,12 +33,18 @@ export const Documents: Paths[] = [
     href: "/structure",
     items: [
       {
-        title: "Deeper",
-        href: "/deeper",
+        title: "Deep",
+        href: "/deep",
         items: [
           {
-            title: "Even deeper",
-            href: "/even-deeper",
+            title: "Deeper",
+            href: "/deeper",
+            items: [
+              {
+                title: "Even deeper",
+                href: "/even-deeper",
+              },
+            ],
           },
         ],
       },
@@ -48,8 +54,8 @@ export const Documents: Paths[] = [
     spacer: true,
   },
   {
-    title: "Markup",
-    href: "/markup",
+    title: "Markdown",
+    href: "/markdown",
     heading: "Components",
     items: [
       {

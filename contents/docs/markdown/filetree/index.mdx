@@ -1,0 +1,46 @@
+---
+title: Filetree
+description: This section provides an overview of file structures and their implementation using the FileTree component.
+---
+
+This section demonstrates the structure of a file tree using the `FileTree` component. Below is an example showcasing folders and files organized hierarchically for a project setup.
+
+<FileTree>
+  <Folder name="src" label="Source Code">
+    <File name="index.tsx" label="Index File" />
+    <Folder name="components" label="Components">
+      <File name="button.tsx" label="Button Component" />
+      <File name="input.tsx" label="Input Component" />
+    </Folder>
+    <Folder name="pages" label="Pages">
+      <File name="home.tsx" label="Home Page" />
+      <File name="about.tsx" label="About Page" />
+    </Folder>
+  </Folder>
+</FileTree>
+
+## How to Use
+
+Integrate the `FileTree` component into your project to visually represent file and folder structures. This is particularly useful for documentation, tutorials, or providing users with an overview of your project's architecture.
+
+### JSX Code Example
+
+Here is how you can define the file tree structure in for use in your project:
+
+```jsx
+<FileTree>
+  <Folder name="src" label="Source Code">
+    <File name="index.tsx" label="Index File" />
+    <Folder name="components" label="Components">
+      <File name="button.tsx" label="Button Component" />
+      <File name="input.tsx" label="Input Component" />
+    </Folder>
+    <Folder name="pages" label="Pages">
+      <File name="home.tsx" label="Home Page" />
+      <File name="about.tsx" label="About Page" />
+    </Folder>
+  </Folder>
+</FileTree>
+```
+
+Use this code as a template to set up your own file tree structure and customize it as needed.

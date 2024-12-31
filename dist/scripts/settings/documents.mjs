@@ -31,12 +31,18 @@ export const Documents = [
         href: "/structure",
         items: [
             {
-                title: "Deeper",
-                href: "/deeper",
+                title: "Deep",
+                href: "/deep",
                 items: [
                     {
-                        title: "Even deeper",
-                        href: "/even-deeper",
+                        title: "Deeper",
+                        href: "/deeper",
+                        items: [
+                            {
+                                title: "Even deeper",
+                                href: "/even-deeper",
+                            },
+                        ],
                     },
                 ],
             },
@@ -46,8 +52,8 @@ export const Documents = [
         spacer: true,
     },
     {
-        title: "Markup",
-        href: "/markup",
+        title: "Markdown",
+        href: "/markdown",
         heading: "Components",
         items: [
             {
