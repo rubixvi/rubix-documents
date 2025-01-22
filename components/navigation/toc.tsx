@@ -15,7 +15,8 @@ export default function Toc({ tocs }: TocProps) {
     href: string
   ) => {
     e.preventDefault()
-    const targetElement = document.querySelector(href)
+    const id = href.startsWith("#") ? href.slice(1) : href
+    const targetElement = document.getElementById(id)
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: "smooth" })
       window.history.pushState(null, "", href)
