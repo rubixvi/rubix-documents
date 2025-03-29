@@ -20,10 +20,10 @@ export default function Copy({ content }: { content: string }) {
 
   return (
     <Button
-      variant="ghost"
+      variant="outline"
       size="icon"
       onClick={handleCopy}
-      className="cursor-pointer !size-5"
+      className="cursor-pointer !size-8"
     >
       <LuCopy
         className={cn(

@@ -30,7 +30,7 @@ export default async function Pages({ params }: PageProps) {
         <PageBreadcrumb paths={slug} />
 
         <Typography>
-          <h1 className="text-3xl !font-semibold mb-2!">{frontmatter.title}</h1>
+          <h1 className="text-3xl !font-semibold !mb-2">{frontmatter.title}</h1>
           <p className="-mt-4 text-sm">
             {frontmatter.description}
           </p>
