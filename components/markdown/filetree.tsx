@@ -35,9 +35,7 @@ function useIndent() {
 
 function Tree({ children }: { children: ReactNode }): ReactElement {
   return (
-    <div className={cn("flex")}>
-      <ul className="border list-none !p-4 !py-1 !m-0">{children}</ul>
-    </div>
+    <ul className="border list-none !p-2 !m-0 rounded-lg w-full">{children}</ul>
   )
 }
 
@@ -79,7 +77,7 @@ export const Folder = memo(
           <span className="ml-2">{label ?? name}</span>
         </div>
         {isFolderOpen && (
-          <ul className="list-none">
+          <ul className="list-none !pl-0.5">
             <ctx.Provider value={indent + 1}>{children}</ctx.Provider>
           </ul>
         )}

@@ -25,8 +25,9 @@ export default async function Pages({ params }: PageProps) {
 
   return (
     <div className="flex items-start gap-14">
-      <div className="flex-[3] pt-10">
+      <section className="flex-[3] pt-10">
         <PageBreadcrumb paths={slug} />
+
         <Typography>
           <h1 className="text-3xl -mt-2">{frontmatter.title}</h1>
           <p className="-mt-4 text-base text-muted-foreground text-[16.5px]">
@@ -35,9 +36,13 @@ export default async function Pages({ params }: PageProps) {
           <div>{content}</div>
           <Pagination pathname={pathName} />
         </Typography>
-      </div>
+      </section>
+
       {Settings.rightbar && (
-        <div className="hidden xl:flex xl:flex-col sticky top-16 gap-3 py-8 min-w-[230px] h-[94.5vh] toc">
+        <aside
+          className="hidden xl:flex xl:flex-col sticky top-16 gap-3 py-8 min-w-[230px] h-[94.5vh] toc"
+          aria-label="Table of contents"
+        >
           {Settings.toc && <Toc tocs={tocs} />}
           {Settings.feedback && (
             <Feedback slug={pathName} title={frontmatter.title} />
@@ -45,7 +50,7 @@ export default async function Pages({ params }: PageProps) {
           {Settings.totop && (
             <BackToTop className="mt-6 self-start text-sm text-neutral-800 dark:text-neutral-300/85" />
           )}
-        </div>
+        </aside>
       )}
     </div>
   )

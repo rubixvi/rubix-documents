@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { Link } from "lib/transition"
 
 interface Routed {
   href?: string
@@ -9,11 +9,7 @@ const RoutedLink: React.FC<Routed> = ({ href = "#", children }) => {
   const isInternal = href.startsWith("/") || href.startsWith("#")
 
   if (isInternal) {
-    return (
-      <Link href={href} passHref>
-        {children}
-      </Link>
-    )
+    return <Link href={href}>{children}</Link>
   }
 
   return (

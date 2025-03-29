@@ -19,21 +19,24 @@ export default function Copy({ content }: { content: string }) {
   }
 
   return (
-    <Button variant="secondary" size="xs" onClick={handleCopy}>
-      <span className="relative inline-block w-4 h-4">
-        <LuCopy
-          className={cn(
-            "absolute w-full h-full transition-opacity duration-300 transform",
-            isCopied ? "opacity-0 scale-90" : "opacity-100 scale-100"
-          )}
-        />
-        <LuCheck
-          className={cn(
-            "absolute w-full h-full transition-opacity duration-300 transform",
-            isCopied ? "opacity-100 scale-100" : "opacity-0 scale-90"
-          )}
-        />
-      </span>
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={handleCopy}
+      className="cursor-pointer !size-5"
+    >
+      <LuCopy
+        className={cn(
+          "absolute transition-opacity duration-300 transform !size-3.5",
+          isCopied ? "opacity-0 scale-90" : "opacity-100 scale-100"
+        )}
+      />
+      <LuCheck
+        className={cn(
+          "absolute transition-opacity duration-300 transform !size-3.5",
+          isCopied ? "opacity-100 scale-100" : "opacity-0 scale-90"
+        )}
+      />
     </Button>
   )
 }

@@ -1,6 +1,6 @@
-import Link from "next/link"
+import { Link } from "lib/transition"
 
-import { buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 
 export default function NotFound() {
   return (
@@ -10,12 +10,9 @@ export default function NotFound() {
         Page not found
       </p>
       <div className="flex items-center">
-        <Link
-          href="/"
-          className={buttonVariants({ className: "px-6", size: "lg" })}
-        >
-          Return Home
-        </Link>
+        <Button variant="default" size="lg" asChild>
+          <Link href="/">Return Home</Link>
+        </Button>
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "lib/transition"
 
 import { Settings } from "@/lib/meta"
 
@@ -14,7 +14,7 @@ export function Logo() {
         loading="lazy"
         decoding="async"
       />
-      <h1 className="text-md font-semibold">{Settings.title}</h1>
+      <span className="text-md font-semibold">{Settings.title}</span>
     </Link>
   )
 }
