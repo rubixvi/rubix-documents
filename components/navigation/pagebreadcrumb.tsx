@@ -1,4 +1,5 @@
 import { Fragment } from "react"
+import { Link } from "lib/transition"
 import { LuHouse } from "react-icons/lu"
 
 import {
@@ -17,7 +18,7 @@ export default function PageBreadcrumb({ paths }: { paths: string[] }) {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink>
+            <BreadcrumbLink asChild>
               <LuHouse className="h-4" />
             </BreadcrumbLink>
           </BreadcrumbItem>
@@ -26,8 +27,10 @@ export default function PageBreadcrumb({ paths }: { paths: string[] }) {
             <>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href={`/docs/${paths[0]}`} className="a">
-                  {toTitleCase(paths[0])}
+                <BreadcrumbLink asChild>
+                  <Link href={`/docs/${paths[0]}`}>
+                    {toTitleCase(paths[0])}
+                  </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
 
@@ -45,8 +48,8 @@ export default function PageBreadcrumb({ paths }: { paths: string[] }) {
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
                       {index < paths.length - 1 ? (
-                        <BreadcrumbLink href={href} className="a">
-                          {toTitleCase(path)}
+                        <BreadcrumbLink asChild>
+                          <Link href={href}>{toTitleCase(path)}</Link>
                         </BreadcrumbLink>
                       ) : (
                         <BreadcrumbPage className="b">
@@ -67,8 +70,8 @@ export default function PageBreadcrumb({ paths }: { paths: string[] }) {
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
                     {index < paths.length - 1 ? (
-                      <BreadcrumbLink href={href} className="a">
-                        {toTitleCase(path)}
+                      <BreadcrumbLink asChild>
+                        <Link href={href}>{toTitleCase(path)}</Link>
                       </BreadcrumbLink>
                     ) : (
                       <BreadcrumbPage className="b">

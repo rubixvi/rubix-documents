@@ -31,14 +31,18 @@ export function SheetLeft() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden flex">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden flex cursor-pointer"
+        >
           <LuAlignLeft className="!size-6" />
         </Button>
       </SheetTrigger>
-      <SheetContent className="flex flex-col gap-4 px-0" side="left">
+      <SheetContent className="flex flex-col gap-0 px-0" side="left">
         <DialogTitle className="sr-only">Menu</DialogTitle>
         <SheetHeader>
-          <SheetClose className="px-5" asChild>
+          <SheetClose asChild>
             <Logo />
           </SheetClose>
         </SheetHeader>

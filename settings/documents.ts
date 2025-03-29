@@ -2,9 +2,9 @@ import { Paths } from "@/lib/pageroutes"
 
 export const Documents: Paths[] = [
   {
-    title: "Introduction",
+    heading: "Introduction",
+    title: "Basic Setup",
     href: "/introduction",
-    heading: "Getting started",
     items: [
       {
         title: "Installation",
