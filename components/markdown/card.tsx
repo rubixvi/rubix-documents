@@ -16,7 +16,7 @@ type CardProps = PropsWithChildren & {
   variant?: "normal" | "small" | "image"
 }
 
-export default function Card({
+export function Card({
   subtitle,
   title,
   description,
@@ -39,7 +39,7 @@ export default function Card({
           ? "p-3 items-center space-x-2"
           : variant === "image"
             ? "p-0 h-full flex-col justify-between"
-            : "p-3 h-full flex-col justify-between",
+            : "p-4 h-full flex-col justify-between",
         className
       )}
     >
@@ -105,5 +105,13 @@ export default function Card({
     </Link>
   ) : (
     content
+  )
+}
+
+export function CardGrid({ children }: PropsWithChildren) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-6">
+      {children}
+    </div>
   )
 }

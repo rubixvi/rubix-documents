@@ -9,6 +9,7 @@ import Feedback from "@/components/navigation/feedback"
 import PageBreadcrumb from "@/components/navigation/pagebreadcrumb"
 import Pagination from "@/components/navigation/pagination"
 import Toc from "@/components/navigation/toc"
+import { Separator } from "@/components/ui/separator"
 
 type PageProps = {
   params: Promise<{ slug: string[] }>
@@ -29,11 +30,14 @@ export default async function Pages({ params }: PageProps) {
         <PageBreadcrumb paths={slug} />
 
         <Typography>
-          <h1 className="text-3xl -mt-2">{frontmatter.title}</h1>
-          <p className="-mt-4 text-base text-muted-foreground text-[16.5px]">
+          <h1 className="text-3xl !font-semibold mb-2!">{frontmatter.title}</h1>
+          <p className="-mt-4 text-sm">
             {frontmatter.description}
           </p>
-          <div>{content}</div>
+          <Separator className="my-6" />
+          <section>
+            {content}
+          </section>
           <Pagination pathname={pathName} />
         </Typography>
       </section>

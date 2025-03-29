@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react"
 import { Documents } from "@/settings/documents"
-import { LuCommand, LuFileText, LuSearch } from "react-icons/lu"
+import { LuFileText, LuSearch } from "react-icons/lu"
 
 import { advanceSearch, cn, debounce, highlight, search } from "@/lib/utils"
 import {
@@ -37,17 +37,12 @@ export default function Search() {
         const results = advanceSearch(input.trim())
         setFilteredResults(results)
         setIsLoading(false)
-      }, 200),
+      }, 300),
     []
   )
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.ctrlKey && event.key === "k") {
-        event.preventDefault()
-        setIsOpen(true)
-      }
-
       if (isOpen && event.key === "Enter" && filteredResults.length > 2) {
         const selected = filteredResults[0]
         if ("href" in selected) {
@@ -120,14 +115,10 @@ export default function Search() {
           <div className="relative flex-1 max-w-md cursor-pointer">
             <LuSearch className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500 dark:text-neutral-400" />
             <Input
-              className="h-9 w-full pl-10 pr-4 rounded-md border bg-muted shadow-sm md:w-full"
-              placeholder="Search documents..."
+              className="h-9 w-full pl-10 pr-4 bg-background rounded-md border shadow text-sm md:w-full"
+              placeholder="Search"
               type="search"
             />
-            <div className="absolute right-2 top-1/2 hidden -translate-y-1/2 items-center gap-0.5 rounded-sm bg-zinc-200 p-1 text-xs font-mono font-medium dark:bg-neutral-700 sm:flex">
-              <LuCommand className="w-3 h-3" />
-              <span>k</span>
-            </div>
           </div>
         </DialogTrigger>
         <DialogContent className="max-w-[650px] p-0 top-[45%] sm:top-[38%]">
@@ -136,7 +127,7 @@ export default function Search() {
             <input
               value={searchedInput}
               onChange={(e) => setSearchedInput(e.target.value)}
-              placeholder="Search documents..."
+              placeholder="Search..."
               autoFocus
               className="h-14 px-4 bg-transparent border-b text-[15px] outline-none"
             />

@@ -35,7 +35,9 @@ function useIndent() {
 
 function Tree({ children }: { children: ReactNode }): ReactElement {
   return (
-    <ul className="border list-none !p-2 !m-0 rounded-lg w-full">{children}</ul>
+    <ul className="border list-none !p-2 !m-0 rounded-lg w-full overflow-hidden">
+      {children}
+    </ul>
   )
 }
 
@@ -76,11 +78,18 @@ export const Folder = memo(
           </span>
           <span className="ml-2">{label ?? name}</span>
         </div>
-        {isFolderOpen && (
-          <ul className="list-none !pl-0.5">
-            <ctx.Provider value={indent + 1}>{children}</ctx.Provider>
-          </ul>
-        )}
+        <div
+          className={cn(
+            "grid transition-[grid-template-rows] duration-200 ease-in-out",
+            isFolderOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          )}
+        >
+          <div className="overflow-hidden">
+            <ul className="list-none !pl-[0.75rem]">
+              <ctx.Provider value={indent + 1}>{children}</ctx.Provider>
+            </ul>
+          </div>
+        </div>
       </li>
     )
   }
@@ -90,7 +99,7 @@ Folder.displayName = "Folder"
 
 export const File = memo(({ label, name }: FileProps) => (
   <li className="list-none">
-    <div className="inline-flex items-center py-1 cursor-default text-xs hover:text-muted-foreground  transition-all">
+    <div className="inline-flex items-center py-1 cursor-default text-xs hover:text-muted-foreground transition-all">
       <span className="ml-1">
         <FiFileText size={14} />
       </span>

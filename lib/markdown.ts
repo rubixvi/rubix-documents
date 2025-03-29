@@ -50,7 +50,7 @@ async function parseMdx<Frontmatter>(rawMdx: string) {
   })
 }
 
-const computeDocumentPath = (slug: string) => {
+const documentPath = (slug: string) => {
   return Settings.gitload
     ? `${GitHubLink.href}/raw/main/contents/docs/${slug}/index.mdx`
     : path.join(process.cwd(), "/contents/docs/", `${slug}/index.mdx`)
@@ -60,7 +60,7 @@ const getDocumentPath = (() => {
   const cache = new Map<string, string>()
   return (slug: string) => {
     if (!cache.has(slug)) {
-      cache.set(slug, computeDocumentPath(slug))
+      cache.set(slug, documentPath(slug))
     }
     return cache.get(slug)!
   }
