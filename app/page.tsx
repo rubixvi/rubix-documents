@@ -1,11 +1,11 @@
-import Link from "next/link"
+import { Link } from "lib/transition"
 
 import { PageRoutes } from "@/lib/pageroutes"
 import { buttonVariants } from "@/components/ui/button"
 
 export default function Home() {
   return (
-    <div className="min-h-[86.5vh] flex flex-col justify-center items-center text-center px-2 py-8">
+    <section className="min-h-[86.5vh] flex flex-col justify-center items-center text-center px-2 py-8">
       <h1 className="text-4xl font-bold mb-4 sm:text-7xl">Documents</h1>
       <p className="max-w-[600px] text-foreground mb-8 sm:text-base">
         A simple open-source product documentation platform. That&apos;s simple
@@ -19,6 +19,6 @@ export default function Home() {
           Get Started
         </Link>
       </div>
-    </div>
+    </section>
   )
 }

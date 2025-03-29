@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { Link } from "lib/transition"
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu"
 
 import { getPreviousNext } from "@/lib/markdown"

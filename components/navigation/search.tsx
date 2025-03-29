@@ -15,8 +15,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
-
-import Anchor from "./anchor"
+import Anchor from "@/components/navigation/anchor"
 
 interface Document {
   title?: string
