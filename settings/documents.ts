@@ -4,7 +4,7 @@ export const Documents: Paths[] = [
   {
     heading: "Introduction",
     title: "Basic Setup",
-    href: "/introduction",
+    href: "/basic-setup",
     items: [
       {
         title: "Installation",
