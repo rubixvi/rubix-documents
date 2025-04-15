@@ -1,70 +1,89 @@
 # Documents
 
-**Documents** is a powerful **Next.js** documentation starter kit designed to simplify the process of creating high-quality, comprehensive product documentation, technical manuals and business guides. Built with **React**, **Tailwind CSS** and **TypeScript**, this starter kit provides the foundation to build your project documentation and knowledge base.
+Documents is a modern documentation starter kit built with **Next.js**, **React**, **Tailwind CSS**, and **TypeScript**. Designed for businesses, product teams, and technical writers, it provides a scalable and efficient foundation for building documentation websites, product manuals, and knowledge bases.
 
-**Demo**: [https://rubix-documents.vercel.app/](https://rubix-documents.vercel.app/)
+> **Demo**: [https://rubix-documents.vercel.app](https://rubix-documents.vercel.app)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Frubixvi%2Frubix-documents&project-name=my-documents&repository-name=my-documents&demo-title=Documents&demo-description=This%20Document%20Starter%20Kit%20is%20developed%20with%20Next.js%2C%20Tailwind%20CSS%20and%20TypeScript.%20It%20serves%20as%20a%20flexible%20and%20scalable%20foundation%20for%20building%20documentation%20websites%20or%20content-driven%20projects.&demo-url=https%3A%2F%2Frubix-documents.vercel.app%2F&demo-image=https%3A%2F%2Fgithub.com%2Frubixvi%2Frubix-documents%2Fblob%2Fmain%2Fpublic%2Fscreens%2Fscreen-1.png)
 
-## Table of Contents
+***
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+## Overview
 
-## Documentation
+Documents enables businesses to deliver clear, structured, and accessible product documentation — with a focus on performance, usability, and maintainability.
 
-[https://docs.rubixstudios.com.au](https://docs.rubixstudios.com.au) **(In-Development)**
+Built for technical and content-driven projects, this starter kit supports Markdown (MDX), React components, and a flexible content architecture designed for scale.
 
-## Development
+Documentation: [https://docs.rubixstudios.com.au](https://docs.rubixstudios.com.au) (In Development)
+
+***
+
+## Features
+
+### Content Management
+
+- MDX support (Markdown with React components)
+- Reusable custom components
+- Mermaid.js for diagrams and flowcharts
+- Tables and LaTeX math support
+
+### Navigation & Structure
+
+- Multi-level navigation
+- Auto-generated table of contents
+- Content pagination
+- Code snippet switcher with copy functionality
+
+### Development Experience
+
+- Syntax highlighting with theme support
+- Enhanced code blocks with titles and line highlighting
+- Built-in light/dark mode with auto-detection
+- SEO-ready with dynamic meta tags
+
+### Search & Future Enhancements
+
+- Fuzzy search with term highlighting
+- Planned: AI-powered knowledgebase tools
+
+***
+
+## Quick Start
 
 ### Installation
 
-1. Clone the repository:
+```bash
+git clone https://github.com/rubixvi/rubix-documents.git
+cd rubix-documents
+npm install
+npm run dev
+```
 
-   ```bash
-   git clone https://github.com/rubixvi/rubix-documents.git
-   cd rubix-documents
-   ```
+Visit [http://localhost:3000](http://localhost:3000) to view your project locally.
 
-2. Install dependencies:
+**For production:**
 
-   ```bash
-   npm install
-   ```
+```bash
+npm run build
+npm run start
+```
 
-3. Run the development server:
+Deploy to Vercel for automated builds and hosting.
 
-   ```bash
-   npm run dev
-   ```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the project.
-
-5. **For Production:**
-
-   - Build the app:
-
-     ```bash
-     npm run build
-     ```
-
-   - Start the production server:
-
-     ```bash
-     npm run start
-     ```
-
-   - Open [http://localhost:3000](http://localhost:3000) to view the production build.
-
-   - **If deploying to Vercel,** the build step is automatically handled during deployment.
+***
 
 ## Usage
 
-This kit can be used to create product documentation, business websites and guides.
+Documents is designed to support:
+
+- Product documentation
+- Technical manuals
+- Internal guides
+- Business knowledge bases
+
+***
+
+## Screenshots
 
 ![Main Screen](./public/screens/screen-1.png)
 _Main Screen_
@@ -84,57 +103,31 @@ _Main Dark Mode Screen_
 ![Document Dark Screen](./public/screens/screen-6.png)
 _Document Dark Mode Screen_
 
-## Features
-
-### Content Creation
-
-- **MDX Integration**: Write docs with Markdown & JSX components.
-- **Custom Components**: Reuse React components in your docs.
-- **Mermaid.js Diagrams**: Create flowcharts & diagrams.
-- **Math & Tables**: Include tables & LaTeX math formulas.
-
-### Navigation & Readability
-
-- **Multi-level Navigation**: Nested pages for hierarchy.
-- **Content Pagination**: Smooth transitions between pages.
-- **Dynamic TOC**: Auto-generated table of contents.
-- **Code Switcher**: Toggle & copy code snippets easily.
-
-### Code Features
-
-- **Syntax Highlighting**: Theme-aware highlighting.
-- **Enhanced Code Blocks**: Line highlighting & code titles.
-
-### Theming & UX
-
-- **Light/Dark Modes**: Automatic theme switching.
-- **SEO Optimization**: Auto-generated metadata for better ranking.
-  - Manage meta tags (title, description, URLs, social sharing).
-
-### Search & Future Enhancements
-
-- **Advanced Search**: Fuzzy search with term highlighting.
-- **AI Knowledgebase**: Future AI-powered doc tools.
-
-> **Note:** AI documentation support is in development.
+***
 
 ## Contributing
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add some feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Open a pull request.
+We welcome contributions to improve this project.
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a pull request
+
+***
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
+***
+
 ## Contact
 
-For support or inquiries, contact Vincent Vu [@rubixvi](https://x.com/rubixvi) on X.
+For support or inquiries:
 
-Rubix Studios - [https://www.rubixstudios.com.au](https://www.rubixstudios.com.au)
+Vincent Vu — [@rubixvi](https://x.com/rubixvi)
 
-Project: [https://github.com/rubixvi/rubix-documents](https://github.com/rubixvi/rubix-documents)
+Rubix Studios — [https://www.rubixstudios.com.au](https://www.rubixstudios.com.au)
+
+**Project:** [https://github.com/rubixvi/rubix-documents](https://github.com/rubixvi/rubix-documents)
