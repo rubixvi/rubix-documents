@@ -95,6 +95,32 @@ function removeCustomComponents() {
   }
 }
 
+function cleanContentForSearch(content: string): string {
+  return content
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`]+`/g, '')
+    .replace(/#{1,6}\s+(.+)/g, '$1')
+
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/_(.+?)_/g, '$1')
+    .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1')
+
+    .replace(/<Note.*?>([\s\S]*?)<\/Note>/g, '$1')
+    .replace(/<Card.*?>([\s\S]*?)<\/Card>/g, '$1')
+    .replace(/<Step.*?>([\s\S]*?)<\/Step>/g, '$1')
+
+    .replace(/^\s*[-*+]\s+/gm, '')
+    .replace(/^\s*\d+\.\s+/gm, '')
+    .replace(/^\s*\[[x\s]\]\s+/gm, '')
+
+    .replace(/\|[^|\n]*\|/g, ' ')
+    .replace(/^\s*>\s+/gm, '')
+
+    .replace(/\s+/g, ' ')
+    .toLowerCase()
+    .trim()
+}
+
 async function processMdxFile(filePath: string) {
   const rawMdx = await fs.readFile(filePath, "utf-8")
   const { content, data: frontmatter } = grayMatter(rawMdx)
@@ -108,26 +134,33 @@ async function processMdxFile(filePath: string) {
 
   const documentContent = String(processed.value)
 
-  const searchOptimized = documentContent
-    .replace(/```[\s\S]*?```/g, "")
-    .replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1")
-    .replace(/[*_`]/g, "")
-    .replace(/\s+/g, " ")
-    .trim()
+  const headings = documentContent
+    .match(/^##\s+(.+)$/gm)
+    ?.map(h => h.replace(/^##\s+/, '').trim()) || []
+
+  const extractedKeywords = new Set([
+    ...(frontmatter.keywords || []),
+    ...headings,
+    ...(documentContent.match(/\*\*([^*]+)\*\*/g) || [])
+      .map(m => m.replace(/\*\*/g, '').trim()),
+    ...(documentContent.match(/`([^`]+)`/g) || [])
+      .map(m => m.replace(/`/g, '').trim())
+  ])
 
   const slug = createSlug(filePath)
   const matchedDoc = findDocumentBySlug(slug)
 
   return {
     slug,
-    title: frontmatter.title || 
-           (matchedDoc && isRoute(matchedDoc) ? matchedDoc.title : "Untitled"),
+    title:
+      frontmatter.title ||
+      (matchedDoc && isRoute(matchedDoc) ? matchedDoc.title : "Untitled"),
     description: frontmatter.description || "",
     content: documentContent,
     _searchMeta: {
-      cleanContent: searchOptimized,
-      headings: documentContent.match(/^##\s+(.+)$/gm)?.map(h => h.replace(/^##\s+/, "")) || [],
-      keywords: frontmatter.keywords || []
+      cleanContent: cleanContentForSearch(documentContent),
+      headings,
+      keywords: Array.from(extractedKeywords)
     }
   }
 }

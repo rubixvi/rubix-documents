@@ -1,6 +1,5 @@
 import searchJson from "@/public/search-data/documents.json"
 import { clsx, type ClassValue } from "clsx"
-import sanitizeHtml from "sanitize-html"
 import { twMerge } from "tailwind-merge"
 
 import { Paths } from "@/lib/pageroutes"
@@ -170,46 +169,49 @@ function calculateRelevance(
     score += 30
   }
 
-  queryWords.forEach(word => {
+  queryWords.forEach((word) => {
     if (lowerTitle.includes(word)) {
       score += 15
     }
   })
 
-  const lowerHeadings = headings.map(h => h.toLowerCase())
-  if (lowerHeadings.some(h => h === lowerQuery)) {
+  const lowerHeadings = headings.map((h) => h.toLowerCase())
+  if (lowerHeadings.some((h) => h === lowerQuery)) {
     score += 40
   }
-  lowerHeadings.forEach(heading => {
+  lowerHeadings.forEach((heading) => {
     if (heading.includes(lowerQuery)) {
       score += 25
     }
   })
 
-  const lowerKeywords = keywords.map(k => k.toLowerCase())
-  if (lowerKeywords.some(k => k === lowerQuery)) {
+  const lowerKeywords = keywords.map((k) => k.toLowerCase())
+  if (lowerKeywords.some((k) => k === lowerQuery)) {
     score += 35
   }
-  lowerKeywords.forEach(keyword => {
+  lowerKeywords.forEach((keyword) => {
     if (keyword.includes(lowerQuery)) {
       score += 20
     }
   })
 
-  const exactMatches = content.toLowerCase().match(
-    new RegExp(`\\b${lowerQuery}\\b`, "gi")
-  )
+  const exactMatches = content
+    .toLowerCase()
+    .match(new RegExp(`\\b${lowerQuery}\\b`, "gi"))
   if (exactMatches) {
     score += exactMatches.length * 10
   }
 
-  queryWords.forEach(word => {
+  queryWords.forEach((word) => {
     if (content.toLowerCase().includes(word)) {
       score += 5
     }
   })
 
-  const proximityScore = calculateProximityScore(lowerQuery, content.toLowerCase())
+  const proximityScore = calculateProximityScore(
+    lowerQuery,
+    content.toLowerCase()
+  )
   score += proximityScore * 2
 
   return score / Math.log(content.length + 1)
@@ -243,21 +245,12 @@ function calculateProximityScore(query: string, content: string): number {
   return proximityScore
 }
 
-function safeURI(str: string): string {
-  try {
-    return decodeURIComponent(str)
-  } catch {
-    return str
-  }
-}
-
 function extractSnippet(content: string, query: string): string {
-  const lowerContent = content.toLowerCase()
-  const queryWords = query.toLowerCase().split(/\s+/)
-
   const indices: number[] = []
-  queryWords.forEach((word) => {
-    const index = lowerContent.indexOf(word)
+  const words = query.split(/\s+/)
+
+  words.forEach(word => {
+    const index = content.indexOf(word)
     if (index !== -1) {
       indices.push(index)
     }
@@ -273,8 +266,7 @@ function extractSnippet(content: string, query: string): string {
   const start = Math.max(0, avgIndex - contextLength)
   const end = Math.min(avgIndex + contextLength, content.length)
 
-  let snippet = content.slice(start, end).replace(/\n/g, " ").trim()
-  snippet = safeURI(snippet)
+  let snippet = content.slice(start, end)
   if (start > 0) snippet = `...${snippet}`
   if (end < content.length) snippet += "..."
 
@@ -283,15 +275,15 @@ function extractSnippet(content: string, query: string): string {
 
 export function advanceSearch(query: string) {
   const lowerQuery = query.toLowerCase().trim()
-  const queryWords = lowerQuery.split(/\s+/).filter(word => word.length >= 3)
+  const queryWords = lowerQuery.split(/\s+/).filter((word) => word.length >= 3)
 
   if (queryWords.length === 0) return []
 
   const chunks = chunkArray(searchData, 100)
 
-  const results = chunks.flatMap(chunk =>
+  const results = chunks.flatMap((chunk) =>
     chunk
-      .map(doc => {
+      .map((doc) => {
         const relevanceScore = calculateRelevance(
           queryWords.join(" "),
           doc.title,
@@ -308,10 +300,10 @@ export function advanceSearch(query: string) {
           href: doc.slug,
           snippet: highlightedSnippet,
           description: doc.description || "",
-          relevance: relevanceScore
+          relevance: relevanceScore,
         }
       })
-      .filter(doc => doc.relevance > 0)
+      .filter((doc) => doc.relevance > 0)
       .sort((a, b) => b.relevance - a.relevance)
   )
 
@@ -404,18 +396,11 @@ export function highlight(snippet: string, searchTerms: string): string {
 
   const terms = searchTerms
     .split(/\s+/)
-    .filter((term) => term.trim().length > 0)
-    .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .filter(term => term.trim().length > 0)
+    .map(term => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
 
   if (terms.length === 0) return snippet
 
-  const regex = new RegExp(`(${terms.join("|")})(?![^<>]*>)`, "gi")
-
-  return snippet.replace(
-    /(<[^>]+>)|([^<]+)/g,
-    (match, htmlTag, textContent) => {
-      if (htmlTag) return htmlTag
-      return textContent.replace(regex, "<span class='highlight'>$1</span>")
-    }
-  )
+  const regex = new RegExp(`(${terms.join("|")})`, "gi")
+  return snippet.replace(regex, "<span class='highlight'>$1</span>")
 }
