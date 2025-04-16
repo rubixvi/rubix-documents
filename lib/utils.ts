@@ -54,7 +54,6 @@ function memoize<T extends (...args: any[]) => any>(fn: T): T {
 }
 
 const memoizedSearchMatch = memoize(searchMatch)
-const memoizedCleanMdxContent = memoize(cleanMdxContent)
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -242,35 +241,6 @@ function calculateProximityScore(query: string, content: string): number {
   })
 
   return proximityScore
-}
-
-function cleanMdxContent(content: string): string {
-  let sanitizedContent = sanitizeHtml(content, {
-    allowedTags: [],
-    allowedAttributes: {},
-    textFilter: (text) => text.replace(/\s+/g, " ").trim(),
-  })
-
-  sanitizedContent = sanitizedContent.replace(
-    /&(#(?:\d+)|(?:[a-z]+));/gi,
-    (_, entity) => {
-      if (entity.startsWith("#")) {
-        const code = parseInt(entity.substring(1), 10)
-        return String.fromCharCode(code)
-      }
-      const entities: { [key: string]: string } = {
-        amp: "&",
-        lt: "<",
-        gt: ">",
-        nbsp: " ",
-        quot: '"',
-        apos: "'",
-      }
-      return entities[entity.toLowerCase()] || ""
-    }
-  )
-
-  return sanitizedContent
 }
 
 function safeURI(str: string): string {
