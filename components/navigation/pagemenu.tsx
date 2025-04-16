@@ -10,7 +10,7 @@ export default function PageMenu({ isSheet = false }) {
   if (!pathname.startsWith("/docs")) return null
 
   return (
-    <div className="flex flex-col gap-3.5 mt-5 pb-6">
+    <div className="mt-5 flex flex-col gap-3.5 pb-6">
       {Routes.map((item, index) => {
         if ("spacer" in item) {
           return (
@@ -22,7 +22,7 @@ export default function PageMenu({ isSheet = false }) {
         return (
           <div key={item.title + index} className="mb-2">
             {item.heading && (
-              <div className="text-sm font-bold mb-2">{item.heading}</div>
+              <div className="mb-2 text-sm font-bold">{item.heading}</div>
             )}
             <SubLink
               {...{

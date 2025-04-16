@@ -1,5 +1,6 @@
 import { promises as fs } from "fs"
 import path from "path"
+
 import { Documents } from "@/settings/documents"
 import grayMatter from "gray-matter"
 import remarkMdx from "remark-mdx"
@@ -75,6 +76,14 @@ function removeCustomComponents() {
     "TabsTrigger",
     "pre",
     "Mermaid",
+    "Card",
+    "CardGrid",
+    "Step",
+    "StepItem",
+    "Note",
+    "FileTree",
+    "Folder",
+    "File",
   ]
 
   return (tree: Node) => {
@@ -95,17 +104,73 @@ function removeCustomComponents() {
   }
 }
 
+function cleanContentForSearch(content: string): string {
+  let cleanedContent = content
+
+  cleanedContent = cleanedContent.replace(/```[\s\S]*?```/g, " ")
+  cleanedContent = cleanedContent.replace(/`([^`]+)`/g, "$1")
+  cleanedContent = cleanedContent.replace(/#{1,6}\s+(.+)/g, "$1")
+  cleanedContent = cleanedContent
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/_(.+?)_/g, "$1")
+
+  cleanedContent = cleanedContent.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1")
+  cleanedContent = cleanedContent.replace(/\|.*\|[\r\n]?/gm, (match) => {
+    return match
+      .split("|")
+      .filter((cell) => cell.trim())
+      .map((cell) => cell.trim())
+      .join(" ")
+  })
+
+  cleanedContent = cleanedContent.replace(
+    /<(?:Note|Card|Step|FileTree|Folder|File|Mermaid)[^>]*>([\s\S]*?)<\/(?:Note|Card|Step|FileTree|Folder|File|Mermaid)>/g,
+    "$1"
+  )
+
+  cleanedContent = cleanedContent
+    .replace(/^\s*[-*+]\s+/gm, "")
+    .replace(/^\s*\d+\.\s+/gm, "")
+    .replace(/^\s*\[[x\s]\]\s+/gm, "")
+    .replace(/^\s*>\s+/gm, "")
+
+  cleanedContent = cleanedContent
+    .replace(/[^\w\s-:]/g, " ")
+    .replace(/\s+/g, " ")
+    .toLowerCase()
+    .trim()
+
+  return cleanedContent
+}
+
 async function processMdxFile(filePath: string) {
   const rawMdx = await fs.readFile(filePath, "utf-8")
-
   const { content, data: frontmatter } = grayMatter(rawMdx)
 
-  const plainContent = await unified()
+  const processed = await unified()
     .use(remarkParse)
     .use(remarkMdx)
     .use(removeCustomComponents)
     .use(remarkStringify)
     .process(content)
+
+  const documentContent = String(processed.value)
+
+  const headings =
+    documentContent
+      .match(/^##\s+(.+)$/gm)
+      ?.map((h) => h.replace(/^##\s+/, "").trim()) || []
+
+  const extractedKeywords = new Set([
+    ...(frontmatter.keywords || []),
+    ...headings,
+    ...(documentContent.match(/\*\*([^*]+)\*\*/g) || []).map((m) =>
+      m.replace(/\*\*/g, "").trim()
+    ),
+    ...(documentContent.match(/`([^`]+)`/g) || []).map((m) =>
+      m.replace(/`/g, "").trim()
+    ),
+  ])
 
   const slug = createSlug(filePath)
   const matchedDoc = findDocumentBySlug(slug)
@@ -116,7 +181,12 @@ async function processMdxFile(filePath: string) {
       frontmatter.title ||
       (matchedDoc && isRoute(matchedDoc) ? matchedDoc.title : "Untitled"),
     description: frontmatter.description || "",
-    content: String(plainContent.value),
+    content: documentContent,
+    _searchMeta: {
+      cleanContent: cleanContentForSearch(documentContent),
+      headings,
+      keywords: Array.from(extractedKeywords),
+    },
   }
 }
 

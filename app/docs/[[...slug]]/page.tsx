@@ -3,13 +3,13 @@ import { notFound } from "next/navigation"
 import { getDocument } from "@/lib/markdown"
 import { Settings } from "@/lib/meta"
 import { PageRoutes } from "@/lib/pageroutes"
+import { Separator } from "@/components/ui/separator"
 import { Typography } from "@/components/ui/typography"
 import { BackToTop } from "@/components/navigation/backtotop"
 import Feedback from "@/components/navigation/feedback"
 import PageBreadcrumb from "@/components/navigation/pagebreadcrumb"
 import Pagination from "@/components/navigation/pagination"
 import Toc from "@/components/navigation/toc"
-import { Separator } from "@/components/ui/separator"
 
 type PageProps = {
   params: Promise<{ slug: string[] }>
@@ -30,21 +30,17 @@ export default async function Pages({ params }: PageProps) {
         <PageBreadcrumb paths={slug} />
 
         <Typography>
-          <h1 className="text-3xl !font-semibold !mb-2">{frontmatter.title}</h1>
-          <p className="-mt-4 text-sm">
-            {frontmatter.description}
-          </p>
+          <h1 className="!mb-2 text-3xl !font-semibold">{frontmatter.title}</h1>
+          <p className="-mt-4 text-sm">{frontmatter.description}</p>
           <Separator className="my-6" />
-          <section>
-            {content}
-          </section>
+          <section>{content}</section>
           <Pagination pathname={pathName} />
         </Typography>
       </section>
 
       {Settings.rightbar && (
         <aside
-          className="hidden xl:flex xl:flex-col sticky top-16 gap-3 py-8 min-w-[230px] h-[94.5vh] toc"
+          className="toc sticky top-16 hidden h-[94.5vh] min-w-[230px] gap-3 py-8 xl:flex xl:flex-col"
           aria-label="Table of contents"
         >
           {Settings.toc && <Toc tocs={tocs} />}

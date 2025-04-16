@@ -22,20 +22,20 @@ export default function RightSideBar({ slug, title }: SideBarEdit) {
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
-            "text-sm text-neutral-800 dark:text-neutral-300/85 no-underline flex items-center"
+            "flex items-center text-sm text-neutral-800 no-underline dark:text-neutral-300/85"
           )}
         >
-          <LuArrowUpRight className="mr-1 w-4 h-4 inline-block" /> Feedback
+          <LuArrowUpRight className="mr-1 inline-block h-4 w-4" /> Feedback
         </Link>
         <Link
           href={editUrl}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
-            "text-sm text-neutral-800 dark:text-neutral-300/85 no-underline flex items-center"
+            "flex items-center text-sm text-neutral-800 no-underline dark:text-neutral-300/85"
           )}
         >
-          <LuArrowUpRight className="mr-1 w-4 h-4 inline-block" /> Edit page
+          <LuArrowUpRight className="mr-1 inline-block h-4 w-4" /> Edit page
         </Link>
       </div>
     </div>

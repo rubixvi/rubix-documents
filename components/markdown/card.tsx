@@ -34,23 +34,23 @@ export function Card({
   const content = (
     <div
       className={clsx(
-        "relative border rounded-lg flex overflow-hidden bg-white dark:bg-neutral-900 dark:border-neutral-800 shadow-md transition-shadow duration-300 ease-in-out hover:shadow-lg hover:dark:shadow-md group",
+        "group relative flex overflow-hidden rounded-lg border bg-white shadow-md transition-shadow duration-300 ease-in-out hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-900 hover:dark:shadow-md",
         variant === "small"
-          ? "p-3 items-center space-x-2"
+          ? "items-center space-x-2 p-3"
           : variant === "image"
-            ? "p-0 h-full flex-col justify-between"
-            : "p-4 h-full flex-col justify-between",
+            ? "h-full flex-col justify-between p-0"
+            : "h-full flex-col justify-between p-4",
         className
       )}
     >
       {external && href && variant !== "image" && (
         <div
           className={clsx(
-            "absolute top-2 text-gray-500 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white transform transition-transform duration-300 ease-in-out group-hover:translate-x-1 group-hover:-translate-y-1",
+            "absolute top-2 transform text-gray-500 transition-transform duration-300 ease-in-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-black dark:text-gray-400 dark:group-hover:text-white",
             variant === "small" ? "right-0" : "right-2"
           )}
         >
-          <ExternalIcon className="w-4 h-4" />
+          <ExternalIcon className="h-4 w-4" />
         </div>
       )}
       {IconComponent && (
@@ -58,7 +58,7 @@ export function Card({
       )}
       <div>
         {subtitle && variant === "normal" && (
-          <p className="text-xs font-semibold !my-1 text-gray-500 dark:text-gray-400">
+          <p className="!my-1 text-xs font-semibold text-gray-500 dark:text-gray-400">
             {subtitle}
           </p>
         )}
@@ -68,16 +68,16 @@ export function Card({
             alt={title}
             width={400}
             height={400}
-            className="w-full h-[180px] object-cover object-center !m-0 border-0 !rounded-none"
+            className="!m-0 h-[180px] w-full !rounded-none border-0 object-cover object-center"
           />
         )}
         <div
           className={clsx(
-            "transition-all duration-300 font-semibold group-hover:font-bold",
+            "font-semibold transition-all duration-300 group-hover:font-bold",
             variant === "small"
               ? "text-sm"
               : variant === "image"
-                ? "text-sm p-4"
+                ? "p-4 text-sm"
                 : "text-lg",
             className
           )}
@@ -85,7 +85,7 @@ export function Card({
           {title}
         </div>
         {description && variant === "normal" && (
-          <p className="text-sm font-normal text-gray-600 dark:text-gray-400 !my-2">
+          <p className="!my-2 text-sm font-normal text-gray-600 dark:text-gray-400">
             {description}
           </p>
         )}
@@ -110,7 +110,7 @@ export function Card({
 
 export function CardGrid({ children }: PropsWithChildren) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-3">
       {children}
     </div>
   )

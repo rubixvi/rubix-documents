@@ -17,7 +17,7 @@ import PageMenu from "@/components/navigation/pagemenu"
 export function Sidebar() {
   return (
     <aside
-      className="md:flex hidden flex-[1] min-w-[230px] sticky top-16 flex-col h-[94.5vh] overflow-y-auto"
+      className="sticky top-16 hidden h-[94.5vh] min-w-[230px] flex-[1] flex-col overflow-y-auto md:flex"
       aria-label="Page navigation"
     >
       <ScrollArea className="py-4">
@@ -34,7 +34,7 @@ export function SheetLeft() {
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden flex cursor-pointer"
+          className="flex cursor-pointer md:hidden"
         >
           <LuAlignLeft className="!size-6" />
         </Button>
@@ -47,7 +47,7 @@ export function SheetLeft() {
           </SheetClose>
         </SheetHeader>
         <ScrollArea className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2.5 mt-3 mx-0 px-5">
+          <div className="mx-0 mt-3 flex flex-col gap-2.5 px-5">
             <NavMenu isSheet />
           </div>
           <div className="mx-0 px-5">

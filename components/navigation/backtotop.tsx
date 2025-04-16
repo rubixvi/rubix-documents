@@ -33,11 +33,11 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
       ref={ref}
       onClick={ScrollUp}
       className={cn(
-        "flex items-center ml-2 transition opacity-0 cursor-pointer",
+        "ml-2 flex cursor-pointer items-center opacity-0 transition",
         className
       )}
     >
-      <LuArrowUp className="inline-block w-4 h-4 mr-1 align-middle" />
+      <LuArrowUp className="mr-1 inline-block h-4 w-4 align-middle" />
       <span>Scroll to top</span>
     </button>
   )
