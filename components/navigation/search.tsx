@@ -86,11 +86,11 @@ export default function Search() {
         <DialogClose key={href} asChild>
           <Anchor
             className={cn(
-              "w-full px-3 flex items-center gap-2.5 text-[15px] rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-300"
+              "flex w-full items-center gap-2.5 rounded-sm px-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-900"
             )}
             href={href}
           >
-            <div className="flex items-center h-full w-fit gap-1.5 py-3 whitespace-nowrap">
+            <div className="flex h-full w-fit items-center gap-1.5 py-3 whitespace-nowrap">
               <LuFileText className="h-[1.1rem] w-[1.1rem]" /> {doc.title}
             </div>
           </Anchor>
@@ -112,16 +112,16 @@ export default function Search() {
         }}
       >
         <DialogTrigger asChild>
-          <div className="relative flex-1 max-w-md cursor-pointer">
-            <LuSearch className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500 dark:text-neutral-400" />
+          <div className="relative max-w-md flex-1 cursor-pointer">
+            <LuSearch className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-neutral-500 dark:text-neutral-400" />
             <Input
-              className="h-9 w-full pl-10 pr-4 bg-background rounded-md border shadow text-sm md:w-full"
+              className="bg-background h-9 w-full rounded-md border pr-4 pl-10 text-sm shadow md:w-full"
               placeholder="Search"
               type="search"
             />
           </div>
         </DialogTrigger>
-        <DialogContent className="max-w-xs sm:max-w-lg p-0 top-[45%] sm:top-[38%]">
+        <DialogContent className="top-[45%] max-w-xs p-0 sm:top-[38%] sm:max-w-lg">
           <DialogTitle className="sr-only">Search</DialogTitle>
           <DialogHeader>
             <input
@@ -129,29 +129,29 @@ export default function Search() {
               onChange={(e) => setSearchedInput(e.target.value)}
               placeholder="Search..."
               autoFocus
-              className="h-14 px-4 bg-transparent border-b text-[15px] outline-none"
+              className="h-14 border-b bg-transparent px-4 text-[15px] outline-none"
             />
           </DialogHeader>
           {searchedInput.length > 0 && searchedInput.length < 3 && (
-            <p className="mx-auto mt-2 text-sm text-warning">
+            <p className="text-warning mx-auto mt-2 text-sm">
               Please enter at least 3 characters.
             </p>
           )}
           {isLoading ? (
-            <p className="mx-auto mt-2 text-sm text-muted-foreground">
+            <p className="text-muted-foreground mx-auto mt-2 text-sm">
               Searching...
             </p>
           ) : (
             filteredResults.length === 0 &&
             searchedInput.length >= 3 && (
-              <p className="mx-auto mt-2 text-sm text-muted-foreground">
+              <p className="text-muted-foreground mx-auto mt-2 text-sm">
                 No results found for{" "}
                 <span className="text-primary">{`"${searchedInput}"`}</span>
               </p>
             )
           )}
-          <ScrollArea className="max-h-[350px] overflow-hidden w-full">
-            <div className="flex flex-col items-start px-1 pt-1 pb-4 sm:px-3 w-full">
+          <ScrollArea className="max-h-[350px] w-full overflow-hidden">
+            <div className="flex w-full flex-col items-start px-1 pt-1 pb-4 sm:px-3">
               {searchedInput
                 ? filteredResults.map((item) => {
                     if ("href" in item) {
@@ -159,11 +159,11 @@ export default function Search() {
                         <DialogClose key={item.href} asChild>
                           <Anchor
                             className={cn(
-                              "p-3 flex flex-col w-full max-w-[310px] sm:max-w-[480px] gap-0.5 text-[15px] rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-300"
+                              "flex w-full max-w-[310px] flex-col gap-0.5 rounded-sm p-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 sm:max-w-[480px] dark:hover:bg-neutral-900"
                             )}
                             href={`/docs${item.href}`}
                           >
-                            <div className="flex items-center h-full gap-x-2">
+                            <div className="flex h-full items-center gap-x-2">
                               <LuFileText className="h-[1.1rem] w-[1.1rem]" />
                               <span className="truncate">{item.title}</span>
                             </div>

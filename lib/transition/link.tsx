@@ -1,4 +1,5 @@
 import type { UrlObject } from "url"
+
 import { useCallback } from "react"
 import NextLink from "next/link"
 

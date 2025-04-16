@@ -5,8 +5,8 @@ import { Company } from "@/lib/meta"
 
 export function Footer() {
   return (
-    <footer className="w-full h-16 border-t">
-      <div className="flex flex-wrap items-center justify-center sm:justify-between gap-4 sm:gap-0 w-full h-full px-2 sm:py-0 py-3 sm:px-4 lg:px-8 text-sm text-muted-foreground">
+    <footer className="h-16 w-full border-t">
+      <div className="text-muted-foreground flex h-full w-full flex-wrap items-center justify-center gap-4 px-2 py-3 text-sm sm:justify-between sm:gap-0 sm:px-4 sm:py-0 lg:px-8">
         <p className="text-center">
           &copy; {new Date().getFullYear()}{" "}
           <Link className="font-semibold" href={Company.link}>
@@ -15,7 +15,7 @@ export function Footer() {
           .
         </p>
         {Company.branding !== false && (
-          <div className="text-center hidden md:block">
+          <div className="hidden text-center md:block">
             <Link
               className="font-semibold"
               href="https://www.rubixstudios.com.au"

@@ -1,5 +1,6 @@
 import { promises as fs } from "fs"
 import path from "path"
+
 import { Documents } from "@/settings/documents"
 import grayMatter from "gray-matter"
 import remarkMdx from "remark-mdx"
@@ -82,7 +83,7 @@ function removeCustomComponents() {
     "Note",
     "FileTree",
     "Folder",
-    "File"
+    "File",
   ]
 
   return (tree: Node) => {
@@ -104,41 +105,42 @@ function removeCustomComponents() {
 }
 
 function cleanContentForSearch(content: string): string {
-  let cleanedContent = content;
+  let cleanedContent = content
 
-  cleanedContent = cleanedContent.replace(/```[\s\S]*?```/g, ' ');
-  cleanedContent = cleanedContent.replace(/`([^`]+)`/g, '$1');
-  cleanedContent = cleanedContent.replace(/#{1,6}\s+(.+)/g, '$1');
+  cleanedContent = cleanedContent.replace(/```[\s\S]*?```/g, " ")
+  cleanedContent = cleanedContent.replace(/`([^`]+)`/g, "$1")
+  cleanedContent = cleanedContent.replace(/#{1,6}\s+(.+)/g, "$1")
   cleanedContent = cleanedContent
-    .replace(/\*\*(.+?)\*\*/g, '$1')
-    .replace(/_(.+?)_/g, '$1');
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/_(.+?)_/g, "$1")
 
-  cleanedContent = cleanedContent.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
+  cleanedContent = cleanedContent.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1")
   cleanedContent = cleanedContent.replace(/\|.*\|[\r\n]?/gm, (match) => {
-    return match.split('|')
-      .filter(cell => cell.trim())
-      .map(cell => cell.trim())
-      .join(' ');
-  });
+    return match
+      .split("|")
+      .filter((cell) => cell.trim())
+      .map((cell) => cell.trim())
+      .join(" ")
+  })
 
   cleanedContent = cleanedContent.replace(
     /<(?:Note|Card|Step|FileTree|Folder|File|Mermaid)[^>]*>([\s\S]*?)<\/(?:Note|Card|Step|FileTree|Folder|File|Mermaid)>/g,
-    '$1'
-  );
+    "$1"
+  )
 
   cleanedContent = cleanedContent
-    .replace(/^\s*[-*+]\s+/gm, '')
-    .replace(/^\s*\d+\.\s+/gm, '')
-    .replace(/^\s*\[[x\s]\]\s+/gm, '')
-    .replace(/^\s*>\s+/gm, '');
+    .replace(/^\s*[-*+]\s+/gm, "")
+    .replace(/^\s*\d+\.\s+/gm, "")
+    .replace(/^\s*\[[x\s]\]\s+/gm, "")
+    .replace(/^\s*>\s+/gm, "")
 
   cleanedContent = cleanedContent
-    .replace(/[^\w\s-:]/g, ' ')
-    .replace(/\s+/g, ' ')
+    .replace(/[^\w\s-:]/g, " ")
+    .replace(/\s+/g, " ")
     .toLowerCase()
-    .trim();
+    .trim()
 
-  return cleanedContent;
+  return cleanedContent
 }
 
 async function processMdxFile(filePath: string) {
@@ -154,17 +156,20 @@ async function processMdxFile(filePath: string) {
 
   const documentContent = String(processed.value)
 
-  const headings = documentContent
-    .match(/^##\s+(.+)$/gm)
-    ?.map(h => h.replace(/^##\s+/, '').trim()) || []
+  const headings =
+    documentContent
+      .match(/^##\s+(.+)$/gm)
+      ?.map((h) => h.replace(/^##\s+/, "").trim()) || []
 
   const extractedKeywords = new Set([
     ...(frontmatter.keywords || []),
     ...headings,
-    ...(documentContent.match(/\*\*([^*]+)\*\*/g) || [])
-      .map(m => m.replace(/\*\*/g, '').trim()),
-    ...(documentContent.match(/`([^`]+)`/g) || [])
-      .map(m => m.replace(/`/g, '').trim())
+    ...(documentContent.match(/\*\*([^*]+)\*\*/g) || []).map((m) =>
+      m.replace(/\*\*/g, "").trim()
+    ),
+    ...(documentContent.match(/`([^`]+)`/g) || []).map((m) =>
+      m.replace(/`/g, "").trim()
+    ),
   ])
 
   const slug = createSlug(filePath)
@@ -180,8 +185,8 @@ async function processMdxFile(filePath: string) {
     _searchMeta: {
       cleanContent: cleanContentForSearch(documentContent),
       headings,
-      keywords: Array.from(extractedKeywords)
-    }
+      keywords: Array.from(extractedKeywords),
+    },
   }
 }
 

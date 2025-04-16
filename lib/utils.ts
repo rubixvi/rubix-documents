@@ -249,7 +249,7 @@ function extractSnippet(content: string, query: string): string {
   const indices: number[] = []
   const words = query.split(/\s+/)
 
-  words.forEach(word => {
+  words.forEach((word) => {
     const index = content.indexOf(word)
     if (index !== -1) {
       indices.push(index)
@@ -396,8 +396,8 @@ export function highlight(snippet: string, searchTerms: string): string {
 
   const terms = searchTerms
     .split(/\s+/)
-    .filter(term => term.trim().length > 0)
-    .map(term => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .filter((term) => term.trim().length > 0)
+    .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
 
   if (terms.length === 0) return snippet
 

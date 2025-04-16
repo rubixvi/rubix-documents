@@ -19,7 +19,7 @@ export function Step({ children }: PropsWithChildren<StepProps>) {
             clsx({ "pb-5": index < length - 1 })
           )}
         >
-          <div className="absolute -left-4 flex items-center justify-center size-8 rounded-full border bg-secondary text-xs font-medium">
+          <div className="bg-secondary absolute -left-4 flex size-8 items-center justify-center rounded-full border text-xs font-medium">
             {index + 1}
           </div>
           {child}

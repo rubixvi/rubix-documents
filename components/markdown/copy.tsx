@@ -23,18 +23,18 @@ export default function Copy({ content }: { content: string }) {
       variant="outline"
       size="icon"
       onClick={handleCopy}
-      className="cursor-pointer !size-8"
+      className="!size-8 cursor-pointer"
     >
       <LuCopy
         className={cn(
-          "absolute transition-opacity duration-300 transform !size-3.5",
-          isCopied ? "opacity-0 scale-90" : "opacity-100 scale-100"
+          "absolute !size-3.5 transform transition-opacity duration-300",
+          isCopied ? "scale-90 opacity-0" : "scale-100 opacity-100"
         )}
       />
       <LuCheck
         className={cn(
-          "absolute transition-opacity duration-300 transform !size-3.5",
-          isCopied ? "opacity-100 scale-100" : "opacity-0 scale-90"
+          "absolute !size-3.5 transform transition-opacity duration-300",
+          isCopied ? "scale-100 opacity-100" : "scale-90 opacity-0"
         )}
       />
     </Button>

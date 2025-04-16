@@ -30,7 +30,7 @@ export default async function Pages({ params }: PageProps) {
         <PageBreadcrumb paths={slug} />
 
         <Typography>
-          <h1 className="text-3xl !font-semibold !mb-2">{frontmatter.title}</h1>
+          <h1 className="!mb-2 text-3xl !font-semibold">{frontmatter.title}</h1>
           <p className="-mt-4 text-sm">{frontmatter.description}</p>
           <Separator className="my-6" />
           <section>{content}</section>
@@ -40,7 +40,7 @@ export default async function Pages({ params }: PageProps) {
 
       {Settings.rightbar && (
         <aside
-          className="hidden xl:flex xl:flex-col sticky top-16 gap-3 py-8 min-w-[230px] h-[94.5vh] toc"
+          className="toc sticky top-16 hidden h-[94.5vh] min-w-[230px] gap-3 py-8 xl:flex xl:flex-col"
           aria-label="Table of contents"
         >
           {Settings.toc && <Toc tocs={tocs} />}

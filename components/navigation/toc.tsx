@@ -28,7 +28,7 @@ export default function Toc({ tocs }: TocProps) {
   }
 
   return (
-    <div className="flex flex-col gap-3 w-full pl-2">
+    <div className="flex w-full flex-col gap-3 pl-2">
       <h3 className="text-sm font-semibold">On this page</h3>
       <ScrollArea className="pt-0.5 pb-4">
         <div className="flex flex-col gap-2.5 text-sm text-neutral-800 dark:text-neutral-300/85">

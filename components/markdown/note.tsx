@@ -26,11 +26,11 @@ export default function Note({
   return (
     <div
       className={cn(
-        "border rounded-md py-0.5 px-3.5 text-sm tracking-wide",
+        "rounded-md border px-3.5 py-0.5 text-sm tracking-wide",
         noteClassNames
       )}
     >
-      <p className="font-semibold text-sm -mb-3">{title}:</p>
+      <p className="-mb-3 text-sm font-semibold">{title}:</p>
       {children}
     </div>
   )

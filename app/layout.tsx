@@ -58,7 +58,7 @@ export default function RootLayout({
       <body className={`${inter.variable} font-regular`}>
         <Providers>
           <Navbar />
-          <main className="px-5 sm:px-8 h-auto">{children}</main>
+          <main className="h-auto px-5 sm:px-8">{children}</main>
           <Footer />
         </Providers>
       </body>
