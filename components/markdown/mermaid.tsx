@@ -22,22 +22,19 @@ mermaid.initialize({
 
 const Mermaid = ({ chart, className }: MermaidProps) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  const uniqueId = useMemo(
-    () => `mermaid-${Math.random().toString(36).slice(2, 11)}`,
-    []
-  )
   const [mounted, setMounted] = useState(false)
 
-  const renderMermaid = useCallback(async () => {
+  const renderMermaid = useCallback(() => {
     if (ref.current) {
+      ref.current.innerHTML = chart
+
       try {
-        const { svg } = await mermaid.render(uniqueId, chart)
-        ref.current.innerHTML = svg
+        mermaid.contentLoaded()
       } catch (error) {
         console.error("Mermaid diagram render error:", error)
       }
     }
-  }, [chart, uniqueId])
+  }, [chart])
 
   const memoizedClassName = useMemo(
     () => clsx("mermaid", className),
