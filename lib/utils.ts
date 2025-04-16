@@ -261,7 +261,7 @@ function extractSnippet(content: string, query: string): string {
   }
 
   const avgIndex = Math.floor(indices.reduce((a, b) => a + b) / indices.length)
-  const snippetLength = 120
+  const snippetLength = 160
   const contextLength = Math.floor(snippetLength / 2)
   const start = Math.max(0, avgIndex - contextLength)
   const end = Math.min(avgIndex + contextLength, content.length)

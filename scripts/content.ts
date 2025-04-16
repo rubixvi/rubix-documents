@@ -75,6 +75,14 @@ function removeCustomComponents() {
     "TabsTrigger",
     "pre",
     "Mermaid",
+    "Card",
+    "CardGrid",
+    "Step",
+    "StepItem",
+    "Note",
+    "FileTree",
+    "Folder",
+    "File"
   ]
 
   return (tree: Node) => {
@@ -96,29 +104,41 @@ function removeCustomComponents() {
 }
 
 function cleanContentForSearch(content: string): string {
-  return content
-    .replace(/```[\s\S]*?```/g, '')
-    .replace(/`[^`]+`/g, '')
-    .replace(/#{1,6}\s+(.+)/g, '$1')
+  let cleanedContent = content;
 
+  cleanedContent = cleanedContent.replace(/```[\s\S]*?```/g, ' ');
+  cleanedContent = cleanedContent.replace(/`([^`]+)`/g, '$1');
+  cleanedContent = cleanedContent.replace(/#{1,6}\s+(.+)/g, '$1');
+  cleanedContent = cleanedContent
     .replace(/\*\*(.+?)\*\*/g, '$1')
-    .replace(/_(.+?)_/g, '$1')
-    .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1')
+    .replace(/_(.+?)_/g, '$1');
 
-    .replace(/<Note.*?>([\s\S]*?)<\/Note>/g, '$1')
-    .replace(/<Card.*?>([\s\S]*?)<\/Card>/g, '$1')
-    .replace(/<Step.*?>([\s\S]*?)<\/Step>/g, '$1')
+  cleanedContent = cleanedContent.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
+  cleanedContent = cleanedContent.replace(/\|.*\|[\r\n]?/gm, (match) => {
+    return match.split('|')
+      .filter(cell => cell.trim())
+      .map(cell => cell.trim())
+      .join(' ');
+  });
 
+  cleanedContent = cleanedContent.replace(
+    /<(?:Note|Card|Step|FileTree|Folder|File|Mermaid)[^>]*>([\s\S]*?)<\/(?:Note|Card|Step|FileTree|Folder|File|Mermaid)>/g,
+    '$1'
+  );
+
+  cleanedContent = cleanedContent
     .replace(/^\s*[-*+]\s+/gm, '')
     .replace(/^\s*\d+\.\s+/gm, '')
     .replace(/^\s*\[[x\s]\]\s+/gm, '')
+    .replace(/^\s*>\s+/gm, '');
 
-    .replace(/\|[^|\n]*\|/g, ' ')
-    .replace(/^\s*>\s+/gm, '')
-
+  cleanedContent = cleanedContent
+    .replace(/[^\w\s-:]/g, ' ')
     .replace(/\s+/g, ' ')
     .toLowerCase()
-    .trim()
+    .trim();
+
+  return cleanedContent;
 }
 
 async function processMdxFile(filePath: string) {
