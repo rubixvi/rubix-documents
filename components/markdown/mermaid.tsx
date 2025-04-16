@@ -47,7 +47,9 @@ const Mermaid = ({ chart, className }: MermaidProps) => {
 
   useLayoutEffect(() => {
     if (mounted && ref.current) {
-      renderMermaid()
+      requestAnimationFrame(() => {
+        renderMermaid()
+      })
     }
   }, [mounted, renderMermaid])
 
