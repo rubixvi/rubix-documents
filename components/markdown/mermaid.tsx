@@ -22,7 +22,10 @@ mermaid.initialize({
 
 const Mermaid = ({ chart, className }: MermaidProps) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  const uniqueId = `mermaid-${Math.random().toString(36).slice(2, 11)}`
+  const uniqueId = useMemo(
+    () => `mermaid-${Math.random().toString(36).slice(2, 11)}`,
+    []
+  )
   const [mounted, setMounted] = useState(false)
 
   const renderMermaid = useCallback(async () => {
