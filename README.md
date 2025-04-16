@@ -27,10 +27,6 @@
 - [License](#license)
 - [Contact](#contact)
 
-## Documentation
-
-[https://docs.rubixstudios.com.au](https://docs.rubixstudios.com.au) **(In-Development)**
-
 ## Development
 
 ### Installation
