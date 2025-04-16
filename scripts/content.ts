@@ -97,26 +97,38 @@ function removeCustomComponents() {
 
 async function processMdxFile(filePath: string) {
   const rawMdx = await fs.readFile(filePath, "utf-8")
-
   const { content, data: frontmatter } = grayMatter(rawMdx)
 
-  const plainContent = await unified()
+  const processed = await unified()
     .use(remarkParse)
     .use(remarkMdx)
     .use(removeCustomComponents)
     .use(remarkStringify)
     .process(content)
 
+  const documentContent = String(processed.value)
+
+  const searchOptimized = documentContent
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1")
+    .replace(/[*_`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+
   const slug = createSlug(filePath)
   const matchedDoc = findDocumentBySlug(slug)
 
   return {
     slug,
-    title:
-      frontmatter.title ||
-      (matchedDoc && isRoute(matchedDoc) ? matchedDoc.title : "Untitled"),
+    title: frontmatter.title || 
+           (matchedDoc && isRoute(matchedDoc) ? matchedDoc.title : "Untitled"),
     description: frontmatter.description || "",
-    content: String(plainContent.value),
+    content: documentContent,
+    _searchMeta: {
+      cleanContent: searchOptimized,
+      headings: documentContent.match(/^##\s+(.+)$/gm)?.map(h => h.replace(/^##\s+/, "")) || [],
+      keywords: frontmatter.keywords || []
+    }
   }
 }
 

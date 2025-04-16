@@ -86,7 +86,7 @@ export default function Search() {
         <DialogClose key={href} asChild>
           <Anchor
             className={cn(
-              "w-full px-3 flex items-center gap-2.5 text-[15px] rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-900"
+              "w-full px-3 flex items-center gap-2.5 text-[15px] rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-300"
             )}
             href={href}
           >
@@ -121,7 +121,7 @@ export default function Search() {
             />
           </div>
         </DialogTrigger>
-        <DialogContent className="max-w-[650px] p-0 top-[45%] sm:top-[38%]">
+        <DialogContent className="max-w-xs sm:max-w-lg p-0 top-[45%] sm:top-[38%]">
           <DialogTitle className="sr-only">Search</DialogTitle>
           <DialogHeader>
             <input
@@ -150,8 +150,8 @@ export default function Search() {
               </p>
             )
           )}
-          <ScrollArea className="max-h-[350px] w-full">
-            <div className="flex flex-col items-start overflow-y-auto px-1 pt-1 pb-4 sm:px-3 w-full">
+          <ScrollArea className="max-h-[350px] overflow-hidden w-full">
+            <div className="flex flex-col items-start px-1 pt-1 pb-4 sm:px-3 w-full">
               {searchedInput
                 ? filteredResults.map((item) => {
                     if ("href" in item) {
@@ -159,7 +159,7 @@ export default function Search() {
                         <DialogClose key={item.href} asChild>
                           <Anchor
                             className={cn(
-                              "p-3 flex flex-col max-w-[620px] gap-0.5 text-[15px] rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-900"
+                              "p-3 flex flex-col w-full max-w-[310px] sm:max-w-[480px] gap-0.5 text-[15px] rounded-sm hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-300"
                             )}
                             href={`/docs${item.href}`}
                           >
