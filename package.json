@@ -10,7 +10,8 @@
     "lint:fix": "npx eslint . --fix",
     "format": "npx prettier --write .",
     "format:check": "npx prettier --check .",
-    "generate-content-json": "node -r esbuild-register scripts/content.ts",
+    "generate-content-json": "ts-node scripts/content.ts",
+    "generate-content-json:ide": "node -r esbuild-register scripts/content.ts",
     "prepare": "husky"
   },
   "dependencies": {
@@ -56,7 +57,6 @@
     "@types/react-dom": "^19.1.2",
     "@typescript-eslint/parser": "^8.30.1",
     "autoprefixer": "^10.4.21",
-    "esbuild-register": "^3.6.0",
     "eslint": "^9.24.0",
     "eslint-config-next": "^15.3.0",
     "husky": "^9.1.7",
