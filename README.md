@@ -18,7 +18,7 @@ Documents is a modern documentation starter kit built with **Next.js**, **React*
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Frubixvi%2Frubix-documents&project-name=my-documents&repository-name=my-documents&demo-title=Documents&demo-description=This%20Document%20Starter%20Kit%20is%20developed%20with%20Next.js%2C%20Tailwind%20CSS%20and%20TypeScript.%20It%20serves%20as%20a%20flexible%20and%20scalable%20foundation%20for%20building%20documentation%20websites%20or%20content-driven%20projects.&demo-url=https%3A%2F%2Frubix-documents.vercel.app%2F&demo-image=https%3A%2F%2Fgithub.com%2Frubixvi%2Frubix-documents%2Fblob%2Fmain%2Fpublic%2Fscreens%2Fscreen-1.png)
 
----
+***
 
 ## Overview
 
@@ -28,7 +28,7 @@ Built for technical and content-driven projects, this starter kit supports Markd
 
 Documentation: [https://docs.rubixstudios.com.au](https://docs.rubixstudios.com.au) (In Development)
 
----
+***
 
 ## Features
 
@@ -58,7 +58,7 @@ Documentation: [https://docs.rubixstudios.com.au](https://docs.rubixstudios.com.
 - Fuzzy search with term highlighting
 - Planned: AI-powered knowledgebase tools
 
----
+***
 
 ## Quick Start
 
@@ -82,7 +82,7 @@ npm run start
 
 Deploy to Vercel for automated builds and hosting.
 
----
+***
 
 ## Usage
 
@@ -93,7 +93,7 @@ Documents is designed to support:
 - Internal guides
 - Business knowledge bases
 
----
+***
 
 ## Screenshots
 
@@ -115,7 +115,7 @@ _Main Dark Mode Screen_
 ![Document Dark Screen](./public/screens/screen-6.png)
 _Document Dark Mode Screen_
 
----
+***
 
 ## Contributing
 
@@ -126,13 +126,13 @@ We welcome contributions to improve this project.
 3. Commit your changes
 4. Open a pull request
 
----
+***
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
----
+***
 
 ## Contact
 
