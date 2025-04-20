@@ -7,7 +7,7 @@ export const Navigations = [
   },
   {
     title: "Home",
-    href: "https://www.rubixstudios.com.au/",
+    href: "https://rubixstudios.com.au",
     external: true,
   },
 ]

@@ -140,6 +140,6 @@ For support or inquiries:
 
 Vincent Vu — [@rubixvi](https://x.com/rubixvi)
 
-Rubix Studios — [https://www.rubixstudios.com.au](https://www.rubixstudios.com.au)
+Rubix Studios — [https://rubixstudios.com.au](https://rubixstudios.com.au)
 
 **Project:** [https://github.com/rubixvi/rubix-documents](https://github.com/rubixvi/rubix-documents)
