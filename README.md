@@ -26,8 +26,6 @@ Documents enables businesses to deliver clear, structured, and accessible produc
 
 Built for technical and content-driven projects, this starter kit supports Markdown (MDX), React components, and a flexible content architecture designed for scale.
 
-Documentation: [https://docs.rubixstudios.com.au](https://docs.rubixstudios.com.au) (In Development)
-
 ***
 
 ## Features
