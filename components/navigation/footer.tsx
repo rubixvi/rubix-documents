@@ -20,7 +20,6 @@ export function Footer() {
               className="font-semibold"
               href="https://rubixstudios.com.au"
               target="_blank"
-              rel="noopener noreferrer"
             >
               <Image
                 src="/logo.svg"
