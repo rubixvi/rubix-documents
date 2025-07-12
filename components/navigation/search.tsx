@@ -73,7 +73,7 @@ export default function Search() {
     parentHref: string = "/docs"
   ): React.ReactNode[] {
 
-    if (!documents || documents.length === 0) {
+    if (!Array.isArray(documents) || documents.length === 0) {
       return []
     }
 
