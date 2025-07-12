@@ -22,6 +22,7 @@ interface Document {
   href?: string
   spacer?: boolean
   items?: Document[]
+  noLink?: boolean
 }
 
 export default function Search() {
@@ -71,31 +72,43 @@ export default function Search() {
     documents: Document[],
     parentHref: string = "/docs"
   ): React.ReactNode[] {
-    if (!documents || !Array.isArray(documents)) {
+
+    if (!Array.isArray(documents) || documents.length === 0) {
+      return []
+    }
+
+    if (!Array.isArray(documents)) {
       return []
     }
 
     return documents.flatMap((doc) => {
+      // Skip documents with the spacer property set to true
       if ("spacer" in doc && doc.spacer) {
         return []
       }
 
-      const href = `${parentHref}${doc.href}`
+      // If the document has noLink: true, don't render the parent link, but render the child items
+      const href = doc.href ? `${parentHref}${doc.href}` : ""
 
       return [
-        <DialogClose key={href} asChild>
-          <Anchor
-            className={cn(
-              "flex w-full items-center gap-2.5 rounded-sm px-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-900"
-            )}
-            href={href}
-          >
-            <div className="flex h-full w-fit items-center gap-1.5 py-3 whitespace-nowrap">
-              <LuFileText className="h-[1.1rem] w-[1.1rem]" /> {doc.title}
-            </div>
-          </Anchor>
-        </DialogClose>,
-        ...renderDocuments(doc.items || [], `${href}`),
+        // Only render the parent link if noLink is not true
+        !doc.noLink && doc.href ? (
+          <DialogClose key={href} asChild>
+            <Anchor
+              className={cn(
+                "flex w-full items-center gap-2.5 rounded-sm px-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-900"
+              )}
+              href={href}
+            >
+              <div className="flex h-full w-fit items-center gap-1.5 py-3 whitespace-nowrap">
+                <LuFileText className="h-[1.1rem] w-[1.1rem]" /> {doc.title}
+              </div>
+            </Anchor>
+          </DialogClose>
+        ) : null,
+
+        // Render the child items recursively, filtering out those with noLink
+        ...renderDocuments(doc.items?.filter(item => !item.noLink) || [], `${href}`),
       ]
     })
   }
