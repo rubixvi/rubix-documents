@@ -39,17 +39,14 @@ export function SheetLeft() {
           <LuAlignLeft className="!size-6" />
         </Button>
       </SheetTrigger>
-      <SheetContent
-        className="flex flex-col gap-0 px-0 h-full"
-        side="left"
-      >
+      <SheetContent className="flex h-full flex-col gap-0 px-0" side="left">
         <DialogTitle className="sr-only">Menu</DialogTitle>
         <SheetHeader>
           <SheetClose asChild>
             <Logo />
           </SheetClose>
         </SheetHeader>
-        <ScrollArea className="flex flex-col gap-4 h-full overflow-y-auto">
+        <ScrollArea className="flex h-full flex-col gap-4 overflow-y-auto">
           <div className="mx-0 mt-3 flex flex-col gap-2.5 px-5">
             <NavMenu isSheet />
           </div>
