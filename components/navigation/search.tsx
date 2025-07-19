@@ -72,27 +72,19 @@ export default function Search() {
     documents: Document[],
     parentHref: string = "/docs"
   ): React.ReactNode[] {
-
     if (!Array.isArray(documents) || documents.length === 0) {
       return []
     }
 
-    if (!Array.isArray(documents)) {
-      return []
-    }
-
     return documents.flatMap((doc) => {
-      // Skip documents with the spacer property set to true
       if ("spacer" in doc && doc.spacer) {
         return []
       }
 
-      // If the document has noLink: true, don't render the parent link, but render the child items
       const href = doc.href ? `${parentHref}${doc.href}` : ""
 
       return [
-        // Only render the parent link if noLink is not true
-        !doc.noLink && doc.href ? (
+        !doc.noLink && doc.href && (
           <DialogClose key={href} asChild>
             <Anchor
               className={cn(
@@ -105,10 +97,12 @@ export default function Search() {
               </div>
             </Anchor>
           </DialogClose>
-        ) : null,
+        ),
 
-        // Render the child items recursively, filtering out those with noLink
-        ...renderDocuments(doc.items?.filter(item => !item.noLink) || [], `${href}`),
+        ...renderDocuments(
+          doc.items?.filter((item) => !item.noLink) || [],
+          `${href}`
+        ),
       ]
     })
   }

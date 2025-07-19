@@ -1,5 +1,3 @@
-import React from "react"
-
 import { ViewTransitions } from "@/lib/transition"
 import { ThemeProvider } from "@/components/providers/theme"
 
