@@ -1,5 +1,8 @@
 name: Documents Search CI
 
+permissions:
+  contents: read
+
 on:
   push:
     branches:
