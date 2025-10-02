@@ -3,9 +3,9 @@
     "slug": "/basic-setup/changelog",
     "title": "Changelog",
     "description": "Changelogs and improvements to the Documents projects.",
-    "content": "## Added\n\n**Linting and Formatting**:\n\n* Added `npm run lint` and `npm run lint:fix` scripts to automate linting tasks.\n* Added `npm run format` and `npm run format:check` scripts to ensure consistent code formatting.\n\n**SEO Enhancements**:\n\n* Added an SEO component to MDX pages to dynamically include `keywords` and `lastModified` metadata for improved SEO generation.\n\n## Updated\n\n**Next.js Upgrade**:\n\n* Upgraded the project from **Next.js 14** to **Next.js 15**, leveraging the latest features and performance improvements.\n\n**Codebase Improvements**:\n\n* Reordered imports across the project files for better consistency and readability.\n\n**Mermaid Component**:\n\n* Fixed an ID bug that caused rendering issues when multiple Mermaid diagrams were included in MDX pages.\n* Improved initialization and rendering logic to prevent duplicate diagram rendering.\n",
+    "content": "## Added\n\n**Linting and Formatting**:\n\n* Added `pnpm run lint` and `pnpm run lint:fix` scripts to automate linting tasks.\n* Added `pnpm run format` and `pnpm run format:check` scripts to ensure consistent code formatting.\n\n**SEO Enhancements**:\n\n* Added an SEO component to MDX pages to dynamically include `keywords` and `lastModified` metadata for improved SEO generation.\n\n## Updated\n\n**Next.js Upgrade**:\n\n* Upgraded the project from **Next.js 14** to **Next.js 15**, leveraging the latest features and performance improvements.\n\n**Codebase Improvements**:\n\n* Reordered imports across the project files for better consistency and readability.\n\n**Mermaid Component**:\n\n* Fixed an ID bug that caused rendering issues when multiple Mermaid diagrams were included in MDX pages.\n* Improved initialization and rendering logic to prevent duplicate diagram rendering.\n",
     "_searchMeta": {
-      "cleanContent": "added linting and formatting: added npm run lint and npm run lint:fix scripts to automate linting tasks added npm run format and npm run format:check scripts to ensure consistent code formatting seo enhancements: added an seo component to mdx pages to dynamically include keywords and lastmodified metadata for improved seo generation updated next js upgrade: upgraded the project from next js 14 to next js 15 leveraging the latest features and performance improvements codebase improvements: reordered imports across the project files for better consistency and readability mermaid component: fixed an id bug that caused rendering issues when multiple mermaid diagrams were included in mdx pages improved initialization and rendering logic to prevent duplicate diagram rendering",
+      "cleanContent": "added linting and formatting: added pnpm run lint and pnpm run lint:fix scripts to automate linting tasks added pnpm run format and pnpm run format:check scripts to ensure consistent code formatting seo enhancements: added an seo component to mdx pages to dynamically include keywords and lastmodified metadata for improved seo generation updated next js upgrade: upgraded the project from next js 14 to next js 15 leveraging the latest features and performance improvements codebase improvements: reordered imports across the project files for better consistency and readability mermaid component: fixed an id bug that caused rendering issues when multiple mermaid diagrams were included in mdx pages improved initialization and rendering logic to prevent duplicate diagram rendering",
       "headings": [
         "Added",
         "Updated"
@@ -24,10 +24,10 @@
         "Next.js 15",
         "Codebase Improvements",
         "Mermaid Component",
-        "npm run lint",
-        "npm run lint:fix",
-        "npm run format",
-        "npm run format:check",
+        "pnpm run lint",
+        "pnpm run lint:fix",
+        "pnpm run format",
+        "pnpm run format:check",
         "keywords",
         "lastModified"
       ]
