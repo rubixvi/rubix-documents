@@ -12,6 +12,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { toTitleCase } from "@/utils/toTitleCase"
 
 export function ArticleBreadcrumb({ paths }: { paths: string[] }) {
   return (
@@ -110,12 +111,4 @@ export function ArticleBreadcrumb({ paths }: { paths: string[] }) {
       </Breadcrumb>
     </div>
   )
-}
-
-function toTitleCase(input: string): string {
-  const words = input.split("-")
-  const capitalizedWords = words.map(
-    (word) => word.charAt(0).toUpperCase() + word.slice(1)
-  )
-  return capitalizedWords.join(" ")
 }

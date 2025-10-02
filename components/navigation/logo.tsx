@@ -13,8 +13,9 @@ export function Logo() {
     >
       <Image
         src={Settings.siteicon}
-        title={`${Settings.title} main logo`}
         alt={`${Settings.title} main logo`}
+        title={`${Settings.title} main logo`}
+        aria-label={`${Settings.title} main logo`}
         width={34}
         height={34}
         loading="lazy"
