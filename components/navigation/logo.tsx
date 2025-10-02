@@ -5,9 +5,15 @@ import { Settings } from "@/lib/meta"
 
 export function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-2.5">
+    <Link
+      href="/"
+      title={`${Settings.title} main logo`}
+      aria-label={`${Settings.title} main logo`}
+      className="flex items-center gap-2.5"
+    >
       <Image
         src={Settings.siteicon}
+        title={`${Settings.title} main logo`}
         alt={`${Settings.title} main logo`}
         width={34}
         height={34}

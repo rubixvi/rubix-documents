@@ -42,6 +42,7 @@ export const metadata: Metadata = {
       url: `${baseUrl}${image.url}`,
     })),
   },
+  publisher: Settings.name,
   alternates: {
     canonical: baseUrl,
   },

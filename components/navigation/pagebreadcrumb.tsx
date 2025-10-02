@@ -2,6 +2,7 @@ import { Fragment } from "react"
 import { Link } from "lib/transition"
 import { LuHouse } from "react-icons/lu"
 
+import { PageRoutes } from "@/lib/pageroutes"
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -19,7 +20,13 @@ export default function PageBreadcrumb({ paths }: { paths: string[] }) {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <LuHouse className="h-4" />
+              <Link
+                title="Documentation Home"
+                aria-label="Documentation Home"
+                href={`/docs${PageRoutes[0].href}`}
+              >
+                <LuHouse className="h-4" />
+              </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
 
@@ -28,7 +35,11 @@ export default function PageBreadcrumb({ paths }: { paths: string[] }) {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href={`/docs/${paths[0]}`}>
+                  <Link
+                    title={toTitleCase(paths[0])}
+                    aria-label={toTitleCase(paths[0])}
+                    href={`/docs/${paths[0]}`}
+                  >
                     {toTitleCase(paths[0])}
                   </Link>
                 </BreadcrumbLink>
@@ -49,7 +60,13 @@ export default function PageBreadcrumb({ paths }: { paths: string[] }) {
                     <BreadcrumbItem>
                       {index < paths.length - 1 ? (
                         <BreadcrumbLink asChild>
-                          <Link href={href}>{toTitleCase(path)}</Link>
+                          <Link
+                            title={toTitleCase(path)}
+                            aria-label={toTitleCase(path)}
+                            href={href}
+                          >
+                            {toTitleCase(path)}
+                          </Link>
                         </BreadcrumbLink>
                       ) : (
                         <BreadcrumbPage className="b">
@@ -71,7 +88,13 @@ export default function PageBreadcrumb({ paths }: { paths: string[] }) {
                   <BreadcrumbItem>
                     {index < paths.length - 1 ? (
                       <BreadcrumbLink asChild>
-                        <Link href={href}>{toTitleCase(path)}</Link>
+                        <Link
+                          title={toTitleCase(path)}
+                          aria-label={toTitleCase(path)}
+                          href={href}
+                        >
+                          {toTitleCase(path)}
+                        </Link>
                       </BreadcrumbLink>
                     ) : (
                       <BreadcrumbPage className="b">

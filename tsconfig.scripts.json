@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "ESNext",
-    "moduleResolution": "Node",
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "node",
     "outDir": "dist/scripts",
     "strict": true,
     "esModuleInterop": true,

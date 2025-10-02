@@ -11,7 +11,9 @@ export default function NotFound() {
       </p>
       <div className="flex items-center">
         <Button variant="default" size="lg" asChild>
-          <Link href="/">Return Home</Link>
+          <Link title="Return Home" aria-label="Return Home" href="/">
+            Return Home
+          </Link>
         </Button>
       </div>
     </div>
