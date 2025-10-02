@@ -25,14 +25,15 @@ export default async function Pages({ params }: PageProps) {
   const { frontmatter, content, tocs } = res
 
   return (
-    <div className="flex items-start gap-14">
+    <div className="flex items-start gap-10">
       <section className="flex-[3] pt-10">
         <PageBreadcrumb paths={slug} />
-
+        <div className="space-y-4">
+          <h1 className="text-3xl font-semibold">{frontmatter.title}</h1>
+          <p className="text-sm">{frontmatter.description}</p>
+          <Separator />
+        </div>
         <Typography>
-          <h1 className="!mb-2 text-3xl !font-semibold">{frontmatter.title}</h1>
-          <p className="-mt-4 text-sm">{frontmatter.description}</p>
-          <Separator className="my-6" />
           <section>{content}</section>
           <Pagination pathname={pathName} />
         </Typography>
@@ -72,6 +73,30 @@ export async function generateMetadata({ params }: PageProps) {
     ...(lastUpdated && {
       lastModified: new Date(lastUpdated).toISOString(),
     }),
+    openGraph: {
+      title: `${frontmatter.title} - ${Settings.openGraph.title}`,
+      description: frontmatter.description || Settings.openGraph.description,
+      url: `${Settings.metadataBase}/docs/${pathName}`,
+      siteName: Settings.openGraph.siteName,
+      type: "article",
+      images: Settings.openGraph.images.map((image) => ({
+        ...image,
+        url: `${Settings.metadataBase}${image.url}`,
+      })),
+    },
+    twitter: {
+      title: `${frontmatter.title} - ${Settings.twitter.title}`,
+      description: frontmatter.description || Settings.twitter.description,
+      card: Settings.twitter.card,
+      site: Settings.twitter.site,
+      images: Settings.twitter.images.map((image) => ({
+        ...image,
+        url: `${Settings.metadataBase}${image.url}`,
+      })),
+    },
+    alternates: {
+      canonical: `${Settings.metadataBase}/docs/${pathName}`,
+    },
   }
 }
 

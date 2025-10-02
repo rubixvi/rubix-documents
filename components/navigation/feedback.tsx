@@ -19,6 +19,8 @@ export default function RightSideBar({ slug, title }: SideBarEdit) {
       <div className="flex flex-col gap-2">
         <Link
           href={feedbackUrl}
+          title="Give Feedback"
+          aria-label="Give Feedback"
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
@@ -29,6 +31,8 @@ export default function RightSideBar({ slug, title }: SideBarEdit) {
         </Link>
         <Link
           href={editUrl}
+          title="Edit this page"
+          aria-label="Edit this page"
           target="_blank"
           rel="noopener noreferrer"
           className={cn(

@@ -35,6 +35,7 @@ export function Navbar() {
                 className={buttonVariants({ variant: "outline", size: "icon" })}
                 target="_blank"
                 rel="noopener noreferrer"
+                title="View the repository on GitHub"
                 aria-label="View the repository on GitHub"
               >
                 <LuGithub className="h-[1.1rem] w-[1.1rem]" />

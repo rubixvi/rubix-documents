@@ -21,15 +21,33 @@ import {
 
 import { OpenGraph, TwitterCard } from "@/lib/metadata"
 
-export const Company = {
-  name: companyname,
-  link: companylink,
-  branding: branding,
+interface AppSettings {
+  name: string
+  link: string
+  branding: boolean
+  gtm: string
+  gtmconnected: boolean
+  rightbar: boolean
+  toc: boolean
+  feedback: boolean
+  totop: boolean
+  gitload: boolean
+  title: string
+  metadataBase: string
+  description: string
+  siteicon: string
+  keywords: string[]
+  openGraph: OpenGraph
+  twitter: TwitterCard
+  canonical: string
 }
 
-export const Settings = {
-  gtm: gtm,
-  gtmconnected: gtmconnected,
+export const Settings: AppSettings = {
+  name: companyname,
+  link: companylink,
+  branding,
+  gtm,
+  gtmconnected,
   rightbar: rightsidebar,
   toc: tableofcontent,
   feedback: feedbackedit,
@@ -38,13 +56,13 @@ export const Settings = {
 
   title: sitename,
   metadataBase: url,
-  description: description,
-  siteicon: siteicon,
-  keywords: keywords,
+  description,
+  siteicon,
+  keywords,
   openGraph: {
     type: "website",
     title: sitename,
-    description: description,
+    description,
     siteName: sitename,
     images: [
       {
@@ -54,11 +72,11 @@ export const Settings = {
         alt: imagealt,
       },
     ],
-  } as OpenGraph,
+  },
   twitter: {
     card: "summary_large_image",
     title: sitename,
-    description: description,
+    description,
     site: twitterhandle,
     images: [
       {
@@ -66,6 +84,6 @@ export const Settings = {
         alt: imagealt,
       },
     ],
-  } as TwitterCard,
+  },
   canonical: url,
 }
