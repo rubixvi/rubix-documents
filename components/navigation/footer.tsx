@@ -29,9 +29,9 @@ export function Footer() {
           >
             <Image
               src="/logo.svg"
-              alt="Rubix Studios Logo"
-              title="Rubix Studios Logo"
-              aria-label="Rubix Studios Logo"
+              alt="Rubix Studios logo"
+              title="Rubix Studios logo"
+              aria-label="Rubix Studios logo"
               priority={false}
               width={30}
               height={30}
