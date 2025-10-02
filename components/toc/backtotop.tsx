@@ -2,7 +2,6 @@
 
 import type { ReactElement } from "react"
 import { useEffect, useRef } from "react"
-import cn from "clsx"
 import { LuArrowUp } from "react-icons/lu"
 
 function ScrollUp() {
@@ -11,7 +10,7 @@ function ScrollUp() {
   }
 }
 
-export function BackToTop({ className }: { className?: string }): ReactElement {
+export function BackToTop(): ReactElement {
   const ref = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -32,10 +31,10 @@ export function BackToTop({ className }: { className?: string }): ReactElement {
     <button
       ref={ref}
       onClick={ScrollUp}
-      className={cn(
-        "ml-2 flex cursor-pointer items-center opacity-0 transition",
-        className
-      )}
+      title="Scroll to top"
+      aria-label="Scroll to top"
+      type="button"
+      className="text-foreground mt-6 ml-2 flex cursor-pointer items-center self-start text-sm opacity-0 transition"
     >
       <LuArrowUp className="mr-1 inline-block h-4 w-4 align-middle" />
       <span>Scroll to top</span>

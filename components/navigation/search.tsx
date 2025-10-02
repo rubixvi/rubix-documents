@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import Anchor from "@/components/navigation/anchor"
+import Anchor from "@/components/anchor"
 
 interface Document {
   title?: string
@@ -108,7 +108,7 @@ export default function Search() {
   }
 
   return (
-    <div>
+    <>
       <Dialog
         open={isOpen}
         onOpenChange={(open) => {
@@ -196,6 +196,6 @@ export default function Search() {
           </ScrollArea>
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   )
 }

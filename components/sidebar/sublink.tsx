@@ -11,7 +11,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import { SheetClose } from "@/components/ui/sheet"
-import Anchor from "@/components/navigation/anchor"
+import Anchor from "@/components/anchor"
 
 function isRoute(
   item: Paths
@@ -43,7 +43,7 @@ export default function SubLink(
   const { title, href, items, noLink, level, isSheet } = props
 
   const Comp = (
-    <Anchor activeClassName="text-primary text-sm font-medium" href={href}>
+    <Anchor activeClassName="text-primary text-sm font-semibold" href={href}>
       {title}
     </Anchor>
   )
@@ -55,7 +55,7 @@ export default function SubLink(
       Comp
     )
   ) : (
-    <h2 className="text-primary font-medium sm:text-sm">{title}</h2>
+    <h2 className="text-primary font-bold sm:text-sm">{title}</h2>
   )
 
   if (!items) {
@@ -81,7 +81,7 @@ export default function SubLink(
         <CollapsibleContent className="CollapsibleContent">
           <div
             className={cn(
-              "mt-2.5 flex flex-col items-start gap-3 border-l pl-4 text-sm text-neutral-800 dark:text-neutral-300/85",
+              "mt-2.5 flex flex-col items-start gap-3 border-l pl-4 text-sm",
               level > 0 && "ml-1 border-l pl-4"
             )}
           >
