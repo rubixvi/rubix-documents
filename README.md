@@ -65,8 +65,8 @@ Built for technical and content-driven projects, this starter kit supports Markd
 ```bash
 git clone https://github.com/rubixvi/rubix-documents.git
 cd rubix-documents
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 Visit [http://localhost:3000](http://localhost:3000) to view your project locally.
@@ -74,8 +74,8 @@ Visit [http://localhost:3000](http://localhost:3000) to view your project locall
 **For production:**
 
 ```bash
-npm run build
-npm run start
+pnpm run build
+pnpm run start
 ```
 
 Deploy to Vercel for automated builds and hosting.

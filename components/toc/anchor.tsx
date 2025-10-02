@@ -5,11 +5,11 @@ import clsx from "clsx"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-type TocProps = {
+export type TableAnchorProps = {
   tocs: { href: string; level: number; text: string }[]
 }
 
-export default function Toc({ tocs }: TocProps) {
+export function TableAnchor({ tocs }: TableAnchorProps) {
   const handleSmoothScroll = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
@@ -31,11 +31,13 @@ export default function Toc({ tocs }: TocProps) {
     <div className="flex w-full flex-col gap-3 pl-2">
       <h3 className="text-sm font-semibold">On this page</h3>
       <ScrollArea className="pt-0.5 pb-4">
-        <div className="flex flex-col gap-2.5 text-sm text-neutral-800 dark:text-neutral-300/85">
+        <div className="text-foreground flex flex-col gap-2.5 text-sm">
           {tocs.map(({ href, level, text }) => (
             <Link
               key={href}
               href={href}
+              title={text}
+              aria-label={text}
               scroll={false}
               onClick={(e) => handleSmoothScroll(e, href)}
               className={clsx({

@@ -17,9 +17,9 @@ import {
   twitterhandle,
   url,
   urlimage,
-} from "@/settings/settings"
+} from "@/settings/main"
 
-import { OpenGraph, TwitterCard } from "@/lib/metadata"
+import { OpenGraph, TwitterCard } from "@/types/opengraph"
 
 interface AppSettings {
   name: string

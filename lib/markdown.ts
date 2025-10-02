@@ -2,7 +2,7 @@ import { createReadStream, promises as fs } from "fs"
 import path from "path"
 
 import { GitHubLink } from "@/settings/navigation"
-import { Element, Text } from "hast"
+import type { Element, Text } from "hast"
 import { compileMDX } from "next-mdx-remote/rsc"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeCodeTitles from "rehype-code-titles"
@@ -13,8 +13,8 @@ import remarkGfm from "remark-gfm"
 import { Node } from "unist"
 import { visit } from "unist-util-visit"
 
+import { Settings } from "@/types/settings"
 import { components } from "@/lib/components"
-import { Settings } from "@/lib/meta"
 import { PageRoutes } from "@/lib/pageroutes"
 
 declare module "hast" {

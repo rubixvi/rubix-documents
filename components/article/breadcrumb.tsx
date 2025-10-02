@@ -13,7 +13,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 
-export default function PageBreadcrumb({ paths }: { paths: string[] }) {
+export function ArticleBreadcrumb({ paths }: { paths: string[] }) {
   return (
     <div className="pb-5">
       <Breadcrumb>

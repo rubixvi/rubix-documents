@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from "react"
 import { createContext, use, useEffect, useState } from "react"
 
-import { useBrowserNativeTransitions } from "./browser-native-events"
+import { useBrowserNativeTransitions } from "./browser-native"
 
 const ViewTransitionsContext = createContext<
   Dispatch<SetStateAction<(() => void) | null>>

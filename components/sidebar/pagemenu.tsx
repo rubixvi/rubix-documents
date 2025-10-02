@@ -3,26 +3,23 @@
 import { usePathname } from "next/navigation"
 
 import { Routes } from "@/lib/pageroutes"
-import SubLink from "@/components/navigation/sublink"
+import { Separator } from "@/components/ui/separator"
+import SubLink from "@/components/sidebar/sublink"
 
-export default function PageMenu({ isSheet = false }) {
+export function PageMenu({ isSheet = false }) {
   const pathname = usePathname()
   if (!pathname.startsWith("/docs")) return null
 
   return (
-    <div className="mt-5 flex flex-col gap-3.5 pb-6">
+    <div className="flex flex-col gap-3.5 pb-6">
       {Routes.map((item, index) => {
         if ("spacer" in item) {
-          return (
-            <div key={`spacer-${index}`} className="my-2 mr-3">
-              <hr className="border-t border-gray-300" />
-            </div>
-          )
+          return <Separator key={`spacer-${index}`} className="my-2" />
         }
         return (
-          <div key={item.title + index} className="mb-2">
+          <div key={item.title + index}>
             {item.heading && (
-              <div className="mb-2 text-sm font-bold">{item.heading}</div>
+              <div className="mb-4 text-sm font-bold">{item.heading}</div>
             )}
             <SubLink
               {...{

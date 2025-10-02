@@ -1,15 +1,13 @@
 import { notFound } from "next/navigation"
 
+import { Settings } from "@/types/settings"
 import { getDocument } from "@/lib/markdown"
-import { Settings } from "@/lib/meta"
 import { PageRoutes } from "@/lib/pageroutes"
 import { Separator } from "@/components/ui/separator"
 import { Typography } from "@/components/ui/typography"
-import { BackToTop } from "@/components/navigation/backtotop"
-import Feedback from "@/components/navigation/feedback"
-import PageBreadcrumb from "@/components/navigation/pagebreadcrumb"
-import Pagination from "@/components/navigation/pagination"
-import Toc from "@/components/navigation/toc"
+import { ArticleBreadcrumb } from "@/components/article/breadcrumb"
+import { Pagination } from "@/components/article/pagination"
+import { TableOfContents } from "@/components/toc"
 
 type PageProps = {
   params: Promise<{ slug: string[] }>
@@ -26,8 +24,8 @@ export default async function Pages({ params }: PageProps) {
 
   return (
     <div className="flex items-start gap-10">
-      <section className="flex-[3] pt-10">
-        <PageBreadcrumb paths={slug} />
+      <section className="flex-[3]">
+        <ArticleBreadcrumb paths={slug} />
         <div className="space-y-4">
           <h1 className="text-3xl font-semibold">{frontmatter.title}</h1>
           <p className="text-sm">{frontmatter.description}</p>
@@ -38,21 +36,11 @@ export default async function Pages({ params }: PageProps) {
           <Pagination pathname={pathName} />
         </Typography>
       </section>
-
-      {Settings.rightbar && (
-        <aside
-          className="toc sticky top-16 hidden h-[94.5vh] min-w-[230px] gap-3 py-8 xl:flex xl:flex-col"
-          aria-label="Table of contents"
-        >
-          {Settings.toc && <Toc tocs={tocs} />}
-          {Settings.feedback && (
-            <Feedback slug={pathName} title={frontmatter.title} />
-          )}
-          {Settings.totop && (
-            <BackToTop className="mt-6 self-start text-sm text-neutral-800 dark:text-neutral-300/85" />
-          )}
-        </aside>
-      )}
+      <TableOfContents
+        tocs={{ tocs }}
+        pathName={pathName}
+        frontmatter={frontmatter}
+      />
     </div>
   )
 }
