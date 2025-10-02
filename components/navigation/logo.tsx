@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Link } from "lib/transition"
 
-import { Settings } from "@/lib/meta"
+import { Settings } from "@/types/settings"
 
 export function Logo() {
   return (

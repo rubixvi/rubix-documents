@@ -1,4 +1,4 @@
-import { Settings } from "@/lib/meta"
+import { Settings } from "@/types/settings"
 import { TableAnchor, TableAnchorProps } from "@/components/toc/anchor"
 import { BackToTop } from "@/components/toc/backtotop"
 import Feedback from "@/components/toc/feedback"

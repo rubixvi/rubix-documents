@@ -3,7 +3,7 @@ import { Inter } from "next/font/google"
 import { Providers } from "@/providers"
 import { GoogleTagManager } from "@next/third-parties/google"
 
-import { Settings } from "@/lib/meta"
+import { Settings } from "@/types/settings"
 import { Footer } from "@/components/navigation/footer"
 import { Navbar } from "@/components/navigation/navbar"
 

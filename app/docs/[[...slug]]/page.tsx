@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 
+import { Settings } from "@/types/settings"
 import { getDocument } from "@/lib/markdown"
-import { Settings } from "@/lib/meta"
 import { PageRoutes } from "@/lib/pageroutes"
 import { Separator } from "@/components/ui/separator"
 import { Typography } from "@/components/ui/typography"

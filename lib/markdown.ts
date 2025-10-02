@@ -13,8 +13,8 @@ import remarkGfm from "remark-gfm"
 import { Node } from "unist"
 import { visit } from "unist-util-visit"
 
+import { Settings } from "@/types/settings"
 import { components } from "@/lib/components"
-import { Settings } from "@/lib/meta"
 import { PageRoutes } from "@/lib/pageroutes"
 
 declare module "hast" {
