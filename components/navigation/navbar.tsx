@@ -1,14 +1,13 @@
 import Link from "next/link"
-import { GitHubLink, Navigations } from "@/settings/navigation"
-import { LuArrowUpRight, LuGithub } from "react-icons/lu"
+import {Navigations } from "@/settings/navigation"
+import { LuArrowUpRight,} from "react-icons/lu"
 
 import { buttonVariants } from "@/components/ui/button"
 import { SheetClose } from "@/components/ui/sheet"
 import Anchor from "@/components/anchor"
-import { Logo } from "@/components/navigation/logo"
-import Search from "@/components/navigation/search"
 import { SheetLeft } from "@/components/sidebar"
 import { ModeToggle } from "@/components/theme-toggle"
+import Image from "next/image"
 
 export function Navbar() {
   return (
@@ -17,31 +16,58 @@ export function Navbar() {
         <SheetLeft />
         <div className="flex items-center gap-6">
           <div className="hidden md:flex">
-            <Logo />
-          </div>
-          <div className="text-muted-foreground hidden items-center gap-5 text-sm font-medium md:flex">
-            <NavMenu />
+          <div className="flex gap-4 items-center">
+              <Image
+                src="/microcash-logo.png"
+                alt="microcash-logo"
+                title="Validador de Payload"
+                aria-label="microcash-logo"
+                priority={false}
+                width={150}
+                height={150}
+              />
+              <div className="h-8 border-l border-gray-600 mx-2" />
+              <Image
+                src="/a55.png"
+                alt="a55-logo"
+                title="Validador de Payload"
+                aria-label="a55-logo"
+                priority={false}
+                width={80}
+                height={80}
+              />       
+            </div>
           </div>
         </div>
       </div>
-
-      <div className="flex items-center gap-2">
-        <Search />
-        <div className="flex gap-2 sm:ml-0">
-          {GitHubLink.href && (
-            <Link
-              href={GitHubLink.href}
-              className={buttonVariants({ variant: "outline", size: "icon" })}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="View the repository on GitHub"
-              aria-label="View the repository on GitHub"
-            >
-              <LuGithub className="h-[1.1rem] w-[1.1rem]" />
-            </Link>
-          )}
-          <ModeToggle />
-        </div>
+      <div className="flex items-center gap-2 flex-wrap">
+        <Link
+          href='https://docs.a55scd.com.br/'
+          className={
+            buttonVariants({ variant: "outline" }) +
+            " px-3 py-2 text-sm transition-colors hover:bg-[#01a2f8] hover:text-white"
+          }
+          target="_blank"
+          rel="noopener noreferrer"
+          title="View the repository on GitHub"
+          aria-label="View the repository on GitHub"
+        >
+          Doc a55
+        </Link>
+        <Link
+          href='https://docs.microcashif.com.br/'
+          className={
+            buttonVariants({ variant: "outline" }) +
+            " px-3 py-2 text-sm transition-colors hover:bg-[#13cf27] hover:text-white"
+          }
+          target="_blank"
+          rel="noopener noreferrer"
+          title="View the repository on GitHub"
+          aria-label="View the repository on GitHub"
+        >
+          Doc Microcash
+        </Link>
+        <ModeToggle />
       </div>
     </nav>
   )
