@@ -1,35 +1,22 @@
-import { use, useEffect, useRef, useState } from "react"
-import { usePathname } from "next/navigation"
+/* eslint-disable react-hooks/refs */
+import { usePathname } from 'next/navigation'
+import { use, useEffect, useRef, useState } from 'react'
 
-import { useHash } from "./use-hash"
+import { useHash } from './use-hash'
 
 const suspenseBoundaries = new Set<string>()
 let suspenseResolve: (() => void) | null = null
-
-export function useTrackSuspense(id: string) {
-  useEffect(() => {
-    suspenseBoundaries.add(id)
-
-    return () => {
-      suspenseBoundaries.delete(id)
-      if (suspenseBoundaries.size === 0 && suspenseResolve) {
-        suspenseResolve()
-        suspenseResolve = null
-      }
-    }
-  }, [id])
-}
 
 export function useBrowserNativeTransitions() {
   const pathname = usePathname()
   const currentPathname = useRef(pathname)
 
   const [currentViewTransition, setCurrentViewTransition] = useState<
-    null | [Promise<void>, () => void]
+    [Promise<void>, () => void] | null
   >(null)
 
   useEffect(() => {
-    if (!("startViewTransition" in document)) {
+    if (!('startViewTransition' in document)) {
       return
     }
 
@@ -47,15 +34,12 @@ export function useBrowserNativeTransitions() {
         })
       })
 
-      setCurrentViewTransition([
-        pendingStartViewTransition,
-        pendingViewTransitionResolve!,
-      ])
+      setCurrentViewTransition([pendingStartViewTransition, pendingViewTransitionResolve!])
     }
 
-    window.addEventListener("popstate", onPopState)
+    window.addEventListener('popstate', onPopState)
     return () => {
-      window.removeEventListener("popstate", onPopState)
+      window.removeEventListener('popstate', onPopState)
     }
   }, [])
 
@@ -73,7 +57,6 @@ export function useBrowserNativeTransitions() {
   useEffect(() => {
     const finishTransition = async () => {
       currentPathname.current = pathname
-
       if (transitionRef.current) {
         if (suspenseBoundaries.size > 0) {
           await new Promise<void>((resolve) => {
@@ -88,4 +71,18 @@ export function useBrowserNativeTransitions() {
 
     finishTransition()
   }, [hash, pathname])
+}
+
+export function useTrackSuspense(id: string) {
+  useEffect(() => {
+    suspenseBoundaries.add(id)
+
+    return () => {
+      suspenseBoundaries.delete(id)
+      if (suspenseBoundaries.size === 0 && suspenseResolve) {
+        suspenseResolve()
+        suspenseResolve = null
+      }
+    }
+  }, [id])
 }

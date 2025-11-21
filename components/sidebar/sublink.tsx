@@ -32,7 +32,7 @@ export default function SubLink(
       path !== props.href &&
       path.includes(props.href)
     ) {
-      setIsOpen(true)
+      Promise.resolve().then(() => setIsOpen(true))
     }
   }, [path, props])
 

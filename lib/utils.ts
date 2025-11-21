@@ -18,7 +18,7 @@ interface SearchDocument {
   _searchMeta: SearchMeta
 }
 
-export type search = {
+export interface search {
   title: string
   href: string
   snippet?: string

@@ -3,10 +3,8 @@
 import React, {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
-  useState,
 } from "react"
 import clsx from "clsx"
 import mermaid from "mermaid"
@@ -22,17 +20,16 @@ mermaid.initialize({
 
 const Mermaid = ({ chart, className }: MermaidProps) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [mounted, setMounted] = useState(false)
 
   const renderMermaid = useCallback(() => {
-    if (ref.current) {
-      ref.current.innerHTML = chart
+    if (!ref.current) return
 
-      try {
-        mermaid.contentLoaded()
-      } catch (error) {
-        console.error("Mermaid diagram render error:", error)
-      }
+    ref.current.innerHTML = chart
+
+    try {
+      mermaid.contentLoaded()
+    } catch (error) {
+      console.error("Mermaid diagram render error:", error)
     }
   }, [chart])
 
@@ -42,20 +39,8 @@ const Mermaid = ({ chart, className }: MermaidProps) => {
   )
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useLayoutEffect(() => {
-    if (mounted && ref.current) {
-      requestAnimationFrame(() => {
-        renderMermaid()
-      })
-    }
-  }, [mounted, renderMermaid])
-
-  if (!mounted) {
-    return null
-  }
+    renderMermaid()
+  }, [renderMermaid])
 
   return <div className={memoizedClassName} ref={ref} />
 }

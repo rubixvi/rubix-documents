@@ -7,7 +7,7 @@ import { useRouter as useNextRouter } from "next/navigation"
 
 import { useSetFinishViewTransition } from "./transition-context"
 
-export type TransitionOptions = {
+export interface TransitionOptions {
   onTransitionReady?: () => void
 }
 

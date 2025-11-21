@@ -1,20 +1,31 @@
-import type { Dispatch, SetStateAction } from "react"
-import { createContext, use, useEffect, useState } from "react"
+/* eslint-disable react-hooks/set-state-in-effect */
+/* eslint-disable @typescript-eslint/no-empty-function */
+import {
+  createContext,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+  use,
+  useEffect,
+  useState,
+} from 'react'
 
-import { useBrowserNativeTransitions } from "./browser-native"
+import { useBrowserNativeTransitions } from './browser-native'
 
-const ViewTransitionsContext = createContext<
-  Dispatch<SetStateAction<(() => void) | null>>
->(() => () => {})
+const ViewTransitionsContext = createContext<Dispatch<SetStateAction<(() => void) | null>>>(
+  () => () => {}
+)
+
+export function useSetFinishViewTransition() {
+  return use(ViewTransitionsContext)
+}
 
 export function ViewTransitions({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
-  const [finishViewTransition, setFinishViewTransition] = useState<
-    null | (() => void)
-  >(null)
+  const [finishViewTransition, setFinishViewTransition] = useState<(() => void) | null>(null)
 
   useEffect(() => {
     if (finishViewTransition) {
@@ -30,8 +41,4 @@ export function ViewTransitions({
       {children}
     </ViewTransitionsContext.Provider>
   )
-}
-
-export function useSetFinishViewTransition() {
-  return use(ViewTransitionsContext)
 }

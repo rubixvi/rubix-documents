@@ -38,10 +38,11 @@ function createSlug(filePath: string): string {
   const normalizedSlug = slugPath.replace(/\\/g, "/")
 
   if (parsed.name === "index") {
-    return `/${parsed.dir.replace(/\\/g, "/")}` || "/"
-  } else {
-    return `/${normalizedSlug}`
+    const dir = parsed.dir.replace(/\\/g, "/")
+    return dir ? `/${dir}` : "/"
   }
+
+  return `/${normalizedSlug}`
 }
 
 function findDocumentBySlug(slug: string): Paths | null {
@@ -114,7 +115,7 @@ function cleanContentForSearch(content: string): string {
     .replace(/\*\*(.+?)\*\*/g, "$1")
     .replace(/_(.+?)_/g, "$1")
 
-  cleanedContent = cleanedContent.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1")
+  cleanedContent = cleanedContent.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
   cleanedContent = cleanedContent.replace(/\|.*\|[\r\n]?/gm, (match) => {
     return match
       .split("|")

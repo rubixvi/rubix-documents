@@ -60,17 +60,18 @@ export default function Search() {
     }
   }, [isOpen, filteredResults])
 
-  useEffect(() => {
-    if (searchedInput.length >= 3) {
-      debouncedSearch(searchedInput)
-    } else {
-      setFilteredResults([])
-    }
-  }, [searchedInput, debouncedSearch])
+useEffect(() => {
+  if (searchedInput.length < 3) {
+    Promise.resolve().then(() => setFilteredResults([]))
+    return
+  }
+
+  debouncedSearch(searchedInput)
+}, [searchedInput, debouncedSearch])
 
   function renderDocuments(
     documents: Document[],
-    parentHref: string = "/docs"
+    parentHref = "/docs"
   ): React.ReactNode[] {
     if (!Array.isArray(documents) || documents.length === 0) {
       return []
