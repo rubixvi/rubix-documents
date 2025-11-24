@@ -1,17 +1,37 @@
-import { dirname } from "path"
-import { fileURLToPath } from "url"
+import eslint from '@eslint/js'
+import tsParser from '@typescript-eslint/parser'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import { defineConfig } from 'eslint/config'
+import tseslint from 'typescript-eslint'
 
-import { FlatCompat } from "@eslint/eslintrc"
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
-
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-]
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  eslint.configs.recommended,
+  tseslint.configs.recommended,
+  tseslint.configs.stylistic,
+  {
+    files: ['**/*.{ts,tsx,js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      parser: tsParser,
+      parserOptions: {
+        ecmaFeatures: {
+          ecmaVersion: 'latest',
+          jsx: true,
+        },
+        projectService: true,
+      },
+      sourceType: 'module',
+    },
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+    },
+  },
+  {
+    ignores: ['.next/', 'next-env.d.ts'],
+  },
+])
 
 export default eslintConfig

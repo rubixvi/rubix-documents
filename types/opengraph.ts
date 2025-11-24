@@ -1,11 +1,11 @@
-export type OpenGraphImage = {
+export interface OpenGraphImage {
   url: string
   width: number
   height: number
   alt: string
 }
 
-export type OpenGraph = {
+export interface OpenGraph {
   type: "website" | "article"
   title: string
   description: string
@@ -13,7 +13,7 @@ export type OpenGraph = {
   images: OpenGraphImage[]
 }
 
-export type TwitterCard = {
+export interface TwitterCard {
   card: "summary_large_image" | "summary" | "app" | "player"
   title: string
   description: string

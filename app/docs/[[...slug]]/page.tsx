@@ -9,7 +9,7 @@ import { ArticleBreadcrumb } from "@/components/article/breadcrumb"
 import { Pagination } from "@/components/article/pagination"
 import { TableOfContents } from "@/components/toc"
 
-type PageProps = {
+interface PageProps {
   params: Promise<{ slug: string[] }>
 }
 

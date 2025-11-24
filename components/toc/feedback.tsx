@@ -4,7 +4,7 @@ import { LuArrowUpRight } from "react-icons/lu"
 
 import { cn } from "@/lib/utils"
 
-type SideBarEdit = {
+interface SideBarEdit {
   title: string
   slug: string
 }

@@ -5,7 +5,7 @@ import clsx from "clsx"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-export type TableAnchorProps = {
+export interface TableAnchorProps {
   tocs: { href: string; level: number; text: string }[]
 }
 

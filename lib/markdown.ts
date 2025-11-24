@@ -23,7 +23,7 @@ declare module "hast" {
   }
 }
 
-type BaseMdxFrontmatter = {
+interface BaseMdxFrontmatter {
   title: string
   description: string
   keywords: string
@@ -107,12 +107,12 @@ const headingsRegex = /^(#{2,4})\s(.+)$/gm
 
 export async function getTable(
   slug: string
-): Promise<Array<{ level: number; text: string; href: string }>> {
-  const extractedHeadings: Array<{
+): Promise<{ level: number; text: string; href: string }[]> {
+  const extractedHeadings: {
     level: number
     text: string
     href: string
-  }> = []
+  }[] = []
   let rawMdx = ""
 
   if (Settings.gitload) {

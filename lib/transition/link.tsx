@@ -1,18 +1,14 @@
-import type { UrlObject } from "url"
+import NextLink from 'next/link'
+import { type ComponentProps, type MouseEvent, useCallback } from 'react'
+import { type UrlObject } from 'url'
 
-import { useCallback } from "react"
-import NextLink from "next/link"
+import { useTransitionRouter } from './use-transition-router'
 
-import { useTransitionRouter } from "./use-transition-router"
-
-const supportsViewTransitions =
-  typeof document !== "undefined" && "startViewTransition" in document
-
-function isModifiedEvent(event: React.MouseEvent): boolean {
+function isModifiedEvent(event: MouseEvent): boolean {
   const eventTarget = event.currentTarget as HTMLAnchorElement | SVGAElement
-  const target = eventTarget.getAttribute("target")
+  const target = eventTarget.getAttribute('target')
   return (
-    (target && target !== "_self") ||
+    (target && target !== '_self') ||
     event.metaKey ||
     event.ctrlKey ||
     event.shiftKey ||
@@ -21,39 +17,49 @@ function isModifiedEvent(event: React.MouseEvent): boolean {
   )
 }
 
-function shouldPreserveDefault(
-  e: React.MouseEvent<HTMLAnchorElement>
-): boolean {
-  return e.currentTarget.nodeName.toUpperCase() === "A" && isModifiedEvent(e)
+function shouldPreserveDefault(e: MouseEvent<HTMLAnchorElement>): boolean {
+  const { nodeName } = e.currentTarget
+
+  const isAnchorNodeName = nodeName.toUpperCase() === 'A'
+
+  if (isAnchorNodeName && isModifiedEvent(e)) {
+    return true
+  }
+
+  return false
 }
 
 const formatUrl = (url: string | UrlObject): string =>
-  typeof url === "string"
-    ? url
-    : new URL(url.pathname || "", window.location.href).toString()
+  typeof url === 'string' ? url : new URL(url.pathname || '', window.location.href).toString()
 
-export function Link(props: React.ComponentProps<typeof NextLink>) {
+export function Link(props: ComponentProps<typeof NextLink>) {
   const router = useTransitionRouter()
 
-  const { href, as, replace, scroll, onClick, ...rest } = props
+  const { as, href, onClick, replace, scroll, ...rest } = props
 
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>) => {
+    (e: MouseEvent<HTMLAnchorElement>) => {
       if (onClick) {
         onClick(e)
       }
 
-      if (!supportsViewTransitions || shouldPreserveDefault(e)) {
+      if (e.defaultPrevented) {
         return
       }
 
-      e.preventDefault()
+      if ('startViewTransition' in document) {
+        if (shouldPreserveDefault(e)) {
+          return
+        }
 
-      const navigate = replace ? router.replace : router.push
-      navigate(formatUrl(as ?? href), { scroll: scroll ?? true })
+        e.preventDefault()
+
+        const navigate = replace ? router.replace : router.push
+        navigate(formatUrl(as ?? href), { scroll: scroll ?? true })
+      }
     },
     [onClick, href, as, replace, scroll, router]
   )
 
-  return <NextLink {...rest} href={href} as={as} onClick={handleClick} />
+  return <NextLink {...rest} href={href} onClick={handleClick} as={as} />
 }
