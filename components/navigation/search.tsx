@@ -60,14 +60,14 @@ export default function Search() {
     }
   }, [isOpen, filteredResults])
 
-useEffect(() => {
-  if (searchedInput.length < 3) {
-    Promise.resolve().then(() => setFilteredResults([]))
-    return
-  }
+  useEffect(() => {
+    if (searchedInput.length < 3) {
+      Promise.resolve().then(() => setFilteredResults([]))
+      return
+    }
 
-  debouncedSearch(searchedInput)
-}, [searchedInput, debouncedSearch])
+    debouncedSearch(searchedInput)
+  }, [searchedInput, debouncedSearch])
 
   function renderDocuments(
     documents: Document[],

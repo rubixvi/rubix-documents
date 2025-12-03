@@ -1,9 +1,9 @@
-import eslint from '@eslint/js'
-import tsParser from '@typescript-eslint/parser'
-import nextVitals from 'eslint-config-next/core-web-vitals'
-import nextTs from 'eslint-config-next/typescript'
-import { defineConfig } from 'eslint/config'
-import tseslint from 'typescript-eslint'
+import eslint from "@eslint/js"
+import tsParser from "@typescript-eslint/parser"
+import nextVitals from "eslint-config-next/core-web-vitals"
+import nextTs from "eslint-config-next/typescript"
+import { defineConfig } from "eslint/config"
+import tseslint from "typescript-eslint"
 
 const eslintConfig = defineConfig([
   ...nextVitals,
@@ -12,25 +12,25 @@ const eslintConfig = defineConfig([
   tseslint.configs.recommended,
   tseslint.configs.stylistic,
   {
-    files: ['**/*.{ts,tsx,js,jsx}'],
+    files: ["**/*.{ts,tsx,js,jsx}"],
     languageOptions: {
-      ecmaVersion: 'latest',
+      ecmaVersion: "latest",
       parser: tsParser,
       parserOptions: {
         ecmaFeatures: {
-          ecmaVersion: 'latest',
+          ecmaVersion: "latest",
           jsx: true,
         },
         projectService: true,
       },
-      sourceType: 'module',
+      sourceType: "module",
     },
     plugins: {
-      '@typescript-eslint': tseslint.plugin,
+      "@typescript-eslint": tseslint.plugin,
     },
   },
   {
-    ignores: ['.next/', 'next-env.d.ts'],
+    ignores: [".next/", "next-env.d.ts"],
   },
 ])
 

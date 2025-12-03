@@ -1,7 +1,11 @@
-import { useSyncExternalStore } from 'react'
+import { useSyncExternalStore } from "react"
 
 export function useHash() {
-  return useSyncExternalStore(subscribeHash, getHashSnapshot, getServerHashSnapshot)
+  return useSyncExternalStore(
+    subscribeHash,
+    getHashSnapshot,
+    getServerHashSnapshot
+  )
 }
 
 function getHashSnapshot() {
@@ -9,10 +13,10 @@ function getHashSnapshot() {
 }
 
 function getServerHashSnapshot() {
-  return ''
+  return ""
 }
 
 function subscribeHash(onStoreChange: () => void) {
-  window.addEventListener('hashchange', onStoreChange)
-  return () => window.removeEventListener('hashchange', onStoreChange)
+  window.addEventListener("hashchange", onStoreChange)
+  return () => window.removeEventListener("hashchange", onStoreChange)
 }

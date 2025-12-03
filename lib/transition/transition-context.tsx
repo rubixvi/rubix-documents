@@ -2,19 +2,19 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import {
   createContext,
-  type Dispatch,
-  type ReactNode,
-  type SetStateAction,
   use,
   useEffect,
   useState,
-} from 'react'
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+} from "react"
 
-import { useBrowserNativeTransitions } from './browser-native'
+import { useBrowserNativeTransitions } from "./browser-native"
 
-const ViewTransitionsContext = createContext<Dispatch<SetStateAction<(() => void) | null>>>(
-  () => () => {}
-)
+const ViewTransitionsContext = createContext<
+  Dispatch<SetStateAction<(() => void) | null>>
+>(() => () => {})
 
 export function useSetFinishViewTransition() {
   return use(ViewTransitionsContext)
@@ -25,7 +25,9 @@ export function ViewTransitions({
 }: Readonly<{
   children: ReactNode
 }>) {
-  const [finishViewTransition, setFinishViewTransition] = useState<(() => void) | null>(null)
+  const [finishViewTransition, setFinishViewTransition] = useState<
+    (() => void) | null
+  >(null)
 
   useEffect(() => {
     if (finishViewTransition) {
