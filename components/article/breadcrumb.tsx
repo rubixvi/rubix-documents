@@ -1,4 +1,5 @@
 import { Fragment } from "react"
+import { toTitleCase } from "@/utils/toTitleCase"
 import { Link } from "lib/transition"
 import { LuHouse } from "react-icons/lu"
 
@@ -12,7 +13,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { toTitleCase } from "@/utils/toTitleCase"
 
 export function ArticleBreadcrumb({ paths }: { paths: string[] }) {
   return (
