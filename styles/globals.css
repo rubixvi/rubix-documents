@@ -126,7 +126,7 @@
 
 .typography {
   @apply prose prose-zinc prose-headings:scroll-m-20 prose-code:rounded-md prose-code:p-1 prose-code:leading-6 prose-code:before:content-none prose-code:after:content-none prose-pre:border prose-pre:bg-neutral-100 prose-img:rounded-md prose-img:border;
-  @apply prose-code:text-xs w-[85vw] min-w-full! pt-2 text-sm sm:mx-auto sm:w-full;
+  @apply w-[85vw] min-w-full! pt-2 text-sm sm:mx-auto sm:w-full prose-code:text-xs;
   @apply dark:prose-invert prose-code:text-neutral-800 dark:prose-code:bg-neutral-900 dark:prose-code:text-white dark:prose-pre:bg-neutral-900;
 }
 

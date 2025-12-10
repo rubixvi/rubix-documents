@@ -14,7 +14,7 @@ export function TableOfContents({ tocs, pathName, frontmatter }: TableProps) {
     <>
       {Settings.rightbar && (
         <aside
-          className="toc sticky top-26 hidden h-[100vh] min-w-[230px] gap-3 xl:flex xl:flex-col"
+          className="toc sticky top-26 hidden h-screen min-w-[230px] gap-3 xl:flex xl:flex-col"
           aria-label="Table of contents"
         >
           {Settings.toc && <TableAnchor tocs={tocs.tocs} />}

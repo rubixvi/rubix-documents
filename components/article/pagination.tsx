@@ -13,9 +13,9 @@ export function Pagination({ pathname }: { pathname: string }) {
           rel="prev"
           href={`/docs${res.prev.href}`}
           title={`Previous: ${res.prev.title}`}
-          className="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 items-center justify-center rounded-md border px-4 py-2 text-sm font-medium whitespace-nowrap !no-underline shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+          className="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium whitespace-nowrap no-underline! shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
         >
-          <LuChevronLeft className="mr-1 h-[1rem] w-[1rem]" />
+          <LuChevronLeft className="mr-1 h-4 w-4" />
           <span>{res.prev.title}</span>
         </Link>
       )}
@@ -24,10 +24,10 @@ export function Pagination({ pathname }: { pathname: string }) {
           rel="next"
           href={`/docs${res.next.href}`}
           title={`Next: ${res.next.title}`}
-          className="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring ml-auto inline-flex h-9 items-center justify-center rounded-md border px-4 py-2 text-sm font-medium whitespace-nowrap !no-underline shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+          className="ml-auto inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium whitespace-nowrap no-underline! shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
         >
           <span>{res.next.title}</span>
-          <LuChevronRight className="ml-1 h-[1rem] w-[1rem]" />
+          <LuChevronRight className="ml-1 h-4 w-4" />
         </Link>
       )}
     </div>

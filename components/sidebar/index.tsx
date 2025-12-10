@@ -18,7 +18,7 @@ import { PageMenu } from "@/components/sidebar/pagemenu"
 export function Sidebar() {
   return (
     <aside
-      className="sticky top-26 hidden h-[100vh] min-w-[230px] flex-[1] flex-col overflow-y-auto md:flex"
+      className="sticky top-26 hidden h-screen min-w-[230px] flex-1 flex-col overflow-y-auto md:flex"
       aria-label="Page navigation"
     >
       <ScrollArea>
@@ -37,7 +37,7 @@ export function SheetLeft() {
           size="icon"
           className="flex cursor-pointer md:hidden"
         >
-          <LuAlignLeft className="!size-6" />
+          <LuAlignLeft className="size-6!" />
         </Button>
       </SheetTrigger>
       <SheetContent className="flex h-full flex-col gap-0 px-0" side="left">

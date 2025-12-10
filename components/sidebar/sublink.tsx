@@ -55,7 +55,7 @@ export default function SubLink(
       Comp
     )
   ) : (
-    <h2 className="text-primary font-bold sm:text-sm">{title}</h2>
+    <h2 className="font-bold text-primary sm:text-sm">{title}</h2>
   )
 
   if (!items) {

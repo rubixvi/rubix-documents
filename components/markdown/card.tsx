@@ -58,7 +58,7 @@ export function Card({
       )}
       <div>
         {subtitle && variant === "normal" && (
-          <p className="!my-1 text-xs font-semibold text-gray-500 dark:text-gray-400">
+          <p className="my-1! text-xs font-semibold text-gray-500 dark:text-gray-400">
             {subtitle}
           </p>
         )}
@@ -68,7 +68,7 @@ export function Card({
             alt={title}
             width={400}
             height={400}
-            className="!m-0 h-[180px] w-full !rounded-none border-0 object-cover object-center"
+            className="m-0! h-[180px] w-full rounded-none! border-0 object-cover object-center"
           />
         )}
         <div
@@ -85,7 +85,7 @@ export function Card({
           {title}
         </div>
         {description && variant === "normal" && (
-          <p className="!my-2 text-sm font-normal text-gray-600 dark:text-gray-400">
+          <p className="my-2! text-sm font-normal text-gray-600 dark:text-gray-400">
             {description}
           </p>
         )}
@@ -99,7 +99,7 @@ export function Card({
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className="!no-underline"
+      className="no-underline!"
     >
       {content}
     </Link>
