@@ -24,7 +24,7 @@ export default async function Pages({ params }: PageProps) {
 
   return (
     <div className="flex items-start gap-10">
-      <section className="flex-[3]">
+      <section className="flex-3">
         <ArticleBreadcrumb paths={slug} />
         <div className="space-y-4">
           <h1 className="text-3xl font-semibold">{frontmatter.title}</h1>

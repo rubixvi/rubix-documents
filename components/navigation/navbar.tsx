@@ -19,7 +19,7 @@ export function Navbar() {
           <div className="hidden md:flex">
             <Logo />
           </div>
-          <div className="text-muted-foreground hidden items-center gap-5 text-sm font-medium md:flex">
+          <div className="hidden items-center gap-5 text-sm font-medium text-muted-foreground md:flex">
             <NavMenu />
           </div>
         </div>
