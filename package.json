@@ -17,7 +17,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@next/third-parties": "^16.0.7",
+    "@next/third-parties": "^16.0.10",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -26,17 +26,17 @@
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tabs": "^1.1.13",
-    "@tailwindcss/postcss": "^4.1.17",
+    "@tailwindcss/postcss": "^4.1.18",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "lib": "^5.1.0",
     "mermaid": "^11.12.2",
-    "next": "16.0.9",
+    "next": "16.0.10",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.4.6",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-code-titles": "^1.2.1",
@@ -59,24 +59,24 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/hast": "^3.0.4",
-    "@types/node": "^24.10.1",
+    "@types/node": "^25.0.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/unist": "^3.0.3",
-    "@typescript-eslint/parser": "^8.48.1",
+    "@typescript-eslint/parser": "^8.49.0",
     "eslint": "^9.39.1",
-    "eslint-config-next": "^16.0.7",
+    "eslint-config-next": "^16.0.10",
     "husky": "^9.1.7",
     "postcss": "^8.5.6",
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^4.1.18",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.48.1"
+    "typescript-eslint": "^8.49.0"
   },
   "engines": {
     "node": "22.x"
   },
-  "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b"
+  "packageManager": "pnpm@10.25.0"
 }
