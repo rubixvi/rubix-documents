@@ -76,7 +76,7 @@
     "typescript-eslint": "^8.49.0"
   },
   "engines": {
-    "node": "22.x"
+    "node": "^22.x"
   },
   "packageManager": "pnpm@10.25.0"
 }
