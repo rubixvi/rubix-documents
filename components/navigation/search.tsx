@@ -158,7 +158,7 @@ export default function Search() {
               </p>
             )
           )}
-          <ScrollArea className="max-h-[350px] w-full overflow-hidden">
+          <ScrollArea className="max-h-87.5 w-full overflow-hidden">
             <div className="flex w-full flex-col items-start px-1 pt-1 pb-4 sm:px-3">
               {searchedInput
                 ? filteredResults.map((item) => {
@@ -167,7 +167,7 @@ export default function Search() {
                         <DialogClose key={item.href} asChild>
                           <Anchor
                             className={cn(
-                              "flex w-full max-w-[310px] flex-col gap-0.5 rounded-sm p-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 sm:max-w-[480px] dark:hover:bg-neutral-900"
+                              "flex w-full max-w-77.5 flex-col gap-0.5 rounded-sm p-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 sm:max-w-120 dark:hover:bg-neutral-900"
                             )}
                             href={`/docs${item.href}`}
                           >

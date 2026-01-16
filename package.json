@@ -17,7 +17,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@next/third-parties": "^16.1.1",
+    "@next/third-parties": "^16.1.2",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -32,7 +32,7 @@
     "gray-matter": "^4.0.3",
     "lib": "^5.1.0",
     "mermaid": "^11.12.2",
-    "next": "16.1.1",
+    "next": "16.1.2",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.4.6",
     "react": "^19.2.3",
@@ -59,24 +59,24 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/hast": "^3.0.4",
-    "@types/node": "^25.0.3",
-    "@types/react": "^19.2.7",
+    "@types/node": "^25.0.9",
+    "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
     "@types/unist": "^3.0.3",
-    "@typescript-eslint/parser": "^8.52.0",
+    "@typescript-eslint/parser": "^8.53.0",
     "eslint": "^9.39.2",
-    "eslint-config-next": "^16.1.1",
+    "eslint-config-next": "^16.1.2",
     "husky": "^9.1.7",
     "postcss": "^8.5.6",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.1.18",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.52.0"
+    "typescript-eslint": "^8.53.0"
   },
   "engines": {
-    "node": "^22.x"
+    "node": "^24.x"
   },
-  "packageManager": "pnpm@10.25.0"
+  "packageManager": "pnpm@10.28.0"
 }
