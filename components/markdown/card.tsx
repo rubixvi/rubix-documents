@@ -68,7 +68,7 @@ export function Card({
             alt={title}
             width={400}
             height={400}
-            className="m-0! h-[180px] w-full rounded-none! border-0 object-cover object-center"
+            className="m-0! h-45 w-full rounded-none! border-0 object-cover object-center"
           />
         )}
         <div
