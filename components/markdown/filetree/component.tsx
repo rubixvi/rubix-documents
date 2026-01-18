@@ -1,5 +1,6 @@
-"use client"
+'use client'
 
+import cn from 'clsx'
 import {
   createContext,
   memo,
@@ -8,10 +9,9 @@ import {
   useCallback,
   useContext,
   useState,
-} from "react"
-import cn from "clsx"
-import { FiFileText } from "react-icons/fi"
-import { LuFolder, LuFolderClosed } from "react-icons/lu"
+} from 'react'
+import { FiFileText } from 'react-icons/fi'
+import { LuFolder, LuFolderClosed } from 'react-icons/lu'
 
 const ctx = createContext(0)
 
@@ -35,21 +35,12 @@ function useIndent() {
 
 function Tree({ children }: { children: ReactNode }): ReactElement {
   return (
-    <ul className="m-0! w-full list-none overflow-hidden rounded-lg border p-2!">
-      {children}
-    </ul>
+    <ul className="m-0! w-full list-none overflow-hidden rounded-lg border p-2!">{children}</ul>
   )
 }
 
 export const Folder = memo(
-  ({
-    label,
-    name,
-    open,
-    defaultOpen = false,
-    onToggle,
-    children,
-  }: FolderProps) => {
+  ({ label, name, open, defaultOpen = false, onToggle, children }: FolderProps) => {
     const indent = useIndent()
     const [isOpen, setIsOpen] = useState(defaultOpen)
 
@@ -66,22 +57,18 @@ export const Folder = memo(
           onClick={toggle}
           title={name}
           className={cn(
-            "inline-flex cursor-pointer items-center py-1 text-xs transition-all hover:text-muted-foreground"
+            'inline-flex cursor-pointer items-center py-1 text-xs transition-all hover:text-muted-foreground'
           )}
         >
           <span className="ml-1">
-            {isFolderOpen ? (
-              <LuFolderClosed size={14} />
-            ) : (
-              <LuFolder size={14} />
-            )}
+            {isFolderOpen ? <LuFolderClosed size={14} /> : <LuFolder size={14} />}
           </span>
           <span className="ml-2">{label ?? name}</span>
         </div>
         <div
           className={cn(
-            "grid transition-[grid-template-rows] duration-200 ease-in-out",
-            isFolderOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+            'grid transition-[grid-template-rows] duration-200 ease-in-out',
+            isFolderOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
           )}
         >
           <div className="overflow-hidden">
@@ -95,7 +82,7 @@ export const Folder = memo(
   }
 )
 
-Folder.displayName = "Folder"
+Folder.displayName = 'Folder'
 
 export const File = memo(({ label, name }: FileProps) => (
   <li className="list-none">
@@ -108,6 +95,6 @@ export const File = memo(({ label, name }: FileProps) => (
   </li>
 ))
 
-File.displayName = "File"
+File.displayName = 'File'
 
 export default Tree

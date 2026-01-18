@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/refs */
-import { use, useEffect, useRef, useState } from "react"
-import { usePathname } from "next/navigation"
+import { usePathname } from 'next/navigation'
+import { use, useEffect, useRef, useState } from 'react'
 
-import { useHash } from "./use-hash"
+import { useHash } from './use-hash'
 
 const suspenseBoundaries = new Set<string>()
 let suspenseResolve: (() => void) | null = null
@@ -16,7 +15,7 @@ export function useBrowserNativeTransitions() {
   >(null)
 
   useEffect(() => {
-    if (!("startViewTransition" in document)) {
+    if (!('startViewTransition' in document)) {
       return
     }
 
@@ -34,15 +33,12 @@ export function useBrowserNativeTransitions() {
         })
       })
 
-      setCurrentViewTransition([
-        pendingStartViewTransition,
-        pendingViewTransitionResolve!,
-      ])
+      setCurrentViewTransition([pendingStartViewTransition, pendingViewTransitionResolve!])
     }
 
-    window.addEventListener("popstate", onPopState)
+    window.addEventListener('popstate', onPopState)
     return () => {
-      window.removeEventListener("popstate", onPopState)
+      window.removeEventListener('popstate', onPopState)
     }
   }, [])
 
@@ -56,7 +52,7 @@ export function useBrowserNativeTransitions() {
   }, [currentViewTransition])
 
   const hash = useHash()
-
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentional
   useEffect(() => {
     const finishTransition = async () => {
       currentPathname.current = pathname

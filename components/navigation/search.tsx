@@ -1,10 +1,8 @@
-"use client"
+'use client'
 
-import { useEffect, useMemo, useState } from "react"
-import { Documents } from "@/settings/documents"
-import { LuFileText, LuSearch } from "react-icons/lu"
-
-import { advanceSearch, cn, debounce, highlight, search } from "@/lib/utils"
+import { useEffect, useMemo, useState } from 'react'
+import { LuFileText, LuSearch } from 'react-icons/lu'
+import Anchor from '@/components/anchor'
 import {
   Dialog,
   DialogClose,
@@ -12,10 +10,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import Anchor from "@/components/anchor"
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { advanceSearch, cn, debounce, highlight, search } from '@/lib/utils'
+import { Documents } from '@/settings/documents'
 
 interface Document {
   title?: string
@@ -26,7 +25,7 @@ interface Document {
 }
 
 export default function Search() {
-  const [searchedInput, setSearchedInput] = useState("")
+  const [searchedInput, setSearchedInput] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const [filteredResults, setFilteredResults] = useState<search[]>([])
   const [isLoading, setIsLoading] = useState(false)
@@ -44,19 +43,19 @@ export default function Search() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (isOpen && event.key === "Enter" && filteredResults.length > 2) {
+      if (isOpen && event.key === 'Enter' && filteredResults.length > 2) {
         const selected = filteredResults[0]
-        if ("href" in selected) {
+        if ('href' in selected) {
           window.location.href = `/docs${selected.href}`
           setIsOpen(false)
         }
       }
     }
 
-    window.addEventListener("keydown", handleKeyDown)
+    window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown)
+      window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen, filteredResults])
 
@@ -69,27 +68,24 @@ export default function Search() {
     debouncedSearch(searchedInput)
   }, [searchedInput, debouncedSearch])
 
-  function renderDocuments(
-    documents: Document[],
-    parentHref = "/docs"
-  ): React.ReactNode[] {
+  function renderDocuments(documents: Document[], parentHref = '/docs'): React.ReactNode[] {
     if (!Array.isArray(documents) || documents.length === 0) {
       return []
     }
 
     return documents.flatMap((doc) => {
-      if ("spacer" in doc && doc.spacer) {
+      if ('spacer' in doc && doc.spacer) {
         return []
       }
 
-      const href = doc.href ? `${parentHref}${doc.href}` : ""
+      const href = doc.href ? `${parentHref}${doc.href}` : ''
 
       return [
         !doc.noLink && doc.href && (
           <DialogClose key={href} asChild>
             <Anchor
               className={cn(
-                "flex w-full items-center gap-2.5 rounded-sm px-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-900"
+                'flex w-full items-center gap-2.5 rounded-sm px-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-900'
               )}
               href={href}
             >
@@ -100,10 +96,7 @@ export default function Search() {
           </DialogClose>
         ),
 
-        ...renderDocuments(
-          doc.items?.filter((item) => !item.noLink) || [],
-          `${href}`
-        ),
+        ...renderDocuments(doc.items?.filter((item) => !item.noLink) || [], `${href}`),
       ]
     })
   }
@@ -115,7 +108,7 @@ export default function Search() {
         onOpenChange={(open) => {
           setIsOpen(open)
           if (!open) {
-            setTimeout(() => setSearchedInput(""), 200)
+            setTimeout(() => setSearchedInput(''), 200)
           }
         }}
       >
@@ -141,20 +134,15 @@ export default function Search() {
             />
           </DialogHeader>
           {searchedInput.length > 0 && searchedInput.length < 3 && (
-            <p className="text-warning mx-auto mt-2 text-sm">
-              Please enter at least 3 characters.
-            </p>
+            <p className="text-warning mx-auto mt-2 text-sm">Please enter at least 3 characters.</p>
           )}
           {isLoading ? (
-            <p className="mx-auto mt-2 text-sm text-muted-foreground">
-              Searching...
-            </p>
+            <p className="mx-auto mt-2 text-sm text-muted-foreground">Searching...</p>
           ) : (
             filteredResults.length === 0 &&
             searchedInput.length >= 3 && (
               <p className="mx-auto mt-2 text-sm text-muted-foreground">
-                No results found for{" "}
-                <span className="text-primary">{`"${searchedInput}"`}</span>
+                No results found for <span className="text-primary">{`"${searchedInput}"`}</span>
               </p>
             )
           )}
@@ -162,12 +150,12 @@ export default function Search() {
             <div className="flex w-full flex-col items-start px-1 pt-1 pb-4 sm:px-3">
               {searchedInput
                 ? filteredResults.map((item) => {
-                    if ("href" in item) {
+                    if ('href' in item) {
                       return (
                         <DialogClose key={item.href} asChild>
                           <Anchor
                             className={cn(
-                              "flex w-full max-w-77.5 flex-col gap-0.5 rounded-sm p-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 sm:max-w-120 dark:hover:bg-neutral-900"
+                              'flex w-full max-w-77.5 flex-col gap-0.5 rounded-sm p-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 sm:max-w-120 dark:hover:bg-neutral-900'
                             )}
                             href={`/docs${item.href}`}
                           >
@@ -175,14 +163,11 @@ export default function Search() {
                               <LuFileText className="h-[1.1rem] w-[1.1rem]" />
                               <span className="truncate">{item.title}</span>
                             </div>
-                            {"snippet" in item && item.snippet && (
+                            {'snippet' in item && item.snippet && (
                               <p
                                 className="truncate text-xs text-neutral-500 dark:text-neutral-400"
                                 dangerouslySetInnerHTML={{
-                                  __html: highlight(
-                                    item.snippet,
-                                    searchedInput
-                                  ),
+                                  __html: highlight(item.snippet, searchedInput),
                                 }}
                               />
                             )}

@@ -1,7 +1,7 @@
-import { Children, PropsWithChildren, ReactNode } from "react"
-import clsx from "clsx"
+import clsx from 'clsx'
+import { Children, PropsWithChildren, ReactNode } from 'react'
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
 
 interface StepProps {
   children: ReactNode
@@ -13,12 +13,7 @@ export function Step({ children }: PropsWithChildren<StepProps>) {
   return (
     <div className="flex flex-col">
       {Children.map(children, (child, index) => (
-        <div
-          className={cn(
-            "relative border-l pl-9",
-            clsx({ "pb-5": index < length - 1 })
-          )}
-        >
+        <div className={cn('relative border-l pl-9', clsx({ 'pb-5': index < length - 1 }))}>
           <div className="absolute -left-4 flex size-8 items-center justify-center rounded-full border bg-secondary text-xs font-medium">
             {index + 1}
           </div>

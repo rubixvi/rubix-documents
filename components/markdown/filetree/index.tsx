@@ -1,10 +1,7 @@
-"use client"
+'use client'
 
-import dynamic from "next/dynamic"
+import dynamic from 'next/dynamic'
 
-export const FileTree = dynamic(
-  () => import("@/components/markdown/filetree/component"),
-  {
-    ssr: false,
-  }
-)
+export const FileTree = dynamic(() => import('@/components/markdown/filetree/component'), {
+  ssr: false,
+})

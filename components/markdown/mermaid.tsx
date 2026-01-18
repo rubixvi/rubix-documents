@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import React, { useCallback, useEffect, useMemo, useRef } from "react"
-import clsx from "clsx"
-import mermaid from "mermaid"
+import clsx from 'clsx'
+import mermaid from 'mermaid'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 
 interface MermaidProps {
   chart: string
@@ -10,7 +10,7 @@ interface MermaidProps {
 }
 
 mermaid.initialize({
-  theme: "neutral",
+  theme: 'neutral',
 })
 
 const Mermaid = ({ chart, className }: MermaidProps) => {
@@ -24,14 +24,11 @@ const Mermaid = ({ chart, className }: MermaidProps) => {
     try {
       mermaid.contentLoaded()
     } catch (error) {
-      console.error("Mermaid diagram render error:", error)
+      console.error('Mermaid diagram render error:', error)
     }
   }, [chart])
 
-  const memoizedClassName = useMemo(
-    () => clsx("mermaid", className),
-    [className]
-  )
+  const memoizedClassName = useMemo(() => clsx('mermaid', className), [className])
 
   useEffect(() => {
     renderMermaid()

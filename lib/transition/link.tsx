@@ -1,15 +1,15 @@
-import { type UrlObject } from "url"
+import NextLink from 'next/link'
 
-import { useCallback, type ComponentProps, type MouseEvent } from "react"
-import NextLink from "next/link"
+import { type ComponentProps, type MouseEvent, useCallback } from 'react'
+import { type UrlObject } from 'url'
 
-import { useTransitionRouter } from "./use-transition-router"
+import { useTransitionRouter } from './use-transition-router'
 
 function isModifiedEvent(event: MouseEvent): boolean {
   const eventTarget = event.currentTarget as HTMLAnchorElement | SVGAElement
-  const target = eventTarget.getAttribute("target")
+  const target = eventTarget.getAttribute('target')
   return (
-    (target && target !== "_self") ||
+    (target && target !== '_self') ||
     event.metaKey ||
     event.ctrlKey ||
     event.shiftKey ||
@@ -21,7 +21,7 @@ function isModifiedEvent(event: MouseEvent): boolean {
 function shouldPreserveDefault(e: MouseEvent<HTMLAnchorElement>): boolean {
   const { nodeName } = e.currentTarget
 
-  const isAnchorNodeName = nodeName.toUpperCase() === "A"
+  const isAnchorNodeName = nodeName.toUpperCase() === 'A'
 
   if (isAnchorNodeName && isModifiedEvent(e)) {
     return true
@@ -31,9 +31,7 @@ function shouldPreserveDefault(e: MouseEvent<HTMLAnchorElement>): boolean {
 }
 
 const formatUrl = (url: string | UrlObject): string =>
-  typeof url === "string"
-    ? url
-    : new URL(url.pathname || "", window.location.href).toString()
+  typeof url === 'string' ? url : new URL(url.pathname || '', window.location.href).toString()
 
 export function Link(props: ComponentProps<typeof NextLink>) {
   const router = useTransitionRouter()
@@ -50,7 +48,7 @@ export function Link(props: ComponentProps<typeof NextLink>) {
         return
       }
 
-      if ("startViewTransition" in document) {
+      if ('startViewTransition' in document) {
         if (shouldPreserveDefault(e)) {
           return
         }

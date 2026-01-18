@@ -1,37 +1,23 @@
-import { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
-import { LuChevronDown, LuChevronRight } from "react-icons/lu"
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { LuChevronDown, LuChevronRight } from 'react-icons/lu'
+import Anchor from '@/components/anchor'
+import { Button } from '@/components/ui/button'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { SheetClose } from '@/components/ui/sheet'
+import { Paths } from '@/lib/pageroutes'
+import { cn } from '@/lib/utils'
 
-import { Paths } from "@/lib/pageroutes"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import { SheetClose } from "@/components/ui/sheet"
-import Anchor from "@/components/anchor"
-
-function isRoute(
-  item: Paths
-): item is Extract<Paths, { title: string; href: string }> {
-  return "title" in item && "href" in item
+function isRoute(item: Paths): item is Extract<Paths, { title: string; href: string }> {
+  return 'title' in item && 'href' in item
 }
 
-export default function SubLink(
-  props: Paths & { level: number; isSheet: boolean }
-) {
+export default function SubLink(props: Paths & { level: number; isSheet: boolean }) {
   const path = usePathname()
   const [isOpen, setIsOpen] = useState(true)
 
   useEffect(() => {
-    if (
-      isRoute(props) &&
-      props.href &&
-      path !== props.href &&
-      path.includes(props.href)
-    ) {
+    if (isRoute(props) && props.href && path !== props.href && path.includes(props.href)) {
       Promise.resolve().then(() => setIsOpen(true))
     }
   }, [path, props])
@@ -81,8 +67,8 @@ export default function SubLink(
         <CollapsibleContent className="CollapsibleContent">
           <div
             className={cn(
-              "mt-2.5 flex flex-col items-start gap-3 border-l pl-4 text-sm",
-              level > 0 && "ml-1 border-l pl-4"
+              'mt-2.5 flex flex-col items-start gap-3 border-l pl-4 text-sm',
+              level > 0 && 'ml-1 border-l pl-4'
             )}
           >
             {items?.map((innerLink) => {

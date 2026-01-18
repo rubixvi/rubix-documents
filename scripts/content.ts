@@ -1,19 +1,17 @@
-import { promises as fs } from "fs"
-import path from "path"
+import { promises as fs } from 'fs'
+import grayMatter from 'gray-matter'
+import path from 'path'
+import remarkMdx from 'remark-mdx'
+import remarkParse from 'remark-parse'
+import remarkStringify from 'remark-stringify'
+import { unified } from 'unified'
+import { Node, Parent } from 'unist'
+import { visit } from 'unist-util-visit'
+import { Paths } from '@/lib/pageroutes'
+import { Documents } from '@/settings/documents'
 
-import { Documents } from "@/settings/documents"
-import grayMatter from "gray-matter"
-import remarkMdx from "remark-mdx"
-import remarkParse from "remark-parse"
-import remarkStringify from "remark-stringify"
-import { unified } from "unified"
-import { Node, Parent } from "unist"
-import { visit } from "unist-util-visit"
-
-import { Paths } from "@/lib/pageroutes"
-
-const docsDir = path.join(process.cwd(), "contents/docs")
-const outputDir = path.join(process.cwd(), "public", "search-data")
+const docsDir = path.join(process.cwd(), 'contents/docs')
+const outputDir = path.join(process.cwd(), 'public', 'search-data')
 
 interface MdxJsxFlowElement extends Node {
   name: string
@@ -21,13 +19,11 @@ interface MdxJsxFlowElement extends Node {
 }
 
 function isMdxJsxFlowElement(node: Node): node is MdxJsxFlowElement {
-  return node.type === "mdxJsxFlowElement" && "name" in node
+  return node.type === 'mdxJsxFlowElement' && 'name' in node
 }
 
-function isRoute(
-  node: Paths
-): node is Extract<Paths, { href: string; title: string }> {
-  return "href" in node && "title" in node
+function isRoute(node: Paths): node is Extract<Paths, { href: string; title: string }> {
+  return 'href' in node && 'title' in node
 }
 
 function createSlug(filePath: string): string {
@@ -35,18 +31,18 @@ function createSlug(filePath: string): string {
   const parsed = path.parse(relativePath)
 
   const slugPath = parsed.dir ? `${parsed.dir}/${parsed.name}` : parsed.name
-  const normalizedSlug = slugPath.replace(/\\/g, "/")
+  const normalizedSlug = slugPath.replace(/\\/g, '/')
 
-  if (parsed.name === "index") {
-    const dir = parsed.dir.replace(/\\/g, "/")
-    return dir ? `/${dir}` : "/"
+  if (parsed.name === 'index') {
+    const dir = parsed.dir.replace(/\\/g, '/')
+    return dir ? `/${dir}` : '/'
   }
 
   return `/${normalizedSlug}`
 }
 
 function findDocumentBySlug(slug: string): Paths | null {
-  function searchDocs(docs: Paths[], currentPath = ""): Paths | null {
+  function searchDocs(docs: Paths[], currentPath = ''): Paths | null {
     for (const doc of docs) {
       if (isRoute(doc)) {
         const fullPath = currentPath + doc.href
@@ -72,72 +68,66 @@ async function ensureDirectoryExists(dir: string) {
 
 function removeCustomComponents() {
   const customComponentNames = [
-    "Tabs",
-    "TabsList",
-    "TabsTrigger",
-    "pre",
-    "Mermaid",
-    "Card",
-    "CardGrid",
-    "Step",
-    "StepItem",
-    "Note",
-    "FileTree",
-    "Folder",
-    "File",
+    'Tabs',
+    'TabsList',
+    'TabsTrigger',
+    'pre',
+    'Mermaid',
+    'Card',
+    'CardGrid',
+    'Step',
+    'StepItem',
+    'Note',
+    'FileTree',
+    'Folder',
+    'File',
   ]
 
   return (tree: Node) => {
-    visit(
-      tree,
-      "mdxJsxFlowElement",
-      (node: Node, index: number | null, parent: Parent | null) => {
-        if (
-          isMdxJsxFlowElement(node) &&
-          parent &&
-          Array.isArray(parent.children) &&
-          customComponentNames.includes(node.name)
-        ) {
-          parent.children.splice(index!, 1)
-        }
+    visit(tree, 'mdxJsxFlowElement', (node: Node, index: number | null, parent: Parent | null) => {
+      if (
+        isMdxJsxFlowElement(node) &&
+        parent &&
+        Array.isArray(parent.children) &&
+        customComponentNames.includes(node.name)
+      ) {
+        parent.children.splice(index!, 1)
       }
-    )
+    })
   }
 }
 
 function cleanContentForSearch(content: string): string {
   let cleanedContent = content
 
-  cleanedContent = cleanedContent.replace(/```[\s\S]*?```/g, " ")
-  cleanedContent = cleanedContent.replace(/`([^`]+)`/g, "$1")
-  cleanedContent = cleanedContent.replace(/#{1,6}\s+(.+)/g, "$1")
-  cleanedContent = cleanedContent
-    .replace(/\*\*(.+?)\*\*/g, "$1")
-    .replace(/_(.+?)_/g, "$1")
+  cleanedContent = cleanedContent.replace(/```[\s\S]*?```/g, ' ')
+  cleanedContent = cleanedContent.replace(/`([^`]+)`/g, '$1')
+  cleanedContent = cleanedContent.replace(/#{1,6}\s+(.+)/g, '$1')
+  cleanedContent = cleanedContent.replace(/\*\*(.+?)\*\*/g, '$1').replace(/_(.+?)_/g, '$1')
 
-  cleanedContent = cleanedContent.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+  cleanedContent = cleanedContent.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
   cleanedContent = cleanedContent.replace(/\|.*\|[\r\n]?/gm, (match) => {
     return match
-      .split("|")
+      .split('|')
       .filter((cell) => cell.trim())
       .map((cell) => cell.trim())
-      .join(" ")
+      .join(' ')
   })
 
   cleanedContent = cleanedContent.replace(
     /<(?:Note|Card|Step|FileTree|Folder|File|Mermaid)[^>]*>([\s\S]*?)<\/(?:Note|Card|Step|FileTree|Folder|File|Mermaid)>/g,
-    "$1"
+    '$1'
   )
 
   cleanedContent = cleanedContent
-    .replace(/^\s*[-*+]\s+/gm, "")
-    .replace(/^\s*\d+\.\s+/gm, "")
-    .replace(/^\s*\[[x\s]\]\s+/gm, "")
-    .replace(/^\s*>\s+/gm, "")
+    .replace(/^\s*[-*+]\s+/gm, '')
+    .replace(/^\s*\d+\.\s+/gm, '')
+    .replace(/^\s*\[[x\s]\]\s+/gm, '')
+    .replace(/^\s*>\s+/gm, '')
 
   cleanedContent = cleanedContent
-    .replace(/[^\w\s-:]/g, " ")
-    .replace(/\s+/g, " ")
+    .replace(/[^\w\s-:]/g, ' ')
+    .replace(/\s+/g, ' ')
     .toLowerCase()
     .trim()
 
@@ -145,7 +135,7 @@ function cleanContentForSearch(content: string): string {
 }
 
 async function processMdxFile(filePath: string) {
-  const rawMdx = await fs.readFile(filePath, "utf-8")
+  const rawMdx = await fs.readFile(filePath, 'utf-8')
   const { content, data: frontmatter } = grayMatter(rawMdx)
 
   const processed = await unified()
@@ -158,19 +148,13 @@ async function processMdxFile(filePath: string) {
   const documentContent = String(processed.value)
 
   const headings =
-    documentContent
-      .match(/^##\s+(.+)$/gm)
-      ?.map((h) => h.replace(/^##\s+/, "").trim()) || []
+    documentContent.match(/^##\s+(.+)$/gm)?.map((h) => h.replace(/^##\s+/, '').trim()) || []
 
   const extractedKeywords = new Set([
     ...(frontmatter.keywords || []),
     ...headings,
-    ...(documentContent.match(/\*\*([^*]+)\*\*/g) || []).map((m) =>
-      m.replace(/\*\*/g, "").trim()
-    ),
-    ...(documentContent.match(/`([^`]+)`/g) || []).map((m) =>
-      m.replace(/`/g, "").trim()
-    ),
+    ...(documentContent.match(/\*\*([^*]+)\*\*/g) || []).map((m) => m.replace(/\*\*/g, '').trim()),
+    ...(documentContent.match(/`([^`]+)`/g) || []).map((m) => m.replace(/`/g, '').trim()),
   ])
 
   const slug = createSlug(filePath)
@@ -178,10 +162,8 @@ async function processMdxFile(filePath: string) {
 
   return {
     slug,
-    title:
-      frontmatter.title ||
-      (matchedDoc && isRoute(matchedDoc) ? matchedDoc.title : "Untitled"),
-    description: frontmatter.description || "",
+    title: frontmatter.title || (matchedDoc && isRoute(matchedDoc) ? matchedDoc.title : 'Untitled'),
+    description: frontmatter.description || '',
     content: documentContent,
     _searchMeta: {
       cleanContent: cleanContentForSearch(documentContent),
@@ -200,7 +182,7 @@ async function getMdxFiles(dir: string): Promise<string[]> {
     if (item.isDirectory()) {
       const subFiles = await getMdxFiles(fullPath)
       files = files.concat(subFiles)
-    } else if (item.name.endsWith(".mdx")) {
+    } else if (item.name.endsWith('.mdx')) {
       files.push(fullPath)
     }
   }
@@ -220,13 +202,10 @@ async function convertMdxToJson() {
       combinedData.push(jsonData)
     }
 
-    const combinedOutputPath = path.join(outputDir, "documents.json")
-    await fs.writeFile(
-      combinedOutputPath,
-      JSON.stringify(combinedData, null, 2)
-    )
+    const combinedOutputPath = path.join(outputDir, 'documents.json')
+    await fs.writeFile(combinedOutputPath, JSON.stringify(combinedData, null, 2))
   } catch (err) {
-    console.error("Error processing MDX files:", err)
+    console.error('Error processing MDX files:', err)
   }
 }
 
