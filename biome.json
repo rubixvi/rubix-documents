@@ -29,10 +29,10 @@
       "!./.next/",
       "!./out/",
       "!./build",
-      "!./dist",
       "!**/.DS_Store",
       "!**/*.pem",
       "!**/.env",
+      "!./dist",
       "!**/dist",
       "!public/search-data",
       "!contents/docs"
