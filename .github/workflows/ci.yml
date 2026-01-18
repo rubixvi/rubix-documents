@@ -32,21 +32,37 @@ jobs:
 
       - name: Rename .js files to .mjs
         run: |
-          for file in dist/scripts/**/*.js; do
+          find dist/scripts -name "*.js" -type f | while read file; do
             mv "$file" "${file%.js}.mjs"
           done
 
-      - name: Post-process scripts
+      - name: Post-process content.mjs
         run: |
-          for file in dist/scripts/scripts/content.mjs dist/scripts/lib/pageroutes.mjs; do
-            if [ -f "$file" ]; then
-              echo "Processing $file..."
-              sed -i 's|from "@/settings"|from "../settings/index.mjs"|g' "$file"
-              sed -i 's|from "@/settings/documents[^"]*"|from "../settings/documents.mjs"|g' "$file"
-              sed -i 's|from "@/|from ../|g' "$file"
-              echo "$file updated successfully."
-            fi
-          done
+          if [ -f "dist/scripts/scripts/content.mjs" ]; then
+            echo "Processing content.mjs..."
+            sed -i 's|from '"'"'@/lib/pageroutes'"'"'|from '"'"'../../lib/pageroutes.mjs'"'"'|g' dist/scripts/scripts/content.mjs
+            sed -i 's|from '"'"'@/settings/documents'"'"'|from '"'"'../../settings/documents.mjs'"'"'|g' dist/scripts/scripts/content.mjs
+            sed -i 's|from '"'"'@/\([^'"'"']*\)'"'"'|from '"'"'../../\1.mjs'"'"'|g' dist/scripts/scripts/content.mjs
+            echo "content.mjs processed successfully"
+          fi
+
+      - name: Post-process pageroutes.mjs
+        run: |
+          if [ -f "dist/scripts/lib/pageroutes.mjs" ]; then
+            echo "Processing pageroutes.mjs..."
+            sed -i 's|from '"'"'@/settings'"'"'|from '"'"'../settings/index.mjs'"'"'|g' dist/scripts/lib/pageroutes.mjs
+            sed -i 's|from '"'"'@/settings/documents'"'"'|from '"'"'../settings/documents.mjs'"'"'|g' dist/scripts/lib/pageroutes.mjs
+            sed -i 's|from '"'"'@/\([^'"'"']*\)'"'"'|from '"'"'../\1.mjs'"'"'|g' dist/scripts/lib/pageroutes.mjs
+            echo "pageroutes.mjs processed successfully"
+          fi
 
       - name: Run content script
         run: node dist/scripts/scripts/content.mjs
+
+      - name: Upload search data artifact
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: search-data
+          path: public/search-data/
+          retention-days: 30
