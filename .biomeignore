@@ -1,3 +1,4 @@
 dist/
 dist/**
-public/search-data
+scripts/
+public/**

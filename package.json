@@ -2,14 +2,14 @@
   "name": "rubix-documents",
   "version": "1.0.1",
   "private": false,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "clean": "pnpm biome check --write",
     "update": "pnpm update --latest --recursive && pnpm install && pnpm prune && pnpm dedupe && pnpm run clean",
-    "generate-content-json": "ts-node scripts/content.ts",
-    "generate-content-json:ide": "node -r esbuild-register scripts/content.ts",
+    "generate-content-json": "tsx scripts/content.ts",
     "prepare": "husky"
   },
   "dependencies": {
@@ -60,7 +60,7 @@
     "husky": "^9.1.7",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.0"
   },
