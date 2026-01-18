@@ -1,26 +1,24 @@
 #!/bin/sh
 
-npx tsc --project tsconfig.scripts.json
+npx tsc --project tsconfig.scripts.json || exit 1
 
-for file in dist/scripts/**/*.js; do
+find dist/scripts -name "*.js" -type f | while read file; do
   mv "$file" "${file%.js}.mjs"
 done
 
-for file in dist/scripts/scripts/content.mjs dist/scripts/lib/pageroutes.mjs; do
-  if [ -f "$file" ]; then
-    echo "Processing $file..."
+if [ -f "dist/scripts/scripts/content.mjs" ]; then
+  sed -i.bak 's|from '"'"'@/lib/pageroutes'"'"'|from '"'"'../../lib/pageroutes.mjs'"'"'|g' dist/scripts/scripts/content.mjs
+  sed -i.bak 's|from '"'"'@/settings/documents'"'"'|from '"'"'../settings/documents.mjs'"'"'|g' dist/scripts/scripts/content.mjs
+  sed -i.bak 's|from '"'"'@/\([^'"'"']*\)'"'"'|from '"'"'../../\1.mjs'"'"'|g' dist/scripts/scripts/content.mjs
+  rm -f dist/scripts/scripts/content.mjs.bak
+fi
 
-    sed -i 's|import { Documents } from "@/settings/documents"|import { Documents } from "../settings/documents.mjs"|g' "$file"
-
-    if [ $? -ne 0 ]; then
-      echo "Error: Failed to update $file"
-      exit 1
-    fi
-    
-    echo "$file updated successfully."
-  else
-    echo "$file not found!"
-  fi
-done
+if [ -f "dist/scripts/lib/pageroutes.mjs" ]; then
+  echo "Processing pageroutes.mjs..."
+  sed -i.bak 's|from '"'"'@/settings'"'"'|from '"'"'../settings/index.mjs'"'"'|g' dist/scripts/lib/pageroutes.mjs
+  sed -i.bak 's|from '"'"'@/settings/documents'"'"'|from '"'"'../settings/documents.mjs'"'"'|g' dist/scripts/lib/pageroutes.mjs
+  sed -i.bak 's|from '"'"'@/\([^'"'"']*\)'"'"'|from '"'"'../\1.mjs'"'"'|g' dist/scripts/lib/pageroutes.mjs
+  rm -f dist/scripts/lib/pageroutes.mjs.bak
+fi
 
 node dist/scripts/scripts/content.mjs || exit 1

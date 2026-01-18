@@ -1,17 +1,16 @@
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import { Providers } from "@/providers"
-import { GoogleTagManager } from "@next/third-parties/google"
+import { GoogleTagManager } from '@next/third-parties/google'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import { Footer } from '@/components/navigation/footer'
+import { Navbar } from '@/components/navigation/navbar'
+import { Providers } from '@/providers'
+import { Settings } from '@/types/settings'
 
-import { Settings } from "@/types/settings"
-import { Footer } from "@/components/navigation/footer"
-import { Navbar } from "@/components/navigation/navbar"
-
-import "@/styles/globals.css"
+import '@/styles/globals.css'
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+  variable: '--font-inter',
+  subsets: ['latin'],
 })
 
 const baseUrl = Settings.metadataBase

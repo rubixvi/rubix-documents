@@ -1,9 +1,6 @@
-import { Fragment } from "react"
-import { toTitleCase } from "@/utils/toTitleCase"
-import { Link } from "lib/transition"
-import { LuHouse } from "react-icons/lu"
-
-import { PageRoutes } from "@/lib/pageroutes"
+import { Link } from 'lib/transition'
+import { Fragment } from 'react'
+import { LuHouse } from 'react-icons/lu'
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -12,7 +9,10 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+} from '@/components/ui/breadcrumb'
+
+import { PageRoutes } from '@/lib/pageroutes'
+import { toTitleCase } from '@/utils/toTitleCase'
 
 export function ArticleBreadcrumb({ paths }: { paths: string[] }) {
   return (
@@ -53,7 +53,7 @@ export function ArticleBreadcrumb({ paths }: { paths: string[] }) {
 
               {paths.slice(-1).map((path, i) => {
                 const index = paths.length - 1 + i
-                const href = `/docs/${paths.slice(0, index + 1).join("/")}`
+                const href = `/docs/${paths.slice(0, index + 1).join('/')}`
 
                 return (
                   <Fragment key={path}>
@@ -70,9 +70,7 @@ export function ArticleBreadcrumb({ paths }: { paths: string[] }) {
                           </Link>
                         </BreadcrumbLink>
                       ) : (
-                        <BreadcrumbPage className="b">
-                          {toTitleCase(path)}
-                        </BreadcrumbPage>
+                        <BreadcrumbPage className="b">{toTitleCase(path)}</BreadcrumbPage>
                       )}
                     </BreadcrumbItem>
                   </Fragment>
@@ -81,7 +79,7 @@ export function ArticleBreadcrumb({ paths }: { paths: string[] }) {
             </>
           ) : (
             paths.map((path, index) => {
-              const href = `/docs/${paths.slice(0, index + 1).join("/")}`
+              const href = `/docs/${paths.slice(0, index + 1).join('/')}`
 
               return (
                 <Fragment key={path}>
@@ -89,18 +87,12 @@ export function ArticleBreadcrumb({ paths }: { paths: string[] }) {
                   <BreadcrumbItem>
                     {index < paths.length - 1 ? (
                       <BreadcrumbLink asChild>
-                        <Link
-                          title={toTitleCase(path)}
-                          aria-label={toTitleCase(path)}
-                          href={href}
-                        >
+                        <Link title={toTitleCase(path)} aria-label={toTitleCase(path)} href={href}>
                           {toTitleCase(path)}
                         </Link>
                       </BreadcrumbLink>
                     ) : (
-                      <BreadcrumbPage className="b">
-                        {toTitleCase(path)}
-                      </BreadcrumbPage>
+                      <BreadcrumbPage className="b">{toTitleCase(path)}</BreadcrumbPage>
                     )}
                   </BreadcrumbItem>
                 </Fragment>

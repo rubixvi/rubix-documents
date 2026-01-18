@@ -1,4 +1,4 @@
-import { Documents } from "@/settings/documents"
+import { Documents } from '@/settings/documents'
 
 export type Paths =
   | {
@@ -19,10 +19,8 @@ interface Page {
   href: string
 }
 
-function isRoute(
-  node: Paths
-): node is Extract<Paths, { title: string; href: string }> {
-  return "title" in node && "href" in node
+function isRoute(node: Paths): node is Extract<Paths, { title: string; href: string }> {
+  return 'title' in node && 'href' in node
 }
 
 function getAllLinks(node: Paths): Page[] {

@@ -1,13 +1,12 @@
-import { notFound } from "next/navigation"
-
-import { Settings } from "@/types/settings"
-import { getDocument } from "@/lib/markdown"
-import { PageRoutes } from "@/lib/pageroutes"
-import { Separator } from "@/components/ui/separator"
-import { Typography } from "@/components/ui/typography"
-import { ArticleBreadcrumb } from "@/components/article/breadcrumb"
-import { Pagination } from "@/components/article/pagination"
-import { TableOfContents } from "@/components/toc"
+import { notFound } from 'next/navigation'
+import { ArticleBreadcrumb } from '@/components/article/breadcrumb'
+import { Pagination } from '@/components/article/pagination'
+import { TableOfContents } from '@/components/toc'
+import { Separator } from '@/components/ui/separator'
+import { Typography } from '@/components/ui/typography'
+import { getDocument } from '@/lib/markdown'
+import { PageRoutes } from '@/lib/pageroutes'
+import { Settings } from '@/types/settings'
 
 interface PageProps {
   params: Promise<{ slug: string[] }>
@@ -15,7 +14,7 @@ interface PageProps {
 
 export default async function Pages({ params }: PageProps) {
   const { slug = [] } = await params
-  const pathName = slug.join("/")
+  const pathName = slug.join('/')
   const res = await getDocument(pathName)
 
   if (!res) notFound()
@@ -36,18 +35,14 @@ export default async function Pages({ params }: PageProps) {
           <Pagination pathname={pathName} />
         </Typography>
       </section>
-      <TableOfContents
-        tocs={{ tocs }}
-        pathName={pathName}
-        frontmatter={frontmatter}
-      />
+      <TableOfContents tocs={{ tocs }} pathName={pathName} frontmatter={frontmatter} />
     </div>
   )
 }
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug = [] } = await params
-  const pathName = slug.join("/")
+  const pathName = slug.join('/')
   const res = await getDocument(pathName)
 
   if (!res) return null
@@ -66,7 +61,7 @@ export async function generateMetadata({ params }: PageProps) {
       description: frontmatter.description || Settings.openGraph.description,
       url: `${Settings.metadataBase}/docs/${pathName}`,
       siteName: Settings.openGraph.siteName,
-      type: "article",
+      type: 'article',
       images: Settings.openGraph.images.map((image) => ({
         ...image,
         url: `${Settings.metadataBase}${image.url}`,
@@ -90,6 +85,6 @@ export async function generateMetadata({ params }: PageProps) {
 
 export function generateStaticParams() {
   return PageRoutes.filter((item) => item.href).map((item) => ({
-    slug: item.href.split("/").slice(1),
+    slug: item.href.split('/').slice(1),
   }))
 }

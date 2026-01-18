@@ -1,8 +1,7 @@
-import searchJson from "@/public/search-data/documents.json"
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
-
-import { Paths } from "@/lib/pageroutes"
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+import { Paths } from '@/lib/pageroutes'
+import searchJson from '@/public/search-data/documents.json'
 
 interface SearchMeta {
   cleanContent: string
@@ -28,7 +27,7 @@ export interface search {
 
 const searchData = searchJson as SearchDocument[]
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: third-party library returns any
 function memoize<T extends (...args: any[]) => any>(fn: T): T {
   const cache = new Map<string, ReturnType<T>>()
 
@@ -44,7 +43,7 @@ function memoize<T extends (...args: any[]) => any>(fn: T): T {
 
     const result = fn(...args)
 
-    if (result !== "" && result != null) {
+    if (result !== '' && result != null) {
       cache.set(key, result)
     }
 
@@ -58,10 +57,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-function isRoute(
-  node: Paths
-): node is Extract<Paths, { href: string; title: string }> {
-  return "href" in node && "title" in node
+function isRoute(node: Paths): node is Extract<Paths, { href: string; title: string }> {
+  return 'href' in node && 'title' in node
 }
 
 export function helperSearch(
@@ -79,10 +76,7 @@ export function helperSearch(
     const nextLink = `${prefix}${node.href}`
 
     const titleMatch = node.title.toLowerCase().includes(lowerQuery)
-    const titleDistance = memoizedSearchMatch(
-      lowerQuery,
-      node.title.toLowerCase()
-    )
+    const titleDistance = memoizedSearchMatch(lowerQuery, node.title.toLowerCase())
 
     if (titleMatch || titleDistance <= 2) {
       res.push({ ...node, items: undefined, href: nextLink })
@@ -93,13 +87,7 @@ export function helperSearch(
 
     if (goNext && node.items) {
       node.items.forEach((item) => {
-        const innerRes = helperSearch(
-          query,
-          item,
-          nextLink,
-          currentLevel + 1,
-          maxLevel
-        )
+        const innerRes = helperSearch(query, item, nextLink, currentLevel + 1, maxLevel)
         if (innerRes.length && !parentHas && !node.noLink) {
           res.push({ ...node, items: undefined, href: nextLink })
           parentHas = true
@@ -113,7 +101,7 @@ export function helperSearch(
 }
 
 function searchMatch(a: string, b: string): number {
-  if (typeof a !== "string" || typeof b !== "string") return 0
+  if (typeof a !== 'string' || typeof b !== 'string') return 0
 
   const aLen = a.length
   const bLen = b.length
@@ -134,11 +122,7 @@ function searchMatch(a: string, b: string): number {
     currRow[0] = j
     for (let i = 1; i <= aLen; i++) {
       const cost = a[i - 1] === b[j - 1] ? 0 : 1
-      currRow[i] = Math.min(
-        prevRow[i] + 1,
-        currRow[i - 1] + 1,
-        prevRow[i - 1] + cost
-      )
+      currRow[i] = Math.min(prevRow[i] + 1, currRow[i - 1] + 1, prevRow[i - 1] + cost)
 
       if (currRow[i] > maxDistance) {
         return maxDistance
@@ -195,9 +179,7 @@ function calculateRelevance(
     }
   })
 
-  const exactMatches = content
-    .toLowerCase()
-    .match(new RegExp(`\\b${lowerQuery}\\b`, "gi"))
+  const exactMatches = content.toLowerCase().match(new RegExp(`\\b${lowerQuery}\\b`, 'gi'))
   if (exactMatches) {
     score += exactMatches.length * 10
   }
@@ -208,17 +190,14 @@ function calculateRelevance(
     }
   })
 
-  const proximityScore = calculateProximityScore(
-    lowerQuery,
-    content.toLowerCase()
-  )
+  const proximityScore = calculateProximityScore(lowerQuery, content.toLowerCase())
   score += proximityScore * 2
 
   return score / Math.log(content.length + 1)
 }
 
 function calculateProximityScore(query: string, content: string): number {
-  if (typeof query !== "string" || typeof content !== "string") return 0
+  if (typeof query !== 'string' || typeof content !== 'string') return 0
 
   const words = content.split(/\s+/)
   const queryWords = query.split(/\s+/)
@@ -268,7 +247,7 @@ function extractSnippet(content: string, query: string): string {
 
   let snippet = content.slice(start, end)
   if (start > 0) snippet = `...${snippet}`
-  if (end < content.length) snippet += "..."
+  if (end < content.length) snippet += '...'
 
   return snippet
 }
@@ -285,7 +264,7 @@ export function advanceSearch(query: string) {
     chunk
       .map((doc) => {
         const relevanceScore = calculateRelevance(
-          queryWords.join(" "),
+          queryWords.join(' '),
           doc.title,
           doc._searchMeta.cleanContent,
           doc._searchMeta.headings,
@@ -293,13 +272,13 @@ export function advanceSearch(query: string) {
         )
 
         const snippet = extractSnippet(doc._searchMeta.cleanContent, lowerQuery)
-        const highlightedSnippet = highlight(snippet, queryWords.join(" "))
+        const highlightedSnippet = highlight(snippet, queryWords.join(' '))
 
         return {
           title: doc.title,
           href: doc.slug,
           snippet: highlightedSnippet,
-          description: doc.description || "",
+          description: doc.description || '',
           relevance: relevanceScore,
         }
       })
@@ -318,38 +297,35 @@ function chunkArray<T>(array: T[], chunkSize: number): T[][] {
   return chunks
 }
 
-function formatDateHelper(
-  dateStr: string,
-  options: Intl.DateTimeFormatOptions
-): string {
-  const [day, month, year] = dateStr.split("-").map(Number)
+function formatDateHelper(dateStr: string, options: Intl.DateTimeFormatOptions): string {
+  const [day, month, year] = dateStr.split('-').map(Number)
   const date = new Date(year, month - 1, day)
-  return date.toLocaleDateString("en-US", options)
+  return date.toLocaleDateString('en-US', options)
 }
 
 export function formatDate(dateStr: string): string {
   return formatDateHelper(dateStr, {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   })
 }
 
 export function formatDate2(dateStr: string): string {
   return formatDateHelper(dateStr, {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
   })
 }
 
 export function stringToDate(date: string) {
-  const [day, month, year] = date.split("-").map(Number)
+  const [day, month, year] = date.split('-').map(Number)
   return new Date(year, month - 1, day)
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: third-party library returns any
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number,
@@ -397,10 +373,10 @@ export function highlight(snippet: string, searchTerms: string): string {
   const terms = searchTerms
     .split(/\s+/)
     .filter((term) => term.trim().length > 0)
-    .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
 
   if (terms.length === 0) return snippet
 
-  const regex = new RegExp(`(${terms.join("|")})`, "gi")
+  const regex = new RegExp(`(${terms.join('|')})`, 'gi')
   return snippet.replace(regex, "<span class='highlight'>$1</span>")
 }

@@ -1,8 +1,7 @@
-import Link from "next/link"
-import { GitHubLink } from "@/settings/navigation"
-import { LuArrowUpRight } from "react-icons/lu"
-
-import { cn } from "@/lib/utils"
+import Link from 'next/link'
+import { LuArrowUpRight } from 'react-icons/lu'
+import { cn } from '@/lib/utils'
+import { GitHubLink } from '@/settings/navigation'
 
 interface SideBarEdit {
   title: string
@@ -23,7 +22,7 @@ export default function RightSideBar({ slug, title }: SideBarEdit) {
           aria-label="Give Feedback"
           target="_blank"
           rel="noopener noreferrer"
-          className={cn("flex items-center text-sm text-foreground")}
+          className={cn('flex items-center text-sm text-foreground')}
         >
           <LuArrowUpRight className="mr-1 inline-block h-4 w-4" />
           <span>Feedback</span>
@@ -34,7 +33,7 @@ export default function RightSideBar({ slug, title }: SideBarEdit) {
           aria-label="Edit this page"
           target="_blank"
           rel="noopener noreferrer"
-          className={cn("flex items-center text-sm text-foreground")}
+          className={cn('flex items-center text-sm text-foreground')}
         >
           <LuArrowUpRight className="mr-1 inline-block h-4 w-4" />
           <span>Edit page</span>

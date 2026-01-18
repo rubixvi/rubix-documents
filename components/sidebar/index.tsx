@@ -1,19 +1,12 @@
-import { LuAlignLeft } from "react-icons/lu"
-
-import { Button } from "@/components/ui/button"
-import { DialogTitle } from "@/components/ui/dialog"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-import { Logo } from "@/components/navigation/logo"
-import { NavMenu } from "@/components/navigation/navbar"
-import { PageMenu } from "@/components/sidebar/pagemenu"
+import { LuAlignLeft } from 'react-icons/lu'
+import { Logo } from '@/components/navigation/logo'
+import { NavMenu } from '@/components/navigation/navbar'
+import { PageMenu } from '@/components/sidebar/pagemenu'
+import { Button } from '@/components/ui/button'
+import { DialogTitle } from '@/components/ui/dialog'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Separator } from '@/components/ui/separator'
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet'
 
 export function Sidebar() {
   return (
@@ -32,11 +25,7 @@ export function SheetLeft() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="flex cursor-pointer md:hidden"
-        >
+        <Button variant="ghost" size="icon" className="flex cursor-pointer md:hidden">
           <LuAlignLeft className="size-6!" />
         </Button>
       </SheetTrigger>

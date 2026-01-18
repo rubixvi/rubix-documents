@@ -1,19 +1,18 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import {
   createContext,
-  use,
-  useEffect,
-  useState,
   type Dispatch,
   type ReactNode,
   type SetStateAction,
-} from "react"
+  use,
+  useEffect,
+  useState,
+} from 'react'
 
-import { useBrowserNativeTransitions } from "./browser-native"
+import { useBrowserNativeTransitions } from './browser-native'
 
 const ViewTransitionsContext = createContext<
   Dispatch<SetStateAction<(() => void) | null>>
+  // biome-ignore lint/suspicious/noEmptyBlockStatements: intentional
 >(() => () => {})
 
 export function useSetFinishViewTransition() {
@@ -25,9 +24,7 @@ export function ViewTransitions({
 }: Readonly<{
   children: ReactNode
 }>) {
-  const [finishViewTransition, setFinishViewTransition] = useState<
-    (() => void) | null
-  >(null)
+  const [finishViewTransition, setFinishViewTransition] = useState<(() => void) | null>(null)
 
   useEffect(() => {
     if (finishViewTransition) {

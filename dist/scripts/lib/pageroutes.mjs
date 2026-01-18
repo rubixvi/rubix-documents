@@ -1,7 +1,7 @@
-import { Documents } from "../settings/documents.mjs";
+import { Documents } from '../settings/documents.mjs';
 export const Routes = [...Documents];
 function isRoute(node) {
-    return "title" in node && "href" in node;
+    return 'title' in node && 'href' in node;
 }
 function getAllLinks(node) {
     const pages = [];

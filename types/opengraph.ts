@@ -6,7 +6,7 @@ export interface OpenGraphImage {
 }
 
 export interface OpenGraph {
-  type: "website" | "article"
+  type: 'website' | 'article'
   title: string
   description: string
   siteName: string
@@ -14,7 +14,7 @@ export interface OpenGraph {
 }
 
 export interface TwitterCard {
-  card: "summary_large_image" | "summary" | "app" | "player"
+  card: 'summary_large_image' | 'summary' | 'app' | 'player'
   title: string
   description: string
   site: string

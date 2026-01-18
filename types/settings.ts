@@ -17,9 +17,9 @@ import {
   twitterhandle,
   url,
   urlimage,
-} from "@/settings/main"
+} from '@/settings/main'
 
-import { OpenGraph, TwitterCard } from "@/types/opengraph"
+import { OpenGraph, TwitterCard } from '@/types/opengraph'
 
 interface AppSettings {
   name: string
@@ -60,7 +60,7 @@ export const Settings: AppSettings = {
   siteicon,
   keywords,
   openGraph: {
-    type: "website",
+    type: 'website',
     title: sitename,
     description,
     siteName: sitename,
@@ -74,7 +74,7 @@ export const Settings: AppSettings = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: sitename,
     description,
     site: twitterhandle,

@@ -1,20 +1,20 @@
 export const Documents = [
     {
-        heading: "Introduction",
-        title: "Basic Setup",
-        href: "/basic-setup",
+        heading: 'Introduction',
+        title: 'Basic Setup',
+        href: '/basic-setup',
         items: [
             {
-                title: "Installation",
-                href: "/installation",
+                title: 'Installation',
+                href: '/installation',
             },
             {
-                title: "Setup",
-                href: "/setup",
+                title: 'Setup',
+                href: '/setup',
             },
             {
-                title: "Changelog",
-                href: "/changelog",
+                title: 'Changelog',
+                href: '/changelog',
             },
         ],
     },
@@ -22,25 +22,25 @@ export const Documents = [
         spacer: true,
     },
     {
-        title: "Navigation",
-        href: "/navigation",
-        heading: "Documents",
+        title: 'Navigation',
+        href: '/navigation',
+        heading: 'Documents',
     },
     {
-        title: "Structure",
-        href: "/structure",
+        title: 'Structure',
+        href: '/structure',
         items: [
             {
-                title: "Deep",
-                href: "/deep",
+                title: 'Deep',
+                href: '/deep',
                 items: [
                     {
-                        title: "Deeper",
-                        href: "/deeper",
+                        title: 'Deeper',
+                        href: '/deeper',
                         items: [
                             {
-                                title: "Even deeper",
-                                href: "/even-deeper",
+                                title: 'Even deeper',
+                                href: '/even-deeper',
                             },
                         ],
                     },
@@ -52,45 +52,45 @@ export const Documents = [
         spacer: true,
     },
     {
-        title: "Markdown",
-        href: "/markdown",
-        heading: "Components",
+        title: 'Markdown',
+        href: '/markdown',
+        heading: 'Components',
         items: [
             {
-                title: "Cards",
-                href: "/cards",
+                title: 'Cards',
+                href: '/cards',
             },
             {
-                title: "Diagrams",
-                href: "/diagrams",
+                title: 'Diagrams',
+                href: '/diagrams',
             },
             {
-                title: "Filetree",
-                href: "/filetree",
+                title: 'Filetree',
+                href: '/filetree',
             },
             {
-                title: "Lists",
-                href: "/lists",
+                title: 'Lists',
+                href: '/lists',
             },
             {
-                title: "Maths",
-                href: "/maths",
+                title: 'Maths',
+                href: '/maths',
             },
             {
-                title: "Notes",
-                href: "/notes",
+                title: 'Notes',
+                href: '/notes',
             },
             {
-                title: "Steps",
-                href: "/steps",
+                title: 'Steps',
+                href: '/steps',
             },
             {
-                title: "Table",
-                href: "/table",
+                title: 'Table',
+                href: '/table',
             },
             {
-                title: "Tabs",
-                href: "/tabs",
+                title: 'Tabs',
+                href: '/tabs',
             },
         ],
     },

@@ -1,25 +1,22 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import clsx from "clsx"
+import clsx from 'clsx'
+import Link from 'next/link'
 
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export interface TableAnchorProps {
   tocs: { href: string; level: number; text: string }[]
 }
 
 export function TableAnchor({ tocs }: TableAnchorProps) {
-  const handleSmoothScroll = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
-    const id = href.startsWith("#") ? href.slice(1) : href
+    const id = href.startsWith('#') ? href.slice(1) : href
     const targetElement = document.getElementById(id)
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" })
-      window.history.pushState(null, "", href)
+      targetElement.scrollIntoView({ behavior: 'smooth' })
+      window.history.pushState(null, '', href)
     }
   }
 
@@ -41,9 +38,9 @@ export function TableAnchor({ tocs }: TableAnchorProps) {
               scroll={false}
               onClick={(e) => handleSmoothScroll(e, href)}
               className={clsx({
-                "pl-0": level == 2,
-                "pl-3": level == 3,
-                "pl-6": level == 4,
+                'pl-0': level == 2,
+                'pl-3': level == 3,
+                'pl-6': level == 4,
               })}
             >
               {text}

@@ -27,35 +27,18 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          node-version: "24"
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
-      - name: Compile TypeScript
-        run: pnpm tsc --project tsconfig.scripts.json
+      - name: Generate content
+        run: sh .husky/post-process.sh
 
-      - name: Rename .js files to .mjs
-        run: |
-          for file in dist/scripts/**/*.js; do
-            mv "$file" "${file%.js}.mjs"
-          done
-
-      - name: Post-process scripts
-        run: |
-          for file in dist/scripts/scripts/content.mjs dist/scripts/lib/pageroutes.mjs; do
-            if [ -f "$file" ]; then
-              echo "Processing $file..."
-              sed -i 's|import { Documents } from "@/settings/documents"|import { Documents } from "../settings/documents.mjs"|g' "$file"
-              if [ $? -ne 0 ]; then
-                echo "Error: Failed to update $file"
-                exit 1
-              fi
-              echo "$file updated successfully."
-            else
-              echo "$file not found!"
-            fi
-          done
-
-      - name: Run content script
-        run: node dist/scripts/scripts/content.mjs
+      - name: Upload search data artifact
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: search-data
+          path: public/search-data/
+          retention-days: 30

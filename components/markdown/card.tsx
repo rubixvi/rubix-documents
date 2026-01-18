@@ -1,8 +1,8 @@
-import { PropsWithChildren } from "react"
-import Image from "next/image"
-import { iconMap } from "@/settings/icons"
-import clsx from "clsx"
-import { Link } from "lib/transition"
+import clsx from 'clsx'
+import { Link } from 'lib/transition'
+import Image from 'next/image'
+import { PropsWithChildren } from 'react'
+import { iconMap } from '@/settings/icons'
 
 type CardProps = PropsWithChildren & {
   subtitle?: string
@@ -13,7 +13,7 @@ type CardProps = PropsWithChildren & {
   className?: string
   external?: boolean
   icon?: keyof typeof iconMap
-  variant?: "normal" | "small" | "image"
+  variant?: 'normal' | 'small' | 'image'
 }
 
 export function Card({
@@ -25,44 +25,40 @@ export function Card({
   className,
   external = false,
   icon,
-  variant = "normal",
+  variant = 'normal',
   children,
 }: CardProps) {
   const IconComponent = icon ? iconMap[icon] : null
-  const ExternalIcon = iconMap["arrowUpRight"]
+  const ExternalIcon = iconMap['arrowUpRight']
 
   const content = (
     <div
       className={clsx(
-        "group relative flex overflow-hidden rounded-lg border bg-white shadow-md transition-shadow duration-300 ease-in-out hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-900 hover:dark:shadow-md",
-        variant === "small"
-          ? "items-center space-x-2 p-3"
-          : variant === "image"
-            ? "h-full flex-col justify-between p-0"
-            : "h-full flex-col justify-between p-4",
+        'group relative flex overflow-hidden rounded-lg border bg-white shadow-md transition-shadow duration-300 ease-in-out hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-900 hover:dark:shadow-md',
+        variant === 'small'
+          ? 'items-center space-x-2 p-3'
+          : variant === 'image'
+            ? 'h-full flex-col justify-between p-0'
+            : 'h-full flex-col justify-between p-4',
         className
       )}
     >
-      {external && href && variant !== "image" && (
+      {external && href && variant !== 'image' && (
         <div
           className={clsx(
-            "absolute top-2 transform text-gray-500 transition-transform duration-300 ease-in-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-black dark:text-gray-400 dark:group-hover:text-white",
-            variant === "small" ? "right-0" : "right-2"
+            'absolute top-2 transform text-gray-500 transition-transform duration-300 ease-in-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-black dark:text-gray-400 dark:group-hover:text-white',
+            variant === 'small' ? 'right-0' : 'right-2'
           )}
         >
           <ExternalIcon className="h-4 w-4" />
         </div>
       )}
-      {IconComponent && (
-        <IconComponent className="text-gray-500 dark:text-gray-300" />
-      )}
+      {IconComponent && <IconComponent className="text-gray-500 dark:text-gray-300" />}
       <div>
-        {subtitle && variant === "normal" && (
-          <p className="my-1! text-xs font-semibold text-gray-500 dark:text-gray-400">
-            {subtitle}
-          </p>
+        {subtitle && variant === 'normal' && (
+          <p className="my-1! text-xs font-semibold text-gray-500 dark:text-gray-400">{subtitle}</p>
         )}
-        {image && variant === "image" && (
+        {image && variant === 'image' && (
           <Image
             src={image}
             alt={title}
@@ -73,18 +69,14 @@ export function Card({
         )}
         <div
           className={clsx(
-            "font-semibold transition-all duration-300 group-hover:font-bold",
-            variant === "small"
-              ? "text-sm"
-              : variant === "image"
-                ? "p-4 text-sm"
-                : "text-lg",
+            'font-semibold transition-all duration-300 group-hover:font-bold',
+            variant === 'small' ? 'text-sm' : variant === 'image' ? 'p-4 text-sm' : 'text-lg',
             className
           )}
         >
           {title}
         </div>
-        {description && variant === "normal" && (
+        {description && variant === 'normal' && (
           <p className="my-2! text-sm font-normal text-gray-600 dark:text-gray-400">
             {description}
           </p>
@@ -97,8 +89,8 @@ export function Card({
   return href ? (
     <Link
       href={href}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noopener noreferrer" : undefined}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
       className="no-underline!"
     >
       {content}
@@ -109,9 +101,5 @@ export function Card({
 }
 
 export function CardGrid({ children }: PropsWithChildren) {
-  return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-3">
-      {children}
-    </div>
-  )
+  return <div className="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-3">{children}</div>
 }

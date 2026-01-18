@@ -1,11 +1,11 @@
-import { startTransition, useCallback, useMemo } from "react"
 import {
   AppRouterInstance,
   NavigateOptions,
-} from "next/dist/shared/lib/app-router-context.shared-runtime"
-import { useRouter as useNextRouter } from "next/navigation"
+} from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import { useRouter as useNextRouter } from 'next/navigation'
+import { startTransition, useCallback, useMemo } from 'react'
 
-import { useSetFinishViewTransition } from "./transition-context"
+import { useSetFinishViewTransition } from './transition-context'
 
 export interface TransitionOptions {
   onTransitionReady?: () => void
@@ -24,7 +24,7 @@ export function useTransitionRouter() {
 
   const triggerTransition = useCallback(
     (cb: () => void, { onTransitionReady }: TransitionOptions = {}) => {
-      if ("startViewTransition" in document) {
+      if ('startViewTransition' in document) {
         const transition = document.startViewTransition(
           () =>
             new Promise<void>((resolve) => {
@@ -46,10 +46,7 @@ export function useTransitionRouter() {
   )
 
   const push = useCallback(
-    (
-      href: string,
-      { onTransitionReady, ...options }: NavigateOptionsWithTransition = {}
-    ) => {
+    (href: string, { onTransitionReady, ...options }: NavigateOptionsWithTransition = {}) => {
       triggerTransition(() => router.push(href, options), {
         onTransitionReady,
       })
@@ -58,10 +55,7 @@ export function useTransitionRouter() {
   )
 
   const replace = useCallback(
-    (
-      href: string,
-      { onTransitionReady, ...options }: NavigateOptionsWithTransition = {}
-    ) => {
+    (href: string, { onTransitionReady, ...options }: NavigateOptionsWithTransition = {}) => {
       triggerTransition(() => router.replace(href, options), {
         onTransitionReady,
       })
