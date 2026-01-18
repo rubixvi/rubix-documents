@@ -22,42 +22,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20" # Updated to Node.js 20 as per the GitHub Actions change
+          node-version: "24"
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install --frozen-lockfile
 
-      - name: Compile TypeScript
-        run: npx tsc --project tsconfig.scripts.json
-
-      - name: Rename .js files to .mjs
-        run: |
-          find dist/scripts -name "*.js" -type f | while read file; do
-            mv "$file" "${file%.js}.mjs"
-          done
-
-      - name: Post-process content.mjs
-        run: |
-          if [ -f "dist/scripts/scripts/content.mjs" ]; then
-            echo "Processing content.mjs..."
-            sed -i 's|from '"'"'@/lib/pageroutes'"'"'|from '"'"'../../lib/pageroutes.mjs'"'"'|g' dist/scripts/scripts/content.mjs
-            sed -i 's|from '"'"'@/settings/documents'"'"'|from '"'"'../../settings/documents.mjs'"'"'|g' dist/scripts/scripts/content.mjs
-            sed -i 's|from '"'"'@/\([^'"'"']*\)'"'"'|from '"'"'../../\1.mjs'"'"'|g' dist/scripts/scripts/content.mjs
-            echo "content.mjs processed successfully"
-          fi
-
-      - name: Post-process pageroutes.mjs
-        run: |
-          if [ -f "dist/scripts/lib/pageroutes.mjs" ]; then
-            echo "Processing pageroutes.mjs..."
-            sed -i 's|from '"'"'@/settings'"'"'|from '"'"'../settings/index.mjs'"'"'|g' dist/scripts/lib/pageroutes.mjs
-            sed -i 's|from '"'"'@/settings/documents'"'"'|from '"'"'../settings/documents.mjs'"'"'|g' dist/scripts/lib/pageroutes.mjs
-            sed -i 's|from '"'"'@/\([^'"'"']*\)'"'"'|from '"'"'../\1.mjs'"'"'|g' dist/scripts/lib/pageroutes.mjs
-            echo "pageroutes.mjs processed successfully"
-          fi
-
-      - name: Run content script
-        run: node dist/scripts/scripts/content.mjs
+      - name: Generate content
+        run: sh .husky/post-process.sh
 
       - name: Upload search data artifact
         uses: actions/upload-artifact@v4
