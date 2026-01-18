@@ -6,7 +6,10 @@
     "content": "## Added\n\n**Linting and Formatting**:\n\n* Added `pnpm run lint` and `pnpm run lint:fix` scripts to automate linting tasks.\n* Added `pnpm run format` and `pnpm run format:check` scripts to ensure consistent code formatting.\n\n**SEO Enhancements**:\n\n* Added an SEO component to MDX pages to dynamically include `keywords` and `lastModified` metadata for improved SEO generation.\n\n## Updated\n\n**Next.js Upgrade**:\n\n* Upgraded the project from **Next.js 14** to **Next.js 15**, leveraging the latest features and performance improvements.\n\n**Codebase Improvements**:\n\n* Reordered imports across the project files for better consistency and readability.\n\n**Mermaid Component**:\n\n* Fixed an ID bug that caused rendering issues when multiple Mermaid diagrams were included in MDX pages.\n* Improved initialization and rendering logic to prevent duplicate diagram rendering.\n",
     "_searchMeta": {
       "cleanContent": "added linting and formatting: added pnpm run lint and pnpm run lint:fix scripts to automate linting tasks added pnpm run format and pnpm run format:check scripts to ensure consistent code formatting seo enhancements: added an seo component to mdx pages to dynamically include keywords and lastmodified metadata for improved seo generation updated next js upgrade: upgraded the project from next js 14 to next js 15 leveraging the latest features and performance improvements codebase improvements: reordered imports across the project files for better consistency and readability mermaid component: fixed an id bug that caused rendering issues when multiple mermaid diagrams were included in mdx pages improved initialization and rendering logic to prevent duplicate diagram rendering",
-      "headings": ["Added", "Updated"],
+      "headings": [
+        "Added",
+        "Updated"
+      ],
       "keywords": [
         "changelog",
         "guide",
@@ -79,7 +82,12 @@
     "content": "To install and edit the Documents, you need to have several prerequisites in place. Here's a list of all the essential pre-requisites\nfor setting up and working on this project.\n\n[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Frubixvi%2Frubix-documents\\&project-name=my-documents\\&repository-name=my-documents\\&demo-title=Documents\\&demo-description=This%20Document%20Starter%20Kit%20is%20developed%20with%20Next.js%2C%20Tailwind%20CSS%20and%20TypeScript.%20It%20serves%20as%20a%20flexible%20and%20scalable%20foundation%20for%20building%20documentation%20websites%20or%20content-driven%20projects.\\&demo-url=https%3A%2F%2Frubix-documents.vercel.app%2F\\&demo-image=https%3A%2F%2Fgithub.com%2Frubixvi%2Frubix-documents%2Fblob%2Fmain%2Fpublic%2Fscreens%2Fscreen-1.png)\n\n## Prerequisites\n\n## Installation\n\n## Optional\n\n## Important Information\n\nThe project's search functionality relies on the Husky's automation to build `search-data/documents.json` ensure git commit is performed to generate this file.\n",
     "_searchMeta": {
       "cleanContent": "to install and edit the documents you need to have several prerequisites in place here s a list of all the essential pre-requisites for setting up and working on this project deploy with vercel https: vercel com new clone repository-url https 3a 2f 2fgithub com 2frubixvi 2frubix-documents project-name my-documents repository-name my-documents demo-title documents demo-description this 20document 20starter 20kit 20is 20developed 20with 20next js 2c 20tailwind 20css 20and 20typescript 20it 20serves 20as 20a 20flexible 20and 20scalable 20foundation 20for 20building 20documentation 20websites 20or 20content-driven 20projects demo-url https 3a 2f 2frubix-documents vercel app 2f demo-image https 3a 2f 2fgithub com 2frubixvi 2frubix-documents 2fblob 2fmain 2fpublic 2fscreens 2fscreen-1 png prerequisites installation optional important information the project s search functionality relies on the husky s automation to build search-data documents json ensure git commit is performed to generate this file",
-      "headings": ["Prerequisites", "Installation", "Optional", "Important Information"],
+      "headings": [
+        "Prerequisites",
+        "Installation",
+        "Optional",
+        "Important Information"
+      ],
       "keywords": [
         "installation",
         "github",
@@ -148,7 +156,11 @@
     "content": "This section introduces the different card styles available in the system, from compact small cards to visually rich image cards. Each example is paired with JSX code snippets, providing you with a practical guide to incorporate these components seamlessly into your project.\n\n## Small Card\n\n```jsx\n<CardGrid>\n  <Card\n    title=\"Instructions\"\n    href=\"/docs/basic-setup/installation\"\n    icon=\"alignJustify\"\n    variant=\"small\"\n    description=\"test description\"\n  />\n  <Card\n    title=\"Setup\"\n    href=\"/docs/basic-setup/setup\"\n    icon=\"alignJustify\"\n    variant=\"small\"\n  />\n  <Card\n    title=\"Rubix Studios\"\n    href=\"https://rubixstudios.com.au\"\n    icon=\"alignJustify\"\n    external={true}\n    variant=\"small\"\n  />\n</CardGrid>\n```\n\n## Large Card\n\n```jsx\n<CardGrid>\n  <Card\n    subtitle=\"Instructions\"\n    title=\"Installation\"\n    description=\"Get started with Documents using our quick start installation guide to get your project started.\"\n    href=\"/docs/basic-setup/installation\"\n  />\n  <Card\n    subtitle=\"Setup\"\n    title=\"Site Settings\"\n    description=\"Setting up your Documents projects layout, links and search engine optimisation.\"\n    href=\"/docs/basic-setup/setup\"\n  />\n  <Card\n    subtitle=\"Support\"\n    title=\"Rubix Studios\"\n    description=\"Australia's leading branding, marketing and web development company.\"\n    href=\"https://rubixstudios.com.au\"\n    external={true}\n  />\n</CardGrid>\n```\n\n## Image Card\n\n```jsx\n<CardGrid>\n  <Card\n    title=\"Instructions\"\n    href=\"/docs/introduction/installation\"\n    image=\"/images/og-image.png\"\n    variant=\"image\"\n  />\n  <Card\n    title=\"Setup\"\n    href=\"/docs/introduction/setup\"\n    image=\"/images/og-image.png\"\n    variant=\"image\"\n  />\n  <Card\n    title=\"Rubix Studios\"\n    href=\"https://www.rubixstudios.com.au\"\n    image=\"/images/og-image.png\"\n    external={true}\n    variant=\"image\"\n  />\n</CardGrid>\n```\n",
     "_searchMeta": {
       "cleanContent": "this section introduces the different card styles available in the system from compact small cards to visually rich image cards each example is paired with jsx code snippets providing you with a practical guide to incorporate these components seamlessly into your project small card large card image card",
-      "headings": ["Small Card", "Large Card", "Image Card"],
+      "headings": [
+        "Small Card",
+        "Large Card",
+        "Image Card"
+      ],
       "keywords": [
         "Small Card",
         "Large Card",
@@ -168,7 +180,11 @@
     "content": "Diagrams are powerful tools for visualizing processes, relationships, and decisions. This section showcases different types of diagrams created using **Mermaid**, complete with examples and reusable code snippets to integrate into your projects.\n\n## Flowchart\n\nA flowchart represents a sequence of steps or processes in a visual format. Use this diagram to map workflows, decision-making processes, or operational flows.\n\n```jsx\n<Mermaid\n  chart={\\`\n    graph TD;\n    Start --> Task1;\n    Task1 --> Task2;\n    Task2 --> End;\n  \\`}\n/>\n```\n\n## Decision Tree\n\nDecision trees illustrate choices and possible outcomes, making them ideal for decision-making workflows or processes involving multiple paths.\n\n```jsx\n<Mermaid\n  chart={\\`\n    graph TD;\n    A[Start] --> B{Is it raining?};\n    B -->|Yes| C[Take an umbrella];\n    B -->|No| D[Enjoy the weather];\n    C --> E[Go outside];\n    D --> E;\n  \\`}\n/>\n```\n\n## Entity-Relationship Diagram\n\nEntity-relationship diagrams (ERDs) are used to model relationships between entities in a system. They are widely used in database design and system architecture planning.\n\n```jsx\n<Mermaid\n  chart={\\`\n    erDiagram\n    CUSTOMER ||--o{ ORDER : places\n    ORDER ||--|{ LINE-ITEM : contains\n    PRODUCT ||--o{ LINE-ITEM : \"included in\"\n    CUSTOMER {\n        string name\n        string email\n    }\n    ORDER {\n        int orderNumber\n        date orderDate\n    }\n    LINE-ITEM {\n        int quantity\n        float price\n    }\n    PRODUCT {\n        int productId\n        string name\n        float price\n    }\n  \\`}\n/>\n```\n\nEach of these diagrams serves a specific purpose and Mermaid makes it easy to generate them dynamically. Feel free to experiment with the provided code snippets and adapt them to your needs.\n",
     "_searchMeta": {
       "cleanContent": "diagrams are powerful tools for visualizing processes relationships and decisions this section showcases different types of diagrams created using mermaid complete with examples and reusable code snippets to integrate into your projects flowchart a flowchart represents a sequence of steps or processes in a visual format use this diagram to map workflows decision-making processes or operational flows decision tree decision trees illustrate choices and possible outcomes making them ideal for decision-making workflows or processes involving multiple paths entity-relationship diagram entity-relationship diagrams erds are used to model relationships between entities in a system they are widely used in database design and system architecture planning each of these diagrams serves a specific purpose and mermaid makes it easy to generate them dynamically feel free to experiment with the provided code snippets and adapt them to your needs",
-      "headings": ["Flowchart", "Decision Tree", "Entity-Relationship Diagram"],
+      "headings": [
+        "Flowchart",
+        "Decision Tree",
+        "Entity-Relationship Diagram"
+      ],
       "keywords": [
         "Flowchart",
         "Decision Tree",
@@ -188,7 +204,9 @@
     "content": "This section demonstrates the structure of a file tree using the `FileTree` component. Below is an example showcasing folders and files organized hierarchically for a project setup.\n\n## How to Use\n\nIntegrate the `FileTree` component into your project to visually represent file and folder structures. This is particularly useful for documentation, tutorials, or providing users with an overview of your project's architecture.\n\n### JSX Code Example\n\nHere is how you can define the file tree structure in for use in your project:\n\n```jsx\n<FileTree>\n  <Folder name=\"src\" label=\"Source Code\">\n    <File name=\"index.tsx\" label=\"Index File\" />\n    <Folder name=\"components\" label=\"Components\">\n      <File name=\"button.tsx\" label=\"Button Component\" />\n      <File name=\"input.tsx\" label=\"Input Component\" />\n    </Folder>\n    <Folder name=\"pages\" label=\"Pages\">\n      <File name=\"home.tsx\" label=\"Home Page\" />\n      <File name=\"about.tsx\" label=\"About Page\" />\n    </Folder>\n  </Folder>\n</FileTree>\n```\n\nUse this code as a template to set up your own file tree structure and customize it as needed.\n",
     "_searchMeta": {
       "cleanContent": "this section demonstrates the structure of a file tree using the filetree component below is an example showcasing folders and files organized hierarchically for a project setup how to use integrate the filetree component into your project to visually represent file and folder structures this is particularly useful for documentation tutorials or providing users with an overview of your project s architecture jsx code example here is how you can define the file tree structure in for use in your project: use this code as a template to set up your own file tree structure and customize it as needed",
-      "headings": ["How to Use"],
+      "headings": [
+        "How to Use"
+      ],
       "keywords": [
         "How to Use",
         "FileTree",
@@ -226,7 +244,12 @@
     "content": "Learn how to create and render different types of lists in the Documents boilerplate. Examples include checklists, ordered lists, unordered lists and nested lists.\n\n## Checklist\n\n* \\[x] Write the press release\n* \\[ ] Update the website\n* \\[ ] Contact the media\n\n```jsx\n- [x] Write the press release\n- [ ] Update the website\n- [ ] Contact the media\n```\n\n## Simple List\n\n* Item 1\n* Item 2\n* Item 3\n\n```jsx\n- Item 1\n- Item 2\n- Item 3\n```\n\n## Number List\n\n1. Research\n2. Draft the content\n3. Review and edit\n4. Publish\n\n```jsx\n1. Research\n2. Draft the content\n3. Review and edit\n4. Publish\n```\n\n## Nested List\n\n* Main Category 1\n  * Sub Item 1.1\n  * Sub Item 1.2\n* Main Category 2\n  * Sub Item 2.1\n  * Sub Item 2.2\n\n```jsx\n- Main Category 1\n  - Sub Item 1.1\n  - Sub Item 1.2\n- Main Category 2\n  - Sub Item 2.1\n  - Sub Item 2.2\n```\n\nUse these examples as a foundation to create and customize lists that fit your project's needs.\n",
     "_searchMeta": {
       "cleanContent": "learn how to create and render different types of lists in the documents boilerplate examples include checklists ordered lists unordered lists and nested lists checklist x write the press release update the website contact the media simple list item 1 item 2 item 3 number list research draft the content review and edit publish nested list main category 1 sub item 1 1 sub item 1 2 main category 2 sub item 2 1 sub item 2 2 use these examples as a foundation to create and customize lists that fit your project s needs",
-      "headings": ["Checklist", "Simple List", "Number List", "Nested List"],
+      "headings": [
+        "Checklist",
+        "Simple List",
+        "Number List",
+        "Nested List"
+      ],
       "keywords": [
         "Checklist",
         "Simple List",
@@ -281,8 +304,18 @@
     "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime, molestiae, facilis aperiam et, error illum vel ullam? Quis architecto dolore ullam\n\n## Standard Note\n\n## Success Note\n\n## Warning Note\n\n## Danger Note\n",
     "_searchMeta": {
       "cleanContent": "lorem ipsum dolor sit amet consectetur adipisicing elit numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime molestiae facilis aperiam et error illum vel ullam quis architecto dolore ullam standard note success note warning note danger note",
-      "headings": ["Standard Note", "Success Note", "Warning Note", "Danger Note"],
-      "keywords": ["Standard Note", "Success Note", "Warning Note", "Danger Note"]
+      "headings": [
+        "Standard Note",
+        "Success Note",
+        "Warning Note",
+        "Danger Note"
+      ],
+      "keywords": [
+        "Standard Note",
+        "Success Note",
+        "Warning Note",
+        "Danger Note"
+      ]
     }
   },
   {
@@ -292,8 +325,14 @@
     "content": "The `<Step>` and `<StepItem>` components allow you to create structured step-by-step guides in your documentation. These components are particularly useful when you want to break down a process or tutorial into easy-to-follow stages.\n\n## Steps\n\nTo create a step-by-step guide in your MDX, you can use the following structure:\n",
     "_searchMeta": {
       "cleanContent": "the step and stepitem components allow you to create structured step-by-step guides in your documentation these components are particularly useful when you want to break down a process or tutorial into easy-to-follow stages steps to create a step-by-step guide in your mdx you can use the following structure:",
-      "headings": ["Steps"],
-      "keywords": ["Steps", "<Step>", "<StepItem>"]
+      "headings": [
+        "Steps"
+      ],
+      "keywords": [
+        "Steps",
+        "<Step>",
+        "<StepItem>"
+      ]
     }
   },
   {
@@ -304,7 +343,11 @@
     "_searchMeta": {
       "cleanContent": "lorem ipsum dolor sit amet consectetur adipisicing elit numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime molestiae facilis aperiam et error illum vel ullam quis architecto dolore ullam syntax description test text:------------ :---------: ----------:header title here s thisparagraph text and morestrikethrough text feature documentation link notes:------------ :----------------: -----------------------:feature a docs for more info click herefeature b guide see the full guide herefeature c setup setup instructions",
       "headings": [],
-      "keywords": ["Feature A", "Feature B", "Feature C"]
+      "keywords": [
+        "Feature A",
+        "Feature B",
+        "Feature C"
+      ]
     }
   },
   {
@@ -314,8 +357,12 @@
     "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime, molestiae, facilis aperiam et, error illum vel ullam? Quis architecto dolore ullam\n\n## Code Examples with switch\n\nHere a custom tab component from shadcn ui is used.\n",
     "_searchMeta": {
       "cleanContent": "lorem ipsum dolor sit amet consectetur adipisicing elit numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime molestiae facilis aperiam et error illum vel ullam quis architecto dolore ullam code examples with switch here a custom tab component from shadcn ui is used",
-      "headings": ["Code Examples with switch"],
-      "keywords": ["Code Examples with switch"]
+      "headings": [
+        "Code Examples with switch"
+      ],
+      "keywords": [
+        "Code Examples with switch"
+      ]
     }
   },
   {
@@ -326,7 +373,14 @@
     "_searchMeta": {
       "cleanContent": "",
       "headings": [],
-      "keywords": ["navigation", "sidebar", "menus", "mdx", "nextjs", "documents"]
+      "keywords": [
+        "navigation",
+        "sidebar",
+        "menus",
+        "mdx",
+        "nextjs",
+        "documents"
+      ]
     }
   },
   {
@@ -336,8 +390,18 @@
     "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime, molestiae, facilis aperiam et, error illum vel ullam? Quis architecto dolore ullam\n\n* \\[x] Write the press release\n* \\[ ] Update the website\n* \\[ ] Contact the media\n\n| Syntax        | Description |   Test Text |\n| :------------ | :---------: | ----------: |\n| Header        |    Title    | Here's this |\n| Paragraph     |    Text     |    And more |\n| Strikethrough |             |    ~~Text~~ |\n\n## Getting Started\n\nTo begin using the Documentation Template, follow these simple steps:\n\n* Start by cloning the repository to your local machine.\n\nLorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quae iure nulla deserunt dolore quam pariatur minus sapiente accusantium. Optio, necessitatibus sequi. Veritatis, aspernatur? Possimus quis repellat eum vitae eveniet.\n\n## Blockquotes\n\nBlockquotes are useful for emphasizing key points or quoting external sources:\n\n> \"Documentation is a love letter that you write to your future self.\" - Damian Conway\n\nFeel free to use blockquotes to highlight important information or quotes relevant to your documentation.\n\n## Code Examples with switch\n\nHere a custom tab component from shadcn ui is used.\n\n## Conclusion\n\nAdding some random stuff to change the code\n",
     "_searchMeta": {
       "cleanContent": "lorem ipsum dolor sit amet consectetur adipisicing elit numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime molestiae facilis aperiam et error illum vel ullam quis architecto dolore ullam x write the press release update the website contact the media syntax description test text:------------ :---------: ----------:header title here s thisparagraph text and morestrikethrough text getting started to begin using the documentation template follow these simple steps: start by cloning the repository to your local machine lorem ipsum dolor sit amet consectetur adipisicing elit reprehenderit quae iure nulla deserunt dolore quam pariatur minus sapiente accusantium optio necessitatibus sequi veritatis aspernatur possimus quis repellat eum vitae eveniet blockquotes blockquotes are useful for emphasizing key points or quoting external sources: documentation is a love letter that you write to your future self - damian conway feel free to use blockquotes to highlight important information or quotes relevant to your documentation code examples with switch here a custom tab component from shadcn ui is used conclusion adding some random stuff to change the code",
-      "headings": ["Getting Started", "Blockquotes", "Code Examples with switch", "Conclusion"],
-      "keywords": ["Getting Started", "Blockquotes", "Code Examples with switch", "Conclusion"]
+      "headings": [
+        "Getting Started",
+        "Blockquotes",
+        "Code Examples with switch",
+        "Conclusion"
+      ],
+      "keywords": [
+        "Getting Started",
+        "Blockquotes",
+        "Code Examples with switch",
+        "Conclusion"
+      ]
     }
   },
   {
@@ -404,8 +468,18 @@
     "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime, molestiae, facilis aperiam et, error illum vel ullam? Quis architecto dolore ullam\n\n* \\[x] Write the press release\n* \\[ ] Update the website\n* \\[ ] Contact the media\n\n| Syntax        | Description |   Test Text |\n| :------------ | :---------: | ----------: |\n| Header        |    Title    | Here's this |\n| Paragraph     |    Text     |    And more |\n| Strikethrough |             |    ~~Text~~ |\n\n## Getting Started\n\nTo begin using the Documentation Template, follow these simple steps:\n\n* Start by cloning the repository to your local machine.\n\nLorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quae iure nulla deserunt dolore quam pariatur minus sapiente accusantium. Optio, necessitatibus sequi. Veritatis, aspernatur? Possimus quis repellat eum vitae eveniet.\n\n## Blockquotes\n\nBlockquotes are useful for emphasizing key points or quoting external sources:\n\n> \"Documentation is a love letter that you write to your future self.\" - Damian Conway\n\nFeel free to use blockquotes to highlight important information or quotes relevant to your documentation.\n\n## Code Examples with switch\n\nHere a custom tab component from shadcn ui is used.\n\n## Conclusion\n\nThank you for choosing the Documentation Template for your project. Whether you're documenting software, APIs, or processes, we're here to support you in creating clear and effective documentation. Happy documenting!\n",
     "_searchMeta": {
       "cleanContent": "lorem ipsum dolor sit amet consectetur adipisicing elit numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime molestiae facilis aperiam et error illum vel ullam quis architecto dolore ullam x write the press release update the website contact the media syntax description test text:------------ :---------: ----------:header title here s thisparagraph text and morestrikethrough text getting started to begin using the documentation template follow these simple steps: start by cloning the repository to your local machine lorem ipsum dolor sit amet consectetur adipisicing elit reprehenderit quae iure nulla deserunt dolore quam pariatur minus sapiente accusantium optio necessitatibus sequi veritatis aspernatur possimus quis repellat eum vitae eveniet blockquotes blockquotes are useful for emphasizing key points or quoting external sources: documentation is a love letter that you write to your future self - damian conway feel free to use blockquotes to highlight important information or quotes relevant to your documentation code examples with switch here a custom tab component from shadcn ui is used conclusion thank you for choosing the documentation template for your project whether you re documenting software apis or processes we re here to support you in creating clear and effective documentation happy documenting",
-      "headings": ["Getting Started", "Blockquotes", "Code Examples with switch", "Conclusion"],
-      "keywords": ["Getting Started", "Blockquotes", "Code Examples with switch", "Conclusion"]
+      "headings": [
+        "Getting Started",
+        "Blockquotes",
+        "Code Examples with switch",
+        "Conclusion"
+      ],
+      "keywords": [
+        "Getting Started",
+        "Blockquotes",
+        "Code Examples with switch",
+        "Conclusion"
+      ]
     }
   }
 ]
