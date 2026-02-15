@@ -1,7 +1,20 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.3.15/schema.json",
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-  "files": { "includes": ["**", "!!**/dist", "!!**/public"] },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**",
+      "!node_modules",
+      "!.next",
+      "!dist",
+      "!build",
+      "!out",
+      "!src/components/ui",
+      "!contents/docs",
+      "!public/search-data"
+    ]
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -26,16 +39,9 @@
       ".yarn/versions",
       "!**/.pnpm-debug.log",
       "!**/pnpm-lock.yaml",
-      "!./.next/",
-      "!./out/",
-      "!./build",
       "!**/.DS_Store",
       "!**/*.pem",
-      "!**/.env",
-      "!./dist",
-      "!**/dist",
-      "!public/search-data",
-      "!contents/docs"
+      "!**/.env"
     ]
   },
   "linter": {
