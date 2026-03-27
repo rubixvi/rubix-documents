@@ -7,6 +7,11 @@ interface StepProps {
   children: ReactNode
 }
 
+interface StepItemProps {
+  title?: string
+  children: ReactNode
+}
+
 export function Step({ children }: PropsWithChildren<StepProps>) {
   const length = Children.count(children)
 
@@ -22,11 +27,6 @@ export function Step({ children }: PropsWithChildren<StepProps>) {
       ))}
     </div>
   )
-}
-
-interface StepItemProps {
-  title?: string
-  children: ReactNode
 }
 
 export function StepItem({ children, title }: StepItemProps) {

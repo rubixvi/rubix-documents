@@ -1,15 +1,15 @@
-import { Link } from 'lib/transition'
 import Image from 'next/image'
+import { Link } from '@/lib/transition'
 
 import { Settings } from '@/types/settings'
 
-export function Logo() {
+export const Logo = () => {
   return (
     <Link
       href="/"
       title={`${Settings.title} main logo`}
       aria-label={`${Settings.title} main logo`}
-      className="flex items-center gap-2.5"
+      className="items-center gap-2.5 hidden md:flex"
     >
       <Image
         src={Settings.siteicon}

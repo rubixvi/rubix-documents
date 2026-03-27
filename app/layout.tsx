@@ -53,9 +53,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html data-scroll-behavior="smooth" lang="en" suppressHydrationWarning>
       {Settings.gtmconnected && <GoogleTagManager gtmId={Settings.gtm} />}
-      <body className={`${inter.variable} font-regular`}>
+      <body className={`${inter.variable} font-regular antialiased`}>
         <Providers>
           <Navbar />
           <main className="h-auto px-5 sm:px-8">{children}</main>

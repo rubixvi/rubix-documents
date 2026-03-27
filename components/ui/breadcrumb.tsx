@@ -1,4 +1,4 @@
-import { Slot } from '@radix-ui/react-slot'
+import { Slot } from 'radix-ui'
 import * as React from 'react'
 import { BsThreeDots } from 'react-icons/bs'
 import { LuChevronRight } from 'react-icons/lu'
@@ -39,8 +39,7 @@ function BreadcrumbLink({
 }: React.ComponentProps<'a'> & {
   asChild?: boolean
 }) {
-  const Comp = asChild ? Slot : 'a'
-
+  const Comp = asChild ? Slot.Root : 'a'
   return (
     <Comp
       data-slot="breadcrumb-link"

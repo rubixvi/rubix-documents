@@ -30,7 +30,7 @@ export default function Search() {
   const [filteredResults, setFilteredResults] = useState<search[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const debouncedSearch = useMemo(
+  const debounceSearch = useMemo(
     () =>
       debounce((input) => {
         setIsLoading(true)
@@ -65,8 +65,8 @@ export default function Search() {
       return
     }
 
-    debouncedSearch(searchedInput)
-  }, [searchedInput, debouncedSearch])
+    debounceSearch(searchedInput)
+  }, [searchedInput, debounceSearch])
 
   function renderDocuments(documents: Document[], parentHref = '/docs'): React.ReactNode[] {
     if (!Array.isArray(documents) || documents.length === 0) {

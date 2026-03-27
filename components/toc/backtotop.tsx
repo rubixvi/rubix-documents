@@ -4,7 +4,7 @@ import type { ReactElement } from 'react'
 import { useEffect, useRef } from 'react'
 import { LuArrowUp } from 'react-icons/lu'
 
-function ScrollUp() {
+function ScrollToTop() {
   if (typeof window !== 'undefined') {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -30,7 +30,7 @@ export function BackToTop(): ReactElement {
   return (
     <button
       ref={ref}
-      onClick={ScrollUp}
+      onClick={ScrollToTop}
       title="Scroll to top"
       aria-label="Scroll to top"
       type="button"
