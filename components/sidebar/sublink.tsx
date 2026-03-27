@@ -22,9 +22,7 @@ export default function SubLink(props: Paths & { level: number; isSheet: boolean
     }
   }, [path, props])
 
-  if (!isRoute(props)) {
-    return null
-  }
+  if (!isRoute(props)) return
 
   const { title, href, items, noLink, level, isSheet } = props
 

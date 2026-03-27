@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { LuArrowUpRight, LuGithub } from 'react-icons/lu'
 import Anchor from '@/components/anchor'
@@ -14,13 +16,9 @@ export function Navbar() {
     <nav className="bg-opacity-5 sticky top-0 z-50 mx-auto flex h-16 w-full items-center justify-between border-b p-1 px-2 backdrop-blur-xl backdrop-filter sm:p-3 md:gap-2 md:px-4">
       <div className="flex items-center gap-5">
         <SheetLeft />
-        <div className="flex items-center gap-6">
-          <div className="hidden md:flex">
-            <Logo />
-          </div>
-          <div className="hidden items-center gap-5 text-sm font-medium text-muted-foreground md:flex">
-            <NavMenu />
-          </div>
+        <Logo />
+        <div className="hidden items-center gap-5 text-sm font-medium text-muted-foreground md:flex">
+          <NavMenu />
         </div>
       </div>
 
@@ -30,13 +28,13 @@ export function Navbar() {
           {GitHubLink.href && (
             <Link
               href={GitHubLink.href}
-              className={buttonVariants({ variant: 'outline', size: 'icon' })}
+              className={buttonVariants({ variant: 'outline', size: 'icon-lg' })}
               target="_blank"
               rel="noopener noreferrer"
               title="View the repository on GitHub"
               aria-label="View the repository on GitHub"
             >
-              <LuGithub className="h-[1.1rem] w-[1.1rem]" />
+              <LuGithub className="size-4" />
             </Link>
           )}
           <ModeToggle />

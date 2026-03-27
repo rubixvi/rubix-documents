@@ -66,6 +66,7 @@ Built for technical and content-driven projects, this starter kit supports Markd
 git clone https://github.com/rubixvi/rubix-documents.git
 cd rubix-documents
 pnpm install
+pnpm generate-content-json
 pnpm run dev
 ```
 

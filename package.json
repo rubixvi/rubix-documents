@@ -9,28 +9,20 @@
     "start": "next start",
     "clean": "pnpm biome check --write",
     "update": "pnpm update --latest --recursive && pnpm install && pnpm prune && pnpm dedupe && pnpm run clean",
-    "generate-content-json": "tsx scripts/content.ts",
-    "prepare": "husky"
+    "generate-content-json": "tsx scripts/content.ts"
   },
   "dependencies": {
-    "@next/third-parties": "^16.1.6",
-    "@radix-ui/react-accordion": "^1.2.12",
-    "@radix-ui/react-collapsible": "^1.1.12",
-    "@radix-ui/react-dialog": "^1.1.15",
-    "@radix-ui/react-dropdown-menu": "^2.1.16",
-    "@radix-ui/react-scroll-area": "^1.2.10",
-    "@radix-ui/react-separator": "^1.1.8",
-    "@radix-ui/react-slot": "^1.2.4",
-    "@radix-ui/react-tabs": "^1.1.13",
-    "@tailwindcss/postcss": "^4.2.1",
+    "@next/third-parties": "^16.2.1",
+    "@tailwindcss/postcss": "^4.2.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "lib": "^5.1.0",
-    "mermaid": "^11.13.0",
-    "next": "16.1.6",
+    "mermaid": "11.13.0",
+    "next": "16.2.1",
     "next-mdx-remote": "^6.0.0",
     "next-themes": "^0.4.6",
+    "radix-ui": "^1.4.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-icons": "^5.6.0",
@@ -50,22 +42,21 @@
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.6",
+    "@biomejs/biome": "2.4.9",
     "@tailwindcss/typography": "^0.5.19",
     "@types/hast": "^3.0.4",
-    "@types/node": "^25.4.0",
+    "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/unist": "^3.0.3",
-    "husky": "^9.1.7",
     "postcss": "^8.5.8",
-    "tailwindcss": "^4.2.1",
+    "tailwindcss": "^4.2.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.0"
+    "typescript": "6.0.2",
+    "typescript-eslint": "^8.57.2"
   },
   "engines": {
     "node": "24.x"
   },
-  "packageManager": "pnpm@10.32.1"
+  "packageManager": "pnpm@10.33.0"
 }

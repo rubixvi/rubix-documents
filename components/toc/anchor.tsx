@@ -20,9 +20,7 @@ export function TableAnchor({ tocs }: TableAnchorProps) {
     }
   }
 
-  if (!tocs.length) {
-    return null
-  }
+  if (!tocs.length) return null
 
   return (
     <div className="flex w-full flex-col gap-3 pl-2">

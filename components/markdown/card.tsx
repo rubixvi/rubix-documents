@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import { Link } from 'lib/transition'
 import Image from 'next/image'
 import { PropsWithChildren } from 'react'
+import { Link } from '@/lib/transition'
 import { iconMap } from '@/settings/icons'
 
 type CardProps = PropsWithChildren & {

@@ -1,4 +1,4 @@
-import { Link } from 'lib/transition'
+import { Link } from '@/lib/transition'
 
 interface Routed {
   href?: string
