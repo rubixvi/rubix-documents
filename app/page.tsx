@@ -1,6 +1,6 @@
-import { Link } from 'lib/transition'
 import { buttonVariants } from '@/components/ui/button'
 import { PageRoutes } from '@/lib/pageroutes'
+import { Link } from '@/lib/transition'
 
 export default function Home() {
   return (

@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "esnext",
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["node"],
@@ -13,7 +12,6 @@
     "moduleResolution": "bundler",
     "noUncheckedSideEffectImports": false,
     "resolveJsonModule": true,
-    "ignoreDeprecations": "6.0",
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,

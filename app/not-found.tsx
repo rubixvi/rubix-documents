@@ -1,6 +1,5 @@
-import { Link } from 'lib/transition'
-
 import { Button } from '@/components/ui/button'
+import { Link } from '@/lib/transition'
 
 export default function NotFound() {
   return (
