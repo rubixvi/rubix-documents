@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { LuArrowUpRight, LuGithub } from 'react-icons/lu'
+
 import Anchor from '@/components/anchor'
 import { Logo } from '@/components/navigation/logo'
 import Search from '@/components/navigation/search'

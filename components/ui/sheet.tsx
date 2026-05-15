@@ -1,8 +1,9 @@
 'use client'
 
 import { Dialog as SheetPrimitive } from 'radix-ui'
-import * as React from 'react'
+import type * as React from 'react'
 import { LuX } from 'react-icons/lu'
+
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+
 import { ArticleBreadcrumb } from '@/components/article/breadcrumb'
 import { Pagination } from '@/components/article/pagination'
 import { TableOfContents } from '@/components/toc'

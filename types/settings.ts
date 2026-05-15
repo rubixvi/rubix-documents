@@ -18,8 +18,7 @@ import {
   url,
   urlimage,
 } from '@/settings/main'
-
-import { OpenGraph, TwitterCard } from '@/types/opengraph'
+import { type OpenGraph, type TwitterCard } from '@/types/opengraph'
 
 interface AppSettings {
   name: string

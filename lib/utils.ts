@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { Paths } from '@/lib/pageroutes'
+
+import { type Paths } from '@/lib/pageroutes'
 import searchJson from '@/public/search-data/documents.json'
 
 interface SearchMeta {

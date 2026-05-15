@@ -1,7 +1,7 @@
 'use client'
 
 import { Accordion as AccordionPrimitive } from 'radix-ui'
-import * as React from 'react'
+import type * as React from 'react'
 import { LuChevronDown } from 'react-icons/lu'
 
 import { cn } from '@/lib/utils'

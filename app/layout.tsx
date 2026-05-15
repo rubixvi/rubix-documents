@@ -1,6 +1,7 @@
 import { GoogleTagManager } from '@next/third-parties/google'
-import type { Metadata } from 'next'
+import { type Metadata } from 'next'
 import { Inter } from 'next/font/google'
+
 import { Footer } from '@/components/navigation/footer'
 import { Navbar } from '@/components/navigation/navbar'
 import { Providers } from '@/providers'

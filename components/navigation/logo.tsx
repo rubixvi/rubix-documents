@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { Link } from '@/lib/transition'
 
+import { Link } from '@/lib/transition'
 import { Settings } from '@/types/settings'
 
 export const Logo = () => {

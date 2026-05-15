@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react'
+import { type ComponentProps } from 'react'
 
 import Copy from '@/components/markdown/copy'
 
