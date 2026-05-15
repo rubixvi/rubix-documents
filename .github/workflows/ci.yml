@@ -11,6 +11,9 @@ on:
     branches:
       - main
 
+env:
+  ENABLE_EXPERIMENTAL_COREPACK: 1
+
 jobs:
   build:
     runs-on: ubuntu-latest
