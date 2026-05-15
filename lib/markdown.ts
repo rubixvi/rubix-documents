@@ -1,15 +1,16 @@
-import { createReadStream, promises as fs } from 'fs'
-import type { Element, Text } from 'hast'
+import { createReadStream, promises as fs } from 'node:fs'
+import path from 'node:path'
+import { type Element, type Text } from 'hast'
 import { compileMDX } from 'next-mdx-remote/rsc'
-import path from 'path'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeCodeTitles from 'rehype-code-titles'
 import rehypeKatex from 'rehype-katex'
 import rehypePrism from 'rehype-prism-plus'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
-import { Node } from 'unist'
+import { type Node } from 'unist'
 import { visit } from 'unist-util-visit'
+
 import { components } from '@/lib/components'
 import { PageRoutes } from '@/lib/pageroutes'
 import { GitHubLink } from '@/settings/navigation'
@@ -136,8 +137,8 @@ export async function getTable(
     }
   }
 
-  let match
-  while ((match = headingsRegex.exec(rawMdx)) !== null) {
+  const match: RegExpExecArray | null = headingsRegex.exec(rawMdx)
+  while (match !== null) {
     const level = match[1].length
     const text = match[2].trim()
     extractedHeadings.push({

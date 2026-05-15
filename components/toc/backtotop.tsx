@@ -1,7 +1,6 @@
 'use client'
 
-import type { ReactElement } from 'react'
-import { useEffect, useRef } from 'react'
+import { type ReactElement, useEffect, useRef } from 'react'
 import { LuArrowUp } from 'react-icons/lu'
 
 function ScrollToTop() {

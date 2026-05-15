@@ -1,11 +1,12 @@
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { LuChevronDown, LuChevronRight } from 'react-icons/lu'
+
 import Anchor from '@/components/anchor'
 import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { SheetClose } from '@/components/ui/sheet'
-import { Paths } from '@/lib/pageroutes'
+import { type Paths } from '@/lib/pageroutes'
 import { cn } from '@/lib/utils'
 
 function isRoute(item: Paths): item is Extract<Paths, { title: string; href: string }> {

@@ -4,8 +4,8 @@ import cn from 'clsx'
 import {
   createContext,
   memo,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
   useCallback,
   useContext,
   useState,
@@ -53,18 +53,18 @@ export const Folder = memo(
 
     return (
       <li className="list-none">
-        <div
+        <button
+          type="button"
           onClick={toggle}
           title={name}
           className={cn(
-            'inline-flex cursor-pointer items-center py-1 text-xs transition-all hover:text-muted-foreground'
+            'inline-flex cursor-pointer items-center gap-2 py-1 text-xs transition-all hover:text-muted-foreground'
           )}
         >
-          <span className="ml-1">
-            {isFolderOpen ? <LuFolderClosed size={14} /> : <LuFolder size={14} />}
-          </span>
-          <span className="ml-2">{label ?? name}</span>
-        </div>
+          <span>{isFolderOpen ? <LuFolderClosed size={14} /> : <LuFolder size={14} />}</span>
+
+          <span>{label ?? name}</span>
+        </button>
         <div
           className={cn(
             'grid transition-[grid-template-rows] duration-200 ease-in-out',
@@ -86,11 +86,11 @@ Folder.displayName = 'Folder'
 
 export const File = memo(({ label, name }: FileProps) => (
   <li className="list-none">
-    <div className="inline-flex cursor-default items-center py-1 text-xs transition-all hover:text-muted-foreground">
-      <span className="ml-1">
+    <div className="inline-flex cursor-default items-center gap-2 py-1 text-xs transition-all hover:text-muted-foreground">
+      <span>
         <FiFileText size={14} />
       </span>
-      <span className="mr-2 ml-2">{label ?? name}</span>
+      <span>{label ?? name}</span>
     </div>
   </li>
 ))

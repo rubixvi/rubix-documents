@@ -42,4 +42,4 @@ function getAllLinks(node: Paths): Page[] {
   return pages
 }
 
-export const PageRoutes = Routes.map((it) => getAllLinks(it)).flat()
+export const PageRoutes = Routes.flatMap((it) => getAllLinks(it))

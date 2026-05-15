@@ -1,4 +1,5 @@
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu'
+
 import { getPreviousNext } from '@/lib/markdown'
 import { Link } from '@/lib/transition'
 

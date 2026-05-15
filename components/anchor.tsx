@@ -1,9 +1,9 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { ComponentProps } from 'react'
-import { Link } from '@/lib/transition'
+import { type ComponentProps } from 'react'
 
+import { Link } from '@/lib/transition'
 import { cn } from '@/lib/utils'
 
 type AnchorProps = ComponentProps<typeof Link> & {
@@ -22,7 +22,7 @@ export default function Anchor({
 }: AnchorProps) {
   const path = usePathname()
   let isMatch = absolute
-    ? props.href.toString().split('/')[1] == path.split('/')[1]
+    ? props.href.toString().split('/')[1] === path.split('/')[1]
     : path === props.href
 
   if (props.href.toString().includes('http')) isMatch = false

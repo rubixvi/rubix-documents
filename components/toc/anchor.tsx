@@ -36,9 +36,9 @@ export function TableAnchor({ tocs }: TableAnchorProps) {
               scroll={false}
               onClick={(e) => handleSmoothScroll(e, href)}
               className={clsx({
-                'pl-0': level == 2,
-                'pl-3': level == 3,
-                'pl-6': level == 4,
+                'pl-0': level === 2,
+                'pl-3': level === 3,
+                'pl-6': level === 4,
               })}
             >
               {text}

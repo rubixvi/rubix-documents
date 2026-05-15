@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { LuFileText, LuSearch } from 'react-icons/lu'
+
 import Anchor from '@/components/anchor'
 import {
   Dialog,
@@ -13,7 +14,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { advanceSearch, cn, debounce, highlight, search } from '@/lib/utils'
+import { advanceSearch, cn, debounce, highlight, type search } from '@/lib/utils'
 import { Documents } from '@/settings/documents'
 
 interface Document {
@@ -102,86 +103,84 @@ export default function Search() {
   }
 
   return (
-    <>
-      <Dialog
-        open={isOpen}
-        onOpenChange={(open) => {
-          setIsOpen(open)
-          if (!open) {
-            setTimeout(() => setSearchedInput(''), 200)
-          }
-        }}
-      >
-        <DialogTrigger asChild>
-          <div className="relative max-w-md flex-1 cursor-pointer">
-            <LuSearch className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-neutral-500 dark:text-neutral-400" />
-            <Input
-              className="h-9 w-full rounded-md border bg-background pr-4 pl-10 text-sm shadow md:w-full"
-              placeholder="Search"
-              type="search"
-            />
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        setIsOpen(open)
+        if (!open) {
+          setTimeout(() => setSearchedInput(''), 200)
+        }
+      }}
+    >
+      <DialogTrigger asChild>
+        <div className="relative max-w-md flex-1 cursor-pointer">
+          <LuSearch className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-neutral-500 dark:text-neutral-400" />
+          <Input
+            className="h-9 w-full rounded-md border bg-background pr-4 pl-10 text-sm shadow md:w-full"
+            placeholder="Search"
+            type="search"
+          />
+        </div>
+      </DialogTrigger>
+      <DialogContent className="top-[45%] max-w-xs p-0 sm:top-[38%] sm:max-w-lg">
+        <DialogTitle className="sr-only">Search</DialogTitle>
+        <DialogHeader>
+          <input
+            value={searchedInput}
+            onChange={(e) => setSearchedInput(e.target.value)}
+            placeholder="Search..."
+            autoFocus
+            className="h-14 border-b bg-transparent px-4 text-[15px] outline-none"
+          />
+        </DialogHeader>
+        {searchedInput.length > 0 && searchedInput.length < 3 && (
+          <p className="text-warning mx-auto mt-2 text-sm">Please enter at least 3 characters.</p>
+        )}
+        {isLoading ? (
+          <p className="mx-auto mt-2 text-sm text-muted-foreground">Searching...</p>
+        ) : (
+          filteredResults.length === 0 &&
+          searchedInput.length >= 3 && (
+            <p className="mx-auto mt-2 text-sm text-muted-foreground">
+              No results found for <span className="text-primary">{`"${searchedInput}"`}</span>
+            </p>
+          )
+        )}
+        <ScrollArea className="max-h-87.5 w-full overflow-hidden">
+          <div className="flex w-full flex-col items-start px-1 pt-1 pb-4 sm:px-3">
+            {searchedInput
+              ? filteredResults.map((item) => {
+                  if ('href' in item) {
+                    return (
+                      <DialogClose key={item.href} asChild>
+                        <Anchor
+                          className={cn(
+                            'flex w-full max-w-77.5 flex-col gap-0.5 rounded-sm p-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 sm:max-w-120 dark:hover:bg-neutral-900'
+                          )}
+                          href={`/docs${item.href}`}
+                        >
+                          <div className="flex h-full items-center gap-x-2">
+                            <LuFileText className="h-[1.1rem] w-[1.1rem]" />
+                            <span className="truncate">{item.title}</span>
+                          </div>
+                          {'snippet' in item && item.snippet && (
+                            <p
+                              className="truncate text-xs text-neutral-500 dark:text-neutral-400"
+                              dangerouslySetInnerHTML={{
+                                __html: highlight(item.snippet, searchedInput),
+                              }}
+                            />
+                          )}
+                        </Anchor>
+                      </DialogClose>
+                    )
+                  }
+                  return null
+                })
+              : renderDocuments(Documents)}
           </div>
-        </DialogTrigger>
-        <DialogContent className="top-[45%] max-w-xs p-0 sm:top-[38%] sm:max-w-lg">
-          <DialogTitle className="sr-only">Search</DialogTitle>
-          <DialogHeader>
-            <input
-              value={searchedInput}
-              onChange={(e) => setSearchedInput(e.target.value)}
-              placeholder="Search..."
-              autoFocus
-              className="h-14 border-b bg-transparent px-4 text-[15px] outline-none"
-            />
-          </DialogHeader>
-          {searchedInput.length > 0 && searchedInput.length < 3 && (
-            <p className="text-warning mx-auto mt-2 text-sm">Please enter at least 3 characters.</p>
-          )}
-          {isLoading ? (
-            <p className="mx-auto mt-2 text-sm text-muted-foreground">Searching...</p>
-          ) : (
-            filteredResults.length === 0 &&
-            searchedInput.length >= 3 && (
-              <p className="mx-auto mt-2 text-sm text-muted-foreground">
-                No results found for <span className="text-primary">{`"${searchedInput}"`}</span>
-              </p>
-            )
-          )}
-          <ScrollArea className="max-h-87.5 w-full overflow-hidden">
-            <div className="flex w-full flex-col items-start px-1 pt-1 pb-4 sm:px-3">
-              {searchedInput
-                ? filteredResults.map((item) => {
-                    if ('href' in item) {
-                      return (
-                        <DialogClose key={item.href} asChild>
-                          <Anchor
-                            className={cn(
-                              'flex w-full max-w-77.5 flex-col gap-0.5 rounded-sm p-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 sm:max-w-120 dark:hover:bg-neutral-900'
-                            )}
-                            href={`/docs${item.href}`}
-                          >
-                            <div className="flex h-full items-center gap-x-2">
-                              <LuFileText className="h-[1.1rem] w-[1.1rem]" />
-                              <span className="truncate">{item.title}</span>
-                            </div>
-                            {'snippet' in item && item.snippet && (
-                              <p
-                                className="truncate text-xs text-neutral-500 dark:text-neutral-400"
-                                dangerouslySetInnerHTML={{
-                                  __html: highlight(item.snippet, searchedInput),
-                                }}
-                              />
-                            )}
-                          </Anchor>
-                        </DialogClose>
-                      )
-                    }
-                    return null
-                  })
-                : renderDocuments(Documents)}
-            </div>
-          </ScrollArea>
-        </DialogContent>
-      </Dialog>
-    </>
+        </ScrollArea>
+      </DialogContent>
+    </Dialog>
   )
 }

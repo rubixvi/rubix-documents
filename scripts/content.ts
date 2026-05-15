@@ -1,13 +1,14 @@
-import { promises as fs } from 'fs'
+import { promises as fs } from 'node:fs'
+import path from 'node:path'
 import grayMatter from 'gray-matter'
-import path from 'path'
 import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
 import remarkStringify from 'remark-stringify'
 import { unified } from 'unified'
-import { Node, Parent } from 'unist'
+import { type Node, type Parent } from 'unist'
 import { visit } from 'unist-util-visit'
-import { Paths } from '@/lib/pageroutes'
+
+import { type Paths } from '@/lib/pageroutes'
 import { Documents } from '@/settings/documents'
 
 const docsDir = path.join(process.cwd(), 'contents/docs')
