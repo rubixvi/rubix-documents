@@ -11,9 +11,6 @@ importers:
       '@next/third-parties':
         specifier: ^16.2.6
         version: 16.2.6(next@16.2.6(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react@19.2.6)
-      '@tailwindcss/postcss':
-        specifier: ^4.3.0
-        version: 4.3.0
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -23,9 +20,6 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
-      lib:
-        specifier: ^5.1.0
-        version: 5.1.0
       mermaid:
         specifier: 11.15.0
         version: 11.15.0
@@ -83,9 +77,6 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@4.3.0)
-      tw-animate-css:
-        specifier: ^1.4.0
-        version: 1.4.0
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -96,6 +87,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.4.15
         version: 2.4.15
+      '@tailwindcss/postcss':
+        specifier: ^4.3.0
+        version: 4.3.0
       '@tailwindcss/typography':
         specifier: ^0.5.19
         version: 0.5.19(tailwindcss@4.3.0)
@@ -114,15 +108,15 @@ importers:
       '@types/unist':
         specifier: ^3.0.3
         version: 3.0.3
-      postcss:
-        specifier: ^8.5.14
-        version: 8.5.14
       tailwindcss:
         specifier: ^4.3.0
         version: 4.3.0
       tsx:
         specifier: ^4.22.0
         version: 4.22.0
+      tw-animate-css:
+        specifier: ^1.4.0
+        version: 1.4.0
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -2286,10 +2280,6 @@ packages:
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
-
-  lib@5.1.0:
-    resolution: {integrity: sha512-RqaGSpLSf6vtSls86+kUqMuQkNiXLtUFbKrh/mKOuZmi3ENJOXHsScw8/grKOLzDgYTgOvpFPGgmNsEh5f2yuA==}
-    engines: {node: '>=4.0.0'}
 
   lightningcss-android-arm64@1.32.0:
     resolution: {integrity: sha512-YK7/ClTt4kAK0vo6w3X+Pnm0D2cf2vPHbhOXdoNti1Ga0al1P4TBZhwjATvjNwLEBCnKvjJc2jQgHXH0NEwlAg==}
@@ -5212,8 +5202,6 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
       type-check: 0.4.0
-
-  lib@5.1.0: {}
 
   lightningcss-android-arm64@1.32.0:
     optional: true
