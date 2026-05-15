@@ -9,7 +9,7 @@
     "start": "next start",
     "clean": "pnpm biome check --write",
     "update": "pnpm update --latest --recursive && pnpm install && pnpm prune && pnpm dedupe && pnpm run clean",
-    "generate-content-json": "tsx scripts/content.ts"
+    "generate-content-json": "NODE_OPTIONS='--max-old-space-size=6144' tsx scripts/content.ts"
   },
   "dependencies": {
     "@next/third-parties": "^16.2.6",
