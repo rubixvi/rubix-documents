@@ -10,10 +10,9 @@ import {
 
 import { useBrowserNativeTransitions } from './browser-native'
 
-const ViewTransitionsContext = createContext<
-  Dispatch<SetStateAction<(() => void) | null>>
-  // biome-ignore lint/suspicious/noEmptyBlockStatements: intentional
->(() => () => {})
+const ViewTransitionsContext = createContext<Dispatch<SetStateAction<(() => void) | null>>>(
+  () => () => {}
+)
 
 export function useSetFinishViewTransition() {
   return use(ViewTransitionsContext)
