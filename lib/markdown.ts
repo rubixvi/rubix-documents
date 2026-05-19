@@ -142,8 +142,8 @@ export async function getTable(
     }
   }
 
-  const match: RegExpExecArray | null = headingsRegex.exec(rawMdx)
-  while (match !== null) {
+  let match: RegExpExecArray | null
+  while ((match = headingsRegex.exec(rawMdx)) !== null) {
     const level = match[1].length
     const text = match[2].trim()
     extractedHeadings.push({
