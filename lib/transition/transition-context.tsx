@@ -10,9 +10,9 @@ import {
 
 import { useBrowserNativeTransitions } from './browser-native'
 
-const ViewTransitionsContext = createContext<
-  Dispatch<SetStateAction<(() => void) | null>>
->(() => () => {})
+const ViewTransitionsContext = createContext<Dispatch<SetStateAction<(() => void) | null>>>(
+  () => () => {}
+)
 
 export function useSetFinishViewTransition() {
   return use(ViewTransitionsContext)
