@@ -1,5 +1,5 @@
-import { promises as fs } from 'fs'
-import path from 'path'
+import { promises as fs } from 'node:fs'
+import path from 'node:path'
 import grayMatter from 'gray-matter'
 import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'

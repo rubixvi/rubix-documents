@@ -1,4 +1,4 @@
-import { type UrlObject } from 'url'
+import { type UrlObject } from 'node:url'
 import NextLink from 'next/link'
 import { type ComponentProps, type MouseEvent, useCallback } from 'react'
 

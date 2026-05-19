@@ -1,5 +1,5 @@
-import { createReadStream, promises as fs } from 'fs'
-import path from 'path'
+import { createReadStream, promises as fs } from 'node:fs'
+import path from 'node:path'
 import { type Element, type Text } from 'hast'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
