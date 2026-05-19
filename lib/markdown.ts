@@ -2,6 +2,7 @@ import { createReadStream, promises as fs } from 'node:fs'
 import path from 'node:path'
 import { type Element, type Text } from 'hast'
 import { compileMDX } from 'next-mdx-remote/rsc'
+import { cache } from 'react'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeCodeTitles from 'rehype-code-titles'
 import rehypeKatex from 'rehype-katex'
@@ -66,21 +67,25 @@ const getDocumentPath = (() => {
   }
 })()
 
-export async function getDocument(slug: string) {
+export const getDocument = cache(async (slug: string) => {
   try {
     const contentPath = getDocumentPath(slug)
+
     let rawMdx = ''
     let lastUpdated: string | null = null
 
     if (Settings.gitload) {
       const response = await fetch(contentPath)
+
       if (!response.ok) {
-        throw new Error(`Failed to fetch content from GitHub: ${response.statusText}`)
+        throw new Error(`Failed to fetch content`)
       }
+
       rawMdx = await response.text()
       lastUpdated = response.headers.get('Last-Modified') ?? null
     } else {
       rawMdx = await fs.readFile(contentPath, 'utf-8')
+
       const stats = await fs.stat(contentPath)
       lastUpdated = stats.mtime.toISOString()
     }
@@ -98,7 +103,7 @@ export async function getDocument(slug: string) {
     console.error(err)
     return null
   }
-}
+})
 
 const headingsRegex = /^(#{2,4})\s(.+)$/gm
 
