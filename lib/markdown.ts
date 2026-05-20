@@ -23,7 +23,7 @@ declare module 'hast' {
   }
 }
 
-interface BaseMdxFrontmatter {
+interface MdxHeaders {
   title: string
   description: string
   keywords: string
@@ -59,6 +59,7 @@ const documentPath = (slug: string) => {
 
 const getDocumentPath = (() => {
   const cache = new Map<string, string>()
+
   return (slug: string) => {
     if (!cache.has(slug)) {
       cache.set(slug, documentPath(slug))
@@ -71,7 +72,7 @@ export const getDocument = cache(async (slug: string) => {
   try {
     const contentPath = getDocumentPath(slug)
 
-    let rawMdx = ''
+    let mdx = ''
     let lastUpdated: string | null = null
 
     if (Settings.gitload) {
@@ -81,16 +82,16 @@ export const getDocument = cache(async (slug: string) => {
         throw new Error(`Failed to fetch content`)
       }
 
-      rawMdx = await response.text()
+      mdx = await response.text()
       lastUpdated = response.headers.get('Last-Modified') ?? null
     } else {
-      rawMdx = await fs.readFile(contentPath, 'utf-8')
+      mdx = await fs.readFile(contentPath, 'utf-8')
 
       const stats = await fs.stat(contentPath)
       lastUpdated = stats.mtime.toISOString()
     }
 
-    const parsedMdx = await parseMdx<BaseMdxFrontmatter>(rawMdx)
+    const parsedMdx = await parseMdx<MdxHeaders>(mdx)
     const tocs = await getTable(slug)
 
     return {
@@ -115,8 +116,8 @@ export async function getTable(
     text: string
     href: string
   }[] = []
-  let rawMdx = ''
 
+  let mdx = ''
   if (Settings.gitload) {
     const contentPath = `${GitHubLink.href}/raw/main/contents/docs/${slug}/index.mdx`
     try {
@@ -124,7 +125,7 @@ export async function getTable(
       if (!response.ok) {
         throw new Error(`Failed to fetch content from GitHub: ${response.statusText}`)
       }
-      rawMdx = await response.text()
+      mdx = await response.text()
     } catch (error) {
       console.error('Error fetching content from GitHub:', error)
       return []
@@ -134,7 +135,7 @@ export async function getTable(
     try {
       const stream = createReadStream(contentPath, { encoding: 'utf-8' })
       for await (const chunk of stream) {
-        rawMdx += chunk
+        mdx += chunk
       }
     } catch (error) {
       console.error('Error reading local file:', error)
@@ -144,7 +145,7 @@ export async function getTable(
 
   headingsRegex.lastIndex = 0
 
-  let match = headingsRegex.exec(rawMdx)
+  let match = headingsRegex.exec(mdx)
 
   while (match !== null) {
     const level = match[1].length
@@ -156,7 +157,7 @@ export async function getTable(
       href: `#${innerslug(text)}`,
     })
 
-    match = headingsRegex.exec(rawMdx)
+    match = headingsRegex.exec(mdx)
   }
 
   return extractedHeadings
@@ -201,7 +202,7 @@ const postCopy = () => (tree: Node) => {
   visit(tree, 'element', (node: Element) => {
     if (node.tagName === 'pre' && node.raw) {
       node.properties = node.properties || {}
-      node.properties['raw'] = node.raw
+      node.properties.raw = node.raw
     }
   })
 }

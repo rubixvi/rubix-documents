@@ -122,6 +122,7 @@ export function Search() {
           />
         </div>
       </DialogTrigger>
+
       <DialogContent className="top-[45%] max-w-xs p-0 sm:top-[38%] sm:max-w-lg">
         <DialogTitle className="sr-only">Search</DialogTitle>
         <DialogHeader>
@@ -133,9 +134,11 @@ export function Search() {
             className="h-14 border-b bg-transparent px-4 text-[15px] outline-none"
           />
         </DialogHeader>
+
         {searchedInput.length > 0 && searchedInput.length < 3 && (
           <p className="text-warning mx-auto mt-2 text-sm">Please enter at least 3 characters.</p>
         )}
+
         {isLoading ? (
           <p className="mx-auto mt-2 text-sm text-muted-foreground">Searching...</p>
         ) : (
@@ -146,6 +149,7 @@ export function Search() {
             </p>
           )
         )}
+
         <ScrollArea className="max-h-87.5 w-full overflow-hidden">
           <div className="flex w-full flex-col items-start px-1 pt-1 pb-4 sm:px-3">
             {searchedInput
