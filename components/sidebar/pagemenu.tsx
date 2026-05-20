@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 
-import SubLink from '@/components/sidebar/sublink'
+import { SubLink } from '@/components/sidebar/sublink'
 import { Separator } from '@/components/ui/separator'
 import { Routes } from '@/lib/pageroutes'
 

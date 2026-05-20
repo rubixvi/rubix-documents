@@ -1,4 +1,4 @@
-import { type MetadataRoute } from 'next'
+import { type MetadataRoute } from 'next/types'
 
 import { PageRoutes } from '@/lib/pageroutes'
 import { Settings } from '@/types/settings'

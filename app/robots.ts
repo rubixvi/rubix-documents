@@ -1,15 +1,17 @@
-import { type MetadataRoute } from 'next'
+import { type MetadataRoute } from 'next/types'
 
 import { Settings } from '@/types/settings'
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const rules = [
+    {
+      userAgent: '*',
+      allow: '/',
+    },
+  ]
+
   return {
-    rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-      },
-    ],
+    rules,
     sitemap: `${Settings.metadataBase}/sitemap.xml`,
   }
 }

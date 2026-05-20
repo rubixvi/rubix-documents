@@ -2,7 +2,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { LuChevronDown, LuChevronRight } from 'react-icons/lu'
 
-import Anchor from '@/components/anchor'
+import { Anchor } from '@/components/anchor'
 import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { SheetClose } from '@/components/ui/sheet'
@@ -13,7 +13,7 @@ function isRoute(item: Paths): item is Extract<Paths, { title: string; href: str
   return 'title' in item && 'href' in item
 }
 
-export default function SubLink(props: Paths & { level: number; isSheet: boolean }) {
+export function SubLink(props: Paths & { level: number; isSheet: boolean }) {
   const path = usePathname()
   const [isOpen, setIsOpen] = useState(true)
 

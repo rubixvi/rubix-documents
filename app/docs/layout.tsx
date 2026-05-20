@@ -1,10 +1,12 @@
+import { type ReactNode } from 'react'
+
 import { Sidebar } from '@/components/sidebar'
 
-export default function Documents({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+interface DocumentsProps {
+  children: Readonly<ReactNode>
+}
+
+export default function Documents({ children }: DocumentsProps) {
   return (
     <div className="flex items-start gap-10 pt-10">
       <Sidebar />

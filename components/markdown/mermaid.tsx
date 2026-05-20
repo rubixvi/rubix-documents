@@ -48,4 +48,4 @@ const Mermaid = memo(({ chart, className }: MermaidProps) => {
 
 Mermaid.displayName = 'Mermaid'
 
-export default Mermaid
+export { Mermaid }
