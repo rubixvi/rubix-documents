@@ -33,7 +33,7 @@ function useIndent() {
   return useContext(ctx)
 }
 
-function Tree({ children }: { children: ReactNode }): ReactElement {
+export function FileTree({ children }: { children: ReactNode }): ReactElement {
   return (
     <ul className="m-0! w-full list-none overflow-hidden rounded-lg border p-2!">{children}</ul>
   )
@@ -82,8 +82,6 @@ export const Folder = memo(
   }
 )
 
-Folder.displayName = 'Folder'
-
 export const File = memo(({ label, name }: FileProps) => (
   <li className="list-none">
     <div className="inline-flex cursor-default items-center gap-2 py-1 text-xs transition-all hover:text-muted-foreground">
@@ -94,7 +92,3 @@ export const File = memo(({ label, name }: FileProps) => (
     </div>
   </li>
 ))
-
-File.displayName = 'File'
-
-export default Tree

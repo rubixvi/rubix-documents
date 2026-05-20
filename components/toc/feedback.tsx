@@ -3,12 +3,12 @@ import { LuArrowUpRight } from 'react-icons/lu'
 
 import { GitHubLink } from '@/settings/navigation'
 
-interface SideBarEdit {
+interface FeedbackProps {
   title: string
   slug: string
 }
 
-export default function RightSideBar({ slug, title }: SideBarEdit) {
+export function Feedback({ slug, title }: FeedbackProps) {
   const feedbackUrl = `${GitHubLink.href}/issues/new?title=Feedback for "${title}"&labels=feedback`
   const editUrl = `${GitHubLink.href}/edit/main/contents/docs/${slug}/index.mdx`
 
