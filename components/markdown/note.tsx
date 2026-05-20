@@ -3,7 +3,7 @@ import { type PropsWithChildren } from 'react'
 
 import { cn } from '@/lib/utils'
 
-type NoteProps = PropsWithChildren & {
+interface NoteProps extends PropsWithChildren {
   title?: string
   type?: 'note' | 'success' | 'warning' | 'danger'
 }

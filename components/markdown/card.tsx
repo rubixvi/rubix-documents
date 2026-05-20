@@ -5,7 +5,7 @@ import { type PropsWithChildren } from 'react'
 import { Link } from '@/lib/transition'
 import { iconMap } from '@/settings/icons'
 
-type CardProps = PropsWithChildren & {
+interface CardProps extends PropsWithChildren {
   subtitle?: string
   title: string
   description?: string
@@ -30,7 +30,7 @@ export function Card({
   children,
 }: CardProps) {
   const IconComponent = icon ? iconMap[icon] : null
-  const ExternalIcon = iconMap['arrowUpRight']
+  const ExternalIcon = iconMap.arrowUpRight
 
   const content = (
     <div
