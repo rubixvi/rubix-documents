@@ -1,6 +1,6 @@
 import { TableAnchor, type TableAnchorProps } from '@/components/toc/anchor'
 import { BackToTop } from '@/components/toc/backtotop'
-import Feedback from '@/components/toc/feedback'
+import { Feedback } from '@/components/toc/feedback'
 import { Settings } from '@/types/settings'
 
 interface TableProps {

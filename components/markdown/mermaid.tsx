@@ -10,6 +10,7 @@ interface MermaidProps {
 
 const normalizeChart = (input?: string): string => {
   if (!input) return ''
+
   return input
     .replace(/\r/g, '')
     .split('\n')
@@ -24,28 +25,29 @@ mermaid.initialize({
   securityLevel: 'loose',
 })
 
-const Mermaid = memo(({ chart, className }: MermaidProps) => {
+export const Mermaid = memo(({ chart, className }: MermaidProps) => {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!ref.current || !chart) return
+    const current = ref.current
 
-    const id = `mermaid-${crypto.randomUUID()}`
+    if (!current || !chart) return
 
-    mermaid
-      .render(id, normalizeChart(chart))
-      .then(({ svg }) => {
-        if (ref.current) ref.current.innerHTML = svg
-      })
-      .catch((err) => {
-        if (ref.current)
-          ref.current.innerHTML = `<pre style="color:red">Mermaid error: ${err?.message ?? err}</pre>`
-      })
+    const renderChart = async () => {
+      const id = `mermaid-${crypto.randomUUID()}`
+
+      try {
+        const { svg } = await mermaid.render(id, normalizeChart(chart))
+        current.innerHTML = svg
+      } catch (err) {
+        current.innerHTML = `<pre style="color:red">Mermaid error: ${
+          err instanceof Error ? err.message : String(err)
+        }</pre>`
+      }
+    }
+
+    void renderChart()
   }, [chart])
 
   return <div ref={ref} className={className} />
 })
-
-Mermaid.displayName = 'Mermaid'
-
-export { Mermaid }

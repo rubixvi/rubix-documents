@@ -2,6 +2,7 @@
 
 import clsx from 'clsx'
 import Link from 'next/link'
+import { type MouseEvent } from 'react'
 
 import { ScrollArea } from '@/components/ui/scroll-area'
 
@@ -10,7 +11,7 @@ export interface TableAnchorProps {
 }
 
 export function TableAnchor({ tocs }: TableAnchorProps) {
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleSmoothScroll = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     const id = href.startsWith('#') ? href.slice(1) : href
     const targetElement = document.getElementById(id)

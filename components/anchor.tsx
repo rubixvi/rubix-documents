@@ -21,6 +21,7 @@ export function Anchor({
   ...props
 }: AnchorProps) {
   const path = usePathname()
+
   let isMatch = absolute
     ? props.href.toString().split('/')[1] === path.split('/')[1]
     : path === props.href

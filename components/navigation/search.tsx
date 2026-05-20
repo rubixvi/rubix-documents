@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { type ReactNode, useEffect, useMemo, useState } from 'react'
 import { LuFileText, LuSearch } from 'react-icons/lu'
 
 import { Anchor } from '@/components/anchor'
@@ -28,15 +28,15 @@ interface Document {
 export function Search() {
   const [searchedInput, setSearchedInput] = useState('')
   const [isOpen, setIsOpen] = useState(false)
-  const [filteredResults, setFilteredResults] = useState<search[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [results, setResults] = useState<search[]>([])
 
   const debounceSearch = useMemo(
     () =>
       debounce((input) => {
         setIsLoading(true)
         const results = advanceSearch(input.trim())
-        setFilteredResults(results)
+        setResults(results)
         setIsLoading(false)
       }, 300),
     []
@@ -44,8 +44,8 @@ export function Search() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (isOpen && event.key === 'Enter' && filteredResults.length > 2) {
-        const selected = filteredResults[0]
+      if (isOpen && event.key === 'Enter' && results.length > 2) {
+        const selected = results[0]
         if ('href' in selected) {
           window.location.href = `/docs${selected.href}`
           setIsOpen(false)
@@ -58,18 +58,18 @@ export function Search() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isOpen, filteredResults])
+  }, [isOpen, results])
 
   useEffect(() => {
     if (searchedInput.length < 3) {
-      Promise.resolve().then(() => setFilteredResults([]))
+      Promise.resolve().then(() => setResults([]))
       return
     }
 
     debounceSearch(searchedInput)
   }, [searchedInput, debounceSearch])
 
-  function renderDocuments(documents: Document[], parentHref = '/docs'): React.ReactNode[] {
+  function renderDocuments(documents: Document[], parentHref = '/docs'): ReactNode[] {
     if (!Array.isArray(documents) || documents.length === 0) {
       return []
     }
@@ -139,7 +139,7 @@ export function Search() {
         {isLoading ? (
           <p className="mx-auto mt-2 text-sm text-muted-foreground">Searching...</p>
         ) : (
-          filteredResults.length === 0 &&
+          results.length === 0 &&
           searchedInput.length >= 3 && (
             <p className="mx-auto mt-2 text-sm text-muted-foreground">
               No results found for <span className="text-primary">{`"${searchedInput}"`}</span>
@@ -149,7 +149,7 @@ export function Search() {
         <ScrollArea className="max-h-87.5 w-full overflow-hidden">
           <div className="flex w-full flex-col items-start px-1 pt-1 pb-4 sm:px-3">
             {searchedInput
-              ? filteredResults.map((item) => {
+              ? results.map((item) => {
                   if ('href' in item) {
                     return (
                       <DialogClose key={item.href} asChild>

@@ -1,11 +1,13 @@
+import { type ReactNode } from 'react'
+
 import { Link } from '@/lib/transition'
 
-interface Routed {
+interface RouteProps {
   href?: string
-  children: React.ReactNode
+  children: ReactNode
 }
 
-export function RoutedLink({ href = '#', children }: Routed) {
+export function Route({ href = '#', children }: RouteProps) {
   const isInternal = href.startsWith('/') || href.startsWith('#')
 
   if (isInternal) {

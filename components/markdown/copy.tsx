@@ -6,7 +6,11 @@ import { LuCheck, LuCopy } from 'react-icons/lu'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
-export function Copy({ content }: { content: string }) {
+interface CopyProps {
+  content: string
+}
+
+export function Copy({ content }: CopyProps) {
   const [isCopied, setIsCopied] = useState(false)
 
   async function handleCopy() {
