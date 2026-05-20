@@ -1,6 +1,7 @@
 import { GoogleTagManager } from '@next/third-parties/google'
 import { type Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { type ReactNode } from 'react'
 
 import { Footer } from '@/components/navigation/footer'
 import { Navbar } from '@/components/navigation/navbar'
@@ -10,8 +11,11 @@ import { Settings } from '@/types/settings'
 import '@/styles/globals.css'
 
 const inter = Inter({
-  variable: '--font-inter',
+  adjustFontFallback: true,
+  display: 'swap',
+  preload: true,
   subsets: ['latin'],
+  variable: '--font-inter',
 })
 
 const baseUrl = Settings.metadataBase
@@ -48,11 +52,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html data-scroll-behavior="smooth" lang="en" suppressHydrationWarning>
       {Settings.gtmconnected && <GoogleTagManager gtmId={Settings.gtm} />}

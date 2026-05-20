@@ -3,13 +3,13 @@
 import Link from 'next/link'
 import { LuArrowUpRight, LuGithub } from 'react-icons/lu'
 
-import Anchor from '@/components/anchor'
+import { Anchor } from '@/components/anchor'
 import { Logo } from '@/components/navigation/logo'
-import Search from '@/components/navigation/search'
+import { Search } from '@/components/navigation/search'
 import { SheetLeft } from '@/components/sidebar'
-import { ModeToggle } from '@/components/theme-toggle'
 import { buttonVariants } from '@/components/ui/button'
 import { SheetClose } from '@/components/ui/sheet'
+import { ModeToggle } from '@/components/ui/theme-toggle'
 import { GitHubLink, Navigations } from '@/settings/navigation'
 
 export function Navbar() {

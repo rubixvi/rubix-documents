@@ -4,13 +4,12 @@ import { useEffect } from 'react'
 
 import { Button } from '@/components/ui/button'
 
-export default function ErrorBoundary({
-  error,
-  reset,
-}: {
+interface ErrorProps {
   error: Error & { digest?: string }
   reset: () => void
-}) {
+}
+
+export default function ErrorBoundary({ error, reset }: ErrorProps) {
   useEffect(() => {
     console.error(error)
   }, [error])

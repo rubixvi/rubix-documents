@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { LuFileText, LuSearch } from 'react-icons/lu'
 
-import Anchor from '@/components/anchor'
+import { Anchor } from '@/components/anchor'
 import {
   Dialog,
   DialogClose,
@@ -25,7 +25,7 @@ interface Document {
   noLink?: boolean
 }
 
-export default function Search() {
+export function Search() {
   const [searchedInput, setSearchedInput] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const [filteredResults, setFilteredResults] = useState<search[]>([])

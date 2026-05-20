@@ -8,7 +8,7 @@ type NoteProps = PropsWithChildren & {
   type?: 'note' | 'success' | 'warning' | 'danger'
 }
 
-export default function Note({ children, title = 'Note', type = 'note' }: NoteProps) {
+export function Note({ children, title = 'Note', type = 'note' }: NoteProps) {
   const noteClassNames = clsx({
     'dark:bg-neutral-900 bg-neutral-50': type === 'note',
     'dark:bg-green-950 bg-green-100 border-green-300 dark:border-green-900': type === 'success',

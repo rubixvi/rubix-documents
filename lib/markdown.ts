@@ -142,15 +142,21 @@ export async function getTable(
     }
   }
 
-  let match: RegExpExecArray | null
-  while ((match = headingsRegex.exec(rawMdx)) !== null) {
+  headingsRegex.lastIndex = 0
+
+  let match = headingsRegex.exec(rawMdx)
+
+  while (match !== null) {
     const level = match[1].length
     const text = match[2].trim()
+
     extractedHeadings.push({
-      level: level,
-      text: text,
+      level,
+      text,
       href: `#${innerslug(text)}`,
     })
+
+    match = headingsRegex.exec(rawMdx)
   }
 
   return extractedHeadings

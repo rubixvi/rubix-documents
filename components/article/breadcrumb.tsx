@@ -14,7 +14,11 @@ import { PageRoutes } from '@/lib/pageroutes'
 import { Link } from '@/lib/transition'
 import { toTitleCase } from '@/utils/toTitleCase'
 
-export function ArticleBreadcrumb({ paths }: { paths: string[] }) {
+interface BreadcrumbProps {
+  paths: string[]
+}
+
+export function ArticleBreadcrumb({ paths }: BreadcrumbProps) {
   return (
     <Breadcrumb className="pb-5">
       <BreadcrumbList>

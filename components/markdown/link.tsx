@@ -5,7 +5,7 @@ interface Routed {
   children: React.ReactNode
 }
 
-const RoutedLink: React.FC<Routed> = ({ href = '#', children }) => {
+export function RoutedLink({ href = '#', children }: Routed) {
   const isInternal = href.startsWith('/') || href.startsWith('#')
 
   if (isInternal) {
@@ -18,5 +18,3 @@ const RoutedLink: React.FC<Routed> = ({ href = '#', children }) => {
     </a>
   )
 }
-
-export default RoutedLink

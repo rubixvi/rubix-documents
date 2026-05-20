@@ -12,7 +12,7 @@ type AnchorProps = ComponentProps<typeof Link> & {
   disabled?: boolean
 }
 
-export default function Anchor({
+export function Anchor({
   absolute,
   className = '',
   activeClassName = '',
