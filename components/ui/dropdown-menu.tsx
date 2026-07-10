@@ -1,7 +1,7 @@
 'use client'
 
-import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui'
 import type * as React from 'react'
+import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui'
 import { LuCheck, LuChevronRight, LuCircle } from 'react-icons/lu'
 
 import { cn } from '@/lib/utils'

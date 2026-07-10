@@ -1,5 +1,5 @@
-import { Slot } from 'radix-ui'
 import type * as React from 'react'
+import { Slot } from 'radix-ui'
 import { BsThreeDots } from 'react-icons/bs'
 import { LuChevronRight } from 'react-icons/lu'
 

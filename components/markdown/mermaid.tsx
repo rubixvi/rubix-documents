@@ -1,7 +1,7 @@
 'use client'
 
-import mermaid from 'mermaid'
 import { memo, useEffect, useRef } from 'react'
+import mermaid from 'mermaid'
 
 interface MermaidProps {
   chart: string

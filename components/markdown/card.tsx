@@ -1,6 +1,6 @@
-import clsx from 'clsx'
-import Image from 'next/image'
 import { type PropsWithChildren } from 'react'
+import Image from 'next/image'
+import clsx from 'clsx'
 
 import { Link } from '@/lib/transition'
 import { iconMap } from '@/settings/icons'

@@ -1,8 +1,8 @@
 'use client'
 
-import clsx from 'clsx'
-import Link from 'next/link'
 import { type MouseEvent } from 'react'
+import Link from 'next/link'
+import clsx from 'clsx'
 
 import { ScrollArea } from '@/components/ui/scroll-area'
 
