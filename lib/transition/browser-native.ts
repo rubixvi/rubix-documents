@@ -1,5 +1,5 @@
-import { usePathname } from 'next/navigation'
 import { use, useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 import { useHash } from './use-hash'
 

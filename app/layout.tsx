@@ -1,7 +1,7 @@
-import { GoogleTagManager } from '@next/third-parties/google'
+import { type ReactNode } from 'react'
 import { type Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { type ReactNode } from 'react'
+import { GoogleTagManager } from '@next/third-parties/google'
 
 import { Footer } from '@/components/navigation/footer'
 import { Navbar } from '@/components/navigation/navbar'

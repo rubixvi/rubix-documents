@@ -1,5 +1,5 @@
-import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { LuChevronDown, LuChevronRight } from 'react-icons/lu'
 
 import { Anchor } from '@/components/anchor'

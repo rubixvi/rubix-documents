@@ -1,6 +1,5 @@
 'use client'
 
-import cn from 'clsx'
 import {
   createContext,
   memo,
@@ -10,6 +9,7 @@ import {
   useContext,
   useState,
 } from 'react'
+import cn from 'clsx'
 import { FiFileText } from 'react-icons/fi'
 import { LuFolder, LuFolderClosed } from 'react-icons/lu'
 

@@ -1,9 +1,9 @@
+import { startTransition, useCallback, useMemo } from 'react'
 import {
   type AppRouterInstance,
   type NavigateOptions,
 } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import { useRouter as useNextRouter } from 'next/navigation'
-import { startTransition, useCallback, useMemo } from 'react'
 
 import { useSetFinishViewTransition } from './transition-context'
 

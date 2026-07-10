@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.3/schema.json",
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": true,
@@ -103,10 +103,7 @@
       "trailingCommas": "es5",
       "semicolons": "asNeeded",
       "arrowParentheses": "always",
-      "bracketSameLine": false,
-      "quoteStyle": "single",
-      "attributePosition": "auto",
-      "bracketSpacing": true
+      "quoteStyle": "single"
     }
   },
   "html": {
@@ -128,11 +125,16 @@
           "level": "on",
           "options": {
             "groups": [
-              [":NODE:", ":BUN:", ":PACKAGE:", "react", "react/**", "react-*", "react-*/**"],
+              ":NODE:",
+              ":BUN:",
+              ["node", "node:*"],
+              ["react", "react/**"],
+              ["next", "next/**", "next-*", "next-*/**"],
+              ":PACKAGE:",
               ":BLANK_LINE:",
-              ["**", "!**/*.css", "!**/*.scss"],
+              ["**", "!:STYLE:"],
               ":BLANK_LINE:",
-              ["**/*.css", "**/*.scss"]
+              [":STYLE:"]
             ]
           }
         }
