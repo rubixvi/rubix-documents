@@ -49,11 +49,11 @@ export function SubLink(props: Paths & { level: number; isSheet: boolean }) {
 
   return (
     <div className="flex w-full flex-col gap-1">
-      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <Collapsible onOpenChange={setIsOpen} open={isOpen}>
         <div className="mr-3 flex items-center gap-2 text-sm">
           {titleOrLink}
           <CollapsibleTrigger asChild>
-            <Button className="ml-auto h-6 w-6" variant="link" size="icon">
+            <Button className="ml-auto h-6 w-6" size="icon" variant="link">
               {!isOpen ? (
                 <LuChevronRight className="h-[0.9rem] w-[0.9rem]" />
               ) : (

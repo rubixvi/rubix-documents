@@ -49,5 +49,5 @@ export const Mermaid = memo(({ chart, className }: MermaidProps) => {
     void renderChart()
   }, [chart])
 
-  return <div ref={ref} className={className} />
+  return <div className={className} ref={ref} />
 })

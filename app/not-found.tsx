@@ -7,8 +7,8 @@ export default function NotFound() {
       <h1 className="mb-4 text-4xl font-bold sm:text-7xl">404</h1>
       <p className="mb-8 max-w-150 text-foreground sm:text-base">Page not found</p>
       <div className="flex items-center">
-        <Button variant="default" size="lg" asChild>
-          <Link title="Return Home" aria-label="Return Home" href="/">
+        <Button asChild size="lg" variant="default">
+          <Link aria-label="Return Home" href="/" title="Return Home">
             Return Home
           </Link>
         </Button>

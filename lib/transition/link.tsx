@@ -61,5 +61,5 @@ export function Link(props: ComponentProps<typeof NextLink>) {
     [onClick, href, as, replace, scroll, router]
   )
 
-  return <NextLink {...rest} href={href} onClick={handleClick} as={as} />
+  return <NextLink {...rest} as={as} href={href} onClick={handleClick} />
 }

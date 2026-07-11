@@ -6,20 +6,20 @@ import { Settings } from '@/types/settings'
 export function Logo() {
   return (
     <Link
-      href="/"
-      title={`${Settings.title} main logo`}
       aria-label={`${Settings.title} main logo`}
       className="items-center gap-2.5 hidden md:flex"
+      href="/"
+      title={`${Settings.title} main logo`}
     >
       <Image
-        src={Settings.siteicon}
         alt={`${Settings.title} main logo`}
-        title={`${Settings.title} main logo`}
         aria-label={`${Settings.title} main logo`}
-        width={34}
+        decoding="async"
         height={34}
         loading="lazy"
-        decoding="async"
+        src={Settings.siteicon}
+        title={`${Settings.title} main logo`}
+        width={34}
       />
       <span className="text-md font-semibold">{Settings.title}</span>
     </Link>

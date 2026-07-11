@@ -12,7 +12,10 @@
       "!out",
       "!src/components/ui",
       "!contents/docs",
-      "!public/search-data"
+      "!public/search-data",
+      "!**/*.svg",
+      "!**/*.png",
+      "!**/*.ico"
     ]
   },
   "formatter": {
@@ -137,7 +140,14 @@
               [":STYLE:"]
             ]
           }
-        }
+        },
+        "useSortedAttributes": {
+          "level": "on",
+          "options": {
+            "sortOrder": "natural"
+          }
+        },
+        "useSortedInterfaceMembers": "on"
       }
     }
   }

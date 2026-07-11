@@ -16,17 +16,17 @@ import { LuFolder, LuFolderClosed } from 'react-icons/lu'
 const ctx = createContext(0)
 
 interface FolderProps {
-  name: string
-  label?: ReactElement
-  open?: boolean
-  defaultOpen?: boolean
-  onToggle?: (open: boolean) => void
   children: ReactNode
+  defaultOpen?: boolean
+  label?: ReactElement
+  name: string
+  onToggle?: (open: boolean) => void
+  open?: boolean
 }
 
 interface FileProps {
-  name: string
   label?: ReactElement
+  name: string
 }
 
 function useIndent() {
@@ -54,12 +54,12 @@ export const Folder = memo(
     return (
       <li className="list-none">
         <button
-          type="button"
-          onClick={toggle}
-          title={name}
           className={cn(
             'inline-flex cursor-pointer items-center gap-2 py-1 text-xs transition-all hover:text-muted-foreground'
           )}
+          onClick={toggle}
+          title={name}
+          type="button"
         >
           <span>{isFolderOpen ? <LuFolderClosed size={14} /> : <LuFolder size={14} />}</span>
 

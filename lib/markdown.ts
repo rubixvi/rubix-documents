@@ -24,9 +24,9 @@ declare module 'hast' {
 }
 
 interface MdxHeaders {
-  title: string
   description: string
   keywords: string
+  title: string
 }
 
 async function parseMdx<Frontmatter>(rawMdx: string) {

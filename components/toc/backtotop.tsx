@@ -28,12 +28,12 @@ export function BackToTop(): ReactElement {
 
   return (
     <button
-      ref={ref}
-      onClick={ScrollToTop}
-      title="Scroll to top"
       aria-label="Scroll to top"
-      type="button"
       className="mt-2 ml-2 flex cursor-pointer items-center self-start text-sm text-foreground opacity-0 transition"
+      onClick={ScrollToTop}
+      ref={ref}
+      title="Scroll to top"
+      type="button"
     >
       <LuArrowUp className="mr-1 inline-block h-4 w-4 align-middle" />
       <span>Scroll to top</span>

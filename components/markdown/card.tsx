@@ -6,14 +6,14 @@ import { Link } from '@/lib/transition'
 import { iconMap } from '@/settings/icons'
 
 interface CardProps extends PropsWithChildren {
+  className?: string
+  description?: string
+  external?: boolean
+  href?: string
+  icon?: keyof typeof iconMap
+  image?: string
   subtitle?: string
   title: string
-  description?: string
-  href?: string
-  image?: string
-  className?: string
-  external?: boolean
-  icon?: keyof typeof iconMap
   variant?: 'normal' | 'small' | 'image'
 }
 
@@ -61,11 +61,11 @@ export function Card({
         )}
         {image && variant === 'image' && (
           <Image
-            src={image}
             alt={title}
-            width={400}
-            height={400}
             className="m-0! h-45 w-full rounded-none! border-0 object-cover object-center"
+            height={400}
+            src={image}
+            width={400}
           />
         )}
         <div
@@ -89,10 +89,10 @@ export function Card({
 
   return href ? (
     <Link
-      href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
       className="no-underline!"
+      href={href}
+      rel={external ? 'noopener noreferrer' : undefined}
+      target={external ? '_blank' : undefined}
     >
       {content}
     </Link>

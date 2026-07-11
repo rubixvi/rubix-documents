@@ -9,10 +9,10 @@ export function Footer() {
       <p className="items-center">
         &copy; {new Date().getFullYear()}{' '}
         <Link
-          title={Settings.name}
           aria-label={Settings.name}
           className="font-semibold"
           href={Settings.link}
+          title={Settings.name}
         >
           {Settings.name}
         </Link>
@@ -21,20 +21,20 @@ export function Footer() {
       {Settings.branding !== false && (
         <div className="hidden items-center md:block">
           <Link
+            aria-label="Rubix Studios"
             className="font-semibold"
             href="https://rubixstudios.com.au"
-            title="Rubix Studios"
-            aria-label="Rubix Studios"
             target="_blank"
+            title="Rubix Studios"
           >
             <Image
-              src="/logo.svg"
               alt="Rubix Studios logo"
-              title="Rubix Studios logo"
               aria-label="Rubix Studios logo"
-              priority={false}
-              width={30}
               height={30}
+              priority={false}
+              src="/logo.svg"
+              title="Rubix Studios logo"
+              width={30}
             />
           </Link>
         </div>

@@ -23,7 +23,7 @@ export function Copy({ content }: CopyProps) {
   }
 
   return (
-    <Button variant="outline" size="icon" onClick={handleCopy} className="size-8! cursor-pointer">
+    <Button className="size-8! cursor-pointer" onClick={handleCopy} size="icon" variant="outline">
       <LuCopy
         className={cn(
           'absolute size-3.5! transform transition-opacity duration-300',
