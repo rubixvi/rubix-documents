@@ -13,8 +13,8 @@ export default function Home() {
 
       <div className="flex items-center gap-5">
         <Link
-          href={`/docs${PageRoutes[0].href}`}
           className={buttonVariants({ className: 'px-6', size: 'lg' })}
+          href={`/docs${PageRoutes[0].href}`}
         >
           Get Started
         </Link>

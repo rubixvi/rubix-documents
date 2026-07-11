@@ -19,8 +19,8 @@ import {
 export function Sidebar() {
   return (
     <aside
-      className="sticky top-26 hidden h-screen min-w-57.5 flex-1 flex-col overflow-y-auto md:flex"
       aria-label="Page navigation"
+      className="sticky top-26 hidden h-screen min-w-57.5 flex-1 flex-col overflow-y-auto md:flex"
     >
       <ScrollArea>
         <PageMenu />
@@ -33,7 +33,7 @@ export function SheetLeft() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="link" size="icon" className="flex cursor-pointer md:hidden">
+        <Button className="flex cursor-pointer md:hidden" size="icon" variant="link">
           <LuAlignLeft className="size-6" />
         </Button>
       </SheetTrigger>

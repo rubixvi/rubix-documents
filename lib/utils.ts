@@ -11,19 +11,19 @@ interface SearchMeta {
 }
 
 interface SearchDocument {
-  slug: string
-  title: string
+  _searchMeta: SearchMeta
   content: string
   description: string
-  _searchMeta: SearchMeta
+  slug: string
+  title: string
 }
 
 export interface search {
-  title: string
-  href: string
-  snippet?: string
   description?: string
+  href: string
   relevance?: number
+  snippet?: string
+  title: string
 }
 
 const searchData = searchJson as SearchDocument[]

@@ -21,24 +21,24 @@ import {
 import { type OpenGraph, type TwitterCard } from '@/types/opengraph'
 
 interface AppSettings {
-  name: string
-  link: string
   branding: boolean
+  canonical: string
+  description: string
+  feedback: boolean
+  gitload: boolean
   gtm: string
   gtmconnected: boolean
-  rightbar: boolean
-  toc: boolean
-  feedback: boolean
-  totop: boolean
-  gitload: boolean
-  title: string
-  metadataBase: string
-  description: string
-  siteicon: string
   keywords: string[]
+  link: string
+  metadataBase: string
+  name: string
   openGraph: OpenGraph
+  rightbar: boolean
+  siteicon: string
+  title: string
+  toc: boolean
+  totop: boolean
   twitter: TwitterCard
-  canonical: string
 }
 
 export const Settings: AppSettings = {

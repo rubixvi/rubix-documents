@@ -15,7 +15,7 @@ export function PageMenu({ isSheet = false }) {
     <div className="flex flex-col gap-3.5 pb-6">
       {Routes.map((item, index) => {
         if ('spacer' in item) {
-          return <Separator key={`spacer-${index}`} className="my-2" />
+          return <Separator className="my-2" key={`spacer-${index}`} />
         }
 
         return (

@@ -18,11 +18,11 @@ import { advanceSearch, cn, debounce, highlight, type search } from '@/lib/utils
 import { Documents } from '@/settings/documents'
 
 interface Document {
-  title?: string
   href?: string
-  spacer?: boolean
   items?: Document[]
   noLink?: boolean
+  spacer?: boolean
+  title?: string
 }
 
 export function Search() {
@@ -83,7 +83,7 @@ export function Search() {
 
       return [
         !doc.noLink && doc.href && (
-          <DialogClose key={href} asChild>
+          <DialogClose asChild key={href}>
             <Anchor
               className={cn(
                 'flex w-full items-center gap-2.5 rounded-sm px-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-900'
@@ -104,13 +104,13 @@ export function Search() {
 
   return (
     <Dialog
-      open={isOpen}
       onOpenChange={(open) => {
         setIsOpen(open)
         if (!open) {
           setTimeout(() => setSearchedInput(''), 200)
         }
       }}
+      open={isOpen}
     >
       <DialogTrigger asChild>
         <div className="relative max-w-md flex-1 cursor-pointer">
@@ -127,11 +127,11 @@ export function Search() {
         <DialogTitle className="sr-only">Search</DialogTitle>
         <DialogHeader>
           <input
-            value={searchedInput}
-            onChange={(e) => setSearchedInput(e.target.value)}
-            placeholder="Search..."
             autoFocus
             className="h-14 border-b bg-transparent px-4 text-[15px] outline-none"
+            onChange={(e) => setSearchedInput(e.target.value)}
+            placeholder="Search..."
+            value={searchedInput}
           />
         </DialogHeader>
 
@@ -156,7 +156,7 @@ export function Search() {
               ? results.map((item) => {
                   if ('href' in item) {
                     return (
-                      <DialogClose key={item.href} asChild>
+                      <DialogClose asChild key={item.href}>
                         <Anchor
                           className={cn(
                             'flex w-full max-w-77.5 flex-col gap-0.5 rounded-sm p-3 text-[15px] transition-all duration-300 hover:bg-neutral-100 sm:max-w-120 dark:hover:bg-neutral-900'

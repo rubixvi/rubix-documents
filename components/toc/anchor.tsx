@@ -30,17 +30,17 @@ export function TableAnchor({ tocs }: TableAnchorProps) {
         <div className="flex flex-col gap-2.5 text-sm text-foreground">
           {tocs.map(({ href, level, text }) => (
             <Link
-              key={href}
-              href={href}
-              title={text}
               aria-label={text}
-              scroll={false}
-              onClick={(e) => handleSmoothScroll(e, href)}
               className={clsx({
                 'pl-0': level === 2,
                 'pl-3': level === 3,
                 'pl-6': level === 4,
               })}
+              href={href}
+              key={href}
+              onClick={(e) => handleSmoothScroll(e, href)}
+              scroll={false}
+              title={text}
             >
               {text}
             </Link>

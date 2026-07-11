@@ -15,8 +15,8 @@ const docsDir = path.join(process.cwd(), 'contents/docs')
 const outputDir = path.join(process.cwd(), 'public', 'search-data')
 
 interface MdxJsxFlowElement extends Node {
-  name: string
   children?: Node[]
+  name: string
 }
 
 function isMdxJsxFlowElement(node: Node): node is MdxJsxFlowElement {

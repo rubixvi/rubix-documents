@@ -8,8 +8,8 @@ interface StepProps {
 }
 
 interface StepItemProps {
-  title?: string
   children: ReactNode
+  title?: string
 }
 
 export function Step({ children }: PropsWithChildren<StepProps>) {

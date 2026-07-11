@@ -25,9 +25,9 @@ export function ArticleBreadcrumb({ paths }: BreadcrumbProps) {
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link
-              title="Documentation Home"
               aria-label="Documentation Home"
               href={`/docs${PageRoutes[0].href}`}
+              title="Documentation Home"
             >
               <LuHouse className="h-4" />
             </Link>
@@ -40,9 +40,9 @@ export function ArticleBreadcrumb({ paths }: BreadcrumbProps) {
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
                 <Link
-                  title={toTitleCase(paths[0])}
                   aria-label={toTitleCase(paths[0])}
                   href={`/docs/${paths[0]}`}
+                  title={toTitleCase(paths[0])}
                 >
                   {toTitleCase(paths[0])}
                 </Link>
@@ -64,7 +64,7 @@ export function ArticleBreadcrumb({ paths }: BreadcrumbProps) {
                   <BreadcrumbItem>
                     {index < paths.length - 1 ? (
                       <BreadcrumbLink asChild>
-                        <Link title={toTitleCase(path)} aria-label={toTitleCase(path)} href={href}>
+                        <Link aria-label={toTitleCase(path)} href={href} title={toTitleCase(path)}>
                           {toTitleCase(path)}
                         </Link>
                       </BreadcrumbLink>
@@ -86,7 +86,7 @@ export function ArticleBreadcrumb({ paths }: BreadcrumbProps) {
                 <BreadcrumbItem>
                   {index < paths.length - 1 ? (
                     <BreadcrumbLink asChild>
-                      <Link title={toTitleCase(path)} aria-label={toTitleCase(path)} href={href}>
+                      <Link aria-label={toTitleCase(path)} href={href} title={toTitleCase(path)}>
                         {toTitleCase(path)}
                       </Link>
                     </BreadcrumbLink>

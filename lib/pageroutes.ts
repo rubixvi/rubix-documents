@@ -15,8 +15,8 @@ export type Paths =
 export const Routes: Paths[] = [...Documents]
 
 interface Page {
-  title: string
   href: string
+  title: string
 }
 
 function isRoute(node: Paths): node is Extract<Paths, { title: string; href: string }> {

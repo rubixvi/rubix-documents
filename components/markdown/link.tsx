@@ -3,8 +3,8 @@ import { type ReactNode } from 'react'
 import { Link } from '@/lib/transition'
 
 interface RouteProps {
-  href?: string
   children: ReactNode
+  href?: string
 }
 
 export function Route({ href = '#', children }: RouteProps) {
@@ -15,7 +15,7 @@ export function Route({ href = '#', children }: RouteProps) {
   }
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
+    <a href={href} rel="noopener noreferrer" target="_blank">
       {children}
     </a>
   )

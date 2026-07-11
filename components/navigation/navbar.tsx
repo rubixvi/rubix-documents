@@ -28,12 +28,12 @@ export function Navbar() {
         <div className="flex gap-2 sm:ml-0">
           {GitHubLink.href && (
             <Link
-              href={GitHubLink.href}
-              className={buttonVariants({ variant: 'outline', size: 'icon-lg' })}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="View the repository on GitHub"
               aria-label="View the repository on GitHub"
+              className={buttonVariants({ variant: 'outline', size: 'icon-lg' })}
+              href={GitHubLink.href}
+              rel="noopener noreferrer"
+              target="_blank"
+              title="View the repository on GitHub"
             >
               <LuGithub className="size-4" />
             </Link>
@@ -51,20 +51,20 @@ export function NavMenu({ isSheet = false }) {
       {Navigations.map((item) => {
         const Comp = (
           <Anchor
-            key={item.title + item.href}
             absolute
             activeClassName="font-bold text-primary"
             className="flex items-center gap-1 text-sm"
             href={item.href}
-            target={item.external ? '_blank' : undefined}
+            key={item.title + item.href}
             rel={item.external ? 'noopener noreferrer' : undefined}
+            target={item.external ? '_blank' : undefined}
           >
             {item.title}{' '}
             {item.external && <LuArrowUpRight className="h-3 w-3 align-super" strokeWidth={3} />}
           </Anchor>
         )
         return isSheet ? (
-          <SheetClose key={item.title + item.href} asChild>
+          <SheetClose asChild key={item.title + item.href}>
             {Comp}
           </SheetClose>
         ) : (

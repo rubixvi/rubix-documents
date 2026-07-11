@@ -1,22 +1,22 @@
 export interface OpenGraphImage {
+  alt: string
+  height: number
   url: string
   width: number
-  height: number
-  alt: string
 }
 
 export interface OpenGraph {
-  type: 'website' | 'article'
-  title: string
   description: string
-  siteName: string
   images: OpenGraphImage[]
+  siteName: string
+  title: string
+  type: 'website' | 'article'
 }
 
 export interface TwitterCard {
   card: 'summary_large_image' | 'summary' | 'app' | 'player'
-  title: string
   description: string
-  site: string
   images: { url: string; alt: string }[]
+  site: string
+  title: string
 }
