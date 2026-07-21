@@ -12,17 +12,17 @@
     "generate-content-json": "tsx scripts/content.ts"
   },
   "dependencies": {
-    "@next/third-parties": "^16.2.10",
+    "@next/third-parties": "^16.2.11",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "mermaid": "11.16.0",
-    "next": "16.2.10",
+    "next": "16.2.11",
     "next-mdx-remote": "^6.0.0",
     "next-themes": "^0.4.6",
-    "radix-ui": "^1.6.2",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "radix-ui": "^1.6.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-icons": "^5.7.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-code-titles": "^1.2.1",
@@ -39,7 +39,7 @@
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.4",
+    "@biomejs/biome": "2.5.5",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/typography": "^0.5.20",
     "@types/hast": "^3.0.5",
@@ -55,5 +55,5 @@
   "engines": {
     "node": "24.x"
   },
-  "packageManager": "pnpm@11.11.0"
+  "packageManager": "pnpm@11.15.1"
 }
