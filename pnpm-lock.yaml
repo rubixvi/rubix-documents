@@ -118,7 +118,7 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
       typescript:
-        specifier: 7.0.2
+        specifier: ^7.0.2
         version: 7.0.2
 
 packages:
