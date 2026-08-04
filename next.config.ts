@@ -4,7 +4,6 @@ const nextConfig: NextConfig = {
     experimental: {
         inlineCss: true,
         useTypeScriptCli: true,
-        viewTransition: true,
     }
 }
 
