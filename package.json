@@ -12,7 +12,7 @@
     "generate-content-json": "tsx scripts/content.ts"
   },
   "dependencies": {
-    "@next/third-parties": "^16.3.0",
+    "@next/third-parties": "^16.3.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
