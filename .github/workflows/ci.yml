@@ -26,9 +26,10 @@ jobs:
         uses: pnpm/action-setup@v6.1.0
 
       - name: Use Node
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: 24
+          cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -37,9 +38,9 @@ jobs:
         run: pnpm run generate-content-json
 
       - name: Upload search data artifact
-        uses: actions/upload-artifact@v7.0.1
-        if: success()
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: search-data
           path: public/search-data/
+          if-no-files-found: error
           retention-days: 30
