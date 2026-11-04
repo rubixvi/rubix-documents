@@ -86,6 +86,7 @@ Deploy to Vercel for automated builds and hosting.
 ## Usage
 
 Documents is designed to support:
+
 - Product documentation
 - Technical manuals
 - Internal guides
@@ -118,6 +119,7 @@ _Document Dark Mode Screen_
 ## Contributing
 
 We welcome contributions to improve this project.
+
 1. Fork the repository
 2. Create a feature branch
 3. Commit your changes
